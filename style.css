@@ -96,8 +96,7 @@ td, th {
 	overflow: hidden;
 }
 
-.dropdown .dropbtn {
-	font-size: inherit;  
+.dropdown .dropbtn { 
 	border: none;
 	outline: none;
 	color: white;
@@ -105,10 +104,11 @@ td, th {
 	background-color: inherit;
 	font-family: inherit;
 	margin: 0;
+	font-size: 17px;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-	background-color: #333;
+	background-color: gray;
 }
 
 .dropdown-content {
@@ -127,6 +127,7 @@ td, th {
 	text-decoration: none;
 	display: block;
 	text-align: left;
+	
 }
 
 .dropdown-content a:hover {
