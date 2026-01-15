@@ -50,7 +50,7 @@
     <hr>
 
     <!-- Lecture 1 -->
-    <h2 id="lecture1">Lecture 1: Sections 1.1 — Introduction to Differential Equations and Classification</h2>
+    <h2 id="lecture1">Lecture 1: Section 1.1 — Introduction to Differential Equations and Classification</h2>
 
     <div class="definition">
       <span class="label">Definition</span>
@@ -138,9 +138,225 @@
         <td>\(y''' + \sin(y) = 0\)</td>
       </tr>
     </table>
+	
+	<h3 id="implicit-explicit">Implicit vs Explicit Solutions</h3>
+
+	<div class="definition">
+	  <strong>Definition.</strong>
+	  A solution to a differential equation written in the form
+	  \( y = \phi(x) \) is called an <em>explicit</em> solution.
+	  A solution written in the form \( G(x,y) = 0 \) is called an
+	  <em>implicit</em> solution.
+	</div>
+
+	<p>
+	Often, implicit solutions are sufficient to describe the behavior of solutions,
+	especially when solving explicitly is difficult or unnecessary.
+	</p>
+	<h3 id="families">Families of Solutions</h3>
+
+	<p>
+	Differential equations often admit infinitely many solutions that differ by
+	constants.
+	</p>
+
+	<div class="example">
+	  <strong>Example.</strong>
+	  The differential equation
+	  \[
+	  y' = 2x
+	  \]
+	  has a family of solutions
+	  \[
+	  y = x^2 + C,
+	  \]
+	  where \( C \) is an arbitrary constant.
+	</div>
+
+	<div class="example">
+	  <strong>Example.</strong>
+	  Verify that the one-parameter family
+	  \[
+	  y = cx - x\cos(x)
+	  \]
+	  is a solution to the differential equation
+	  \[
+	  xy' - y = x^2\sin(x)
+	  \]
+	  on \( (-\infty, \infty) \).
+	</div>
+
 
     <!-- Lecture 2 -->
     <h2 id="lecture2">Lecture 2: Intital Value Problems</h2>
+	<h1>Lecture 2: Section 1.2 — Initial Value Problems</h1>
+	<hr>
+
+	<h2>Initial Value Problems</h2>
+
+	<p>
+	As we saw in the previous section, there can be infinitely many solutions to a
+	differential equation. Some may be constant solutions, while others may form
+	a one-parameter family of solutions. This naturally leads to the question:
+	what if we want our solutions to satisfy an additional condition?
+	</p>
+
+	<div class="definition">
+	  <strong>Definition.</strong>
+	  An <em>initial value problem</em> (IVP) is a differential equation together with
+	  one or more initial conditions that the solution must satisfy.
+	</div>
+
+	<p>
+	By prescribing initial conditions, we reduce the number of possible solutions,
+	often to a single solution. The solution to an initial value problem is called
+	a <strong>particular solution</strong>.
+	</p>
+
+	<div class="example">
+	  <strong>Example.</strong>
+	  <p>
+	  Verify that the family \( y = ce^x \) is a solution to
+	  \[
+	  y' = y
+	  \]
+	  on \( (-\infty, \infty) \), and find the particular solution such that
+	  \( y(0) = 3 \).
+	  </p>
+
+	  <p>
+	  Since \( y = ce^x \) is continuous and differentiable on
+	  \( (-\infty, \infty) \), we compute
+	  \[
+	  y' = \frac{d}{dx}(ce^x) = ce^x = y.
+	  \]
+	  This verifies that \( y = ce^x \) is a one-parameter family of solutions.
+	  </p>
+
+	  <p>
+	  To find the particular solution, we impose the initial condition:
+	  \[
+	  y(0) = ce^0 = c = 3.
+	  \]
+	  Hence, the particular solution is
+	  \[
+	  y = 3e^x.
+	  \]
+	  </p>
+	</div>
+
+	<hr>
+
+	<h2>When Does an Initial Value Problem Have Solutions?</h2>
+
+	<p>
+	Given an initial value problem, it is natural to ask whether a solution exists,
+	and if so, whether that solution is unique. The following theorem provides
+	sufficient conditions for both existence and uniqueness.
+	</p>
+
+	<div class="theorem">
+	  <strong>Theorem (Existence and Uniqueness).</strong>
+	  <p>
+	  Let \( R \) be a rectangle in the \( xy \)-plane containing the point
+	  \( (x_0, y_0) \) in its interior. If both \( f(x,y) \) and
+	  \( \frac{\partial f}{\partial y} \) are continuous on \( R \), then there exists
+	  an interval \( I \) containing \( x_0 \) and a unique function \( y(x) \),
+	  defined on \( I \), that solves the initial value problem
+	  \[
+	  \frac{dy}{dx} = f(x,y), \quad y(x_0) = y_0.
+	  \]
+	  </p>
+	</div>
+
+	<p>
+	Let’s look at a few examples to determine whether solutions to initial value
+	problems are guaranteed to exist.
+	</p>
+
+	<div class="example">
+	  <strong>Example.</strong>
+	  <p>
+	  Consider the initial value problem
+	  \[
+	  \frac{dy}{dx} = xy^{1/2}.
+	  \]
+	  Let \( f(x,y) = xy^{1/2} \). Then
+	  \[
+	  \frac{\partial f}{\partial y}
+	  = x\left(\frac{1}{2}y^{-1/2}\right)
+	  = \frac{x}{2\sqrt{y}}.
+	  \]
+	  </p>
+
+	  <p>
+	  The function \( \frac{\partial f}{\partial y} \) is continuous for all
+	  \( x \) and all \( y \neq 0 \). Therefore, if the initial condition satisfies
+	  \( y_0 \neq 0 \), the theorem guarantees the existence of a unique solution.
+	  </p>
+	</div>
+
+	<div class="remark">
+	  <strong>Remark.</strong>
+	  The conditions of the existence and uniqueness theorem are sufficient but not
+	  necessary. An initial value problem may fail to meet these conditions and still
+	  have a unique solution.
+	</div>
+
+	<hr>
+
+	<h2>Second-Order Initial Value Problems</h2>
+
+	<div class="example">
+	  <strong>Example.</strong>
+	  <p>
+	  Consider the two-parameter family of functions
+	  \[
+	  x(t) = c_1\cos(t) + c_2\sin(t).
+	  \]
+	  Verify that this family satisfies the differential equation
+	  \[
+	  x'' + x = 0.
+	  \]
+	  </p>
+
+	  <p>
+	  Compute the derivatives:
+	  \[
+	  x' = -c_1\sin(t) + c_2\cos(t),
+	  \]
+	  \[
+	  x'' = -c_1\cos(t) - c_2\sin(t).
+	  \]
+	  Substituting into the equation gives
+	  \[
+	  x'' + x = 0,
+	  \]
+	  which is an identity. Thus, this family is a solution.
+	  </p>
+
+	  <p>
+	  Now find the particular solution such that
+	  \[
+	  x(0) = -1, \quad x'(0) = 8.
+	  \]
+	  From \( x(0) \),
+	  \[
+	  c_1 = -1.
+	  \]
+	  From \( x'(0) \),
+	  \[
+	  c_2 = 8.
+	  \]
+	  </p>
+
+	  <p>
+	  Therefore, the particular solution is
+	  \[
+	  x(t) = -\cos(t) + 8\sin(t).
+	  \]
+	  </p>
+	</div>
 
    
   </main>
