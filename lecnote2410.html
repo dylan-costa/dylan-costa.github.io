@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MATH 2410 — Differential Equations Lecture Notes</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>	
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>MATH 2410 — Differential Equations</h1>
+    <p class="subtitle">Lecture Notes. This is NOT meant to be a substitute for coming to lecture or consulting the textbook directly, but rather a helpful resource to review for exams/ review what was discussed in lecture.</p>
+
+    <!-- Table of Contents -->
+    <nav class="toc">
+      <strong>Jump to Lecture:</strong>
+      <a href="#lecture1">Lecture 1</a> |
+      <a href="#lecture2">Lecture 2</a>
+    </nav>
+    <hr>
+
+    <!-- Lecture 1 -->
+    <h2 id="lecture1">Lecture 1: Sections 1.1 — Introduction to Differential Equations and Classification</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>differential equation</strong> is an equation that involves an unknown function and one or more of its derivatives.
+    </div>
+
+    <p>Throughout calculus, we have encountered many differential equations.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{dy}{dx} = 3x^2
+      \]
+      \[
+      \frac{dy}{dx} = x^4 + 5 \sin(x)
+      \]
+      These are differential equations since they involve the derivative of the unknown function $y(x)$.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      y'' + 4y = 0
+      \]
+      This is a second-order differential equation.
+    </div>
+
+    <h3>Classification by Type</h3>
+    <div class="definition">
+      <span class="label">Definition</span>
+      An <strong>ordinary differential equation (ODE)</strong> contains only ordinary derivatives of one or more unknown functions.
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>partial differential equation (PDE)</strong> involves partial derivatives of unknown functions of two or more variables.
+    </div>
+
+    <h3>Classification by Order</h3>
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>order</strong> of a differential equation is the highest derivative that appears.
+    </div>
+
+    <h3>Classification by Linearity</h3>
+    <div class="definition">
+      <span class="label">Definition</span>
+      A differential equation is <strong>linear</strong> if it can be written as:
+      \[
+      a_n(x)y^{(n)} + a_{n-1}(x)y^{(n-1)} + \dots + a_1(x)y' + a_0(x)y = g(x)
+      \]
+      where the coefficients depend only on $x$.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Linear: \[
+      y' + 2y = e^x
+      \] 
+      Nonlinear: \[
+      y' + y^2 = 0
+      \]
+    </div>
+
+    <h3>Examples Table by Order and Linearity</h3>
+    <table>
+      <tr>
+        <th>Order</th>
+        <th>Linear</th>
+        <th>Nonlinear</th>
+      </tr>
+      <tr>
+        <td>1st</td>
+        <td>\(y' + 2y = e^x\)</td>
+        <td>\(y' + y^2 = 0\)</td>
+      </tr>
+      <tr>
+        <td>2nd</td>
+        <td>\(y'' - 3\sin(x)y' + 2y = x\)</td>
+        <td>\(y'' + (y')^2 = 0\)</td>
+      </tr>
+      <tr>
+        <td>3rd</td>
+        <td>\(y''' + e^{3x}y'' - xy' + 2y = \sin x\)</td>
+        <td>\(y''' + \sin(y) = 0\)</td>
+      </tr>
+    </table>
+
+    <!-- Lecture 2 -->
+    <h2 id="lecture2">Lecture 2: Intital Value Problems</h2>
+
+   
+  </main>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice / Review Problems — MATH 2410</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax for LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Script to toggle solutions and button text -->
+  <script>
+    function toggleSolution(id, btn) {
+      const solution = document.getElementById(id);
+      if (solution.style.display === "none") {
+        solution.style.display = "block";
+        btn.textContent = "Hide Solution";
+      } else {
+        solution.style.display = "none";
+        btn.textContent = "Show Solution";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>	
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>Practice / Review Problems — MATH 2410</h1>
+    <hr>
+
+    <!-- Table of Contents by Section -->
+    <nav class="toc">
+      <strong>Jump to Section:</strong>
+      <a href="#sec1.1">Section 1.1</a> |
+      <a href="#sec1.2">Section 1.2</a>
+    </nav>
+    <hr>
+
+    <!-- Section 1.1 -->
+    <h2 id="sec1.1">Section 1.1</h2>
+
+    <!-- Problem 1 -->
+    <div class="problem">
+      <h3 id="prob1">Problem 1</h3>
+      <p>Verify that 
+      \[
+      y = e^{-x/2}
+      \] 
+      is a solution to 
+      \[
+      2y' + y = 0
+      \] 
+      on \((-\infty, \infty)\).</p>
+      <button onclick="toggleSolution('sol1', this)">Show Solution</button>
+      <div id="sol1" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Compute \(y'\):
+        \[
+        y' = \frac{d}{dx} e^{-x/2} = -\frac{1}{2} e^{-x/2}
+        \]
+        Substitute into the DE:
+        \[
+        2y' + y = 2\left(-\frac{1}{2} e^{-x/2}\right) + e^{-x/2} = 0
+        \]
+        So \(y = e^{-x/2}\) is a solution on \((-\infty, \infty)\).
+      </div>
+    </div>
+
+    <!-- Problem 2 -->
+    <div class="problem">
+      <h3 id="prob2">Problem 2</h3>
+      <p>Verify that the one-parameter family of functions 
+      \[
+      x^2 + y^2 = c, \quad c > 0
+      \]
+      is a solution to 
+      \[
+      y' = -\frac{x}{y}.
+      \]</p>
+      <button onclick="toggleSolution('sol2', this)">Show Solution</button>
+      <div id="sol2" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Differentiate implicitly:
+        \[
+        \frac{d}{dx}(x^2 + y^2) = 0 \implies 2x + 2y \frac{dy}{dx} = 0
+        \]
+        Solve for \(y'\):
+        \[
+        \frac{dy}{dx} = -\frac{x}{y}
+        \]
+        So the family satisfies the DE. The interval excludes points where \(y=0\).
+      </div>
+    </div>
+
+    <!-- Problem 3 -->
+    <div class="problem">
+      <h3 id="prob3">Problem 3</h3>
+      <p>Verify that 
+      \[
+      y = \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt
+      \]
+      is a solution to 
+      \[
+      2xy' - y = 2x \cos(x)
+      \].</p>
+      <button onclick="toggleSolution('sol3', this)">Show Solution</button>
+      <div id="sol3" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Compute \(y'\):
+        \[
+        y' = \frac{1}{2\sqrt{x}} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt + \cos(x)
+        \]
+        Multiply by \(2x\):
+        \[
+        2x y' = 2x \cos(x) + \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt = 2x \cos(x) + y
+        \]
+        Hence,
+        \[
+        2xy' - y = 2x \cos(x)
+        \]
+      </div>
+    </div>
+
+    <!-- Section 1.2 -->
+    <h2 id="sec1.2">Section 1.2</h2>
+    <p>To be continued...</p>
+
+  </main>
+
+</body>
+</html>
