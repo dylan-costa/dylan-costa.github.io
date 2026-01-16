@@ -45,8 +45,10 @@
     <nav class="toc" id="top">
 	  <strong>Jump to Lecture:</strong>
 	  <a href="#lecture1">Lecture 1</a> |
-	  <a href="#lecture2">Lecture 2</a>
+	  <a href="#lecture2">Lecture 2</a> |
+	  <a href="#lecture3">Lecture 3</a>
 	</nav>
+
 
 
     <!-- Lecture 1 -->
@@ -367,6 +369,187 @@
 	  \]
 	  </p>
 	</div>
+	
+	
+	
+	<!-- Lecture 3 -->
+	<h2 id="lecture3">
+	  Lecture 3: Section 1.3 — Mathematical Modeling
+	  <span class="back-to-top">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+
+	<p>
+	Many real-world phenomena are best modeled using differential equations.
+	This is because derivatives describe the instantaneous rate at which a quantity
+	changes with respect to another variable, typically time.
+	</p>
+
+	<p>
+	The goal of mathematical modeling is to translate physical assumptions into
+	equations that describe how a system evolves.
+	</p>
+
+	<p>We typically construct mathematical models using the following steps:</p>
+
+	<ol>
+	  <li>Identify all variables contributing to the system.</li>
+	  <li>Make reasonable assumptions to limit the number of changing variables.</li>
+	  <li>Refine the model as additional data or constraints become available.</li>
+	</ol>
+
+	<p>
+	There is often a balance between making a model realistic and keeping it
+	mathematically tractable. Including too many variables may lead to a model
+	that is difficult or impossible to analyze.
+	</p>
+
+	<p>
+	A key translation used throughout this section is:
+	</p>
+
+	<p>
+	\[
+	\text{“rate proportional to”} \quad \Longleftrightarrow \quad k \cdot \text{(quantity)}
+	\]
+	</p>
+
+	<hr>
+
+	<div class="example">
+	  <strong>Example (Radioactive Decay).</strong>
+
+	  <p>
+	  One of the most common examples of mathematical modeling using differential
+	  equations is radioactive decay.
+	  </p>
+
+	  <p>
+	  Let \( t \) represent time (typically measured in years), and let \( A(t) \)
+	  denote the amount of radioactive substance remaining at time \( t \).
+	  Then,
+	  \[
+	  \frac{dA}{dt}
+	  \]
+	  represents the rate of change of the substance.
+	  </p>
+
+	  <p>
+	  A standard assumption is that the rate of decay is proportional to the amount
+	  of substance remaining. This leads to the model
+	  \[
+	  \frac{dA}{dt} = kA, \quad k < 0.
+	  \]
+	  </p>
+
+	  <p>
+	  The condition \( k < 0 \) ensures that the amount of substance decreases over
+	  time. Some texts instead write the model as
+	  \[
+	  \frac{dA}{dt} = -kA, \quad k > 0.
+	  \]
+	  </p>
+	</div>
+
+	<p>
+	This model describes a single unstable element decaying into a stable state.
+	More complex decay chains can be modeled using systems of differential equations,
+	which we will study later in the course.
+	</p>
+
+	<hr>
+
+	<div class="example">
+	  <strong>Example (Spread of Disease).</strong>
+
+	  <p>
+	  Another important application of differential equations is modeling the spread
+	  of disease through a population.
+	  </p>
+
+	  <p>
+	  Let
+	  \[
+	  x(t) = \text{number of infected individuals}, \quad
+	  y(t) = \text{number of uninfected individuals}.
+	  \]
+	  </p>
+
+	  <p>
+	  We assume that the rate at which the disease spreads is proportional to the
+	  number of encounters between infected and uninfected individuals. Since the
+	  number of encounters is proportional to both \( x(t) \) and \( y(t) \), we obtain
+	  the model
+	  \[
+	  \frac{dx}{dt} = kxy.
+	  \]
+	  </p>
+
+	  <p>
+	  If the total population is fixed at \( n \) individuals and initially one
+	  person is infected, so that \( x(0) = 1 \), then \( y = n + 1 - x \), and the
+	  model becomes
+	  \[
+	  \frac{dx}{dt} = kx(n + 1 - x), \quad x(0) = 1.
+	  \]
+	  </p>
+	</div>
+
+	<p>
+	This model can be further refined into a system that tracks susceptible,
+	infected, and recovered populations, commonly referred to as an
+	<strong>SIR model</strong>.
+	</p>
+
+	<hr>
+
+	<div class="example">
+	  <strong>Example (Draining Tank).</strong>
+
+	  <p>
+	  Suppose water leaks from a tank through a circular hole of area \( A_h \)
+	  at the bottom. The volume of water leaving the tank per unit time is given by
+	  \[
+	  cA_h\sqrt{2gh}, \quad 0 < c < 1,
+	  \]
+	  where \( h \) is the height of the water and \( g \) is the acceleration due
+	  to gravity.
+	  </p>
+
+	  <p>
+	  Let \( V(t) \) denote the volume of water in the tank at time \( t \).
+	  Then
+	  \[
+	  \frac{dV}{dt} = cA_h\sqrt{2gh}.
+	  \]
+	  </p>
+
+	  <p>
+	  Suppose the tank is cubical and has base area \( A_w \). Since volume is related
+	  to height by
+	  \[
+	  V(t) = A_wh,
+	  \]
+	  implicit differentiation gives
+	  \[
+	  \frac{dV}{dt} = A_w\frac{dh}{dt}.
+	  \]
+	  </p>
+
+	  <p>
+	  Substituting into the expression for \( \frac{dV}{dt} \), we obtain the model
+	  \[
+	  \frac{dh}{dt} = \frac{1}{A_w} cA_h\sqrt{2gh}.
+	  \]
+	  </p>
+	</div>
+
+	<p>
+	These examples illustrate how differential equations arise naturally in a wide
+	range of physical, biological, and engineering problems.
+	</p>
+
 
    
   </main>
