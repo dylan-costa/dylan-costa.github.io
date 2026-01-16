@@ -11,6 +11,7 @@ body {
   color: #222;
 }
 
+/* Headings */
 h1 {
   font-family: 'Baskervville', serif;
   font-size: 36px;
@@ -29,12 +30,14 @@ h3 {
   font-size: 22px;
 }
 
+/* Text */
 p, li, td, th, a {
   font-family: 'Baskervville', serif;
   font-size: 18px;
   color: #222;
 }
 
+/* Notes container */
 .notes {
   background-color: #ffffff;
   padding: 2rem;
@@ -42,6 +45,7 @@ p, li, td, th, a {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+/* Definition / Example / Remark boxes */
 .definition, .example, .remark {
   border-left: 4px solid #0645AD;
   padding: 0.5rem 1rem;
@@ -57,6 +61,7 @@ p, li, td, th, a {
   display: block;
 }
 
+/* Table of contents */
 .toc {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
@@ -75,6 +80,7 @@ p, li, td, th, a {
   text-decoration: underline;
 }
 
+/* Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -96,23 +102,36 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-/* Topnav */
+/* =========================
+   Top Navigation Bar
+   ========================= */
+
 .topnav {
   background-color: black;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.topnav a {
-  float: left;
+/* Nav links and dropdown button */
+.topnav a,
+.dropbtn {
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.topnav a:hover {
+/* Hover effects */
+.topnav a:hover,
+.dropdown:hover .dropbtn {
   background-color: gray;
   color: white;
 }
@@ -122,33 +141,25 @@ tr:nth-child(even) {
   color: black;
 }
 
+/* Dropdown container */
 .dropdown {
-  float: left;
-  overflow: hidden;
+  position: relative;
 }
 
-.dropdown .dropbtn {
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-  font-size: 17px;
-}
-
+/* Dropdown content */
 .dropdown-content {
   display: none;
   position: absolute;
+  top: 100%;
+  left: 0;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
+/* Dropdown links */
 .dropdown-content a {
-  float: none;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -156,10 +167,7 @@ tr:nth-child(even) {
   text-align: left;
 }
 
+/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: gray;
 }
