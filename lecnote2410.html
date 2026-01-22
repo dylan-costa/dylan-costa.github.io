@@ -46,7 +46,8 @@
 	  <strong>Jump to Lecture:</strong>
 	  <a href="#lecture1">Lecture 1</a> |
 	  <a href="#lecture2">Lecture 2</a> |
-	  <a href="#lecture3">Lecture 3</a>
+	  <a href="#lecture3">Lecture 3</a> |
+	  <a href="#lecture4">Lecture 4</a> |
 	</nav>
 
 
@@ -549,6 +550,284 @@
 	These examples illustrate how differential equations arise naturally in a wide
 	range of physical, biological, and engineering problems.
 	</p>
+	
+	<h2 id="lecture4">
+	  Lecture 4: Section 2.1 — Autonomous Differential Equations and Critical Points
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<div class="definition">
+	<span class="label">Definition</span>
+	An ordinary differential equation is said to be <strong>autonomous</strong> if the independent variable does not appear explicitly in the differential equation:
+	\[
+	\frac{dy}{dx} = f(y).
+	\]
+	</div>
+
+	<p>
+	An autonomous differential equation describes relationships solely between the dependent variable and its derivatives. The independent variable does not appear explicitly.
+	</p>
+
+	<div class="example">
+	<span class="label">Example</span>
+	The following are examples of autonomous differential equations:
+	<ul>
+	  <li>\( y' = y \)</li>
+	  <li>\( y' = 1 + y^2 \)</li>
+	  <li>\( y'' - y' + y = 0 \)</li>
+	</ul>
+	</div>
+
+	<p>
+	Although solutions to autonomous differential equations can often be found using separation of variables (discussed in Section 2.2), we can gain significant qualitative information about solution behavior without explicitly solving the equation.
+	</p>
+
+	<hr>
+
+	<h2>Critical Points and Phase Portraits</h2>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	For an autonomous differential equation \( \frac{dy}{dx} = f(y) \), a <strong>critical point</strong> (or <strong>stationary point</strong>) is a value \( y=c \) such that
+	\[
+	f(c)=0.
+	\]
+	</div>
+
+	<p>
+	Because the equation is autonomous, critical points correspond to constant solutions and are values of the dependent variable—not the independent variable.
+	</p>
+
+	<p>
+	Recall:
+	</p>
+
+	<table>
+	  <tr>
+		<th>\(f'(x)\)</th>
+		<th>Behavior of \(f(x)\)</th>
+	  </tr>
+	  <tr>
+		<td>\(>0\)</td>
+		<td>Increasing</td>
+	  </tr>
+	  <tr>
+		<td>\(<0\)</td>
+		<td>Decreasing</td>
+	  </tr>
+	</table>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider the autonomous differential equation
+	\[
+	\frac{dy}{dx} = y(a - by), \quad a,b>0.
+	\]
+	</p>
+
+	<p>
+	Critical points:
+	\[
+	y=0, \quad y=\frac{a}{b}.
+	\]
+	</p>
+
+	<table>
+	  <tr>
+		<th>Interval</th>
+		<th>Sign of \(f(y)\)</th>
+		<th>Behavior of \(y(x)\)</th>
+	  </tr>
+	  <tr>
+		<td>\((-\infty,0)\)</td>
+		<td>Negative</td>
+		<td>Decreasing</td>
+	  </tr>
+	  <tr>
+		<td>\((0,\frac{a}{b})\)</td>
+		<td>Positive</td>
+		<td>Increasing</td>
+	  </tr>
+	  <tr>
+		<td>\((\frac{a}{b},\infty)\)</td>
+		<td>Negative</td>
+		<td>Decreasing</td>
+	  </tr>
+	</table>
+
+	<h3>Phase Portrait</h3>
+
+	<svg width="500" height="100">
+	  <line x1="50" y1="50" x2="450" y2="50" stroke="black" stroke-width="2"/>
+
+	  <circle cx="200" cy="50" r="5" fill="black"/>
+	  <circle cx="350" cy="50" r="5" fill="black"/>
+
+	  <text x="190" y="75">0</text>
+	  <text x="335" y="75">a/b</text>
+
+	  <defs>
+		<marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+		  <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+		</marker>
+	  </defs>
+
+	  <line x1="100" y1="50" x2="150" y2="50" stroke="black" marker-end="url(#arrow)"/>
+	  <line x1="230" y1="50" x2="310" y2="50" stroke="black" marker-end="url(#arrow)"/>
+	  <line x1="420" y1="50" x2="380" y2="50" stroke="black" marker-end="url(#arrow)"/>
+	</svg>
+
+	
+	</div>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider
+	\[
+	\frac{dy}{dx} = (y-1)^2.
+	\]
+	</p>
+
+	<p>
+	The critical point is \( y=1 \). Since \( (y-1)^2 \ge 0 \), solutions are increasing on both sides.
+	</p>
+	
+	<table>
+	  <tr>
+		<th>Interval</th>
+		<th>Sign of \(f(y)\)</th>
+		<th>Behavior of \(y(x)\)</th>
+	  </tr>
+	  <tr>
+		<td>\((-\infty,1)\)</td>
+		<td>Positive</td>
+		<td>Increasing</td>
+	  </tr>
+	  <tr>
+		<td>\((1,\infty)\)</td>
+		<td>Positive</td>
+		<td>Increasing</td>
+	  </tr>
+	</table>
+
+	<h3>Phase Portrait</h3>
+
+	<svg width="500" height="100">
+	  <line x1="50" y1="50" x2="450" y2="50" stroke="black" stroke-width="2"/>
+	  <circle cx="250" cy="50" r="5" fill="black"/>
+	  <text x="240" y="75">1</text>
+
+	  <line x1="150" y1="50" x2="200" y2="50" stroke="black" marker-end="url(#arrow)"/>
+	  <line x1="300" y1="50" x2="350" y2="50" stroke="black" marker-end="url(#arrow)"/>
+	</svg>
+
+	
+	</div>
+
+	<hr>
+
+	<h2>Classifying Critical Points</h2>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	<ul>
+	  <li><strong>Asymptotically stable (attractor):</strong> solutions approach the equilibrium</li>
+	  <li><strong>Unstable (repellor):</strong> solutions move away</li>
+	  <li><strong>Semi-stable:</strong> approach from one side only</li>
+	</ul>
+	</div>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	\[
+	\frac{dy}{dx} = 10 + 3y - y^2 = (5-y)(2+y)
+	\]
+	</p>
+
+	<p>
+	Critical points: \( y=-2, \; y=5 \)
+	</p>
+	
+	<table>
+	  <tr>
+		<th>Interval</th>
+		<th>Sign of \(f(y)\)</th>
+		<th>Behavior of \(y(x)\)</th>
+	  </tr>
+	  <tr>
+		<td>\((-\infty,-2)\)</td>
+		<td>Negative</td>
+		<td>Decreasing</td>
+	  </tr>
+	  <tr>
+		<td>\((-2,5)\)</td>
+		<td>Positive</td>
+		<td>Increasing</td>
+	  </tr>
+	  <tr>
+		<td>\((5,\infty)\)</td>
+		<td>Negative</td>
+		<td>Decreasing</td>
+	  </tr>
+	</table>
+
+	<h3>Phase Portrait</h3>
+
+	<svg width="500" height="100">
+	  <!-- Axis -->
+	  <line x1="50" y1="50" x2="450" y2="50" stroke="black" stroke-width="2"/>
+
+	  <!-- Critical points -->
+	  <circle cx="200" cy="50" r="5" fill="black"/>
+	  <circle cx="350" cy="50" r="5" fill="black"/>
+
+	  <text x="185" y="75">-2</text>
+	  <text x="340" y="75">5</text>
+
+	  <!-- Arrow definition -->
+	  <defs>
+		<marker id="arrow" markerWidth="10" markerHeight="10"
+				refX="6" refY="3" orient="auto">
+		  <path d="M0,0 L6,3 L0,6 Z" fill="black"/>
+		</marker>
+	  </defs>
+
+	  <!-- (-∞, -2): negative → arrow left -->
+	  <line x1="150" y1="50" x2="100" y2="50"
+			stroke="black" marker-end="url(#arrow)"/>
+
+	  <!-- (-2, 5): positive → arrow right -->
+	  <line x1="250" y1="50" x2="300" y2="50"
+			stroke="black" marker-end="url(#arrow)"/>
+
+	  <!-- (5, ∞): negative → arrow left -->
+	  <line x1="420" y1="50" x2="380" y2="50"
+			stroke="black" marker-end="url(#arrow)"/>
+	</svg>
+
+
+	<p>
+	Thus:
+	</p>
+	<ul>
+	  <li>\( y=-2 \) is unstable (repellor)</li>
+	  <li>\( y=5 \) is asymptotically stable (attractor)</li>
+	</ul>
+	</div>
+
+	</div>
 
 
    
