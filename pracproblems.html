@@ -61,7 +61,10 @@
       <a href="#sec1.1">Section 1.1</a> |
       <a href="#sec1.2">Section 1.2</a> |
 	  <a href="#sec1.3">Section 1.3</a> |
-	  <a href="#sec2.1">Section 2.1</a>
+	  <a href="#sec2.1">Section 2.1</a> |
+	  <a href="#sec2.2">Section 2.2</a> |
+	  <a href="#sec2.3">Section 2.3</a> |
+	  <a href="#sec2.4">Section 2.4</a> |
     </nav>
     <hr>
 
@@ -777,8 +780,412 @@
 		</p>
 	  </div>
 	</div>
+	
+	<h2 id="sec2.2">Section 2.2
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+		<div class="problem">
+  <h3 id="prob16">Problem 16</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[ e^{x}y\frac{dy}{dx} = e^{-y}e^{-2x-y} \]
+	  </p>
 
+	  <button onclick="toggleSolution('sol16', this)">Show Solution</button>
 
+	  <div id="sol16" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Rewrite the equation:</p>
+
+	  \[
+	  e^x y \frac{dy}{dx} = e^{-2x-2y}
+	  \]
+
+	  <p>Multiply both sides by \(e^{-x}\):</p>
+
+	  \[
+	  y\frac{dy}{dx} = e^{-3x-2y}
+	  \]
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  y e^{2y} dy = e^{-3x} dx
+	  \]
+
+	  <p>Integrate both sides:</p>
+
+	  \[
+	  \int y e^{2y} dy = \int e^{-3x} dx
+	  \]
+
+	  <p>Use integration by parts on the left:</p>
+
+	  \[
+	  \frac{1}{2}ye^{2y}-\frac{1}{4}e^{2y} = -\frac{1}{3}e^{-3x}+C
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob17">Problem 17</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[2y\cos^3(3x)\frac{dy}{dx}=-\sin(3x)\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol17', this)">Show Solution</button>
+
+	  <div id="sol17" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  2y dy = \frac{-\sin(3x)}{\cos^3(3x)} dx
+	  \]
+
+	  <p>Simplify:</p>
+
+	  \[
+	  2y dy = -\tan(3x)\sec^2(3x) dx
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  \int 2y dy = -\int \tan(3x)\sec^2(3x) dx
+	  \]
+
+	  <p>Let \(u=\tan(3x)\):</p>
+
+	  \[
+	  y^2 = -\frac{1}{3}\tan^2(3x)+C
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob18">Problem 18</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[ \frac{dy}{dx}=-y\ln(y), \quad y(0)=e \]
+	  </p>
+
+	  <button onclick="toggleSolution('sol18', this)">Show Solution</button>
+
+	  <div id="sol18" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  \frac{dy}{y\ln(y)}=-dx
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  \int \frac{1}{y\ln(y)}dy=-\int dx
+	  \]
+
+	  \[
+	  \ln|\ln(y)|=-x+C
+	  \]
+
+	  <p>Exponentiate:</p>
+
+	  \[
+	  \ln(y)=Ce^{-x}
+	  \]
+
+	  <p>Apply initial condition:</p>
+
+	  \[
+	  \ln(e)=C \Rightarrow C=1
+	  \]
+
+	  <p>Final Answer:</p>
+
+	  \[
+	  y=e^{e^{-x}}
+	  \]
+
+	  </div>
+	</div>
+	
+	<h2 id="sec2.3">Section 2.3
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+	<div class="problem">
+  <h3 id="prob19">Problem 19</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[3y'+12y=4\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol19', this)">Show Solution</button>
+
+	  <div id="sol19" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Standard form:</p>
+
+	  \[
+	  y'+4y=\frac{4}{3}
+	  \]
+
+	  <p>Integrating factor:</p>
+
+	  \[
+	  \mu(x)=e^{4x}
+	  \]
+
+	  <p>Multiply equation:</p>
+
+	  \[
+	  \frac{d}{dx}(e^{4x}y)=\frac{4}{3}e^{4x}
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  e^{4x}y=\frac{1}{3}e^{4x}+C
+	  \]
+
+	  <p>Final Answer:</p>
+
+	  \[
+	  y=\frac{1}{3}+Ce^{-4x}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob20">Problem 20</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[y'=2y+x^2+5\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol20', this)">Show Solution</button>
+
+	  <div id="sol20" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  \[
+	  y'-2y=x^2+5
+	  \]
+
+	  \[
+	  \mu=e^{-2x}
+	  \]
+
+	  \[
+	  \frac{d}{dx}(e^{-2x}y)=e^{-2x}(x^2+5)
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  y=\frac{x^2}{2}+\frac{x}{2}+\frac{11}{4}+Ce^{2x}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob21">Problem 21</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[yy'-x=2y^2, \quad y(1)=5\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol21', this)">Show Solution</button>
+
+	  <div id="sol21" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Rewrite:</p>
+
+	  \[
+	  y' -2y=\frac{x}{y}
+	  \]
+
+	  <p>Multiply by \(y\):</p>
+
+	  \[
+	  y y' -2y^2=x
+	  \]
+
+	  <p>Let \(u=y^2\):</p>
+
+	  \[
+	  \frac{du}{dx}-4u=2x
+	  \]
+
+	  \[
+	  u=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
+	  \]
+
+	  \[
+	  y^2=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
+	  \]
+
+	  <p>Use initial condition:</p>
+
+	  \[
+	  25=C e^4-\frac{1}{2}-\frac{1}{8}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob22">Problem 22</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[y'-\tan(x)y=\cos^2(x), \quad y(0)=-1\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol22', this)">Show Solution</button>
+
+	  <div id="sol22" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  \[
+	  \mu=e^{\int -\tan(x)dx}=\cos(x)
+	  \]
+
+	  \[
+	  \frac{d}{dx}(y\cos x)=\cos^3 x
+	  \]
+
+	  \[
+	  y\cos x=\int \cos^3 x dx
+	  \]
+
+	  \[
+	  y\cos x=\sin x-\frac{\sin^3 x}{3}+C
+	  \]
+
+	  <p>Apply initial condition:</p>
+
+	  \[
+	  C=-1
+	  \]
+
+	  </div>
+	</div>
+	
+	<h2 id="sec2.4">Section 2.4
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+
+<div class="problem">
+  <h3 id="prob23">Problem 23</h3>
+  <p>
+  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+  \[(2x+y)dx-(x+6y)dy=0\]
+  </p>
+
+  <button onclick="toggleSolution('sol23', this)">Show Solution</button>
+
+  <div id="sol23" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M=2x+y, \quad N=-(x+6y)
+  \]
+
+  \[
+  M_y=1, \quad N_x=-1
+  \]
+
+  <p>Not exact.</p>
+
+  </div>
+</div>
+
+<div class="problem">
+  <h3 id="prob24">Problem 24</h3>
+  <p>
+  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+  \[(5y-2x)dy-2y dx=0\]
+  </p>
+
+  <button onclick="toggleSolution('sol24', this)">Show Solution</button>
+
+  <div id="sol24" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M=-2y, \quad N=5y-2x
+  \]
+
+  \[
+  M_y=-2, \quad N_x=-2
+  \]
+
+  <p>Exact.</p>
+
+  \[
+  f=\int -2y dx=-2xy+g(y)
+  \]
+
+  \[
+  \frac{\partial f}{\partial y}=-2x+g'(y)=5y-2x
+  \]
+
+  \[
+  g'(y)=5y \Rightarrow g=\frac{5}{2}y^2
+  \]
+
+  \[
+  -2xy+\frac{5}{2}y^2=C
+  \]
+
+  </div>
+</div>
+
+<div class="problem">
+  <h3 id="prob25">Problem 25</h3>
+  <p>
+  Find \(k\) so that the equation is exact:
+  \[
+  (6xy^3+\cos y)dx+(2kx^2y^2-x\sin y)dy=0
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol25', this)">Show Solution</button>
+
+  <div id="sol25" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M_y=18xy^2-\sin y
+  \]
+
+  \[
+  N_x=4kxy^2-\sin y
+  \]
+
+  \[
+  18xy^2=4kxy^2 \Rightarrow k=\frac{9}{2}
+  \]
+
+  </div>
+</div>
 
 
 

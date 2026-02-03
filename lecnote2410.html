@@ -49,6 +49,8 @@
 	  <a href="#lecture3">Lecture 3</a> |
 	  <a href="#lecture4">Lecture 4</a> |
 	  <a href="#lecture5">Lecture 5</a> |
+	  <a href="#lecture6">Lecture 6</a> |
+	  <a href="#lecture7">Lecture 7</a> |
 	</nav>
 
 
@@ -268,10 +270,11 @@
 	and if so, whether that solution is unique. The following theorem provides
 	sufficient conditions for both existence and uniqueness.
 	</p>
+	
+	<div class="definition">
+	<span class="label">Theorem (Existence and Uniqueness)</span>
 
-	<div class="theorem">
-	  <strong>Theorem (Existence and Uniqueness).</strong>
-	  <p>
+	<p>
 	  Let \( R \) be a rectangle in the \( xy \)-plane containing the point
 	  \( (x_0, y_0) \) in its interior. If both \( f(x,y) \) and
 	  \( \frac{\partial f}{\partial y} \) are continuous on \( R \), then there exists
@@ -282,6 +285,8 @@
 	  \]
 	  </p>
 	</div>
+
+
 
 	<p>
 	Let’s look at a few examples to determine whether solutions to initial value
@@ -1034,6 +1039,548 @@
 	
 	<h2 id="lecture6">
 	  Lecture 6: Section 2.3 — First-Order Linear Differential Equations
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<p>
+	So far, the only method for finding solutions to differential equations we have is
+	<strong>separation of variables</strong>. This works when the first-order differential
+	equation is of the form
+	</p>
+
+	\[
+	\frac{dy}{dx} = g(x)h(y).
+	\]
+
+	<p>
+	However, in general, most first-order differential equations will not be separable.
+	Thus, we need a method that works for more first-order differential equations.
+	</p>
+
+	<p>
+	Consider a first-order linear differential equation
+	</p>
+
+	\[
+	y' + a_0(x)y = g(x).
+	\]
+
+	<p>
+	This is known as <strong>standard form</strong>. Note that even if the coefficient in
+	front of \(y'\) is not 1, we can always divide the equation by any nonzero function
+	and put the differential equation in standard form.
+	</p>
+
+	<hr>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+
+	<p>
+	A first-order linear differential equation in standard form is
+	</p>
+
+	\[
+	y' + P(x)y = f(x).
+	\]
+
+	<p>
+	The method used to solve all first-order linear differential equations is known as
+	the <strong>method of integrating factor</strong>.
+	</p>
+
+	</div>
+
+	<p>
+	Multiply both sides of the equation by some function \(\mu(x)\):
+	</p>
+
+	\[
+	\mu(x)(y' + P(x)y) = \mu(x)y' + \mu(x)P(x)y = \mu(x)f(x).
+	\]
+
+	<p>
+	Recall the product rule:
+	</p>
+
+	\[
+	\frac{d}{dx}(\mu(x)y) = \mu(x)y' + \mu'(x)y.
+	\]
+
+	<p>
+	These expressions are equal if
+	</p>
+
+	\[
+	\mu'(x) = \mu(x)P(x).
+	\]
+
+	<p>
+	This is a separable differential equation:
+	</p>
+
+	\[
+	\frac{d\mu}{dx} = \mu(x)P(x).
+	\]
+
+	<p>
+	Using separation of variables:
+	</p>
+
+	\[
+	\frac{d\mu}{\mu} = P(x)\,dx.
+	\]
+
+	\[
+	\int \frac{d\mu}{\mu} = \int P(x)\,dx.
+	\]
+
+	\[
+	\ln|\mu| = \int P(x)\,dx.
+	\]
+
+	\[
+	\mu(x) = e^{\int P(x)\,dx}.
+	\]
+
+	<div class="definition">
+	<span class="label">Integrating Factor</span>
+
+	\[
+	\mu(x) = e^{\int P(x)\,dx}.
+	\]
+
+	</div>
+
+	<p>
+	With this choice of \(\mu(x)\), we obtain
+	</p>
+
+	\[
+	\frac{d}{dx}(\mu(x)y) = \mu(x)f(x).
+	\]
+
+	<p>
+	Integrating both sides:
+	</p>
+
+	\[
+	y = \frac{1}{\mu(x)}\int \mu(x)f(x)\,dx
+	= e^{-\int P(x)\,dx}\int e^{\int P(x)\,dx} f(x)\,dx.
+	\]
+
+	<hr>
+
+	<p>
+	<strong>Checklist for the Method:</strong>
+	</p>
+
+	<ul>
+	  <li>Confirm the differential equation is first-order and linear.</li>
+	  <li>Put the differential equation in standard form.</li>
+	  <li>Compute the integrating factor.</li>
+	  <li>Multiply both sides by the integrating factor.</li>
+	  <li>Integrate and solve for \(y\).</li>
+	</ul>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider the differential equation
+	</p>
+
+	\[
+	y' - 3y = 0.
+	\]
+
+	<p>
+	Compute the integrating factor:
+	</p>
+
+	\[
+	\mu(x) = e^{\int -3\,dx} = e^{-3x}.
+	\]
+
+	<p>
+	Multiply both sides:
+	</p>
+
+	\[
+	e^{-3x}y' - 3e^{-3x}y = 0.
+	\]
+
+	<p>
+	Left side becomes:
+	</p>
+
+	\[
+	\frac{d}{dx}(e^{-3x}y) = 0.
+	\]
+
+	<p>
+	Integrate:
+	</p>
+
+	\[
+	e^{-3x}y = C.
+	\]
+
+	\[
+	y = Ce^{3x}.
+	\]
+
+	</div>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider the differential equation
+	</p>
+
+	\[
+	xy' + y = e^x, \quad y(1)=2.
+	\]
+
+	<p>
+	Divide by \(x\):
+	</p>
+
+	\[
+	y' + \frac{1}{x}y = \frac{e^x}{x}.
+	\]
+
+	<p>
+	Integrating factor:
+	</p>
+
+	\[
+	\mu(x) = e^{\int \frac{1}{x}dx} = e^{\ln|x|} = x.
+	\]
+
+	<p>
+	Multiply both sides by \(x\):
+	</p>
+
+	\[
+	x y' + y = e^x.
+	\]
+
+	<p>
+	Left side becomes:
+	</p>
+
+	\[
+	\frac{d}{dx}(xy) = e^x.
+	\]
+
+	<p>
+	Integrate:
+	</p>
+
+	\[
+	xy = e^x + C.
+	\]
+
+	\[
+	y = \frac{e^x + C}{x}.
+	\]
+
+	<p>
+	Apply the initial condition:
+	</p>
+
+	\[
+	2 = \frac{e + C}{1}.
+	\]
+
+	\[
+	C = 2 - e.
+	\]
+
+	<p>
+	Therefore,
+	</p>
+
+	\[
+	y = \frac{e^x + (2 - e)}{x}.
+	\]
+
+	</div>
+	
+	<h2 id="lecture7">
+	  Lecture 7: Section 2.4 — Exact Differential Equations
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	<p>
+	We begin this section with a definition:
+	</p>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+
+	<p>
+	A first-order differential equation of the form
+	</p>
+
+	\[
+	M(x,y)\,dx + N(x,y)\,dy = 0
+	\]
+
+	<p>
+	is said to be an <strong>exact differential equation</strong> if the left-hand side
+	of the equation is an <strong>exact differential</strong>.
+	</p>
+
+	</div>
+
+	<p>
+	This may seem circular at first, but the condition for checking exactness is
+	straightforward.
+	</p>
+
+	<div class="definition">
+	<span class="label">Theorem</span>
+
+	<p>
+	A differential \(M(x,y)\,dx + N(x,y)\,dy\) is exact if and only if
+	</p>
+
+	\[
+	\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+	\]
+
+	</div>
+
+
+
+	<p>
+	Suppose we are given
+	</p>
+
+	\[
+	M(x,y)\,dx + N(x,y)\,dy = 0.
+	\]
+
+	<p>
+	To find a solution, we use the following method:
+	</p>
+
+	<ol>
+	  <li>
+		Check exactness:
+		\[
+		\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+		\]
+	  </li>
+
+	  <li>
+		Find a function \(f(x,y)\) such that
+		\[
+		\frac{\partial f}{\partial x} = M(x,y).
+		\]
+		Compute
+		\[
+		f(x,y) = \int M(x,y)\,dx + g(y).
+		\]
+	  </li>
+
+	  <li>
+		Compute \(\frac{\partial f}{\partial y}\) and use
+		\[
+		\frac{\partial f}{\partial y} = N(x,y)
+		\]
+		to find \(g'(y)\).
+	  </li>
+
+	  <li>
+		Integrate \(g'(y)\) to find \(g(y)\).
+	  </li>
+
+	  <li>
+		Write the solution curve \(f(x,y) = 0\).
+	  </li>
+	</ol>
+
+	<p>
+	This method involves integration and partial differentiation, so some review may
+	be helpful. We now look at examples.
+	</p>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider the differential equation
+	</p>
+
+	\[
+	2xy\,dx + (x^2-1)\,dy = 0.
+	\]
+
+	<p>
+	Check exactness:
+	</p>
+
+	\[
+	\frac{\partial M}{\partial y} = 2x,
+	\quad
+	\frac{\partial N}{\partial x} = 2x.
+	\]
+
+	<p>
+	Thus the equation is exact.
+	</p>
+
+	<p>
+	Find \(f(x,y)\) such that \(\frac{\partial f}{\partial x} = M(x,y)\):
+	</p>
+
+	\[
+	f(x,y) = \int 2xy\,dx + g(y) = x^2y + g(y).
+	\]
+
+	<p>
+	Differentiate with respect to \(y\):
+	</p>
+
+	\[
+	\frac{\partial f}{\partial y} = x^2 + g'(y).
+	\]
+
+	<p>
+	Set equal to \(N(x,y) = x^2-1\):
+	</p>
+
+	\[
+	x^2 + g'(y) = x^2 - 1 \Rightarrow g'(y) = -1.
+	\]
+
+	<p>
+	Integrate:
+	</p>
+
+	\[
+	g(y) = -y + C.
+	\]
+
+	<p>
+	Solution curve:
+	</p>
+
+	\[
+	x^2y - y + C = 0,
+	\quad
+	y = \frac{C}{x^2-1}.
+	\]
+
+	<p>
+	Verification (optional):
+	</p>
+
+	\[
+	y = \frac{C}{x^2-1},
+	\quad
+	dy = \frac{-2Cx}{(x^2-1)^2}\,dx.
+	\]
+
+	\[
+	2xy\,dx + (x^2-1)dy = 0.
+	\]
+
+	</div>
+
+	<hr>
+
+	<div class="example">
+	<span class="label">Example</span>
+
+	<p>
+	Consider the differential equation
+	</p>
+
+	\[
+	(y^2\cos x - 3x^2y - 2x)\,dx
+	+ (2y\sin x - x^3 + \ln y)\,dy = 0.
+	\]
+
+	<p>
+	Check exactness:
+	</p>
+
+	\[
+	\frac{\partial M}{\partial y}
+	= 2y\cos x - 3x^2,
+	\quad
+	\frac{\partial N}{\partial x}
+	= 2y\cos x - 3x^2.
+	\]
+
+	<p>
+	Thus the equation is exact.
+	</p>
+
+	<p>
+	Find \(f(x,y)\):
+	</p>
+
+	\[
+	f(x,y) = \int (y^2\cos x - 3x^2y - 2x)\,dx + g(y).
+	\]
+
+	\[
+	f(x,y) = y^2\sin x - x^3y - x^2 + g(y).
+	\]
+
+	<p>
+	Differentiate with respect to \(y\):
+	</p>
+
+	\[
+	\frac{\partial f}{\partial y}
+	= 2y\sin x - x^3 + g'(y).
+	\]
+
+	<p>
+	Set equal to \(N(x,y)\):
+	</p>
+
+	\[
+	g'(y) = \ln y.
+	\]
+
+	<p>
+	Integrate:
+	</p>
+
+	\[
+	g(y) = y\ln y - y + C.
+	\]
+
+	<p>
+	Solution curve:
+	</p>
+
+	\[
+	y^2\sin x - x^3y - x^2 + y\ln y - y + C = 0.
+	\]
+
+	</div>
+	
+	
+	<h2 id="lecture8">
+	  Lecture 8: Section 2.5 — Linear Substitutions
 	  <span style="font-size: 0.7em; margin-left: 10px;">
 		<a href="#top">↑ Back to top</a>
 	  </span>
