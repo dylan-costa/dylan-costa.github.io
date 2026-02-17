@@ -43,14 +43,20 @@
 
     <!-- Table of Contents -->
     <nav class="toc" id="top">
-	  <strong>Jump to Lecture:</strong>
+	  <strong>Jump to Lecture:</strong><br>
+	  <strong>Unit 1</strong>:
 	  <a href="#lecture1">Lecture 1</a> |
 	  <a href="#lecture2">Lecture 2</a> |
 	  <a href="#lecture3">Lecture 3</a> |
 	  <a href="#lecture4">Lecture 4</a> |
 	  <a href="#lecture5">Lecture 5</a> |
 	  <a href="#lecture6">Lecture 6</a> |
-	  <a href="#lecture7">Lecture 7</a> |
+	  <a href="#lecture7">Lecture 7</a> <br>
+	  <strong>Unit 2</strong>:
+	  <a href="#lecture8">Lecture 8</a> |
+	  <a href="#lecture9">Lecture 9</a> |
+	  <a href="#lecture10">Lecture 10</a> |
+	  
 	</nav>
 
 
@@ -1580,7 +1586,183 @@
 	
 	
 	<h2 id="lecture8">
-	  Lecture 8: Section 2.5 — Linear Substitutions
+	  Lecture 8: Section 3.1 - Mathematical Modeling (Linear)
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+
+	<p>
+	In this lecture, we will use some of the methods discussed in 
+	Lecture 3 on how to construct models for certain real-world situations/systems 
+	and now solve those differential equations.
+	</p>
+
+	<hr>
+
+	<h3>Example: Radioactive Decay</h3>
+
+	<p>
+	Suppose that we have a substance that decays at a rate proportional to the amount 
+	present at time $t$, and that has a half-life of $3.3$ hours. If $1$g of the substance 
+	is present initially, how long will it take for $90\%$ of the substance to decay?
+	</p>
+
+	<p>First, we define the variables:</p>
+
+	\[
+	\begin{aligned}
+	A(t) &= \text{amount of substance present at time } t \\
+	t &= \text{time in hours} \\
+	A'(t) &= \text{rate of decay}
+	\end{aligned}
+	\]
+
+	<p>
+	The statement “decays at a rate proportional to the amount present” gives
+	</p>
+
+	\[
+	\frac{dA}{dt} = -kA, \quad k>0.
+	\]
+
+	<p>
+	The half-life of $3.3$ hours means
+	</p>
+
+	\[
+	A(3.3) = \frac{1}{2}A(0).
+	\]
+
+	<p>
+	Since initially $A(0)=1$, we obtain
+	</p>
+
+	\[
+	A(3.3) = \frac{1}{2}.
+	\]
+
+	<p>
+	If $90\%$ decays, then $10\%$ remains, so we want
+	</p>
+
+	\[
+	A(t) = \frac{1}{10}.
+	\]
+
+	<p>
+	The differential equation is separable, giving the general solution
+	</p>
+
+	\[
+	A(t) = Ce^{-kt}.
+	\]
+
+	<p>
+	Using the initial condition:
+	</p>
+
+	\[
+	1 = A(0) = C.
+	\]
+
+	<p>
+	Using the half-life:
+	</p>
+
+	\[
+	\frac{1}{2} = e^{-k(3.3)}
+	\quad \Rightarrow \quad
+	k = \frac{-1}{3.3}\ln\!\left(\frac{1}{2}\right).
+	\]
+
+	<p>
+	Finally:
+	</p>
+
+	\[
+	e^{-kt} = \frac{1}{10}
+	\quad \Rightarrow \quad
+	t = \frac{-1}{k}\ln\!\left(\frac{1}{10}\right)
+	\approx 10.96 \text{ hours}.
+	\]
+
+	<hr>
+
+	<p>
+	This type of model is used for exponential growth and decay processes, 
+	including population growth.
+	</p>
+
+	<hr>
+
+	<h3>Example: SI Model for Infectious Disease</h3>
+
+	<p>
+	Suppose that we have a fixed isolated population of $n$ people and we introduce 
+	one infected person into the population. The rate of spread of the disease is 
+	proportional to the number of interactions between susceptible and infected individuals.
+	</p>
+
+	<p>Define the variables:</p>
+
+	\[
+	\begin{aligned}
+	S(t) &= \text{number of susceptible individuals at time } t \\
+	I(t) &= \text{number of infected individuals at time } t \\
+	t &= \text{time} \\
+	I'(t) &= \text{rate of spread of the disease}
+	\end{aligned}
+	\]
+
+	<p>
+	The statement that the disease spreads proportional to encounters between 
+	susceptible and infected individuals gives:
+	</p>
+
+	\[
+	\frac{dI}{dt} = kSI.
+	\]
+
+	<p>
+	Since the population is fixed and starts with one infected person:
+	</p>
+
+	\[
+	S + I = n + 1
+	\]
+
+	\[
+	I(0)=1, \quad S(0)=n.
+	\]
+
+	<p>
+	Substituting $S = n+1-I$ gives the model:
+	</p>
+
+	\[
+	I'(t) = kI(n+1-I), 
+	\qquad I(0)=1.
+	\]
+
+	<p>
+	This is a logistic-type differential equation that models the spread of infection 
+	over time.
+	</p>
+
+	<hr>
+
+	</div>
+	<h2 id="lecture9">
+	  Lecture 9: Section 3.2 - Mathematical Modeling (Nonlinear)
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<h2 id="lecture10">
+	  Lecture 10: Section 3.3 - Mathematical Modeling (Systems of Linear Equations)
 	  <span style="font-size: 0.7em; margin-left: 10px;">
 		<a href="#top">↑ Back to top</a>
 	  </span>
