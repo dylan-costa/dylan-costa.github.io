@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 1 Practice / Review Problems — MATH 2410</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax for LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Script to toggle solutions and button text -->
+  <script>
+    function toggleSolution(id, btn) {
+      const solution = document.getElementById(id);
+      if (solution.style.display === "none") {
+        solution.style.display = "block";
+        btn.textContent = "Hide Solution";
+      } else {
+        solution.style.display = "none";
+        btn.textContent = "Show Solution";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>	
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>Practice / Review Problems — MATH 2410</h1>
+    <hr>
+
+    <!-- Table of Contents by Section -->
+    <nav class="toc" id="toc">
+      <strong>Jump to Section:</strong>
+      <a href="#sec1.1">Section 1.1</a> |
+      <a href="#sec1.2">Section 1.2</a> |
+	  <a href="#sec1.3">Section 1.3</a> |
+	  <a href="#sec2.1">Section 2.1</a> |
+	  <a href="#sec2.2">Section 2.2</a> |
+	  <a href="#sec2.3">Section 2.3</a> |
+	  <a href="#sec2.4">Section 2.4</a> |
+    </nav>
+    <hr>
+
+    <!-- Section 1.1 -->
+    <h2 id="sec1.1">Section 1.1
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+    <!-- Problem 1 -->
+    <div class="problem">
+      <h3 id="prob1">Problem 1</h3>
+      <p>Verify that 
+      \[
+      y = e^{-x/2}
+      \] 
+      is a solution to 
+      \[
+      2y' + y = 0
+      \] 
+      on \((-\infty, \infty)\).</p>
+      <button onclick="toggleSolution('sol1', this)">Show Solution</button>
+      <div id="sol1" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Compute \(y'\):
+        \[
+        y' = \frac{d}{dx} e^{-x/2} = -\frac{1}{2} e^{-x/2}
+        \]
+        Substitute into the DE:
+        \[
+        2y' + y = 2\left(-\frac{1}{2} e^{-x/2}\right) + e^{-x/2} = 0
+        \]
+        So \(y = e^{-x/2}\) is a solution on \((-\infty, \infty)\).
+      </div>
+    </div>
+
+    <!-- Problem 2 -->
+    <div class="problem">
+      <h3 id="prob2">Problem 2</h3>
+      <p>Verify that the one-parameter family of functions 
+      \[
+      x^2 + y^2 = c, \quad c > 0
+      \]
+      is a solution to 
+      \[
+      y' = -\frac{x}{y}.
+      \]</p>
+      <button onclick="toggleSolution('sol2', this)">Show Solution</button>
+      <div id="sol2" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Differentiate implicitly:
+        \[
+        \frac{d}{dx}(x^2 + y^2) = 0 \implies 2x + 2y \frac{dy}{dx} = 0
+        \]
+        Solve for \(y'\):
+        \[
+        \frac{dy}{dx} = -\frac{x}{y}
+        \]
+        So the family satisfies the DE. The interval excludes points where \(y=0\).
+      </div>
+    </div>
+
+    <!-- Problem 3 -->
+    <div class="problem">
+      <h3 id="prob3">Problem 3</h3>
+      <p>Verify that 
+      \[
+      y = \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt
+      \]
+      is a solution to 
+      \[
+      2xy' - y = 2x \cos(x)
+      \].</p>
+      <button onclick="toggleSolution('sol3', this)">Show Solution</button>
+      <div id="sol3" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        Compute \(y'\):
+        \[
+        y' = \frac{1}{2\sqrt{x}} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt + \cos(x)
+        \]
+        Multiply by \(2x\):
+        \[
+        2x y' = 2x \cos(x) + \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt = 2x \cos(x) + y
+        \]
+        Hence,
+        \[
+        2xy' - y = 2x \cos(x)
+        \]
+      </div>
+    </div>
+		<!-- Problem 4 -->
+	<div class="problem">
+	  <h3 id="prob4">Problem 4</h3>
+	  <p>Classify the following differential equation by <strong>type</strong>,
+	  <strong>order</strong>, and <strong>linearity</strong>:
+	  \[
+	  y'' + 5\tan(x)y' - 2y = e^x.
+	  \]</p>
+	  <button onclick="toggleSolution('sol4', this)">Show Solution</button>
+	  <div id="sol4" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+		<ul>
+		  <li><strong>Type:</strong> Ordinary differential equation, since only ordinary derivatives of \(y\) appear.</li>
+		  <li><strong>Order:</strong> Second order, because the highest derivative is \(y''\).</li>
+		  <li><strong>Linearity:</strong> Linear, since \(y\) and its derivatives appear only to the first power and are not multiplied together.</li>
+		</ul>
+	  </div>
+	</div>
+
+	<!-- Problem 5 -->
+	<div class="problem">
+	  <h3 id="prob5">Problem 5</h3>
+	  <p>Classify the following differential equation by <strong>type</strong>,
+	  <strong>order</strong>, and <strong>linearity</strong>:
+	  \[
+	  y' + y^2 = \sin(x).
+	  \]</p>
+	  <button onclick="toggleSolution('sol5', this)">Show Solution</button>
+	  <div id="sol5" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+		<ul>
+		  <li><strong>Type:</strong> Ordinary differential equation.</li>
+		  <li><strong>Order:</strong> First order, since the highest derivative is \(y'\).</li>
+		  <li><strong>Linearity:</strong> Nonlinear, because the term \(y^2\) involves the unknown function raised to a power greater than one.</li>
+		</ul>
+	  </div>
+	</div>
+
+	<!-- Problem 6 -->
+	<div class="problem">
+	  <h3 id="prob6">Problem 6</h3>
+	  <p>Classify the following differential equation by <strong>type</strong>,
+	  <strong>order</strong>, and <strong>linearity</strong>:
+	  \[
+	  \frac{\partial^2 u}{\partial x^2} + \frac{\partial u}{\partial t} = x.
+	  \]</p>
+	  <button onclick="toggleSolution('sol6', this)">Show Solution</button>
+	  <div id="sol6" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+		<ul>
+		  <li><strong>Type:</strong> Partial differential equation, since partial derivatives with respect to multiple variables appear.</li>
+		  <li><strong>Order:</strong> Second order, because the highest derivative is \(\frac{\partial^2 u}{\partial x^2}\).</li>
+		  <li><strong>Linearity:</strong> Linear, since \(u\) and its derivatives appear only to the first power and are not multiplied together.</li>
+		</ul>
+	  </div>
+	</div>
+
+
+
+    <!-- Section 1.2 -->
+    <h2 id="sec1.2">Section 1.2
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	 </span>
+	</h2>
+	
+	
+	<div class="problem">
+	  <h3 id="prob7">Problem 7</h3>
+	  <p>
+	  Verify that
+	  \[
+	  y = \frac{1}{x^2 + c}
+	  \]
+	  is a solution to the differential equation
+	  \[
+	  y' + 2xy^2 = 0,
+	  \]
+	  and find the particular solution such that
+	  \[
+	  y(2) = \frac{1}{3}.
+	  \]
+	  Give the largest interval \(I\) over which the solution is defined.
+	  </p>
+
+	  <button onclick="toggleSolution('sol7', this)">Show Solution</button>
+
+	  <div id="sol7" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		We begin by computing the derivative of
+		\[
+		y = \frac{1}{x^2 + c} = (x^2 + c)^{-1}.
+		\]
+		</p>
+
+		<p>
+		Using the chain rule,
+		\[
+		y' = -1(x^2 + c)^{-2}(2x) = -\frac{2x}{(x^2 + c)^2}.
+		\]
+		</p>
+
+		<p>
+		Next, compute the term \(2xy^2\):
+		\[
+		y^2 = \left(\frac{1}{x^2 + c}\right)^2 = \frac{1}{(x^2 + c)^2},
+		\]
+		so
+		\[
+		2xy^2 = \frac{2x}{(x^2 + c)^2}.
+		\]
+		</p>
+
+		<p>
+		Substitute into the differential equation:
+		\[
+		y' + 2xy^2
+		= -\frac{2x}{(x^2 + c)^2}
+		+ \frac{2x}{(x^2 + c)^2}
+		= 0.
+		\]
+		</p>
+
+		<p>
+		Therefore, \(y = \frac{1}{x^2 + c}\) is a solution.
+		</p>
+
+		<p>
+		Now apply the initial condition \(y(2) = \frac{1}{3}\):
+		\[
+		\frac{1}{2^2 + c} = \frac{1}{3}
+		\Rightarrow 4 + c = 3
+		\Rightarrow c = -1.
+		\]
+		</p>
+
+		<p>
+		The particular solution is
+		\[
+		y = \frac{1}{x^2 - 1}.
+		\]
+		</p>
+
+		<p>
+		This solution is undefined when \(x^2 - 1 = 0\), i.e., at \(x = \pm 1\).
+		Since the initial condition occurs at \(x = 2\), the largest interval
+		containing \(2\) is
+		\[
+		(1, \infty).
+		\]
+		</p>
+	  </div>
+	</div>
+
+		
+	<div class="problem">
+	  <h3 id="prob8">Problem 8</h3>
+	  <p>
+	  Determine a region of the \(xy\)-plane for which the differential equation
+	  \[
+	  y' = \sqrt{xy}
+	  \]
+	  has a unique solution whose graph passes through a point \((x_0, y_0)\).
+	  </p>
+
+	  <button onclick="toggleSolution('sol8', this)">Show Solution</button>
+
+	  <div id="sol8" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		We write the differential equation in the form
+		\[
+		y' = f(x,y),
+		\quad \text{where} \quad
+		f(x,y) = \sqrt{xy}.
+		\]
+		</p>
+
+		<p>
+		For the existence and uniqueness theorem to apply, both \(f(x,y)\) and
+		\(\frac{\partial f}{\partial y}\) must be continuous in a region containing
+		the point \((x_0, y_0)\).
+		</p>
+
+		<p>
+		First, observe that \(\sqrt{xy}\) is defined only when
+		\[
+		xy \ge 0.
+		\]
+		</p>
+
+		<p>
+		Next, compute the partial derivative with respect to \(y\):
+		\[
+		\frac{\partial f}{\partial y}
+		= \frac{\partial}{\partial y} (xy)^{1/2}
+		= \frac{1}{2}(xy)^{-1/2} \cdot x
+		= \frac{x}{2\sqrt{xy}}.
+		\]
+		</p>
+
+		<p>
+		This expression is undefined when \(xy = 0\) and not real when \(xy < 0\).
+		Therefore, both \(f(x,y)\) and \(\frac{\partial f}{\partial y}\) are continuous
+		only when
+		\[
+		xy > 0.
+		\]
+		</p>
+
+		<p>
+		One such region is
+		\[
+		x > 0 \quad \text{and} \quad y > 0.
+		\]
+		</p>
+
+		<p>
+		In this region, the hypotheses of the existence and uniqueness theorem are
+		satisfied, so there exists a unique solution whose graph passes through any
+		point \((x_0, y_0)\) with \(x_0 > 0\) and \(y_0 > 0\).
+		</p>
+	  </div>
+	</div>
+	
+	
+		<!-- Section 1.3 -->
+	<h2 id="sec1.3">Section 1.3
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+
+	<div class="problem">
+	  <h3 id="prob9">Problem 9</h3>
+	  <p>
+	  Using the concept of net rate, determine a model for a population \(P(t)\) if
+	  the birth rate is proportional to the population present at time \(t\), but
+	  the death rate is proportional to the square of the population present at time
+	  \(t\).
+	  </p>
+
+	  <button onclick="toggleSolution('sol9', this)">Show Solution</button>
+
+	  <div id="sol9" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		Let \(P(t)\) denote the population at time \(t\).
+		</p>
+
+		<p>
+		The birth rate is proportional to the population, so we model it as
+		\[
+		\text{Birth rate} = aP,
+		\]
+		where \(a > 0\) is a constant.
+		</p>
+
+		<p>
+		The death rate is proportional to the square of the population, so it is
+		modeled as
+		\[
+		\text{Death rate} = bP^2,
+		\]
+		where \(b > 0\) is a constant.
+		</p>
+
+		<p>
+		The net rate of change of the population is given by
+		\[
+		\frac{dP}{dt} = (\text{birth rate}) - (\text{death rate}).
+		\]
+		</p>
+
+		<p>
+		Substituting the expressions above, we obtain the differential equation
+		\[
+		\frac{dP}{dt} = aP - bP^2.
+		\]
+		</p>
+
+		<p>
+		This is a first-order, nonlinear differential equation known as the
+		<em>logistic equation</em>.
+		</p>
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob10">Problem 10</h3>
+	  <p>
+	  Suppose that a large mixing tank initially holds \(300\) gallons of water in
+	  which \(50\) pounds of salt have been dissolved. Another brine solution is
+	  pumped into the tank at a rate of \(3\) gal/min, and when the solution is well
+	  stirred, it is pumped out at a rate of \(2\) gal/min. If the concentration of
+	  the solution entering is \(2\) lb/gal, determine a differential equation for
+	  the amount of salt \(A(t)\) in the tank at time \(t > 0\).
+	  </p>
+
+	  <button onclick="toggleSolution('sol10', this)">Show Solution</button>
+
+	  <div id="sol10" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		Let \(A(t)\) be the amount of salt (in pounds) in the tank at time \(t\).
+		</p>
+
+		<p>
+		The rate of change of salt in the tank is given by
+		\[
+		\frac{dA}{dt} = (\text{rate in}) - (\text{rate out}).
+		\]
+		</p>
+
+		<p>
+		<strong>Rate in:</strong><br>
+		The incoming solution has concentration \(2\) lb/gal and enters at
+		\(3\) gal/min, so
+		\[
+		\text{Rate in} = (2)(3) = 6 \text{ lb/min}.
+		\]
+		</p>
+
+		<p>
+		<strong>Rate out:</strong><br>
+		The volume of liquid in the tank is increasing because the inflow exceeds
+		the outflow:
+		\[
+		V(t) = 300 + (3 - 2)t = 300 + t \text{ gal}.
+		\]
+		</p>
+
+		<p>
+		The concentration of salt in the tank at time \(t\) is
+		\[
+		\frac{A(t)}{300 + t} \text{ lb/gal}.
+		\]
+		</p>
+
+		<p>
+		Since the solution is pumped out at \(2\) gal/min, the rate of salt leaving
+		the tank is
+		\[
+		\text{Rate out} = 2 \cdot \frac{A(t)}{300 + t}.
+		\]
+		</p>
+
+		<p>
+		Therefore, the differential equation is
+		\[
+		\frac{dA}{dt} = 6 - \frac{2A}{300 + t}.
+		\]
+		</p>
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob11">Problem 11</h3>
+	  <p>
+	  A drug is infused into a patient's bloodstream at a constant rate of \(r\)
+	  grams per second. Simultaneously, the drug is removed at a rate proportional
+	  to the amount \(x(t)\) of the drug present at time \(t\). Determine a
+	  differential equation for the amount \(x(t)\).
+	  </p>
+
+	  <button onclick="toggleSolution('sol11', this)">Show Solution</button>
+
+	  <div id="sol11" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		Let \(x(t)\) denote the amount of drug in the bloodstream at time \(t\).
+		</p>
+
+		<p>
+		The rate of change of the drug amount is given by
+		\[
+		\frac{dx}{dt} = (\text{rate in}) - (\text{rate out}).
+		\]
+		</p>
+
+		<p>
+		The drug is infused at a constant rate \(r\) grams per second, so
+		\[
+		\text{Rate in} = r.
+		\]
+		</p>
+
+		<p>
+		The drug is removed at a rate proportional to the amount present, so
+		\[
+		\text{Rate out} = kx,
+		\]
+		where \(k > 0\) is a proportionality constant.
+		</p>
+
+		<p>
+		Substituting into the net rate equation, we obtain
+		\[
+		\frac{dx}{dt} = r - kx.
+		\]
+		</p>
+
+		<p>
+		This is a first-order linear differential equation commonly used in
+		pharmacokinetics.
+		</p>
+	  </div>
+	</div>
+	
+	<h2 id="sec2.1">Section 2.1.1
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+	<div class="problem">
+	  <h3 id="prob12">Problem 12</h3>
+	  <p>
+		Find the critical points and phase portrait of the autonomous differential equation
+		\[
+		y' = y^2 - y^3.
+		\]
+		Classify each critical point as asymptotically stable, unstable, or semi-stable.
+	  </p>
+
+	  <button onclick="toggleSolution('sol12', this)">Show Solution</button>
+
+	  <div id="sol12" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		First, factor the right-hand side:
+		\[
+		y' = y^2(1 - y).
+		\]
+		</p>
+
+		<p>
+		Critical points occur when \( y' = 0 \):
+		\[
+		y = 0, \quad y = 1.
+		\]
+		</p>
+
+		<p>
+		To analyze stability, examine the sign of \(y'\):
+		</p>
+
+		<ul>
+		  <li>For \(y < 0\): \(y^2 > 0\) and \(1-y > 0\), so \(y' > 0\)</li>
+		  <li>For \(0 < y < 1\): \(y' > 0\)</li>
+		  <li>For \(y > 1\): \(1-y < 0\), so \(y' < 0\)</li>
+		</ul>
+		
+		<p>
+		Classification:
+		</p>
+
+		<ul>
+		  <li>\(y=0\): semi-stable</li>
+		  <li>\(y=1\): asymptotically stable</li>
+		</ul>
+
+		
+	  </div>
+	</div>
+	
+	
+	<div class="problem">
+	  <h3 id="prob13">Problem 13</h3>
+	  <p>
+		Find the critical points and phase portrait of the autonomous differential equation
+		\[
+		y' = y(8 - 6y + y^2).
+		\]
+		Classify each critical point.
+	  </p>
+
+	  <button onclick="toggleSolution('sol13', this)">Show Solution</button>
+
+	  <div id="sol13" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		Factor the expression:
+		\[
+		y' = y(y^2 - 6y + 8) = y(y-2)(y-4).
+		\]
+		</p>
+
+		<p>
+		Critical points occur when \(y' = 0\):
+		\[
+		y = 0, \quad y = 2, \quad y = 4.
+		\]
+		</p>
+
+		<p>
+		Sign analysis:
+		</p>
+
+		<ul>
+		  <li>\(y < 0\): \(y' < 0\)</li>
+		  <li>\(0 < y < 2\): \(y' > 0\)</li>
+		  <li>\(2 < y < 4\): \(y' < 0\)</li>
+		  <li>\(y > 4\): \(y' > 0\)</li>
+		</ul>
+
+		<p>
+		Classification:
+		</p>
+
+		<ul>
+		  <li>\(y=0\): unstable</li>
+		  <li>\(y=2\): asymptotically stable</li>
+		  <li>\(y=4\): unstable</li>
+		</ul>
+	  </div>
+	</div>
+
+
+
+
+	<div class="problem">
+	  <h3 id="prob14">Problem 14</h3>
+	  <p>
+		Find the critical points and phase portrait of the autonomous differential equation
+		\[
+		y' = \frac{y e^y - 9y}{e^y}.
+		\]
+		Classify each critical point.
+	  </p>
+
+	  <button onclick="toggleSolution('sol14', this)">Show Solution</button>
+
+	  <div id="sol14" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		Factor the numerator:
+		\[
+		y' = \frac{y(e^y - 9)}{e^y}.
+		\]
+		</p>
+
+		<p>
+		Since \(e^y > 0\) for all \(y\), the sign of \(y'\) depends only on
+		\(y(e^y - 9)\).
+		</p>
+
+		<p>
+		Critical points occur when:
+		\[
+		y = 0, \quad e^y = 9 \Rightarrow y = \ln 9.
+		\]
+		</p>
+
+		<p>
+		Sign analysis:
+		</p>
+
+		<ul>
+		  <li>\(y < 0\): \(y' > 0\)</li>
+		  <li>\(0 < y < \ln 9\): \(y' < 0\)</li>
+		  <li>\(y > \ln 9\): \(y' > 0\)</li>
+		</ul>
+
+		<p>
+		Classification:
+		</p>
+
+		<ul>
+		  <li>\(y=0\): asymptotically stable</li>
+		  <li>\(y=\ln 9\): unstable</li>
+		</ul>
+	  </div>
+	</div>
+
+
+	<div class="problem">
+	  <h3 id="prob15">Problem 15</h3>
+	  <p>
+		Suppose that \(y(x)\) is a nonconstant solution of the autonomous equation
+		\(y' = f(y)\) with \(y=c\) being a critical point.
+		Why can't the graph of \(y(x)\) cross the solution curve \(y=c\)?
+	  </p>
+
+	  <button onclick="toggleSolution('sol15', this)">Show Solution</button>
+
+	  <div id="sol15" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		<p>
+		A critical point \(y=c\) satisfies \(f(c)=0\), so \(y=c\) is itself a constant
+		solution to the differential equation.
+		</p>
+
+		<p>
+		If a nonconstant solution \(y(x)\) were to cross \(y=c\), then at the crossing
+		point both solutions would have the same value.
+		</p>
+
+		<p>
+		However, the existence and uniqueness theorem guarantees that a first-order
+		autonomous differential equation has a unique solution through any initial
+		point \((x_0, y_0)\).
+		</p>
+
+		<p>
+		Therefore, once a solution reaches \(y=c\), it must remain there for all \(x\),
+		and crossing is impossible.
+		</p>
+
+		<p>
+		This is why solution curves of autonomous equations never cross equilibrium
+		solutions.
+		</p>
+	  </div>
+	</div>
+	
+	<h2 id="sec2.2">Section 2.2
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+		<div class="problem">
+  <h3 id="prob16">Problem 16</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[ e^{x}y\frac{dy}{dx} = e^{-y}e^{-2x-y} \]
+	  </p>
+
+	  <button onclick="toggleSolution('sol16', this)">Show Solution</button>
+
+	  <div id="sol16" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Rewrite the equation:</p>
+
+	  \[
+	  e^x y \frac{dy}{dx} = e^{-2x-2y}
+	  \]
+
+	  <p>Multiply both sides by \(e^{-x}\):</p>
+
+	  \[
+	  y\frac{dy}{dx} = e^{-3x-2y}
+	  \]
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  y e^{2y} dy = e^{-3x} dx
+	  \]
+
+	  <p>Integrate both sides:</p>
+
+	  \[
+	  \int y e^{2y} dy = \int e^{-3x} dx
+	  \]
+
+	  <p>Use integration by parts on the left:</p>
+
+	  \[
+	  \frac{1}{2}ye^{2y}-\frac{1}{4}e^{2y} = -\frac{1}{3}e^{-3x}+C
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob17">Problem 17</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[2y\cos^3(3x)\frac{dy}{dx}=-\sin(3x)\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol17', this)">Show Solution</button>
+
+	  <div id="sol17" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  2y dy = \frac{-\sin(3x)}{\cos^3(3x)} dx
+	  \]
+
+	  <p>Simplify:</p>
+
+	  \[
+	  2y dy = -\tan(3x)\sec^2(3x) dx
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  \int 2y dy = -\int \tan(3x)\sec^2(3x) dx
+	  \]
+
+	  <p>Let \(u=\tan(3x)\):</p>
+
+	  \[
+	  y^2 = -\frac{1}{3}\tan^2(3x)+C
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob18">Problem 18</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[ \frac{dy}{dx}=-y\ln(y), \quad y(0)=e \]
+	  </p>
+
+	  <button onclick="toggleSolution('sol18', this)">Show Solution</button>
+
+	  <div id="sol18" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Separate variables:</p>
+
+	  \[
+	  \frac{dy}{y\ln(y)}=-dx
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  \int \frac{1}{y\ln(y)}dy=-\int dx
+	  \]
+
+	  \[
+	  \ln|\ln(y)|=-x+C
+	  \]
+
+	  <p>Exponentiate:</p>
+
+	  \[
+	  \ln(y)=Ce^{-x}
+	  \]
+
+	  <p>Apply initial condition:</p>
+
+	  \[
+	  \ln(e)=C \Rightarrow C=1
+	  \]
+
+	  <p>Final Answer:</p>
+
+	  \[
+	  y=e^{e^{-x}}
+	  \]
+
+	  </div>
+	</div>
+	
+	<h2 id="sec2.3">Section 2.3
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+	<div class="problem">
+  <h3 id="prob19">Problem 19</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[3y'+12y=4\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol19', this)">Show Solution</button>
+
+	  <div id="sol19" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Standard form:</p>
+
+	  \[
+	  y'+4y=\frac{4}{3}
+	  \]
+
+	  <p>Integrating factor:</p>
+
+	  \[
+	  \mu(x)=e^{4x}
+	  \]
+
+	  <p>Multiply equation:</p>
+
+	  \[
+	  \frac{d}{dx}(e^{4x}y)=\frac{4}{3}e^{4x}
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  e^{4x}y=\frac{1}{3}e^{4x}+C
+	  \]
+
+	  <p>Final Answer:</p>
+
+	  \[
+	  y=\frac{1}{3}+Ce^{-4x}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob20">Problem 20</h3>
+	  <p>
+	  Find the general solution to the following differential equation:
+	  \[y'=2y+x^2+5\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol20', this)">Show Solution</button>
+
+	  <div id="sol20" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  \[
+	  y'-2y=x^2+5
+	  \]
+
+	  \[
+	  \mu=e^{-2x}
+	  \]
+
+	  \[
+	  \frac{d}{dx}(e^{-2x}y)=e^{-2x}(x^2+5)
+	  \]
+
+	  <p>Integrate:</p>
+
+	  \[
+	  y=\frac{x^2}{2}+\frac{x}{2}+\frac{11}{4}+Ce^{2x}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob21">Problem 21</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[yy'-x=2y^2, \quad y(1)=5\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol21', this)">Show Solution</button>
+
+	  <div id="sol21" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  <p>Rewrite:</p>
+
+	  \[
+	  y' -2y=\frac{x}{y}
+	  \]
+
+	  <p>Multiply by \(y\):</p>
+
+	  \[
+	  y y' -2y^2=x
+	  \]
+
+	  <p>Let \(u=y^2\):</p>
+
+	  \[
+	  \frac{du}{dx}-4u=2x
+	  \]
+
+	  \[
+	  u=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
+	  \]
+
+	  \[
+	  y^2=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
+	  \]
+
+	  <p>Use initial condition:</p>
+
+	  \[
+	  25=C e^4-\frac{1}{2}-\frac{1}{8}
+	  \]
+
+	  </div>
+	</div>
+
+	<div class="problem">
+	  <h3 id="prob22">Problem 22</h3>
+	  <p>
+	  Find the particular solution to the following initial value problem:
+	  \[y'-\tan(x)y=\cos^2(x), \quad y(0)=-1\]
+	  </p>
+
+	  <button onclick="toggleSolution('sol22', this)">Show Solution</button>
+
+	  <div id="sol22" class="solution" style="display:none;">
+	  <p><strong>Solution:</strong></p>
+
+	  \[
+	  \mu=e^{\int -\tan(x)dx}=\cos(x)
+	  \]
+
+	  \[
+	  \frac{d}{dx}(y\cos x)=\cos^3 x
+	  \]
+
+	  \[
+	  y\cos x=\int \cos^3 x dx
+	  \]
+
+	  \[
+	  y\cos x=\sin x-\frac{\sin^3 x}{3}+C
+	  \]
+
+	  <p>Apply initial condition:</p>
+
+	  \[
+	  C=-1
+	  \]
+
+	  </div>
+	</div>
+	
+	<h2 id="sec2.4">Section 2.4
+	<span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+
+<div class="problem">
+  <h3 id="prob23">Problem 23</h3>
+  <p>
+  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+  \[(2x+y)dx-(x+6y)dy=0\]
+  </p>
+
+  <button onclick="toggleSolution('sol23', this)">Show Solution</button>
+
+  <div id="sol23" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M=2x+y, \quad N=-(x+6y)
+  \]
+
+  \[
+  M_y=1, \quad N_x=-1
+  \]
+
+  <p>Not exact.</p>
+
+  </div>
+</div>
+
+<div class="problem">
+  <h3 id="prob24">Problem 24</h3>
+  <p>
+  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+  \[(5y-2x)dy-2y dx=0\]
+  </p>
+
+  <button onclick="toggleSolution('sol24', this)">Show Solution</button>
+
+  <div id="sol24" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M=-2y, \quad N=5y-2x
+  \]
+
+  \[
+  M_y=-2, \quad N_x=-2
+  \]
+
+  <p>Exact.</p>
+
+  \[
+  f=\int -2y dx=-2xy+g(y)
+  \]
+
+  \[
+  \frac{\partial f}{\partial y}=-2x+g'(y)=5y-2x
+  \]
+
+  \[
+  g'(y)=5y \Rightarrow g=\frac{5}{2}y^2
+  \]
+
+  \[
+  -2xy+\frac{5}{2}y^2=C
+  \]
+
+  </div>
+</div>
+
+<div class="problem">
+  <h3 id="prob25">Problem 25</h3>
+  <p>
+  Find \(k\) so that the equation is exact:
+  \[
+  (6xy^3+\cos y)dx+(2kx^2y^2-x\sin y)dy=0
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol25', this)">Show Solution</button>
+
+  <div id="sol25" class="solution" style="display:none;">
+  <p><strong>Solution:</strong></p>
+
+  \[
+  M_y=18xy^2-\sin y
+  \]
+
+  \[
+  N_x=4kxy^2-\sin y
+  \]
+
+  \[
+  18xy^2=4kxy^2 \Rightarrow k=\frac{9}{2}
+  \]
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+</body>
+</html>
