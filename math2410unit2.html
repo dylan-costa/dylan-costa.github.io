@@ -48,6 +48,11 @@
 	  <a href="#lecture8">Lecture 8</a> |
 	  <a href="#lecture9">Lecture 9</a> |
 	  <a href="#lecture10">Lecture 10</a> |
+	  <a href="#lecture11">Lecture 11</a> |
+	  <a href="#lecture12">Lecture 12</a> |
+	  <a href="#lecture13">Lecture 13</a> |
+	  <a href="#lecture14">Lecture 14</a> |
+	  <a href="#lecture15">Lecture 15</a> |
 	  
 	</nav>
 
@@ -229,14 +234,687 @@
 	  </span>
 	</h2>
 	
+	<p>
+	So far, many models we have studied were linear differential equations. 
+	However, real systems often depend on multiple interacting factors, leading 
+	to nonlinear models.
+	</p>
+
+	<h3>General Nonlinear Growth Model</h3>
+
+	<p>
+	Suppose a growth rate depends both on the amount present and another factor 
+	that itself depends on the amount present. Then we may have a model of the form
+	</p>
+
+	<div class="math">
+	\[
+	\frac{dx}{dt} = x f(x)
+	\]
+	</div>
+
+	<p>
+	This is nonlinear because the dependent variable appears multiplied by a function 
+	of itself.
+	</p>
+
+	<h3>Carrying Capacity and Logistic Equation</h3>
+
+	<p>
+	Suppose an environment has a carrying capacity for a population. Then we model
+	</p>
+
+	<div class="math">
+	\[
+	\frac{dP}{dt} = P f(P)
+	\]
+	</div>
+
+	<p>
+	where
+	</p>
+
+	<div class="math">
+	\[
+	f(K)=0
+	\]
+	</div>
+
+	<p>
+	and \(K\) is the carrying capacity.
+	</p>
+
+	A common choice is a linear function:
+
+	<div class="math">
+	\[
+	f(P)=a-bP
+	\]
+	</div>
+
+	which produces the **logistic equation**
+
+	<div class="math">
+	\[
+	\frac{dP}{dt}=P(a-bP).
+	\]
+	</div>
+
+	---
+
+	<h3>Solving the Logistic Equation</h3>
+
+	Separate variables:
+
+	<div class="math">
+	\[
+	\frac{dP}{P(a-bP)} = dt.
+	\]
+	</div>
+
+	Using partial fractions:
+
+	<div class="math">
+	\[
+	\frac{1}{P(a-bP)} = \frac{C_1}{P} + \frac{C_2}{a-bP}.
+	\]
+	</div>
+
+	After integration and algebra:
+
+	<div class="math">
+	\[
+	P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}.
+	\]
+	</div>
+
+	---
+
+	<h3>Example — Disease Spread</h3>
+
+	<p>
+	A student carrying a flu virus returns to a school of 1000 students. 
+	The rate of spread is proportional to both infected students and 
+	not infected students.
+	</p>
+
+	Model:
+
+	<div class="math">
+	\[
+	\frac{dx}{dt}=k x(1000-x).
+	\]
+	</div>
+
+	With initial condition:
+
+	<div class="math">
+	\[
+	x(0)=1.
+	\]
+	</div>
+
+	Solution form:
+
+	<div class="math">
+	\[
+	x(t)=\frac{1000}{1+999e^{-1000kt}}.
+	\]
+	</div>
+
+	Using data \(x(4)=50\), we can solve for \(k\) and predict future infections.
+
+	---
+
+	<h3>Adjusting Logistic Models</h3>
+
+	Suppose a constant number of individuals is removed (harvesting):
+
+	<div class="math">
+	\[
+	\frac{dP}{dt}=P\left(r-\frac{r}{K}P\right)-h, \quad h>0.
+	\]
+	</div>
+
+	This equation is still:
+
+	<ul>
+	<li>Separable</li>
+	<li>Autonomous</li>
+	</ul>
+
+	But the **critical points change** because of the constant removal term.
+
+
+	
 	<h2 id="lecture10">
 	  Lecture 10: Section 3.3 - Mathematical Modeling (Systems of Linear Equations)
 	  <span style="font-size: 0.7em; margin-left: 10px;">
 		<a href="#top">↑ Back to top</a>
 	  </span>
 	</h2>
+	
+	
+	<h3>Definition of a System</h3>
 
+	A system of first-order differential equations has the form
 
+	<div class="math">
+	\[
+	\frac{dx}{dt}=g_1(t,x,y), \qquad
+	\frac{dy}{dt}=g_2(t,x,y).
+	\]
+	</div>
+
+	---
+	
+	A system is linear if both equations are linear in the dependent variables.
+
+	<div class="math">
+	\[
+	\frac{dx}{dt}=c_1x+c_2y+f_1(t)
+	\]
+
+	\[
+	\frac{dy}{dt}=c_3x+c_4y+f_2(t).
+	\]
+	</div>
+
+	If the system is not linear, then it is nonlinear.
+
+	---
+
+	<h3>Why Systems?</h3>
+
+	Systems model interactions between multiple quantities, such as:
+
+	<ul>
+	<li>Predator–prey populations</li>
+	<li>Mixing tanks</li>
+	<li>Multi-step radioactive decay</li>
+	<li>Economic models</li>
+	</ul>
+
+	---
+
+	<h3>Example — Radioactive Decay Chain</h3>
+
+	Suppose substances decay in sequence:
+
+	<p style="text-align:center;">
+	X → Y → Z
+	</p>
+
+	Model:
+
+	<div class="math">
+	\[
+	\frac{dx}{dt}=-\lambda_1 x
+	\]
+
+	\[
+	\frac{dy}{dt}=-\lambda_2 y + \lambda_1 x
+	\]
+
+	\[
+	\frac{dz}{dt}=\lambda_2 y.
+	\]
+	</div>
+
+	Each equation depends on another variable, so we must solve them together.
+
+	---
+
+	<h3>Example — Mixing Tanks</h3>
+
+	Two tanks exchange fluid.
+
+	Let:
+
+	<ul>
+	<li>\(x_1(t)\) = salt in tank A</li>
+	<li>\(x_2(t)\) = salt in tank B</li>
+	</ul>
+
+	Then:
+
+	<div class="math">
+	\[
+	\frac{dx_1}{dt}=-\frac{2}{25}x_1+\frac{1}{50}x_2
+	\]
+
+	\[
+	\frac{dx_2}{dt}=\frac{2}{25}x_1-\frac{2}{25}x_2.
+	\]
+	</div>
+
+	Initial conditions:
+
+	<div class="math">
+	\[
+	x_1(0)=25, \qquad x_2(0)=0.
+	\]
+	</div>
+
+	This is a linear system with constant coefficients.
+
+	---
+
+	<h2>Key Takeaways</h2>
+
+	<ul>
+	<li>Nonlinear models often arise when growth depends on interactions.</li>
+	<li>The logistic equation models limited growth with carrying capacity.</li>
+	<li>Systems of ODEs model multiple interacting variables.</li>
+	<li>Linear systems have special structure that simplifies solving.</li>
+	</ul>
+
+	</div>
+	
+	<h2 id="lecture11">
+	  Lecture 11: Section 4.1 - Higher-Order Differential Equations
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	<p>
+	In the previous lectures, we have looked at methods to solve certain types of first-order differential equations.
+	Now, we will look at methods of solving higher-order linear differential equations.
+	Let’s begin with a definition.
+	</p>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	<p>
+	A linear \(n\)th-order differential equation of the form
+	\[
+	a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y'+a_0(x)y = 0
+	\]
+	is said to be <b>homogeneous.</b> Otherwise, we have
+	\[
+	a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y'+a_0(x)y = g(x)
+	\]
+	where \(g(x) \neq 0\), which is said to be <b>nonhomogeneous.</b>
+	</p>
+	</div>
+
+	<p>
+	Here we insist that the functions \(a_i(x)\) depend only on \(x\) and are continuous on the interval we are considering.
+	</p>
+
+	<div class="remark">
+	<span class="label">Remark</span>
+	<p>
+	All homogeneous differential equations have a trivial constant solution \(y=0\).
+	So we are more interested in finding non-constant solutions.
+	From now on, when we refer to “solutions,” we mean a nontrivial solution.
+	</p>
+	</div>
+
+	<p>
+	When we find one solution to a higher-order linear differential equation, we actually find infinitely many.
+	Suppose that \(y\) is a solution to
+	\[
+	a_n(x)y^{(n)}+\cdots + a_1(x)y'+a_0(x)y =0
+	\]
+	and \(c\) is a constant. Then
+	\[
+	a_n(x)(cy)^{(n)}+\cdots+a_0(x)(cy)
+	= c\left(a_n(x)y^{(n)}+\cdots+a_0(x)y\right)=0.
+	\]
+	</p>
+
+	<p>
+	This reveals that for any constant \(c\), the curve \(cy\) is also a solution.
+	This follows from the linearity of derivatives:
+	\[
+	(cy)' = cy', \qquad (y_1+y_2)' = y_1'+y_2'.
+	\]
+	</p>
+
+	<p>
+	Similarly, if \(y_1\) and \(y_2\) are solutions, then
+	\[
+	a_n(x)(y_1+y_2)^{(n)}+\cdots+a_0(x)(y_1+y_2)=0,
+	\]
+	so \(y_1+y_2\) is also a solution.
+	</p>
+
+	<div class="theorem">
+	<span class="label">Theorem</span>
+	<p>
+	Let \(y_1, \dots, y_n\) be solutions to a homogeneous differential equation.
+	Then for any constants \(c_1, \dots , c_n\),
+	\[
+	y = c_1y_1 + \cdots + c_ny_n
+	\]
+	is also a solution.
+	</p>
+	</div>
+
+	<p>
+	The question remains: how do we find all the solutions?
+	</p>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	<p>
+	A set of functions \(f_1(x), \dots, f_n(x)\) are said to be <b>linearly dependent</b> on an interval \(I\)
+	if there exist constants \(c_1, \dots, c_n\) (not all zero) such that
+	\[
+	c_1f_1(x) + \cdots + c_nf_n(x) = 0
+	\]
+	for all \(x\) in \(I\). Otherwise, the set is said to be <b>linearly independent.</b>
+	</p>
+	</div>
+
+	<p>
+	To find all solutions, we need a set of linearly independent solutions.
+	Any solution can then be written as a linear combination of these.
+	</p>
+
+	<div class="example">
+	<span class="label">Example</span>
+	<p>
+	Show that \(f_1(x)=x\) and \(f_2(x)=x^2\) are linearly independent.
+	</p>
+
+	<p>
+	We set
+	\[
+	c_1x+c_2x^2=0.
+	\]
+	Factoring gives
+	\[
+	x(c_1+c_2x)=0.
+	\]
+	This would require \(c_2=-c_1/x\), which is not constant.
+	Thus the only constants that work are \(c_1=c_2=0\), so the functions are linearly independent.
+	</p>
+	</div>
+
+	<p>
+	An alternative way to check linear independence is using the <b>Wronskian.</b>
+	</p>
+
+	<div class="theorem">
+	<span class="label">Theorem (Wronskian Test)</span>
+	<p>
+	The functions \(f_1,\dots,f_n\) are linearly independent if
+	\[
+	W(f_1,\dots,f_n)=
+	\det
+	\begin{bmatrix}
+	f_1 & \cdots & f_n\\
+	\vdots & \ddots & \vdots\\
+	f_1^{(n-1)} & \cdots & f_n^{(n-1)}
+	\end{bmatrix}
+	\neq 0.
+	\]
+	</p>
+	</div>
+
+	<p>
+	For the previous example,
+	\[
+	W(x,x^2)=
+	\det
+	\begin{bmatrix}
+	x & x^2\\
+	1 & 2x
+	\end{bmatrix}
+	= x(2x)-x^2(1)=x^2 \neq 0.
+	\]
+	Thus the functions are linearly independent.
+	</p>
+
+	<div class="remark">
+	<span class="label">Remark</span>
+	<p>
+	For two functions, remember
+	\[
+	\det
+	\begin{bmatrix}
+	a & b\\
+	c & d
+	\end{bmatrix}
+	= ad-bc.
+	\]
+	</p>
+	</div>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	<p>
+	Any set of \(n\) linearly independent solutions to an \(n\)th-order homogeneous differential equation
+	is called a <b>fundamental set of solutions.</b>
+	</p>
+	</div>
+
+	<div class="theorem">
+	<span class="label">Theorem</span>
+	<p>
+	Given a fundamental set of solutions, the <b>general solution</b> is
+	\[
+	y = c_1f_1 + \cdots + c_nf_n
+	\]
+	where \(c_1,\dots,c_n\) are constants.
+	</p>
+	</div>
+
+	<div class="example">
+	<span class="label">Example</span>
+	<p>
+	The differential equation
+	\[
+	y''+y=0
+	\]
+	has general solution
+	\[
+	y=c_1\sin(x)+c_2\cos(x).
+	\]
+	</p>
+
+	<p>
+	We check independence using the Wronskian:
+	\[
+	\det
+	\begin{bmatrix}
+	\sin(x) & \cos(x)\\
+	\cos(x) & -\sin(x)
+	\end{bmatrix}
+	=
+	\sin^2(x)+\cos^2(x)=1\neq 0.
+	\]
+	</p>
+
+	<p>
+	Since the equation is second order, we only need two linearly independent solutions.
+	</p>
+	</div>
+
+	</div>
+	
+	<h2 id="lecture12">
+	  Lecture 12: Section 4.2 - Reduction of Order
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<p>
+	In this lecture, we discuss a method called <b>reduction of order</b>, which allows us to
+	find a second linearly independent solution of a second-order linear homogeneous
+	differential equation when one solution is already known.
+	</p>
+
+	<div class="definition">
+	<span class="label">Definition</span>
+	Consider the second-order linear homogeneous differential equation
+	\[
+	y'' + P(x)y' + Q(x)y = 0.
+	\]
+	If one nontrivial solution \(y_1(x)\) is known, the method of
+	<b>reduction of order</b> can be used to find a second solution \(y_2(x)\)
+	that is linearly independent from \(y_1\).
+	</div>
+
+	<h3>Idea of the Method</h3>
+
+	<p>
+	We assume the second solution has the form
+	\[
+	y_2 = v(x)y_1(x),
+	\]
+	where \(v(x)\) is an unknown nonconstant function to be determined.
+	</p>
+
+	<p>
+	Then via product rule
+	\[
+	y_2' = v'y_1 + vy_1', \quad
+	y_2'' = v''y_1 + 2v'y_1' + vy_1''.
+	\]
+	</p>
+
+	<p>
+	Substituting into the differential equation and using the fact that
+	\(y_1\) satisfies the equation simplifies the expression and eventually
+	leads to a first-order equation in \(v'\).
+	</p>
+
+	<div class="theorem">
+	<span class="label">Theorem (Reduction of Order Formula)</span>
+	If \(y_1(x)\) is a known solution to
+	\[
+	y'' + P(x)y' + Q(x)y = 0,
+	\]
+	then a second solution is given by
+	\[
+	y_2 = y_1(x)\int \frac{e^{-\int P(x)\,dx}}{(y_1(x))^2}\,dx.
+	\]
+	</div>
+
+	<div class="remark">
+	<span class="label">Remark</span>
+	The two solutions \(y_1\) and \(y_2\) will be linearly independent provided
+	the Wronskian is nonzero.
+	</div>
+
+	<h3>Example 1</h3>
+
+	<div class="example">
+	<span class="label">Example</span>
+	Find a second solution of
+	\[
+	y'' + y = 0
+	\]
+	given that \(y_1 = \cos x\) is a solution.
+	</div>
+
+	<p>
+	Here \(P(x)=0\), so the formula becomes
+	\[
+	y_2 = y_1 \int \frac{1}{y_1^2}\,dx.
+	\]
+	</p>
+
+	<p>
+	Thus,
+	\[
+	y_2 = \cos x \int \frac{1}{\cos^2 x}\,dx
+	= \cos x \int \sec^2 x\,dx
+	= \cos x \tan x
+	= \sin x.
+	\]
+	</p>
+
+	<p>
+	So the general solution is
+	\[
+	y = c_1\cos x + c_2\sin x.
+	\]
+	</p>
+
+	<h3>Example 2</h3>
+
+	<div class="example">
+	<span class="label">Example</span>
+	Find a second solution of
+	\[
+	y'' - y = 0
+	\]
+	given \(y_1 = e^x.\)
+	</div>
+
+	<p>
+	Again \(P(x)=0\), so
+	\[
+	y_2 = y_1 \int \frac{1}{y_1^2}\,dx
+	= e^x \int e^{-2x}\,dx.
+	\]
+	</p>
+
+	<p>
+	Compute the integral:
+	\[
+	\int e^{-2x}\,dx = -\frac{1}{2}e^{-2x}.
+	\]
+	</p>
+
+	<p>
+	Therefore,
+	\[
+	y_2 = e^x\left(-\frac{1}{2}e^{-2x}\right)
+	= -\frac{1}{2}e^{-x}.
+	\]
+	</p>
+
+	<p>
+	Since constants do not matter for linear independence, we take
+	\[
+	y_2 = e^{-x}.
+	\]
+	</p>
+
+	<p>
+	Hence the general solution is
+	\[
+	y = c_1 e^x + c_2 e^{-x}.
+	\]
+	</p>
+
+	<h3>Summary</h3>
+
+	<ul>
+	<li>Reduction of order is used when one solution is already known.</li>
+	<li>Assume \(y_2 = v(x)y_1(x)\).</li>
+	<li>This converts the problem into a first-order equation.</li>
+	<li>The formula provides a direct shortcut.</li>
+	</ul>
+
+	</div>
+	
+	
+	<h2 id="lecture13">
+	  Lecture 13: Section 4.3 - Auxillary Equations
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	<h2 id="lecture14">
+	  Lecture 14: Section 4.4 - Method of Undetermined Coefficients
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	<h2 id="lecture15">
+	  Lecture 15: Section 4.6 - Variation of Parameters
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
    
   </main>
 </body>
