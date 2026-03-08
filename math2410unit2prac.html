@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Unit 1 Practice / Review Problems — MATH 2410</title>
+  <title>Unit 2 Practice / Review Problems — MATH 2410</title>
   <link href="style.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax for LaTeX -->
@@ -59,8 +59,958 @@
     <nav class="toc" id="toc">
       <strong>Jump to Section:</strong>
       <a href="#sec3.1">Section 3.1</a> |
+	  <a href="#sec3.2">Section 3.2</a> |
+	  <a href="#sec3.3">Section 3.3</a> |
+	  <a href="#sec4.1">Section 4.1</a> |
+	  <a href="#sec4.2">Section 4.2</a> |
+	  <a href="#sec4.3">Section 4.3</a> |
+	  <a href="#sec4.4">Section 4.4</a> |
     </nav>
     <hr>
+	
+	<h2 id="sec3.1">Section 3.1
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+	</h2>
+
+	<!-- Problem 1 -->
+	<div class="problem">
+	  <h3 id="prob1">Problem 1</h3>
+	  <p>
+	  The population of bacteria in a culture grows at a rate proportional to the number of bacteria present at time \(t\).
+	  After 3 hours it is observed that 400 bacteria are present. After 10 hours 2000 bacteria are present.  
+	  What was the initial number of bacteria?
+	  </p>
+
+	  <button onclick="toggleSolution('sol1', this)">Show Solution</button>
+
+	  <div id="sol1" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		Since the growth rate is proportional to the population, the model is
+		\[
+		\frac{dP}{dt} = kP
+		\]
+
+		The general solution is
+		\[
+		P(t) = Ce^{kt}.
+		\]
+
+		Use the given data.
+
+		\[
+		P(3) = 400 \quad \Rightarrow \quad 400 = Ce^{3k}
+		\]
+
+		\[
+		P(10) = 2000 \quad \Rightarrow \quad 2000 = Ce^{10k}
+		\]
+
+		Divide the equations:
+
+		\[
+		\frac{2000}{400} = \frac{Ce^{10k}}{Ce^{3k}} = e^{7k}
+		\]
+
+		\[
+		5 = e^{7k}
+		\]
+
+		Solve for \(k\):
+
+		\[
+		k = \frac{\ln 5}{7}
+		\]
+
+		Substitute into \(400 = Ce^{3k}\):
+
+		\[
+		C = 400e^{-3k} = 400e^{-3\ln(5)/7}.
+		\]
+
+		Therefore the initial population is
+
+		\[
+		P(0) = C = 400e^{-3\ln(5)/7}.
+		\]
+
+		Numerically,
+
+		\[
+		P(0) \approx 200 \text{ bacteria}.
+		\]
+	  </div>
+	</div>
+
+
+	<!-- Problem 2 -->
+	<div class="problem">
+	  <h3 id="prob2">Problem 2</h3>
+	  <p>
+	  A thermometer is taken from an inside room to the outside, where the air temperature is \(0^\circ C\).
+	  After 1 minute the thermometer reads \(20^\circ C\), and after 5 minutes it reads \(5^\circ C\).
+	  What is the initial temperature of the inside room?
+	  </p>
+
+	  <button onclick="toggleSolution('sol2', this)">Show Solution</button>
+
+	  <div id="sol2" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		By Newton's Law of Cooling,
+
+		\[
+		\frac{dT}{dt} = k(T - T_a)
+		\]
+
+		where \(T_a = 0\).
+
+		The solution is
+
+		\[
+		T(t) = Ce^{kt}.
+		\]
+
+		Use the data.
+
+		\[
+		T(1) = 20 \quad \Rightarrow \quad 20 = Ce^k
+		\]
+
+		\[
+		T(5) = 5 \quad \Rightarrow \quad 5 = Ce^{5k}
+		\]
+
+		Divide the equations:
+
+		\[
+		\frac{5}{20} = e^{4k}
+		\]
+
+		\[
+		\frac{1}{4} = e^{4k}
+		\]
+
+		\[
+		k = \frac{\ln(1/4)}{4}.
+		\]
+
+		Substitute into \(20 = Ce^k\):
+
+		\[
+		C = 20e^{-k}.
+		\]
+
+		Therefore the initial temperature is
+
+		\[
+		T(0) = C = 20e^{-k}.
+		\]
+
+		Numerically,
+
+		\[
+		T(0) \approx 28.3^\circ C.
+		\]
+	  </div>
+	</div>
+
+
+	<!-- Section 3.2 -->
+	<h2 id="sec3.2">Section 3.2
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+
+	<!-- Problem 3 -->
+	<div class="problem">
+	  <h3 id="prob3">Problem 3</h3>
+	  <p>
+	  The number \(N(t)\) of people in a community who are exposed to a particular advertisement is governed by the logistic equation.
+	  Initially \(N(0)=5000\), and it is observed that \(N(1)=8000\).
+	  Solve for \(N(t)\) if it is predicted that the limiting number of people in the community who will see the advertisement is 50,000.
+	  </p>
+
+	  <button onclick="toggleSolution('sol3', this)">Show Solution</button>
+
+	  <div id="sol3" class="solution" style="display:none;">
+		<p><strong>Solution:</strong></p>
+
+		The logistic model is
+
+		\[
+		\frac{dN}{dt} = rN\left(1-\frac{N}{K}\right)
+		\]
+
+		where \(K = 50000\).
+
+		The general solution is
+
+		\[
+		N(t) = \frac{K}{1+Ae^{-rt}}.
+		\]
+
+		Use \(N(0)=5000\):
+
+		\[
+		5000 = \frac{50000}{1+A}
+		\]
+
+		\[
+		1+A = 10
+		\]
+
+		\[
+		A = 9.
+		\]
+
+		So
+
+		\[
+		N(t) = \frac{50000}{1+9e^{-rt}}.
+		\]
+
+		Use \(N(1)=8000\):
+
+		\[
+		8000 = \frac{50000}{1+9e^{-r}}.
+		\]
+
+		Solve:
+
+		\[
+		1+9e^{-r} = 6.25
+		\]
+
+		\[
+		9e^{-r} = 5.25
+		\]
+
+		\[
+		e^{-r} = \frac{5.25}{9}.
+		\]
+
+		Therefore
+
+		\[
+		r = -\ln\!\left(\frac{5.25}{9}\right).
+		\]
+
+		The model is
+
+		\[
+		N(t)=\frac{50000}{1+9e^{-rt}}, 
+		\quad r=-\ln\!\left(\frac{5.25}{9}\right).
+		\]
+	  </div>
+	</div>
+
+
+	<!-- Section 3.3 -->
+	<h2 id="sec3.3">Section 3.3
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#toc">↑ Back to top</a>
+	  </span>
+	</h2>
+
+	<!-- Problem 4 -->
+	<!-- Problem 4 -->
+<div class="problem">
+  <h3 id="prob4">Problem 4</h3>
+  <p>
+  Two tanks A and B are connected as shown in the figure. Each tank initially contains 
+  100 gallons of brine. Tank A initially contains 100 pounds of salt and tank B contains 
+  50 pounds of salt. Brine flows from tank A to tank B at 3 gal/min and from tank B to tank A 
+  at 2 gal/min. Construct a mathematical model for the number of pounds of salt 
+  \(x(t)\) and \(y(t)\) at time \(t\) in tanks A and B, respectively.
+  </p>
+
+  <button onclick="toggleSolution('sol4', this)">Show Solution</button>
+
+  <div id="sol4" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Let
+
+    \[
+    x(t) = \text{pounds of salt in tank A}, \qquad
+    y(t) = \text{pounds of salt in tank B}.
+    \]
+
+    Since the flow rates differ, the volumes in the tanks change over time.
+
+    For tank A:
+
+    \[
+    V_A(t) = 100 - 3t + 2t = 100 - t.
+    \]
+
+    For tank B:
+
+    \[
+    V_B(t) = 100 + 3t - 2t = 100 + t.
+    \]
+
+    The concentrations in the tanks are
+
+    \[
+    \frac{x(t)}{100-t}, \qquad \frac{y(t)}{100+t}.
+    \]
+
+    Now compute the rates of change.
+
+    For tank A,
+
+    salt enters from tank B at 2 gal/min:
+
+    \[
+    2 \cdot \frac{y}{100+t}.
+    \]
+
+    Salt leaves tank A at 3 gal/min:
+
+    \[
+    3 \cdot \frac{x}{100-t}.
+    \]
+
+    Therefore
+
+    \[
+    \frac{dx}{dt}
+    =
+    2\frac{y}{100+t}
+    -
+    3\frac{x}{100-t}.
+    \]
+
+    For tank B,
+
+    salt enters from tank A at 3 gal/min:
+
+    \[
+    3 \cdot \frac{x}{100-t}.
+    \]
+
+    Salt leaves tank B at 2 gal/min:
+
+    \[
+    2 \cdot \frac{y}{100+t}.
+    \]
+
+    Thus
+
+    \[
+    \frac{dy}{dt}
+    =
+    3\frac{x}{100-t}
+    -
+    2\frac{y}{100+t}.
+    \]
+
+    The mathematical model is
+
+    \[
+    \frac{dx}{dt}
+    =
+    2\frac{y}{100+t}
+    -
+    3\frac{x}{100-t},
+    \]
+
+    \[
+    \frac{dy}{dt}
+    =
+    3\frac{x}{100-t}
+    -
+    2\frac{y}{100+t},
+    \]
+
+    with initial conditions
+
+    \[
+    x(0)=100, \qquad y(0)=50.
+    \]
+  </div>
+</div>
+
+<!-- Section 4.1 -->
+<h2 id="sec4.1">Section 4.1
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
+
+<!-- Problem 5 -->
+<div class="problem">
+<h3 id="prob5">Problem 5</h3>
+
+<p>
+Determine whether the functions 
+\[
+3, \quad \sin^2(x), \quad \cos^2(x)
+\]
+are linearly independent.
+</p>
+
+<button onclick="toggleSolution('sol5', this)">Show Solution</button>
+
+<div id="sol5" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Note the trigonometric identity
+
+\[
+\sin^2(x)+\cos^2(x)=1.
+\]
+
+Multiplying both sides by 3 gives
+
+\[
+3 = 3\sin^2(x)+3\cos^2(x).
+\]
+
+Rewriting,
+
+\[
+3 - 3\sin^2(x) - 3\cos^2(x) = 0.
+\]
+
+Thus a nontrivial linear combination of the functions equals zero, so the functions are
+
+\[
+\textbf{linearly dependent}.
+\]
+</div>
+</div>
+
+
+<!-- Problem 6 -->
+<div class="problem">
+<h3 id="prob6">Problem 6</h3>
+
+<p>
+Are all functions linearly independent from their derivatives?
+</p>
+
+<button onclick="toggleSolution('sol6', this)">Show Solution</button>
+
+<div id="sol6" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+No. Some functions are scalar multiples of their derivatives.
+
+For example, let
+
+\[
+f(x)=e^x.
+\]
+
+Then
+
+\[
+f'(x)=e^x.
+\]
+
+Thus
+
+\[
+f'(x)-f(x)=0.
+\]
+
+Since a nontrivial linear combination equals zero, the functions are linearly dependent.
+
+Therefore, functions are not necessarily linearly independent from their derivatives.
+</div>
+</div>
+
+
+<!-- Problem 7 -->
+<div class="problem">
+<h3 id="prob7">Problem 7</h3>
+
+<p>
+Provide an example of a homogeneous differential equation of order 2 such that 
+\[
+\sin(2x)
+\]
+is a solution.
+</p>
+
+<button onclick="toggleSolution('sol7', this)">Show Solution</button>
+
+<div id="sol7" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Compute derivatives:
+
+\[
+y=\sin(2x)
+\]
+
+\[
+y' = 2\cos(2x)
+\]
+
+\[
+y'' = -4\sin(2x).
+\]
+
+Thus
+
+\[
+y'' +4y = -4\sin(2x)+4\sin(2x)=0.
+\]
+
+Therefore a second-order homogeneous differential equation with this solution is
+
+\[
+y''+4y=0.
+\]
+</div>
+</div>
+
+
+<!-- Section 4.2 -->
+<h2 id="sec4.2">Section 4.2
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
+
+<!-- Problem 8 -->
+<div class="problem">
+<h3 id="prob8">Problem 8</h3>
+
+<p>
+Use reduction of order to find the general solution to
+\[
+y''+4y'+4y=0
+\]
+if \(y_1=e^{-2x}\) is one solution.
+</p>
+
+<button onclick="toggleSolution('sol8', this)">Show Solution</button>
+
+<div id="sol8" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Let
+
+\[
+y_2 = v(x)y_1.
+\]
+
+Since \(y_1=e^{-2x}\), reduction of order gives
+
+\[
+y_2 = xe^{-2x}.
+\]
+
+Thus the general solution is
+
+\[
+y=C_1e^{-2x}+C_2xe^{-2x}.
+\]
+</div>
+</div>
+
+
+<!-- Problem 9 -->
+<div class="problem">
+<h3 id="prob9">Problem 9</h3>
+
+<p>
+Use reduction of order to find the general solution to
+\[
+xy''+xy'=0
+\]
+if \(y_1=\ln(x)\) is one solution.
+</p>
+
+<button onclick="toggleSolution('sol9', this)">Show Solution</button>
+
+<div id="sol9" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Divide by \(x\):
+
+\[
+y''+y'=0.
+\]
+
+Let \(v=y'\). Then
+
+\[
+v'+v=0.
+\]
+
+Solving,
+
+\[
+v=Ce^{-x}.
+\]
+
+Integrating,
+
+\[
+y=-Ce^{-x}+C_2.
+\]
+
+Thus two independent solutions are \(1\) and \(e^{-x}\).
+
+The general solution is
+
+\[
+y=C_1+C_2e^{-x}.
+\]
+</div>
+</div>
+
+
+<!-- Problem 10 -->
+<div class="problem">
+<h3 id="prob10">Problem 10</h3>
+
+<p>
+Use reduction of order to find the general solution to
+\[
+y''-3y'+2y=5e^{3x}
+\]
+if \(y_1=e^x\) is one solution of the homogeneous equation.
+</p>
+
+<button onclick="toggleSolution('sol10', this)">Show Solution</button>
+
+<div id="sol10" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+First solve the homogeneous equation.
+
+The characteristic equation is
+
+\[
+r^2-3r+2=0.
+\]
+
+\[
+(r-1)(r-2)=0
+\]
+
+Thus
+
+\[
+y_h=C_1e^x+C_2e^{2x}.
+\]
+
+Now find a particular solution.
+
+Try
+
+\[
+y_p=Ae^{3x}.
+\]
+
+Substitute:
+
+\[
+y_p'=3Ae^{3x}, \quad y_p''=9Ae^{3x}.
+\]
+
+\[
+9Ae^{3x}-9Ae^{3x}+2Ae^{3x}=5e^{3x}.
+\]
+
+\[
+2A=5
+\]
+
+\[
+A=\frac{5}{2}.
+\]
+
+Thus
+
+\[
+y_p=\frac{5}{2}e^{3x}.
+\]
+
+The general solution is
+
+\[
+y=C_1e^x+C_2e^{2x}+\frac{5}{2}e^{3x}.
+\]
+</div>
+</div>
+
+
+<!-- Section 4.3 -->
+<h2 id="sec4.3">Section 4.3
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
+
+<!-- Problem 11 -->
+<div class="problem">
+<h3 id="prob11">Problem 11</h3>
+
+<p>
+Find the general solution to
+\[
+y''-36y=0.
+\]
+</p>
+
+<button onclick="toggleSolution('sol11', this)">Show Solution</button>
+
+<div id="sol11" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Characteristic equation:
+
+\[
+r^2-36=0
+\]
+
+\[
+r=\pm6.
+\]
+
+Thus the general solution is
+
+\[
+y=C_1e^{6x}+C_2e^{-6x}.
+\]
+</div>
+</div>
+
+
+<!-- Problem 12 -->
+<div class="problem">
+<h3 id="prob12">Problem 12</h3>
+
+<p>
+Find the general solution to
+\[
+y''+9y=0.
+\]
+</p>
+
+<button onclick="toggleSolution('sol12', this)">Show Solution</button>
+
+<div id="sol12" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Characteristic equation:
+
+\[
+r^2+9=0.
+\]
+
+Since this equation has no real roots, the general solution contains trigonometric functions. We get
+
+\[
+y=C_1\cos(3x)+C_2\sin(3x).
+\]
+</div>
+</div>
+
+
+<!-- Problem 13 -->
+<div class="problem">
+<h3 id="prob13">Problem 13</h3>
+
+<p>
+Find the general solution to
+\[
+y''+12y'+36y=0.
+\]
+</p>
+
+<button onclick="toggleSolution('sol13', this)">Show Solution</button>
+
+<div id="sol13" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+Characteristic equation:
+
+\[
+r^2+12r+36=0.
+\]
+
+\[
+(r+6)^2=0.
+\]
+
+Thus \(r=-6\) is a repeated root.
+
+The general solution is
+
+\[
+y=C_1e^{-6x}+C_2xe^{-6x}.
+\]
+</div>
+</div>
+
+
+<!-- Section 4.4 -->
+<h2 id="sec4.4">Section 4.4
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
+
+<!-- Problem 14 -->
+<div class="problem">
+<h3 id="prob14">Problem 14</h3>
+
+<p>
+Use the method of undetermined coefficients to find the general solution to
+\[
+y''+y'-6y=2x.
+\]
+</p>
+
+<button onclick="toggleSolution('sol14', this)">Show Solution</button>
+
+<div id="sol14" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+First solve the homogeneous equation.
+
+\[
+r^2+r-6=0
+\]
+
+\[
+(r+3)(r-2)=0
+\]
+
+Thus
+
+\[
+y_h=C_1e^{-3x}+C_2e^{2x}.
+\]
+
+For the particular solution try
+
+\[
+y_p=Ax+B.
+\]
+
+Substitute:
+
+\[
+y_p'=A, \quad y_p''=0.
+\]
+
+\[
+A-6(Ax+B)=2x.
+\]
+
+Match coefficients:
+
+\[
+-6A=2 \Rightarrow A=-\frac13
+\]
+
+\[
+A-6B=0.
+\]
+
+\[
+-\frac13-6B=0
+\]
+
+\[
+B=-\frac1{18}.
+\]
+
+Thus
+
+\[
+y_p=-\frac13x-\frac1{18}.
+\]
+
+The general solution is
+
+\[
+y=C_1e^{-3x}+C_2e^{2x}-\frac13x-\frac1{18}.
+\]
+</div>
+</div>
+
+
+<!-- Problem 15 -->
+<div class="problem">
+<h3 id="prob15">Problem 15</h3>
+
+<p>
+Use the method of undetermined coefficients to solve
+\[
+y''-16y=2e^{3x}.
+\]
+</p>
+
+<button onclick="toggleSolution('sol15', this)">Show Solution</button>
+
+<div id="sol15" class="solution" style="display:none;">
+<p><strong>Solution:</strong></p>
+
+First solve the homogeneous equation.
+
+\[
+r^2-16=0
+\]
+
+\[
+r=\pm4.
+\]
+
+\[
+y_h=C_1e^{4x}+C_2e^{-4x}.
+\]
+
+For the particular solution try
+
+\[
+y_p=Ae^{3x}.
+\]
+
+Substitute:
+
+\[
+y_p'=3Ae^{3x}, \quad y_p''=9Ae^{3x}.
+\]
+
+\[
+9Ae^{3x}-16Ae^{3x}=2e^{3x}.
+\]
+
+\[
+-7A=2.
+\]
+
+\[
+A=-\frac{2}{7}.
+\]
+
+Thus
+
+\[
+y_p=-\frac{2}{7}e^{3x}.
+\]
+
+The general solution is
+
+\[
+y=C_1e^{4x}+C_2e^{-4x}-\frac{2}{7}e^{3x}.
+\]
+</div>
+</div>
 
     
 
