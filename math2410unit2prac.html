@@ -625,7 +625,7 @@ y=C_1e^{-2x}+C_2xe^{-2x}.
 <p>
 Use reduction of order to find the general solution to
 \[
-xy''+xy'=0
+x^2y''+xy'=0
 \]
 if \(y_1=\ln(x)\) is one solution.
 </p>
@@ -635,36 +635,106 @@ if \(y_1=\ln(x)\) is one solution.
 <div id="sol9" class="solution" style="display:none;">
 <p><strong>Solution:</strong></p>
 
-Divide by \(x\):
+<b>Step 1:</b> Put the equation in standard form.
+
+Divide by \(x^2\):
 
 \[
-y''+y'=0.
+y''+\frac{1}{x}y'=0.
 \]
 
-Let \(v=y'\). Then
+So
 
 \[
-v'+v=0.
+P(x)=\frac{1}{x}.
 \]
 
-Solving,
+---
+
+<b>Step 2:</b> Reduction of Order Formula
+
+If one solution is \(y_1\), a second solution is
 
 \[
-v=Ce^{-x}.
+y_2=y_1\int \frac{e^{-\int P(x)\,dx}}{y_1^2}\,dx.
 \]
 
-Integrating,
+---
+
+<b>Step 3:</b> Compute needed pieces
 
 \[
-y=-Ce^{-x}+C_2.
+\int P(x)dx=\int \frac{1}{x}dx=\ln x.
 \]
 
-Thus two independent solutions are \(1\) and \(e^{-x}\).
+\[
+e^{-\int P(x)dx}=e^{-\ln x}=\frac{1}{x}.
+\]
+
+Since \(y_1=\ln x\),
+
+\[
+y_1^2=(\ln x)^2.
+\]
+
+Thus
+
+\[
+y_2=\ln x\int \frac{1}{x(\ln x)^2}dx.
+\]
+
+---
+
+<b>Step 4:</b> Evaluate the integral
+
+Let
+
+\[
+u=\ln x
+\]
+
+Then
+
+\[
+du=\frac{1}{x}dx.
+\]
+
+The integral becomes
+
+\[
+\int \frac{1}{u^2}du
+\]
+
+\[
+=-\frac{1}{u}.
+\]
+
+Substitute back:
+
+\[
+-\frac{1}{\ln x}.
+\]
+
+Thus
+
+\[
+y_2=\ln x\left(-\frac{1}{\ln x}\right)=-1.
+\]
+
+Since constants do not affect linear independence, we take
+
+\[
+y_2=1.
+\]
+
+---
+
+<b>Final Answer</b>
 
 The general solution is
 
 \[
-y=C_1+C_2e^{-x}.
+y=c_1\ln x+c_2.
 \]
 </div>
 </div>
