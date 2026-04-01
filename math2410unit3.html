@@ -342,6 +342,323 @@ Factor:
 
 </table>
 
+
+	<h2 id="lecture17">
+	  Lecture 17: Section 7.2 - Inverse Transform
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<h2>Inverse Transform</h2>
+
+<p>
+To accompany the Laplace Transform, we have the inverse transform. This allows us to recover the original function that we took the transform of.
+</p>
+
+<p>
+To keep the analogy with other transforms, consider:
+</p>
+
+\[
+\frac{d}{dx}(f(x)) = f'(x)
+\]
+
+\[
+\int f'(x)\,dx = f(x) + C
+\]
+
+<p>
+Similarly:
+</p>
+
+\[
+\mathcal{L}^{-1}\{\mathcal{L}\{f(t)\}\} = f(t)
+\]
+
+<div class="definition">
+<b>Definition.</b><br>
+If \(F(s) = \mathcal{L}\{f(t)\}\), then
+\[
+f(t) = \mathcal{L}^{-1}\{F(s)\}
+\]
+is the <b>inverse Laplace transform</b>.
+</div>
+
+<p>
+The inverse transform is linear:
+</p>
+
+\[
+\mathcal{L}^{-1}\{aF(s) + bG(s)\}
+= a\mathcal{L}^{-1}\{F(s)\} + b\mathcal{L}^{-1}\{G(s)\}
+\]
+
+<br>
+
+<div class="example">
+<b>Example 1</b><br>
+
+Compute
+\[
+\mathcal{L}^{-1}\left\{\frac{6s+1}{s^2+25}\right\}
+\]
+
+<b>Solution:</b>
+
+\[
+= \mathcal{L}^{-1}\left\{\frac{6s}{s^2+25}\right\}
++ \mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\}
+\]
+
+\[
+= 6\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\}
++ \mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\}
+\]
+
+Using known transforms:
+
+\[
+\mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\} = \cos(at)
+\]
+
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s^2+a^2}\right\} = \frac{1}{a}\sin(at)
+\]
+
+\[
+= 6\cos(5t) + \frac{1}{5}\sin(5t)
+\]
+</div>
+
+<br>
+
+<p><b>Strategy:</b> Use partial fractions to match known Laplace forms.</p>
+
+<br>
+
+<div class="example">
+<b>Example 2</b><br>
+
+Find
+\[
+\mathcal{L}^{-1}\left\{\frac{2s}{s^2+3s+2}\right\}
+\]
+
+<b>Solution:</b>
+
+Factor:
+
+\[
+s^2+3s+2 = (s+1)(s+2)
+\]
+
+Partial fractions:
+
+\[
+\frac{2s}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
+\]
+
+Multiply:
+
+\[
+2s = A(s+2) + B(s+1)
+\]
+
+Expand:
+
+\[
+2s = (A+B)s + (2A+B)
+\]
+
+Match coefficients:
+
+\[
+A + B = 2, \quad 2A + B = 0
+\]
+
+Solve:
+
+\[
+A = -2, \quad B = 4
+\]
+
+Thus:
+
+\[
+\frac{2s}{(s+1)(s+2)} = \frac{-2}{s+1} + \frac{4}{s+2}
+\]
+
+Inverse transforms:
+
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s-a}\right\} = e^{at}
+\]
+
+\[
+= -2e^{-t} + 4e^{-2t}
+\]
+</div>
+
+<br>
+
+<div class="example">
+<b>Example 3</b><br>
+
+Find
+\[
+\mathcal{L}^{-1}\left\{\frac{6s-2}{s^2-1}\right\}
+\]
+
+<b>Solution:</b>
+
+Factor:
+
+\[
+s^2 - 1 = (s-1)(s+1)
+\]
+
+Partial fractions:
+
+\[
+\frac{6s-2}{(s-1)(s+1)} = \frac{A}{s-1} + \frac{B}{s+1}
+\]
+
+Multiply:
+
+\[
+6s - 2 = A(s+1) + B(s-1)
+\]
+
+Expand:
+
+\[
+6s - 2 = (A+B)s + (A-B)
+\]
+
+Match coefficients:
+
+\[
+A + B = 6, \quad A - B = -2
+\]
+
+Solve:
+
+\[
+A = 2, \quad B = 4
+\]
+
+Thus:
+
+\[
+\frac{6s-2}{s^2-1} = \frac{2}{s-1} + \frac{4}{s+1}
+\]
+
+Inverse transforms:
+
+\[
+= 2e^{t} + 4e^{-t}
+\]
+</div>
+
+<br>
+
+<div class="example">
+<b>Example 4</b><br>
+
+Find
+\[
+\mathcal{L}^{-1}\left\{\frac{s+1}{s^3+25s}\right\}
+\]
+
+<b>Solution:</b>
+
+Factor:
+
+\[
+s^3 + 25s = s(s^2+25)
+\]
+
+Partial fractions:
+
+\[
+\frac{s+1}{s(s^2+25)} = \frac{A}{s} + \frac{Bs + C}{s^2+25}
+\]
+
+Multiply:
+
+\[
+s+1 = A(s^2+25) + (Bs+C)s
+\]
+
+Expand:
+
+\[
+s+1 = (A+B)s^2 + Cs + 25A
+\]
+
+Match coefficients:
+
+\[
+A + B = 0, \quad C = 1, \quad 25A = 1
+\]
+
+Solve:
+
+\[
+A = \frac{1}{25}, \quad B = -\frac{1}{25}, \quad C = 1
+\]
+
+Thus:
+
+\[
+= \frac{1}{25}\frac{1}{s}
+-\frac{1}{25}\frac{s}{s^2+25}
++ \frac{1}{s^2+25}
+\]
+
+Inverse transforms:
+
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1
+\]
+
+\[
+\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\} = \cos(5t)
+\]
+
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\} = \frac{1}{5}\sin(5t)
+\]
+
+Final answer:
+
+\[
+= \frac{1}{25}
+- \frac{1}{25}\cos(5t)
++ \frac{1}{5}\sin(5t)
+\]
+</div>
+	
+	
+	
+		<h2 id="lecture18">
+	  Lecture 18: Section 7.2 (cont'd) - Laplace Transforms to Solve IVPs
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	
+	
+	
+		<h2 id="lecture19">
+	  Lecture 19: Section 7.3 - Translation Theorems
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+
    
   </main>
 </body>
