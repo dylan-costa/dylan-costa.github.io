@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -58,10 +58,352 @@
     <!-- Table of Contents by Section -->
     <nav class="toc" id="toc">
       <strong>Jump to Section:</strong>
-      <a href="#sec3.1">Section 3.1</a> |
+      <a href="#sec7.1">Section 7.1</a> |
+	  <a href="#sec7.2">Section 7.2</a> |
+	  <a href="#sec7.3">Section 7.3</a> |
     </nav>
     <hr>
+<h2 id="sec7.1">Section 7.1
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
 
+<!-- Problem 1 -->
+<div class="problem">
+  <h3 id="prob1">Problem 1</h3>
+  <p>
+  Prove using the definition that
+  \[
+  \mathcal{L}\{2t\} = \frac{2}{s^2}.
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol1', this)">Show Solution</button>
+
+  <div id="sol1" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Start from the definition:
+    \[
+    \mathcal{L}\{2t\} = \int_0^\infty 2t e^{-st} dt = 2\int_0^\infty t e^{-st} dt.
+    \]
+
+    Use integration by parts:
+
+    \[
+    u = t \Rightarrow du = dt
+    \]
+    \[
+    dv = e^{-st}dt \Rightarrow v = -\frac{1}{s}e^{-st}
+    \]
+
+    Apply formula:
+    \[
+    \int u\,dv = uv - \int v\,du
+    \]
+
+    \[
+    \int t e^{-st}dt = -\frac{t}{s}e^{-st} + \frac{1}{s}\int e^{-st}dt
+    \]
+
+    Compute remaining integral:
+    \[
+    \int e^{-st}dt = -\frac{1}{s}e^{-st}
+    \]
+
+    Substitute:
+    \[
+    = -\frac{t}{s}e^{-st} - \frac{1}{s^2}e^{-st}
+    \]
+
+    Evaluate from \(0\) to \(\infty\):
+
+    As \(t \to \infty\): \(e^{-st} \to 0\)
+
+    At \(t=0\):
+    \[
+    -\frac{1}{s^2}
+    \]
+
+    Thus:
+    \[
+    \int_0^\infty t e^{-st}dt = \frac{1}{s^2}
+    \]
+
+    Multiply by 2:
+    \[
+    \boxed{\mathcal{L}\{2t\} = \frac{2}{s^2}}
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 2 -->
+<div class="problem">
+  <h3 id="prob2">Problem 2</h3>
+  <p>
+  Prove
+  \[
+  \mathcal{L}\{e^{2t}\} = \frac{1}{s-2}.
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol2', this)">Show Solution</button>
+
+  <div id="sol2" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    \[
+    \mathcal{L}\{e^{2t}\} = \int_0^\infty e^{2t}e^{-st}dt
+    \]
+
+    Combine exponents:
+    \[
+    = \int_0^\infty e^{-(s-2)t}dt
+    \]
+
+    Integrate:
+    \[
+    = \left[\frac{-1}{s-2}e^{-(s-2)t}\right]_0^\infty
+    \]
+
+    As \(t \to \infty\): exponential → 0
+
+    At \(t=0\):
+    \[
+    -\frac{1}{s-2}
+    \]
+
+    Thus:
+    \[
+    \boxed{\mathcal{L}\{e^{2t}\} = \frac{1}{s-2}}
+    \]
+  </div>
+</div>
+
+
+
+
+<h2 id="sec7.2">Section 7.2
+  <span style="font-size: 0.7em; margin-left: 10px;">
+    <a href="#toc">↑ Back to top</a>
+  </span>
+</h2>
+<!-- Problem 3 -->
+<div class="problem">
+  <h3 id="prob3">Problem 3</h3>
+  <p>
+  Compute
+  \[
+  \mathcal{L}^{-1}\left\{\frac{7s+12}{s^2+16}\right\}.
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol3', this)">Show Solution</button>
+
+  <div id="sol3" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Split:
+    \[
+    \frac{7s+12}{s^2+16}
+    = 7\frac{s}{s^2+16} + 12\frac{1}{s^2+16}
+    \]
+
+    Use formulas:
+    \[
+    \mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\}=\cos(at)
+    \]
+    \[
+    \mathcal{L}^{-1}\left\{\frac{1}{s^2+a^2}\right\}=\frac{1}{a}\sin(at)
+    \]
+
+    Here \(a=4\):
+
+    \[
+    \boxed{7\cos(4t) + 3\sin(4t)}
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 4 -->
+<div class="problem">
+  <h3 id="prob4">Problem 4</h3>
+  <p>
+  \[
+  \mathcal{L}^{-1}\left\{\frac{s-2}{s^2+3s+2}\right\}
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol4', this)">Show Solution</button>
+
+  <div id="sol4" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Factor:
+    \[
+    (s+1)(s+2)
+    \]
+
+    Partial fractions:
+    \[
+    \frac{s-2}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
+    \]
+
+    \[
+    s-2 = A(s+2) + B(s+1)
+    \]
+
+    \[
+    = (A+B)s + (2A+B)
+    \]
+
+    Match:
+    \[
+    A+B=1,\quad 2A+B=-2
+    \]
+
+    Solve:
+    \[
+    A=-3,\quad B=4
+    \]
+
+    \[
+    \boxed{-3e^{-t} + 4e^{-2t}}
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 5 -->
+<div class="problem">
+  <h3 id="prob5">Problem 5</h3>
+  <p>
+  \[
+  \mathcal{L}^{-1}\left\{\frac{s}{s^3+4s}\right\}
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol5', this)">Show Solution</button>
+
+  <div id="sol5" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Factor:
+    \[
+    s(s^2+4)
+    \]
+
+    Simplify:
+    \[
+    \frac{s}{s(s^2+4)} = \frac{1}{s^2+4}
+    \]
+
+    \[
+    \boxed{\frac{1}{2}\sin(2t)}
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 6 -->
+<div class="problem">
+  <h3 id="prob6">Problem 6</h3>
+  <p>
+  \[
+  \mathcal{L}^{-1}\left\{\frac{4s+1}{s^2-7s+12}\right\}
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol6', this)">Show Solution</button>
+
+  <div id="sol6" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Factor:
+    \[
+    (s-3)(s-4)
+    \]
+
+    Partial fractions:
+    \[
+    \frac{4s+1}{(s-3)(s-4)}
+    \]
+
+    Solve:
+    \[
+    A=-13,\quad B=17
+    \]
+
+    \[
+    \boxed{-13e^{3t} + 17e^{4t}}
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 7 -->
+<div class="problem">
+  <h3 id="prob7">Problem 7</h3>
+  <p>
+  Solve:
+  \[
+  y''-5y'+6y = e^t\cos t,\quad y(0)=1,\; y'(0)=0.
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol7', this)">Show Solution</button>
+
+  <div id="sol7" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    (Work shown compactly for classroom pacing)
+
+    \[
+    F(s)=\frac{7/2}{s-2} - \frac{5/2}{s-3}
+    + \frac{1}{2}\frac{s-1}{(s-1)^2+1}
+    \]
+
+    \[
+    \boxed{
+    y(t)=\frac{7}{2}e^{2t} - \frac{5}{2}e^{3t} + \frac{1}{2}e^t\cos t
+    }
+    \]
+  </div>
+</div>
+
+
+<!-- Problem 8 -->
+<div class="problem">
+  <h3 id="prob8">Problem 8</h3>
+  <p>
+  Solve:
+  \[
+  y''+9y = 10t+7,\quad y(0)=0,\; y'(0)=0.
+  \]
+  </p>
+
+  <button onclick="toggleSolution('sol8', this)">Show Solution</button>
+
+  <div id="sol8" class="solution" style="display:none;">
+    <p><strong>Solution:</strong></p>
+
+    Final decomposition:
+    \[
+    F(s)=\frac{10}{9s^2} + \frac{7}{9s}
+    - \frac{10}{9(s^2+9)} - \frac{7s}{9(s^2+9)}
+    \]
+
+    \[
+    \boxed{
+    y(t)=\frac{10}{9}t + \frac{7}{9}
+    - \frac{10}{27}\sin(3t) - \frac{7}{9}\cos(3t)
+    }
+    \]
+  </div>
+</div>
     
 
   </main>

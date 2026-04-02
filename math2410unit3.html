@@ -649,6 +649,252 @@ Final answer:
 	  </span>
 	</h2>
 	
+
+<h2>Solving Initial Value Problems using Laplace Transforms</h2>
+
+<p>
+From the last two lectures, we know how to take Laplace transforms and recover functions using inverse transforms. To solve differential equations, we need to understand how Laplace transforms interact with derivatives.
+</p>
+
+<div class="theorem">
+<b>Theorem.</b><br>
+Let \(F(s) = \mathcal{L}\{y(t)\}\). Then
+\[
+\mathcal{L}\{y^{(n)}(t)\}
+= s^nF(s) - s^{n-1}y(0) - \cdots - sy^{(n-2)}(0) - y^{(n-1)}(0).
+\]
+</div>
+
+<p>
+This tells us that solving an IVP using Laplace transforms reduces the problem to algebra, provided we know the initial conditions.
+</p>
+
+<div class="remark">
+<b>Remark.</b><br>
+For first and second derivatives:
+\[
+\mathcal{L}\{y'(t)\} = sF(s) - y(0),
+\]
+\[
+\mathcal{L}\{y''(t)\} = s^2F(s) - sy(0) - y'(0).
+\]
+</div>
+
+<h3>Procedure</h3>
+<ol>
+<li>Take the Laplace transform of both sides.</li>
+<li>Solve algebraically for \(F(s)\).</li>
+<li>Take the inverse Laplace transform to find \(y(t)\).</li>
+</ol>
+
+<br>
+
+<div class="example">
+<b>Example 1</b><br>
+
+Use the Laplace transform to solve
+\[
+y' + 4y = 16e^t, \quad y(0)=1.
+\]
+
+<b>Solution:</b>
+
+Take Laplace transforms:
+\[
+sF(s) - 1 + 4F(s) = \frac{16}{s-1}.
+\]
+
+\[
+(s+4)F(s) = \frac{16}{s-1} + 1.
+\]
+
+Write \(1 = \dfrac{s-1}{s-1}\):
+\[
+(s+4)F(s) = \frac{16 + (s-1)}{s-1} = \frac{s+15}{s-1}.
+\]
+
+\[
+F(s) = \frac{s+15}{(s-1)(s+4)}.
+\]
+
+<b>Partial Fractions:</b>
+\[
+\frac{s+15}{(s-1)(s+4)} = \frac{A}{s-1} + \frac{B}{s+4}.
+\]
+
+\[
+s+15 = A(s+4) + B(s-1).
+\]
+
+Expand:
+\[
+s+15 = (A+B)s + (4A - B).
+\]
+
+Match coefficients:
+\[
+A+B = 1, \quad 4A - B = 15.
+\]
+
+Solve:
+\[
+A = \frac{16}{5}, \quad B = -\frac{11}{5}.
+\]
+
+Thus,
+\[
+F(s) = \frac{16/5}{s-1} - \frac{11/5}{s+4}.
+\]
+
+\[
+y(t) = \frac{16}{5}e^t - \frac{11}{5}e^{-4t}.
+\]
+</div>
+
+<br>
+
+<div class="example">
+<b>Example 2</b><br>
+
+Use the Laplace transform to solve
+\[
+y'' + 5y' + 4y = 0, \quad y(0)=1,\; y'(0)=0.
+\]
+
+<b>Solution:</b>
+
+Take Laplace transforms:
+\[
+(s^2F(s) - s) + 5(sF(s) - 1) + 4F(s) = 0.
+\]
+
+\[
+s^2F(s) - s + 5sF(s) - 5 + 4F(s) = 0.
+\]
+
+\[
+(s^2 + 5s + 4)F(s) = s + 5.
+\]
+
+Factor:
+\[
+s^2 + 5s + 4 = (s+1)(s+4).
+\]
+
+\[
+F(s) = \frac{s+5}{(s+1)(s+4)}.
+\]
+
+<b>Partial Fractions:</b>
+\[
+\frac{s+5}{(s+1)(s+4)} = \frac{A}{s+1} + \frac{B}{s+4}.
+\]
+
+\[
+s+5 = A(s+4) + B(s+1).
+\]
+
+\[
+s+5 = (A+B)s + (4A + B).
+\]
+
+Match:
+\[
+A+B=1, \quad 4A+B=5.
+\]
+
+Solve:
+\[
+A=\frac{4}{3}, \quad B=-\frac{1}{3}.
+\]
+
+Thus,
+\[
+F(s) = \frac{4/3}{s+1} - \frac{1/3}{s+4}.
+\]
+
+\[
+y(t) = \frac{4}{3}e^{-t} - \frac{1}{3}e^{-4t}.
+\]
+</div>
+
+<br>
+
+<div class="example">
+<b>Example 3</b><br>
+
+Use the Laplace transform to solve
+\[
+y'' + 4y = 10\cos(5t), \quad y(0)=0,\; y'(0)=0.
+\]
+
+<b>Solution:</b>
+
+Take Laplace transforms:
+\[
+s^2F(s) + 4F(s) = \frac{10s}{s^2+25}.
+\]
+
+\[
+(s^2+4)F(s) = \frac{10s}{s^2+25}.
+\]
+
+\[
+F(s) = \frac{10s}{(s^2+4)(s^2+25)}.
+\]
+
+<b>Partial Fractions:</b>
+\[
+\frac{10s}{(s^2+4)(s^2+25)} = \frac{As+B}{s^2+4} + \frac{Cs+D}{s^2+25}.
+\]
+
+Multiply:
+\[
+10s = (As+B)(s^2+25) + (Cs+D)(s^2+4).
+\]
+
+Expand:
+\[
+10s = (A+C)s^3 + (B+D)s^2 + (25A+4C)s + (25B+4D).
+\]
+
+Match coefficients:
+\[
+A+C=0, \quad B+D=0,
+\]
+\[
+25A+4C=10, \quad 25B+4D=0.
+\]
+
+Solve:
+\[
+C=-A,\quad D=-B.
+\]
+
+\[
+25A - 4A = 10 \Rightarrow 21A=10 \Rightarrow A=\frac{10}{21},\quad C=-\frac{10}{21}.
+\]
+
+\[
+25B - 4B = 0 \Rightarrow 21B=0 \Rightarrow B=0,\quad D=0.
+\]
+
+Thus,
+\[
+F(s) = \frac{10/21 \, s}{s^2+4} - \frac{10/21 \, s}{s^2+25}.
+\]
+
+Take inverse transforms:
+\[
+\mathcal{L}^{-1}\left\{\frac{s}{s^2+4}\right\} = \cos(2t),
+\quad
+\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\} = \cos(5t).
+\]
+
+\[
+y(t) = \frac{10}{21}\cos(2t) - \frac{10}{21}\cos(5t).
+\]
+</div>
 	
 	
 	
