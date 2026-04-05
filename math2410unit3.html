@@ -905,6 +905,460 @@ y(t) = \frac{10}{21}\cos(2t) - \frac{10}{21}\cos(5t).
 	  </span>
 	</h2>
 
+<p>
+In this lecture, we derive and study the translation theorems. These theorems allow us to use known Laplace transforms 
+\(\mathcal{L}\{f(t)\}\) to compute transforms of modified functions such as \(e^{at}f(t)\) and shifted functions involving unit step functions.
+</p>
+
+<h2>First Translation Theorem</h2>
+
+<p>
+Suppose \(\mathcal{L}\{f(t)\} = F(s)\). Then
+</p>
+
+\[
+\mathcal{L}\{e^{at}f(t)\}
+= \int_0^\infty e^{-st}e^{at}f(t)\,dt
+= \int_0^\infty e^{-(s-a)t}f(t)\,dt
+= F(s-a).
+\]
+
+<div class="theorem">
+<b>Theorem.</b><br>
+If \(F(s) = \mathcal{L}\{f(t)\}\), then
+\[
+\mathcal{L}\{e^{at}f(t)\} = F(s-a).
+\]
+</div>
+
+<div class="example">
+<b>Example 1</b><br>
+Find
+\[
+\mathcal{L}\{e^{3t}\cos(5t)\}.
+\]
+
+<b>Solution:</b>
+
+We know:
+\[
+\mathcal{L}\{\cos(5t)\} = \frac{s}{s^2+25}.
+\]
+
+Apply the shift \(s \to s-3\):
+\[
+\mathcal{L}\{e^{3t}\cos(5t)\}
+=
+\frac{s-3}{(s-3)^2+25}.
+\]
+</div>
+
+
+<div class="example">
+<b>Example 2</b><br>
+Solve
+\[
+y'' + y = te^t,\quad y(0)=1,\; y'(0)=0.
+\]
+
+<b>Step 1:</b> Take Laplace transforms
+
+\[
+\mathcal{L}\{y''\} = s^2F(s) - sy(0) - y'(0) = s^2F(s)-s.
+\]
+
+
+We setup the equation
+
+\[
+(s^2+1)F(s) - s = \mathcal{L}\{te^t\}
+\]
+
+Using translation:
+\[
+\mathcal{L}\{te^t\} = \frac{1}{(s-1)^2}
+\]
+
+\[
+(s^2+1)F(s) = s + \frac{1}{(s-1)^2}
+\]
+
+We have
+
+\[
+F(s) = \frac{s}{s^2+1} + \frac{1}{(s-1)^2(s^2+1)}
+\]
+
+<b>Step 2:</b> Partial fractions
+
+\[
+\frac{1}{(s-1)^2(s^2+1)}
+=
+\frac{A}{s-1} + \frac{B}{(s-1)^2} + \frac{Cs+D}{s^2+1}
+\]
+
+After solving:
+\[
+A=-\frac{1}{2},\quad B=\frac{1}{2},\quad C=\frac{1}{2},\quad D=0
+\]
+
+\[
+=
+-\frac{1}{2}\frac{1}{s-1}
++
+\frac{1}{2}\frac{1}{(s-1)^2}
++
+\frac{1}{2}\frac{s}{s^2+1}
+\]
+
+<b>Step 3:</b> Inverse Laplace
+
+\[
+\mathcal{L}^{-1}\left\{\frac{s}{s^2+1}\right\} = \cos t
+\]
+
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s-1}\right\} = e^t
+\quad
+\mathcal{L}^{-1}\left\{\frac{1}{(s-1)^2}\right\} = te^t
+\]
+
+Thus:
+\[
+y(t)
+=
+\cos t
++
+\left(-\frac{1}{2}e^t + \frac{1}{2}te^t + \frac{1}{2}\cos t\right)
+\]
+
+<b>Final Answer</b>
+
+\[
+y(t)
+=
+\frac{3}{2}\cos t
++
+\frac{1}{2}te^t
+-
+\frac{1}{2}e^t.
+\]
+</div>
+
+
+<h2>Second Translation Theorem</h2>
+
+<div class="definition">
+<b>Definition.</b><br>
+The unit step function is
+\[
+\mathscr{U}(t-a)=
+\begin{cases}
+0, & 0 \le t < a \\
+1, & t \ge a
+\end{cases}
+\]
+</div>
+
+<div class="theorem">
+<b>Theorem (Second Translation).</b><br>
+If \(F(s)=\mathcal{L}\{f(t)\}\), then
+\[
+\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\} = e^{-as}F(s).
+\]
+</div>
+
+<p><b>Proof:</b></p>
+
+\[
+\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\}
+=
+\int_0^\infty e^{-st} f(t-a)\mathscr{U}(t-a)\,dt
+\]
+
+\[
+= \int_a^\infty e^{-st} f(t-a)\,dt
+\]
+
+Let \(u=t-a\):
+
+\[
+= \int_0^\infty e^{-s(u+a)} f(u)\,du
+= e^{-as} \int_0^\infty e^{-su} f(u)\,du
+= e^{-as}F(s)
+\]
+
+
+<div class="remark">
+<b>Remark.</b><br>
+Expressions must be written in the form \(f(t-a)\mathscr{U}(t-a)\).
+</div>
+
+
+<div class="example">
+<b>Example 3</b><br>
+Write \(f(t)\) in terms of unit step functions, where
+\[
+f(t)=
+\begin{cases}
+1, & 0 \le t \le 3 \\
+t^2, & t>3
+\end{cases}
+\]
+
+<b>Solution:</b>
+
+\[
+f(t) = 1 + (t^2-1)\mathscr{U}(t-3)
+\]
+
+Rewrite:
+\[
+t^2 = (t-3)^2 + 6(t-3) + 9
+\]
+
+\[
+t^2 - 1 = (t-3)^2 + 6(t-3) + 8
+\]
+
+\[
+f(t)
+=
+1 + [(t-3)^2 + 6(t-3) + 8]\mathscr{U}(t-3)
+\]
+</div>
+
+
+<div class="example">
+<b>Example 4</b><br>
+Find \(\mathcal{L}\{f(t)\}\) where
+\[
+f(t)=
+\begin{cases}
+1, & 0 \le t \le 2 \\
+t+3, & t>2
+\end{cases}
+\]
+
+<b>Solution:</b>
+
+\[
+f(t)=1+(t+2)\mathscr{U}(t-2)
+\]
+
+Rewrite:
+\[
+t+2=(t-2)+4
+\]
+
+\[
+f(t)=1+[(t-2)+4]\mathscr{U}(t-2)
+\]
+
+Take transforms:
+\[
+\mathcal{L}\{f(t)\}
+=
+\frac{1}{s}
++
+e^{-2s}\left(\frac{1}{s^2}+\frac{4}{s}\right)
+\]
+</div>
+
+
+<div class="example">
+<b>Example 5</b><br>
+Find
+\[
+\mathcal{L}\{\sin(t)\mathscr{U}(t-2\pi)\}
+\]
+
+<b>Solution:</b>
+
+\[
+\sin(t)=\sin(t-2\pi)
+\]
+
+\[
+\mathcal{L}\{\sin(t)\mathscr{U}(t-2\pi)\}
+=
+e^{-2\pi s}\mathcal{L}\{\sin t\}
+=
+\frac{e^{-2\pi s}}{s^2+1}
+\]
+</div>
+
+
+<div class="example">
+<b>Example 6</b><br>
+Solve
+\[
+y'' + 4y = f(t),\quad y(0)=0,\; y'(0)=0
+\]
+
+\[
+f(t)=
+\begin{cases}
+t+1, & 0 \le t \le 1 \\
+t-1, & t>1
+\end{cases}
+\]
+
+<b>Step 1:</b> Rewrite forcing function using unit step
+
+Start with the first expression:
+\[
+f(t) = t+1
+\]
+
+At \(t=1\), the function changes from \(t+1\) to \(t-1\).  
+So we correct it using a step function:
+
+\[
+f(t) = (t+1) + [(t-1) - (t+1)]\mathscr{U}(t-1)
+\]
+
+Simplify:
+\[
+(t-1) - (t+1) = -2
+\]
+
+Thus:
+\[
+f(t) = (t+1) - 2\mathscr{U}(t-1)
+\]
+
+
+
+<b>Step 2:</b> Take Laplace transforms
+
+Let \(F(s)=\mathcal{L}\{y(t)\}\)
+
+\[
+\mathcal{L}\{y''\} = s^2F(s) - sy(0) - y'(0)
+\]
+
+Since \(y(0)=0,\; y'(0)=0\):
+
+\[
+\mathcal{L}\{y''\} = s^2F(s)
+\]
+
+So the equation becomes:
+
+\[
+(s^2+4)F(s) = \mathcal{L}\{t+1\} - 2\mathcal{L}\{\mathscr{U}(t-1)\}
+\]
+
+
+
+<b>Step 3:</b> Compute each Laplace transform
+
+\[
+\mathcal{L}\{t\} = \frac{1}{s^2}, \quad \mathcal{L}\{1\} = \frac{1}{s}
+\]
+
+So:
+\[
+\mathcal{L}\{t+1\} = \frac{1}{s^2} + \frac{1}{s}
+\]
+
+For the step function:
+\[
+\mathcal{L}\{\mathscr{U}(t-1)\} = \frac{e^{-s}}{s}
+\]
+
+Thus:
+
+\[
+(s^2+4)F(s)
+=
+\frac{1}{s^2} + \frac{1}{s} - \frac{2e^{-s}}{s}
+\]
+
+
+
+<b>Step 4:</b> Solve for \(F(s)\)
+
+\[
+F(s)
+=
+\frac{1}{s^2(s^2+4)}
++
+\frac{1}{s(s^2+4)}
+-
+\frac{2e^{-s}}{s(s^2+4)}
+\]
+
+
+
+
+<b>Step 5:</b> Inverse Laplace (non-shifted terms)
+
+First term:
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s^2(s^2+4)}\right\}
+=
+\frac{t}{4} - \frac{1}{8}\sin(2t)
+\]
+
+Second term:
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}
+=
+\frac{1}{4}(1 - \cos(2t))
+\]
+
+
+
+<b>Step 6:</b> Handle the shifted term
+
+We use the Second Translation Theorem:
+
+\[
+\mathcal{L}^{-1}\left\{\frac{e^{-s}}{s(s^2+4)}\right\}
+=
+\left[\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}\right]_{t \to (t-1)} \mathscr{U}(t-1)
+\]
+
+We already know:
+\[
+\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}
+=
+\frac{1}{4}(1 - \cos(2t))
+\]
+
+So replace \(t\) with \(t-1\):
+
+\[
+=
+\frac{1}{4}\big(1 - \cos(2(t-1))\big)\mathscr{U}(t-1)
+\]
+
+Now multiply by \(-2\):
+
+\[
+=
+-\frac{1}{2}\big(1 - \cos(2(t-1))\big)\mathscr{U}(t-1)
+\]
+
+
+
+<b>Step 7:</b> Final solution
+
+Combine all pieces:
+
+\[
+y(t)
+=
+\left(\frac{t}{4} - \frac{1}{8}\sin(2t)\right)
++
+\frac{1}{4}(1 - \cos(2t))
+-
+\frac{1}{2}(1 - \cos(2(t-1)))\mathscr{U}(t-1)
+\]
+
+</div>
    
   </main>
 </body>
