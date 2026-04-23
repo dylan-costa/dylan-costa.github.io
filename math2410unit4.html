@@ -43,11 +43,391 @@
 
     <!-- Table of Contents -->
     <nav class="toc" id="top">
-	  <strong>The following set of lectures follows Appendix B and Chapter 8 of the textbook::</strong><br>
+	  <strong>The following set of lectures follows Appendix B and Chapter 8 of the textbook:</strong><br>
 	  <strong>Unit 4</strong>:
-	  <a href="#lecture8">Lecture </a> |
+	  <a href="#lecture21">Lecture 21</a> |
+	  <a href="#lecture22">Lecture 22</a> |
+	  <a href="#lecture23">Lecture 23</a> |
 	  
-	</nav>
+	  
+	  	</nav>
+		
+		
+		
+		
+<h2 id="lecture21">
+	  Lecture 21: Appendix B.1 - Introduction to Linear Algebra
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<div class="definition">
+<p><span class="label">Definition.</span>
+A <strong>matrix</strong> is a rectangular array of numbers arranged in rows and columns. The entries of a matrix are called its <em>elements</em>.
+</p>
+
+$$
+A = 
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix} = (a_{ij})
+$$
+
+<p>
+the <strong>size</strong> or <strong>order</strong> of a matrix is given by the number of rows and columns.
+</p>
+</div>
+
+<div class="remark">
+<p><span class="label">Remark.</span>
+For this course, we will mostly be interacting with square matrices which are size $n \times n.$
+</p>
+</div>
+
+<div class="example">
+<p><span class="label">Example.</span></p>
+
+$$
+A =
+\begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{pmatrix}
+$$
+
+<p>
+This matrix has 2 rows and 3 columns, so its size is $2 \times 3$.
+</p>
+</div>
+
+<h2>Operations with Matrices</h2>
+
+<p>
+Much like with real numbers, we can perform basic operations with matrices, such as addition, subtraction, and multiplication. Although some operations have a different look than we might expect.
+</p>
+
+<h3>Addition</h3>
+
+<p>Matrices of the same size can be added by adding the corresponding entries.</p>
+
+<div class="example">
+$$
+A =
+\begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}, \quad
+B =
+\begin{pmatrix}
+5 & 6 \\
+7 & 8
+\end{pmatrix}
+$$
+
+$$
+A + B =
+\begin{pmatrix}
+1+5 & 2+6 \\
+3+7 & 4+8
+\end{pmatrix}
+=
+\begin{pmatrix}
+6 & 8 \\
+10 & 12
+\end{pmatrix}
+$$
+</div>
+
+<h3>Subtraction</h3>
+
+<p>
+Matrices of the same size can be subtracted by subtracting the corresponding entries. Continuing with the matrices $A$ and $B$ from the previous example,
+</p>
+
+<div class="example">
+$$
+A - B =
+\begin{pmatrix}
+1-5 & 2-6 \\
+3-7 & 4-8
+\end{pmatrix}
+=
+\begin{pmatrix}
+-4 & -4 \\
+-4 & -4
+\end{pmatrix}
+$$
+</div>
+
+<h3>Scalar Multiplication</h3>
+
+<p>
+We can multiply matrices by a constant by multiplying every entry by that constant. Continuing with the matrix $A$ from the previous example,
+</p>
+
+<div class="example">
+$$
+2A =
+2 \begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\cdot1 & 2\cdot2 \\
+2\cdot3 & 2\cdot4
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 4 \\
+6 & 8
+\end{pmatrix}
+$$
+</div>
+
+<h2>Matrix Multiplication</h2>
+
+<p>
+To multiply two matrices, we look at the $i$th row of $A$ and the $j$th column of $B.$ we take the dot product of both of those vectors and that goes into position $(i,j)$ in the resulting matrix. We provide some examples below.
+</p>
+
+<h3>2 × 2 Case (Formula)</h3>
+
+$$
+A =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}, \quad
+B =
+\begin{pmatrix}
+e & f \\
+g & h
+\end{pmatrix}
+$$
+
+$$
+AB =
+\begin{pmatrix}
+ae + bg & af + bh \\
+ce + dg & cf + dh
+\end{pmatrix}
+$$
+
+<div class="example">
+$$
+A =
+\begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}, \quad
+B =
+\begin{pmatrix}
+5 & 6 \\
+7 & 8
+\end{pmatrix}
+$$
+
+$$
+AB =
+\begin{pmatrix}
+(1)(5) + (2)(7) & (1)(6) + (2)(8) \\
+(3)(5) + (4)(7) & (3)(6) + (4)(8)
+\end{pmatrix}
+=
+\begin{pmatrix}
+5 + 14 & 6 + 16 \\
+15 + 28 & 18 + 32
+\end{pmatrix}
+=
+\begin{pmatrix}
+19 & 22 \\
+43 & 50
+\end{pmatrix}
+$$
+</div>
+
+<div class="remark">
+<p><span class="label">Remark.</span>
+Matrix multiplication is <strong>NOT</strong> commutative. That is, $AB \ne BA$ most of the time.
+</p>
+</div>
+
+<h2>Multiplicative Identity</h2>
+
+<div class="definition">
+<p><span class="label">Definition.</span>
+The <strong>identity matrix</strong> is a square matrix with 1's on the diagonal and 0's elsewhere.
+</p>
+</div>
+
+<div class="example">
+$$
+I_2 =
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+
+$$
+I_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix}
+$$
+</div>
+
+<p>
+The property that the identity matrix has is for any matrix $A,$
+</p>
+
+$$
+AI = IA = A.
+$$
+
+<p>
+Notice that this is analogous to "multiplication by $1$."
+</p>
+
+<h2>Determinants</h2>
+
+<p>
+We saw determinants when we computed the Wronksian to show linear independence of functions. To review,
+</p>
+
+$$
+A =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+
+$$
+\det(A) = ad - bc
+$$
+
+<div class="example">
+$$
+A =
+\begin{pmatrix}
+3 & 4 \\
+2 & 5
+\end{pmatrix}
+$$
+
+$$
+\det(A) = (3)(5) - (4)(2) = 15 - 8 = 7
+$$
+</div>
+
+<div class="example">
+$$
+A =
+\begin{pmatrix}
+1 & 2 & 3 \\
+0 & 4 & 5 \\
+1 & 0 & 6
+\end{pmatrix}
+$$
+
+<p>Expand along first row:</p>
+
+$$
+\det(A) =
+1
+\begin{vmatrix}
+4 & 5 \\
+0 & 6
+\end{vmatrix}
+- 2
+\begin{vmatrix}
+0 & 5 \\
+1 & 6
+\end{vmatrix}
++ 3
+\begin{vmatrix}
+0 & 4 \\
+1 & 0
+\end{vmatrix}
+$$
+
+<p>Compute each minor:</p>
+
+$$
+\begin{vmatrix}
+4 & 5 \\
+0 & 6
+\end{vmatrix}
+= (4)(6) - (5)(0) = 24
+$$
+
+$$
+\begin{vmatrix}
+0 & 5 \\
+1 & 6
+\end{vmatrix}
+= (0)(6) - (5)(1) = -5
+$$
+
+$$
+\begin{vmatrix}
+0 & 4 \\
+1 & 0
+\end{vmatrix}
+= (0)(0) - (4)(1) = -4
+$$
+
+<p>Substitute:</p>
+
+$$
+\det(A) = 1(24) - 2(-5) + 3(-4)
+$$
+
+$$
+= 24 + 10 - 12 = 22
+$$
+</div>
+
+<h2>Multiplicative Inverses</h2>
+
+<div class="definition">
+<p><span class="label">Definition.</span>
+A matrix $A$ of size $n\times n$ is invertible if there exists $A^{-1}$ such that:
+</p>
+
+$$
+AA^{-1} = A^{-1}A = I_n.
+$$
+</div>
+
+<p>
+Note that a square matrix is only invertible when its determinant is nonzero. In the $2 \times 2$ case, we have a formula:
+</p>
+
+$$
+A =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+
+$$
+A^{-1} = \frac{1}{ad - bc}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}
+$$
+
 
 
 	
