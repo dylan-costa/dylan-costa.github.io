@@ -429,6 +429,728 @@ d & -b \\
 $$
 
 
+<h2 id="lecture22">
+	  Lecture 22: Appendix B.2 - Gaussian Elimination
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+
+
+
+<div class="definition">
+<b>Definition.</b> Gaussian elimination is a systematic method used to solve systems of linear equations. The idea is to use <b>elementary row operations</b> in order to transform the system into an equivalent system that is less complex to solve.
+</div>
+
+<div class="definition">
+<b>Definition.</b> The allowed <b>elementary row operations</b> that keep the system the same are 
+<ul>
+<li>Swap rows</li>
+<li>Multiply a row by a constant</li>
+<li>Add or subtract constant multiples of one row to another row.</li>
+</ul>
+</div>
+
+<p>The idea is the following:</p>
+<ol>
+<li>Set up the <b>augmented matrix</b> representation for the system of equations.</li>
+<li>Starting with the first column, obtain a pivot and use the pivot position and row operations to eliminate (make \(0\)) the rest of the column.</li>
+<li>Rewrite the system of equations given your reduced augmented matrix.</li>
+<li>Solve this system to obtain solution.</li>
+</ol>
+
+<div class="example">
+<b>Example.</b> Solve the system:
+\[
+\begin{cases}
+x + y = 5 \\
+2x - y = 1
+\end{cases}
+\]
+
+Write the augmented matrix:
+\[
+\left[
+\begin{array}{cc|c}
+1 & 1 & 5 \\
+2 & -1 & 1
+\end{array}
+\right]
+\]
+
+Let the top left entry be our first pivot. Now we perform the row operation \(R_2 \to R_2 - 2R_1.\) We get
+
+\[
+\left[
+\begin{array}{cc|c}
+1 & 1 & 5 \\
+2-2(1) & -1-2(1) & 1-2(5)
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc|c}
+1 & 1 & 5 \\
+0 & -3 & -9
+\end{array}
+\right]
+\]
+
+Now we need a pivot in the second column. Let the \(-3\) entry be the next pivot position. We perform the row operation \(R_2 \to -\frac{1}{3}R_2.\) We get
+
+\[
+\left[
+\begin{array}{cc|c}
+1 & 1 & 5 \\
+0 & 1 & 3
+\end{array}
+\right]
+\]
+
+Lastly, we will do the row operation \(R_1 \to R_1 - R_2\) to get
+
+\[
+\left[
+\begin{array}{cc|c}
+1 & 0 & 2 \\
+0 & 1 & 3
+\end{array}
+\right]
+\]
+
+Now we rewrite the system as
+\[
+x=2, y=3.
+\]
+
+Thus, our final solution is:
+\[
+(x,y) = (2,3).
+\]
+</div>
+
+<div class="remark">
+<b>Remark.</b> Ideally, every pivot we choose would be a \(1\) so that we can do row operations with integer values and not fractions. The rule of choosing pivots is that we want a pivot in every column of the augmented matrix, but we cannot pick a pivot in the same row as another pivot.
+</div>
+
+<div class="example">
+<b>Example.</b> Solve the system:
+\[
+\begin{cases}
+x + y + z = 6 \\
+2x - y - z = 3 \\
+3x + y + 2z = 10
+\end{cases}
+\]
+
+Augmented matrix:
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 6 \\
+2 & -1 & -1 & 3 \\
+3 & 1 & 2 & 10
+\end{array}
+\right]
+\]
+
+We perform row operations. First, \(R_2 \to R_2 - 2R_1, \text{and } R_3 \to R_3 - 3R_1:\)
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 6 \\
+0 & -3 & -3 & -9 \\
+0 & -2 & -1 & -8
+\end{array}
+\right]
+\]
+
+Next, \(R_2 \to -\frac{1}{3}R_2:\)
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 6 \\
+0 & 1 & 1 & 3 \\
+0 & -2 & -1 & -8
+\end{array}.
+\right]
+\]
+
+Next, \(R_1 \to R_1-R_2, ~R_3 \to R_3+2R_2:\)
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 0 & 0 & 3 \\
+0 & 1 & 1 & 3 \\
+0 & 0 & 1 & -2
+\end{array}.
+\right]
+\]
+
+Lastly, \(R_2 \to R_2 - R_3:\)
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 0 & 0 & 3 \\
+0 & 1 & 0 & 5 \\
+0 & 0 & 1 & -2
+\end{array}.
+\right]
+\]
+
+Now we rewrite the system and get the solution:
+\[
+(x,y,z) = (3,5,-2)
+\]
+</div>
+
+<div class="remark">
+<b>Remark.</b> A system of \(n\) linear equations with \(n\) unknowns can have a unique solution OR infinitely many solutions. The following will be an example of the latter.
+</div>
+
+<div class="example">
+<b>Example.</b> Solve the system:
+\[
+\begin{cases}
+x + y + z = 2 \\
+2x + 2y + 2z = 4 \\
+x - y + z = 0
+\end{cases}
+\]
+
+Augmented matrix:
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+2 & 2 & 2 & 4 \\
+1 & -1 & 1 & 0
+\end{array}
+\right]
+\]
+
+Now we perform row operations. Notice if we perform \(R_2 \to R_2-2R_1\) and \(R_3 \to R_3 - R_1\) we get
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 0 & 0 & 0 \\
+0 & -2 & 0 & -2
+\end{array}
+\right]
+\]
+
+Then we do \(R_3 \to -\frac{1}{2}R_3\) then \(R_1 \to R_1-R_3\) we arrive at a reduced matrix
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1
+\end{array}
+\right]
+\]
+
+\[
+\left[
+\begin{array}{ccc|c}
+1 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1
+\end{array}
+\right]
+\]
+
+Notice there is a row of \(0.\) This means there are more equations than unknowns in the resulting system. We rewrite as 
+\[
+x+z = 1, y=0.
+\]
+
+One of \(x\) or \(z\) is a free variable. When we solve for \(x\):
+\[
+x = 1 - z
+\]
+
+Let \(z = t\) (free variable).
+
+\[
+x = 1 - t, \quad y = 1, \quad z = t
+\]
+
+Solution:
+\[
+(x,y,z) = (1 - t, 1, t), \quad t \in \mathbb{R}
+\]
+</div>
+
+</div>
+
+
+<h2 id="lecture23">
+	  Lecture 23: Appendix B.3 - Eigenvalues and Eigenvectors
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+
+<div class="definition">
+<b>Definition.</b> Let \(A\) be an \(n \times n\) matrix. A nonzero vector \(\mathbf{v}\) is called an <b>eigenvector</b> of \(A\) if there exists a scalar \(\lambda\) such that
+\[
+A\mathbf{v} = \lambda \mathbf{v}.
+\]
+The scalar \(\lambda\) is called an <b>eigenvalue</b> of \(A\).
+</div>
+
+<div class="definition">
+<b>Definition.</b> To find eigenvalues, we solve the <b>characteristic equation</b>:
+\[
+\det(A - \lambda I) = 0.
+\]
+</div>
+
+<p>The process is:</p>
+<ol>
+<li>Compute \(A - \lambda I\)</li>
+<li>Find \(\det(A - \lambda I)\)</li>
+<li>Solve for \(\lambda\)</li>
+<li>For each \(\lambda\), solve \((A - \lambda I)\mathbf{v} = 0\)</li>
+</ol>
+
+<div class="example">
+<b>Example.</b> Find eigenvalues and eigenvectors of
+\[
+A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}.
+\]
+
+Step 1: Compute \(A - \lambda I\):
+\[
+A - \lambda I =
+\begin{bmatrix}
+2 - \lambda & 1 \\
+1 & 2 - \lambda
+\end{bmatrix}
+\]
+
+Step 2: Compute determinant:
+\[
+\det(A - \lambda I) = (2-\lambda)(2-\lambda) - (1)(1)
+\]
+\[
+= (2-\lambda)^2 - 1
+\]
+\[
+= 4 - 4\lambda + \lambda^2 - 1
+\]
+\[
+= \lambda^2 - 4\lambda + 3
+\]
+
+Step 3: Solve:
+\[
+\lambda^2 - 4\lambda + 3 = 0
+\]
+\[
+(\lambda - 1)(\lambda - 3) = 0
+\]
+
+\[
+\lambda = 1, \quad \lambda = 3
+\]
+
+Step 4: Find eigenvectors
+
+For \(\lambda = 1\):
+\[
+A - I =
+\begin{bmatrix}
+1 & 1 \\
+1 & 1
+\end{bmatrix}
+\]
+
+Solve \((A - I)\mathbf{v} = 0\):
+\[
+A - I =
+\begin{bmatrix}
+1 & 1 \\
+1 & 1
+\end{bmatrix}\begin{bmatrix}
+x \\
+y
+\end{bmatrix} = \begin{bmatrix}
+x + y\\
+x + y
+\end{bmatrix} = \begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\]
+
+Both components give the same equation. That is,
+\[
+x + y = 0 \Rightarrow y = -x
+\]
+
+Eigenvector:
+\[
+\mathbf{v}_1 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}
+\]
+
+For \(\lambda = 3\):
+\[
+A - 3I =
+\begin{bmatrix}
+-1 & 1 \\
+1 & -1
+\end{bmatrix}
+\]
+
+Solve \((A - 3I)\mathbf{v} = 0\):
+\[
+A - 3I =
+\begin{bmatrix}
+-1 & 1 \\
+1 & -1
+\end{bmatrix}\begin{bmatrix}
+x \\
+y
+\end{bmatrix} = \begin{bmatrix}
+-x + y\\
+x - y
+\end{bmatrix} = \begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\]
+
+Both components give the same equation. That is,
+\[
+x - y =0  \Rightarrow y = x
+\]
+
+
+Eigenvector:
+\[
+\mathbf{v}_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+\]
+</div>
+
+<div class="remark">
+<b>Remark.</b> Notice that when we try to determine eigenvector, we expect to have a free variable. There are infinitely many eigenvectors that correspond to each eigenvalue, it is up to a choice of free variable. That is, every eigenvector is off by a constant multiple.
+</div>
+
+<div class="remark">
+<b>Remark.</b> Since the characteristic equation is a polynomial, there are a couple of cases to consider. On the one hand, we could have distinct eigenvalues. Alternatively, we could have repeated eigenvalues or complex eigenvalues.</div>
+
+<div class="example">
+<b>Example.</b> Find eigenvalues and eigenvectors of
+\[
+A = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}.
+\]
+
+Step 1:
+\[
+A - \lambda I =
+\begin{bmatrix}
+2 - \lambda & 1 \\
+0 & 2 - \lambda
+\end{bmatrix}
+\]
+
+Step 2:
+\[
+\det(A - \lambda I) = (2-\lambda)^2
+\]
+
+Step 3:
+\[
+(2-\lambda)^2 = 0 \Rightarrow \lambda = 2
+\]
+
+Step 4:
+\[
+A - 2I =
+\begin{bmatrix}
+0 & 1 \\
+0 & 0
+\end{bmatrix}
+\]
+
+Solve \((A - 2I)\mathbf{v} = 0\):
+\[
+A - 2I =
+\begin{bmatrix}
+0 & 1 \\
+0 & 0
+\end{bmatrix}\begin{bmatrix}
+x \\
+y
+\end{bmatrix} = \begin{bmatrix}
+y\\
+0
+\end{bmatrix} = \begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\]
+
+Only the top equation gives information about the variables. That is,
+\[
+y=0.
+\]
+
+Since an eigenvector must be nonzero, x is a free variable and we get an eigenvector of
+\[
+\mathbf{v} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\]
+
+</div>
+
+<div class="remark">
+<b>Remark.</b> When an eigenvalue is repeated, there may be fewer independent eigenvectors than its multiplicity. This is important in determining whether a matrix is diagonalizable.
+</div>
+
+<div class="example">
+<b>Example.</b> Find eigenvalues and eigenvectors of
+\[
+A =
+\begin{bmatrix}
+3 & 0 & 0 \\
+0 & 2 & 0 \\
+4 & 0 & 1
+\end{bmatrix}.
+\]
+
+Step 1:
+\[
+A - \lambda I =
+\begin{bmatrix}
+3-\lambda & 0 & 0 \\
+0 & 2-\lambda & 0 \\
+4 & 0 & 1-\lambda
+\end{bmatrix}
+\]
+
+Step 2: Compute the determinant
+\[
+\det(A - \lambda I) =
+\begin{vmatrix}
+3-\lambda & 0 & 0 \\
+0 & 2-\lambda & 0 \\
+4 & 0 & 1-\lambda
+\end{vmatrix}
+\]
+
+Expand along the first row:
+\[
+= (3-\lambda)
+\begin{vmatrix}
+2-\lambda & 0 \\
+0 & 1-\lambda
+\end{vmatrix}
+\]
+
+\[
+= (3-\lambda)\left[(2-\lambda)(1-\lambda)\right]
+\]
+
+Step 3: Solve for eigenvalues
+\[
+(3-\lambda)(2-\lambda)(1-\lambda) = 0
+\]
+
+\[
+\lambda = 3, \quad 2, \quad 1
+\]
+
+Step 4: Find eigenvectors
+
+First, for \(\lambda = 3\):
+
+\[
+A - 3I =
+\begin{bmatrix}
+0 & 0 & 0 \\
+0 & -1 & 0 \\
+4 & 0 & -2
+\end{bmatrix}
+\]
+
+Solve \((A - 3I)\mathbf{v} = 0\):
+\[
+\begin{bmatrix}
+0 & 0 & 0 \\
+0 & -1 & 0 \\
+4 & 0 & -2
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+-y \\
+4x - 2z
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
+\]
+
+This gives:
+\[
+-y = 0 \Rightarrow y = 0
+\]
+\[
+4x - 2z = 0 \Rightarrow 2x - z = 0 \Rightarrow z = 2x
+\]
+
+Let \(x = t\). Then:
+\[
+\mathbf{v}_1 =
+\begin{bmatrix}
+1 \\
+0 \\
+2
+\end{bmatrix}
+\]
+
+---
+
+Next, for \(\lambda = 2\):
+
+\[
+A - 2I =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+4 & 0 & -1
+\end{bmatrix}
+\]
+
+Solve \((A - 2I)\mathbf{v} = 0\):
+\[
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+4 & 0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}
+=
+\begin{bmatrix}
+x \\
+0 \\
+4x - z
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
+\]
+
+This gives:
+\[
+x = 0
+\]
+\[
+4x - z = 0 \Rightarrow z = 0
+\]
+
+So \(y\) is free. Let \(y = t\). Then:
+\[
+\mathbf{v}_2 =
+\begin{bmatrix}
+0 \\
+1 \\
+0
+\end{bmatrix}
+\]
+
+---
+
+Finally, for \(\lambda = 1\):
+
+\[
+A - I =
+\begin{bmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & 0 & 0
+\end{bmatrix}
+\]
+
+Solve \((A - I)\mathbf{v} = 0\):
+\[
+\begin{bmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}
+=
+\begin{bmatrix}
+2x \\
+y \\
+4x
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\
+0 \\
+0
+\end{bmatrix}
+\]
+
+This gives:
+\[
+2x = 0 \Rightarrow x = 0
+\]
+\[
+y = 0
+\]
+
+No restriction on \(z\), so let \(z = t\). Then:
+\[
+\mathbf{v}_3 =
+\begin{bmatrix}
+0 \\
+0 \\
+1
+\end{bmatrix}
+\]
+
+</div>
+
+<div class="remark">
+<b>Remark.</b> This is only one way to solve for eigenvalues and eigenvectors. We can also use Gaussian elimination to do this process of finding an eigenvector once we have all the eigenvalues.</div>
+
+These values and vectors will become very important in the coming sections.
+
+
+
+
+</div>
 
 	
 
