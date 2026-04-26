@@ -48,6 +48,8 @@
 	  <a href="#lecture21">Lecture 21</a> |
 	  <a href="#lecture22">Lecture 22</a> |
 	  <a href="#lecture23">Lecture 23</a> |
+	  <a href="#lecture24">Lecture 24</a> |
+	  <a href="#lecture25">Lecture 25</a> |
 	  
 	  
 	  	</nav>
@@ -1151,6 +1153,451 @@ These values and vectors will become very important in the coming sections.
 
 
 </div>
+
+
+<h2 id="lecture24">
+	  Lecture 24: Section 8.1 - System of Linear Equations (revisited)
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	
+
+<p>
+The goal of this section is to gain a different perspective on all system problems we saw in Chapter 3. That is, we will be able to restate all linear differential equation problems in terms of matrices and use linear algebra techniques to solve them.
+</p>
+
+
+<p>
+Suppose we have a system of first-order linear differential equations:
+</p>
+
+\[
+\begin{cases}
+x_1' = a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n + f_1(t) \\
+x_2' = a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n + f_2(t) \\
+\vdots \\
+x_n' = a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n + f_n(t)
+\end{cases}
+\]
+
+<p>
+We can rewrite this system in matrix form by using the following remark.
+</p>
+<div class="remark">
+<b>Remark.</b> To take the derivative or integral of a matrix \(A = (a_{ij})\),
+\[\frac{d}{dt}A = A' = (\frac{d}{dt}(a)_{ij})\]
+or
+\[\int A dt = \left(\int a_{ij}dt\right).\]
+</div>
+
+Using this remark, we can rewrite the system above as:
+
+\[
+X =
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}, \quad
+A =
+\begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{bmatrix}, \quad
+F(t) =
+\begin{bmatrix}
+f_1(t) \\
+f_2(t) \\
+\vdots \\
+f_n(t)
+\end{bmatrix}
+\]
+
+<p>
+Then the system becomes:
+</p>
+
+\[
+X' = AX + G(t)
+\]
+This is what we call the matrix representation of the system or the matrix equation.
+
+<h2>Homogeneous vs Nonhomogeneous Systems</h2>
+
+
+<div class="definition">
+<b>Definition.</b> Let a system of linear differential equations have matrix representation \(X' = AX + F\). 
+If \(F = 0\) then the system is called <b>homogeneous.</b> Otherwise, the system is considered <b> nonhomogeneous.</b>
+</div>
+
+
+
+<div class="example">
+<b>Example (Homogeneous).</b> Convert the system to matrix form:
+\[
+\begin{cases}
+x' = 2x + y \\
+y' = 5x + 3y
+\end{cases}
+\]
+
+Step 1: Define the vector
+\[
+X =
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+\]
+
+Step 2: Write coefficient matrix
+\[
+A =
+\begin{bmatrix}
+2 & 1 \\
+5 & 3
+\end{bmatrix}
+\]
+
+Step 3: Write matrix equation
+\[
+X' = AX =
+\begin{bmatrix}
+2 & 1 \\
+5 & 3
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+\]
+</div>
+
+<div class="example">
+<b>Example (Nonhomogeneous).</b> Convert the system to matrix form:
+\[
+\begin{cases}
+x' = 2x + y + t \\
+y' = 5x + 3y + e^t
+\end{cases}
+\]
+
+Step 1: Define vectors
+\[
+X =
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}, \quad
+F(t) =
+\begin{bmatrix}
+t \\
+e^t
+\end{bmatrix}
+\]
+
+Step 2: Matrix form
+\[
+X' = AX + F(t) =
+\begin{bmatrix}
+2 & 1 \\
+5 & 3
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
++
+\begin{bmatrix}
+t \\
+e^t
+\end{bmatrix}
+\]
+</div>
+
+<h2>Higher-Order Differential Equations in Matrix Form</h2>
+
+<p>
+We can convert higher-order ODEs into systems of first-order equations.
+</p>
+
+<div class="example">
+<b>Example.</b> Convert
+\[
+y''' - 3y'' + 5y' - y = 2e^{-2t}
+\]
+
+Step 1: Define new variables
+\[
+x_1 = y, \quad x_2 = y', \quad x_3 = y''
+\]
+
+Then:
+\[
+x_1' = x_2, \quad x_2' = x_3
+\]
+
+Step 2: Express \(x_3'\)
+\[
+x_3' = y''' = 3y'' - 5y' + y + 2e^{-2t}
+\]
+
+Substitute:
+\[
+x_3' = 3x_3 - 5x_2 + x_1 + 2e^{-2t}
+\]
+
+Step 3: Write system
+\[
+\begin{cases}
+x_1' = x_2 \\
+x_2' = x_3 \\
+x_3' = x_1 - 5x_2 + 3x_3 + 2e^{-2t}
+\end{cases}
+\]
+
+Step 4: Matrix form
+\[
+X' =
+\begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & -5 & 3
+\end{bmatrix}
+X +
+\begin{bmatrix}
+0 \\
+0 \\
+2e^{-2t}
+\end{bmatrix}
+\]
+</div>
+
+We now want to extend the definitions learned in Chapter 4 into terms for systems of linear differential equations. We start with the definition of a solution vector.
+
+A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX\) for all \(t \in I\).
+<div class="definition">
+<b>Definition.</b> A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX\) for all \(t \in I\).
+</div>
+
+<div class="example">
+<b>Example (Verification).</b> Verify that
+\[
+X_1 =
+\begin{bmatrix}
+e^{-2t} \\
+-e^{2t}
+\end{bmatrix}
+\]
+and 
+\[
+X_2 =
+\begin{bmatrix}
+3e^{6t} \\
+5e^{6t}\end{bmatrix}
+\]
+is a solution to
+\[
+X' =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+X.
+\]
+
+Step 1: Compute derivative
+\[
+X_1' =
+\begin{bmatrix}
+-2e^{-2t} \\
+2e^{-2t}
+\end{bmatrix}
+\]
+\[
+X_2' = \begin{bmatrix}
+18e^{6t} \\
+30e^{6t}
+\end{bmatrix}
+
+\]
+
+Step 2: Compute \(AX\)
+\[
+AX_1 =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+\begin{bmatrix}
+e^{-2t} \\
+-e^{-2t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+e^{-2t} -3e^{-2t} \\
+5e^{-2t} -3e^{-2t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+-2e^{-2t} \\
+2e^{-2t}
+\end{bmatrix} = X_1'
+\]
+
+and 
+\[
+\[
+AX_2 =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+\begin{bmatrix}
+3e^{6t} \\
+5e^{6t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+3e^{6t}+15e^{6t} \\
+15e^{6t} + 15e^{6t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+18e^{-2t} \\
+30e^{-2t}
+\end{bmatrix} = X_2'
+
+\]
+
+Since \(X_1' = AX_1\) and \(X_2' = AX_2\), then both \(X_1\) and \(X_2\) are solutions.
+</div>
+
+
+
+<div class="definition">
+<b>Definition.</b> A set of solutions \(\{X_1(t), X_2(t), \dots, X_n(t)\}\) is called a <b>fundamental set of solutions</b> if the vectors are linearly independent.
+</div>
+
+<p>
+<b>Remark.</b> We test linear independence the same way as before (using determinant / Wronskian ideas).
+</p>
+
+<div class="example">
+<b>Example.</b> Consider the system from the previous example.
+\[
+X' =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+X.
+\]
+
+We will show the set \(\left\{X_1 =
+\begin{bmatrix}
+e^{-2t} \\
+-e^{-2t}
+\end{bmatrix}, \quad
+X_2 =
+\begin{bmatrix}
+3e^{6t} \\
+5e^{6t}
+\end{bmatrix}\right\}\) form a fundamental set of solutions to the system.
+
+We saw in the previous example both \(X_1\) and \(X_2\) are solutions to the system. Now we show linear independence.
+
+Step 2: Compute Wronksian
+\[
+W(X_1,X_2) = \det\begin{bmatrix}
+e^{-2t} & 3e^{6t} \\
+-e^{-2t} & 5e^{6t}
+\end{bmatrix} = 5e^{4t}+3e^{4t} = 3e^{4t} \ne 0.
+\]
+
+Since the Wronksian is never zero, the solutions are linearly independent.
+
+Therefore, \(\{X_1, X_2\}\) forms a fundamental set of solutions.
+</div>
+
+<h2>Connection</h2>
+
+Here is the thing to notice about the connection between the linear algebra techniques learned in the past lectures and solutions vectors.
+
+<div class="example">
+<b>Example.</b> Continuing with this example
+\[
+X' =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+X,
+\]
+
+notice \(X_1 =
+\begin{bmatrix}
+e^{-2t} \\
+-e^{-2t}
+\end{bmatrix} =
+e^{-2t}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}\) is a solution. Then
+
+\[
+X_1' = -2e^{-2t}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix} = AX_1 = \begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}e^{-2t}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}.
+\]
+
+We conclude that
+\[
+-2\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}= \begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}.
+
+\]
+
+In other words, the value \(-2\) is an eigenvalue with corresponding eigenvector \(\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}\).
+
+
+</div>
+
+So there is clearly a relationship between finding eigenvalues and eigenvectors to the matrix representation for a system of linear differential equations, and finding solution vectors.
+
+
+
+</div>
+
+<h2 id="lecture25">
+	  Lecture 25: Section 8.2 - General Solution to Homogeneous Systems of DEs
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
 
 	
 
