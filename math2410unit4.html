@@ -50,6 +50,7 @@
 	  <a href="#lecture23">Lecture 23</a> |
 	  <a href="#lecture24">Lecture 24</a> |
 	  <a href="#lecture25">Lecture 25</a> |
+	  <a href="#lecture26">Lecture 26</a> |
 	  
 	  
 	  	</nav>
@@ -1380,9 +1381,9 @@ X +
 
 We now want to extend the definitions learned in Chapter 4 into terms for systems of linear differential equations. We start with the definition of a solution vector.
 
-A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX\) for all \(t \in I\).
+
 <div class="definition">
-<b>Definition.</b> A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX\) for all \(t \in I\).
+<b>Definition.</b> A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX+F\) for all \(t \in I\).
 </div>
 
 <div class="example">
@@ -1484,9 +1485,10 @@ Since \(X_1' = AX_1\) and \(X_2' = AX_2\), then both \(X_1\) and \(X_2\) are sol
 <b>Definition.</b> A set of solutions \(\{X_1(t), X_2(t), \dots, X_n(t)\}\) is called a <b>fundamental set of solutions</b> if the vectors are linearly independent.
 </div>
 
-<p>
-<b>Remark.</b> We test linear independence the same way as before (using determinant / Wronskian ideas).
-</p>
+
+
+<div class="remark">
+<b>Remark.</b> We test linear independence the same way as before (using determinant / Wronskian ideas).</div>
 
 <div class="example">
 <b>Example.</b> Consider the system from the previous example.
@@ -1524,6 +1526,14 @@ Since the Wronksian is never zero, the solutions are linearly independent.
 
 Therefore, \(\{X_1, X_2\}\) forms a fundamental set of solutions.
 </div>
+
+Now we arrive at the definition of general solution
+<div class="definition">
+<b>Definition.</b> Given a fundamental set of solutions \(\{X_1, \cdots , X_n\}\) to the system \(X' = AX+F\). Then, the <b>general solution</b> to the system is
+
+\[X = c_1X_1 + \cdots + c_nX_n.\]
+</div>
+
 
 <h2>Connection</h2>
 
@@ -1599,7 +1609,1321 @@ So there is clearly a relationship between finding eigenvalues and eigenvectors 
 	  </span>
 	</h2>
 
+
+As we saw in the connection above, there is a way take the matrix representation for a system \(X' = AX+F\) and relate the solution vectors of that equation to the eigenvalues and eigenvectors for the system. For this section, we will consider a homogeneous system first, that is the matrix representations
+we are looking at come in the form \(X' = AX\).
 	
+<div class="definition">
+<b>Definition.</b> <p>
+Consider the homogeneous system
+\[
+X' = AX
+\]
+where \(A\) is an \(n \times n\) constant matrix.
+</p>
+
+<p>
+If \(A\) has <b>n distinct eigenvalues</b> \(\lambda_1, \dots, \lambda_n\) with corresponding eigenvectors
+\(\mathbf{v}_1, \dots, \mathbf{v}_n\), then the <b>general solution</b> is
+</p>
+
+\[
+X(t) = c_1 e^{\lambda_1 t}\mathbf{v}_1
++ c_2 e^{\lambda_2 t}\mathbf{v}_2
++ \cdots
++ c_n e^{\lambda_n t}\mathbf{v}_n.
+\]
+
+<p>
+Each term \(e^{\lambda t}\mathbf{v}\) is a solution vector, and linear independence follows from distinct eigenvalues.
+</p>
+</div>
+
+
+
+<div class="example">
+<b>Example.</b> 
+For the system 
+\[
+X' =
+\begin{bmatrix}
+1 & 3 \\
+5 & 3
+\end{bmatrix}
+X.
+\]
+
+We proved the set \(\left\{X_1 =
+\begin{bmatrix}
+e^{-2t} \\
+-e^{-2t}
+\end{bmatrix}, \quad
+X_2 =
+\begin{bmatrix}
+3e^{6t} \\
+5e^{6t}
+\end{bmatrix}\right\}\) form a fundamental set of solutions to the system. Therefore, the general solution for this system by the thorem above is
+
+\[
+X = c_1
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}e^{-2t}+c_2
+\begin{bmatrix}
+3 \\
+5
+\end{bmatrix}e^{6t}.
+
+\]
+
+</div>
+
+<p>The idea is the following:</p>
+<ol>
+<li>Create the matrix representation for the system.
+<li>Find all the eigenvalues, and check how the characteristic equation factors
+<li>Find all corresponding eigenvectors (when possible)
+<li>Create the general solution
+</ol>
+
+<div class="example">
+<b>Example.</b> 
+Solve
+
+\[
+\begin{cases}
+x' = 2x + 3y \\
+y' = 2x + y
+\end{cases}
+\]
+
+<p><b>Step 1: Matrix form.</b></p>
+
+\[
+X' =
+\begin{bmatrix}
+2 & 3 \\
+2 & 1
+\end{bmatrix}
+X
+\]
+
+
+<p><b>Step 2: Eigenvalues.</b></p>
+
+\[
+\det(A-\lambda I)
+=
+\begin{vmatrix}
+2-\lambda & 3 \\
+2 & 1-\lambda
+\end{vmatrix}
+\]
+
+\[
+= (2-\lambda)(1-\lambda)-6
+\]
+
+\[
+= \lambda^2 -3\lambda -4
+= (\lambda-4)(\lambda+1)
+\]
+
+\[
+\lambda=4,-1
+\]
+
+
+
+<p><b>Step 3: Eigenvectors.</b></p>
+
+For \(\lambda=4\):
+
+\[
+A-4I=
+\begin{bmatrix}
+-2 & 3 \\
+2 & -3
+\end{bmatrix}
+\]
+
+\[
+-2x+3y=0 \Rightarrow y=\frac{2}{3}x
+\]
+
+Choose \(x=3\), \(y=2\).
+
+\[
+\mathbf{v}_1=
+\begin{bmatrix}
+3\\
+2
+\end{bmatrix}
+\]
+
+
+
+For \(\lambda=-1\):
+
+\[
+A+I=
+\begin{bmatrix}
+3 & 3 \\
+2 & 2
+\end{bmatrix}
+\]
+
+\[
+3x+3y=0 \Rightarrow y=-x
+\]
+
+\[
+\mathbf{v}_2=
+\begin{bmatrix}
+1\\
+-1
+\end{bmatrix}
+\]
+
+
+
+<p><b>Step 4: General solution.</b></p>
+
+\[
+X(t)=
+c_1 e^{4t}
+\begin{bmatrix}
+3\\
+2
+\end{bmatrix}
++
+c_2 e^{-t}
+\begin{bmatrix}
+1\\
+-1
+\end{bmatrix}
+\]
+
+</div>
+
+The question is the following: in Chapter 4, we saw that the auxiliary equation corresponding to a higher order differential equation did not have to give us all distinct roots. What happens
+if we obtain a repeated root in the characteristic equation? That is, what if we have an \(n \times n\) matrix with less than \(n\) distinct eigenvalues.
+
+<div class="remark">
+<b>Remark.</b> <p>
+If \(A\) is (for example) a \(2 \times 2\) matrix with a repeated eigenvalue \(\lambda\) and only one eigenvector \(K\),
+then the second solution has the form
+</p>
+
+\[
+X_2 = K t e^{\lambda t} + P e^{\lambda t}
+\]
+
+<p>
+where \(P\) satisfies
+\[
+(A-\lambda I)P = K.
+\]
+</p>
+
+Together, the set \(\{K, X_2\}\) form a fundamental set of solutions. This process can be mimicked in the higher order cases as well.
+</p></div>
+
+
+
+<div class="example">
+<b>Example.</b> 
+
+\[
+X'=
+\begin{bmatrix}
+3 & -18 \\
+2 & -9
+\end{bmatrix}
+X
+\]
+
+<p><b>Step 1: Eigenvalues.</b></p>
+
+\[
+\det(A-\lambda I)
+=
+\lambda^2+6\lambda+9
+=
+(\lambda+3)^2
+\]
+
+\[
+\lambda=-3
+\]
+
+
+
+<p><b>Step 2: Eigenvector.</b></p>
+
+\[
+A+3I=
+\begin{bmatrix}
+6 & -18 \\
+2 & -6
+\end{bmatrix}
+\]
+
+\[
+6x-18y=0 \Rightarrow x=3y
+\]
+
+\[
+K=
+\begin{bmatrix}
+3\\
+1
+\end{bmatrix}
+\]
+
+
+
+<p><b>Step 3: Find \(P\).</b></p>
+
+Solve
+\[
+(A+3I)P=K.
+\]
+
+Let \(P=\begin{bmatrix}p_1\\p_2\end{bmatrix}\).
+
+\[
+6p_1-18p_2=3
+\]
+
+Choose \(p_2=0\):
+
+\[
+6p_1=3 \Rightarrow p_1=\frac12
+\]
+
+\[
+P=
+\begin{bmatrix}
+\frac12\\
+0
+\end{bmatrix}
+\]
+
+
+
+<p><b>General solution:</b></p>
+
+\[
+X(t)=
+c_1 e^{-3t}
+\begin{bmatrix}
+3\\
+1
+\end{bmatrix}
++
+c_2 e^{-3t}
+\left(
+t
+\begin{bmatrix}
+3\\
+1
+\end{bmatrix}
++
+\begin{bmatrix}
+\frac12\\
+0
+\end{bmatrix}
+\right)
+\] 
+</div>
+
+
+
+If eigenvalues are complex, solutions involve sine and cosine terms.
+See textbook for full treatment.
+   
+   
+   
+   
+<div class="example">
+<b>Example.</b> Find the general solution to the system
+
+\[
+\begin{cases}
+x' = x+y-z \\
+y' = 2y \\
+z' = y-z
+\end{cases}.
+\]
+
+<p><b>Step 1: Matrix form.</b></p>
+
+\[
+A=
+\begin{bmatrix}
+1 & 1 & -1\\
+0 & 2 & 0\\
+0 & 1 & -1
+\end{bmatrix}
+\]
+
+
+
+<p><b>Step 2: Eigenvalues.</b></p>
+
+\[
+\det(A-\lambda I)
+=
+(2-\lambda)
+\begin{vmatrix}
+1-\lambda & -1\\
+0 & -1-\lambda
+\end{vmatrix}
+\]
+
+\[
+=
+(2-\lambda)(1-\lambda)(-1-\lambda)
+\]
+
+\[
+\lambda=2,1,-1
+\]
+
+
+
+<p><b>Step 3: Eigenvectors.</b></p>
+
+For \(\lambda=2\):
+
+\[
+
+A-2I=
+\begin{bmatrix}
+-1 & 1 & -1\\
+0 & 0 & 0\\
+0 & 1 & -3
+\end{bmatrix}
+, \quad \mathbf{v}_1=
+\begin{bmatrix}
+2\\
+3\\
+1
+\end{bmatrix}
+\]
+
+For \(\lambda=1\):
+
+\[
+A-I=
+\begin{bmatrix}
+0 & 1 & -1\\
+0 & 1 & 0\\
+0 & 1 & 0
+\end{bmatrix}
+, \quad 
+\mathbf{v}_2=
+\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}
+\]
+
+For \(\lambda=-1\):
+
+\[
+A-(-1)I=
+\begin{bmatrix}
+2 & 1 & -1\\
+0 & 3 & 0\\
+0 & 1 & 0
+\end{bmatrix}
+, \quad 
+\mathbf{v}_3=
+\begin{bmatrix}
+1\\
+0\\
+2
+\end{bmatrix}
+\]
+
+
+
+<p><b>General solution:</b></p>
+
+\[
+X(t)=
+c_1 e^{2t}\mathbf{v}_1
++
+c_2 e^{t}\mathbf{v}_2
++
+c_3 e^{-t}\mathbf{v}_3
+\]
+
+</div>
+
+
+<h2>Math Modeling Systems problem.</h2>
+
+For our last example, lets connect this to the models we were looking at in chapter 3. We will look at the interaction between two tanks of fluid and solve the corresponding homoegenous system.
+
+<div class="example">
+<b>Example.</b> Two tanks each contain 100 gallons of brine. Let \(x_A(t)\) and \(x_B(t)\) be the number of pounds of salt in tanks A and B, respectively.
+
+Flow rates:
+<ul>
+<li>Pure water into tank A: \(2\) gal/min</li>
+<li>Out of tank A (to drain): \(1\) gal/min</li>
+<li>From A to B: \(2\) gal/min</li>
+<li>From B to A: \(1\) gal/min</li>
+<li>Out of tank B (to drain): \(1\) gal/min</li>
+</ul>
+
+Since inflow = outflow for each tank, both tanks remain at \(100\) gallons. We define concentrations
+
+\[
+\text{Concentration in A} = \frac{x_A}{100}, \quad
+\text{Concentration in B} = \frac{x_B}{100}
+\]
+
+Write equation for tank A
+
+Rate of change = (rate in) − (rate out)
+
+Inflow to A:
+<ul>
+<li>From B: \(1\) gal/min with concentration \(\frac{x_B}{100}\)</li>
+<li>Pure water contributes \(0\) salt</li>
+</ul>
+
+\[
+\text{Salt in} = 1 \cdot \frac{x_B}{100} = \frac{x_B}{100}
+\]
+
+Outflow from A:
+<ul>
+<li>To drain: \(1\) gal/min</li>
+<li>To B: \(2\) gal/min</li>
+<li>Total outflow: \(3\) gal/min with concentration \(\frac{x_A}{100}\)</li>
+</ul>
+
+\[
+\text{Salt out} = 3 \cdot \frac{x_A}{100} = \frac{3x_A}{100}
+\]
+
+Thus,
+\[
+\frac{dx_A}{dt} = \frac{x_B}{100} - \frac{3x_A}{100}
+\]
+
+Write equation for tank B
+
+Inflow to B:
+<ul>
+<li>From A: \(2\) gal/min with concentration \(\frac{x_A}{100}\)</li>
+</ul>
+
+\[
+\text{Salt in} = 2 \cdot \frac{x_A}{100} = \frac{2x_A}{100}
+\]
+
+Outflow from B:
+<ul>
+<li>To A: \(1\) gal/min</li>
+<li>To drain: \(1\) gal/min</li>
+<li>Total: \(2\) gal/min with concentration \(\frac{x_B}{100}\)</li>
+</ul>
+
+\[
+\text{Salt out} = 2 \cdot \frac{x_B}{100} = \frac{2x_B}{100}
+\]
+
+Thus,
+\[
+\frac{dx_B}{dt} = \frac{2x_A}{100} - \frac{2x_B}{100}
+\]
+
+Final system of differential equations
+
+\[
+\begin{cases}
+\frac{dx_A}{dt} = \frac{1}{100}x_B - \frac{3}{100}x_A \\
+\frac{dx_B}{dt} = \frac{2}{100}x_A - \frac{2}{100}x_B
+\end{cases}
+\]
+
+Write in matrix form
+
+Let
+\[
+X =
+\begin{bmatrix}
+x_A \\
+x_B
+\end{bmatrix}
+\]
+
+Then
+\[
+X' =
+\begin{bmatrix}
+-\frac{3}{100} & \frac{1}{100} \\
+\frac{2}{100} & -\frac{2}{100}
+\end{bmatrix}
+X
+\]
+
+We can use the method above to get the general solution
+\[
+X = c_1\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}e^{-t/25} + c_2\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}e^{-t/100}
+
+\]
+
+</div>
+
+
+
+<h2 id="lecture26">
+	  Lecture 26: Section 8.3 - Solving Nonhomogeneous Systems
+	  <span style="font-size: 0.7em; margin-left: 10px;">
+		<a href="#top">↑ Back to top</a>
+	  </span>
+	</h2>
+	
+	<div class="definition">
+<b>Definition.</b> Consider the nonhomogeneous system
+\[
+X' = AX + F(t),
+\]
+where \(A\) is an \(n \times n\) constant matrix and \(F(t)\) is a vector-valued function.
+
+The <b>general solution</b> is given by
+\[
+X(t) = X_c(t) + X_p(t),
+\]
+where:
+<ul>
+<li>\(X_c(t)\) is the general solution to the associated homogeneous system
+    \[
+    X' = AX,
+    \]</li>
+<li>\(X_p(t)\) is any particular solution to the nonhomogeneous system
+    \[
+    X' = AX + F(t).
+    \]</li>
+
+</ul>
+
+</div>
+
+To find the general solution to a nonhomogeneous system \(X'=AX+F\) is the following:
+<ul>
+<li>Find general solution to \(X' = AX\) via method used in previous section (eigenvalues/ eigenvectors). This is \(X_c\)</li>
+<li>Use a method to find a particular solution \(X_p\)</li>
+<li>Form the general solution</li>
+
+</ul>
+
+<br>
+
+<b>Methods for Finding \(X_p(t)\):</b>
+
+In this section, we will isolate the method to finding the particular solution \(X_p\). We have two choices,
+
+<ol>
+    <li>Method of Undetermined Coefficients</li>
+    <li>Method of Variation of Parameters</li>
+</ol>
+	
+<h2>Method of Undetermined Coefficients</h2>
+<div class="remark">
+This method works when \(F(t)\) consists of functions such as polynomials, exponentials, sines, or cosines (or combinations of these).
+</div>
+
+The way to solve this is by inspecting \(F\) and choosing the most general form (using the guesses from 4.4) of each component.
+
+<h2>Table of Guesses</h2>
+
+	<table border="1" cellpadding="8">
+	<tr>
+	<th>\(g(x)\)</th>
+	<th>Guess for \(y_p\)</th>
+	</tr>
+	<tr>
+	<td>Polynomial degree n</td>
+	<td>General polynomial degree n</td>
+	</tr>
+	<tr>
+	<td>\(e^{ax}\)</td>
+	<td>\(Ae^{ax}\)</td>
+	</tr>
+	<tr>
+	<td>\(\sin kx\), \(\cos kx\)</td>
+	<td>\(A\cos kx + B\sin kx\)</td>
+	</tr>
+	<tr>
+	<td>Sum/Difference/Product or functions above</td>
+	<td>Product of guesses</td>
+	</tr>
+	</table>
+
+
+<div class="example">
+<b>Example.</b> Solve the system
+\[
+X' =
+\begin{bmatrix}
+2 & 2 \\
+1 & 3
+\end{bmatrix}
+X
++
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}.
+\]
+
+Notice the general solution to the homogeneous system \(X' = AX\) is
+\[
+X_c =
+c_1 e^t
+\begin{bmatrix}
+-2 \\
+1
+\end{bmatrix}
++
+c_2 e^{4t}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}.
+\]
+
+Now, we want to find a particular solution \(X_p\).
+
+Since the forcing term is constant, we try a constant solution:
+\[
+X_p =
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}.
+\]
+
+Then
+\[
+X_p' =
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}.
+\]
+
+Using the guess and the derivative of the guess, we plug into the differential equation to get
+
+\[
+X_p' = AX_p + F
+\]
+
+\[
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 & 2 \\
+1 & 3
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}
++
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}.
+\]
+
+Now we simplify:
+
+\[
+\begin{bmatrix}
+2 & 2 \\
+1 & 3
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}
+=
+\begin{bmatrix}
+2a + 2b \\
+a + 3b
+\end{bmatrix}.
+\]
+
+So the equation becomes
+\[
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+=
+\begin{bmatrix}
+2a + 2b \\
+a + 3b
+\end{bmatrix}
++
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}
+=
+\begin{bmatrix}
+2a + 2b - 8 \\
+a + 3b + 3
+\end{bmatrix}.
+\]
+
+To find \(a\) and \(b\), we solve the system
+
+\[
+2a + 2b - 8 = 0 \quad \Rightarrow \quad 2a + 2b = 8
+\]
+\[
+a + 3b + 3 = 0 \quad \Rightarrow \quad a + 3b = -3
+\]
+
+Simplify first equation:
+\[
+a + b = 4
+\]
+
+Now subtract:
+\[
+(a + 3b) - (a + b) = -3 - 4
+\]
+\[
+2b = -7 \Rightarrow b = -\frac{7}{2}
+\]
+
+Substitute into \(a + b = 4\):
+\[
+a - \frac{7}{2} = 4 \Rightarrow a = \frac{15}{2}.
+\]
+
+Particular solution
+
+\[
+X_p =
+\begin{bmatrix}
+\frac{15}{2} \\
+-\frac{7}{2}
+\end{bmatrix}.
+\]
+
+General solution
+
+\[
+X =
+c_1 e^t
+\begin{bmatrix}
+-2 \\
+1
+\end{bmatrix}
++
+c_2 e^{4t}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
++
+\begin{bmatrix}
+\frac{15}{2} \\
+-\frac{7}{2}
+\end{bmatrix}.
+\]
+
+</div>
+
+
+
+If we have a sum or product of functions, then we use the sum or product of the guesses.
+
+
+
+<div class="example">
+<b>Example.</b> Solve the system
+\[
+X' =
+\begin{bmatrix}
+6 & 1 \\
+4 & 3
+\end{bmatrix}
+X
++
+\begin{bmatrix}
+6t \\
+-10t + 4
+\end{bmatrix}.
+\]
+
+Step 1: Homogeneous solution
+
+\[
+X_c =
+c_1 e^{7t}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
++
+c_2 e^{2t}
+\begin{bmatrix}
+1 \\
+-4
+\end{bmatrix}.
+\]
+
+Step 2: Form of particular solution
+
+Since \(F\) is polynomial, try
+\[
+X_p =
+\begin{bmatrix}
+at + b \\
+ct + d
+\end{bmatrix}.
+\]
+
+Compute \(X_p'\)
+
+\[
+X_p' =
+\begin{bmatrix}
+a \\
+c
+\end{bmatrix}.
+\]
+
+Compute \(AX_p\)
+
+\[
+AX_p =
+\begin{bmatrix}
+6 & 1 \\
+4 & 3
+\end{bmatrix}
+\begin{bmatrix}
+at + b \\
+ct + d
+\end{bmatrix}
+=
+\begin{bmatrix}
+6(at+b) + (ct+d) \\
+4(at+b) + 3(ct+d)
+\end{bmatrix}
+\]
+
+\[
+=
+\begin{bmatrix}
+(6a+c)t + (6b+d) \\
+(4a+3c)t + (4b+3d)
+\end{bmatrix}.
+\]
+
+Plug into DE
+
+\[
+X_p' = AX_p + F
+\]
+
+\[
+\begin{bmatrix}
+a \\
+c
+\end{bmatrix}
+=
+\begin{bmatrix}
+(6a+c)t + (6b+d) \\
+(4a+3c)t + (4b+3d)
+\end{bmatrix}
++
+\begin{bmatrix}
+6t \\
+-10t + 4
+\end{bmatrix}.
+\]
+
+
+Match coefficients
+
+\[
+0 = 6a + c + 6
+\]
+\[
+a = 6b + d
+\]
+
+From bottom:
+\[
+0 = 4a + 3c - 10
+\]
+\[
+c = 4b + 3d + 4
+\]
+
+Solve system
+\[
+6a + c + 6 = 0 \Rightarrow c = -6a - 6
+\]
+
+Substitute into
+\[
+4a + 3c - 10 = 0
+\]
+\[
+4a + 3(-6a - 6) - 10 = 0
+\]
+\[
+4a - 18a - 18 - 10 = 0
+\]
+\[
+-14a - 28 = 0 \Rightarrow a = -2
+\]
+
+Then
+\[
+c = -6(-2) - 6 = 12 - 6 = 6
+\]
+
+Now solve for \(b,d\):
+
+\[
+a = 6b + d \Rightarrow -2 = 6b + d
+\]
+\[
+c = 4b + 3d + 4 \Rightarrow 6 = 4b + 3d + 4
+\]
+
+\[
+2 = 4b + 3d
+\]
+
+Solve system:
+\[
+-2 = 6b + d
+\Rightarrow d = -2 - 6b
+\]
+
+Substitute:
+\[
+2 = 4b + 3(-2 - 6b)
+\]
+\[
+2 = 4b - 6 - 18b
+\]
+\[
+2 = -14b - 6
+\Rightarrow 8 = -14b
+\Rightarrow b = -\frac{4}{7}
+\]
+
+Then
+\[
+d = -2 - 6\left(-\frac{4}{7}\right)
+= -2 + \frac{24}{7}
+= \frac{10}{7}
+\]
+
+Step 3: Particular solution
+
+\[
+X_p =
+\begin{bmatrix}
+-2t - \frac{4}{7} \\
+6t + \frac{10}{7}
+\end{bmatrix}.
+\]
+
+Step 4: General solution
+
+\[
+X =
+c_1 e^{7t}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
++
+c_2 e^{2t}
+\begin{bmatrix}
+1 \\
+-4
+\end{bmatrix}
++
+\begin{bmatrix}
+-2t - \frac{4}{7} \\
+6t + \frac{10}{7}
+\end{bmatrix}.
+\]
+
+</div>
+
+
+
+
+
+<div class="example">
+<b>Example.</b> 
+
+
+
+
+
+</div>
+
+
+<div class="example">
+<b>Example.</b> 
+
+
+
+
+
+</div>
+
+
+<h2>Variation of Parameters</h2>
+
+
+Here is the idea behind variation of parameters. Once again, this is to find the particular solution \(X_p\). Let \(\{X_1, \cdots, X_n\}\) be a fundamental set 
+of solutions to the system \(X' = AX\). Then the general solution can be written as
+\[
+X = c_1X_1 + \cdots + c_nX_n = \begin{pmatrix}
+x_{11} & x_{12} & \cdots & x_{1n} \\
+x_{21} & x_{22} & \cdots & x_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \cdots & x_{nn}
+\end{pmatrix} \begin{pmatrix} c_1\\ c_2 \\ \vdots\\ c_n \end{pmatrix}
+\]
+
+Let \(\Phi(t) = \begin{pmatrix}
+x_{11} & x_{12} & \cdots & x_{1n} \\
+x_{21} & x_{22} & \cdots & x_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \cdots & x_{nn}
+\end{pmatrix}\) and suppose \(\det(\Phi(t)) \ne 0\). Then
+\[
+X_p = \Phi(t)\int \Phi^{-1}(t)F(t) ~dt.
+\]
+
+<div class="remark">
+<b>Remark.</b> 
+Since we are assuming \(\det(\Phi(t)) \ne 0\) then linear algebra tells us the inverse matrix \(\Phi^{-1}(t)\) exists. In the \(2 \times 2\) case, there is a formula for the inverse we saw from the previous 
+lectures.
+$$
+A =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+
+$$
+A^{-1} = \frac{1}{ad - bc}
+\begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}
+$$
+
+
+
+</div>
+
+<div class="example">
+<b>Example.</b> Use <i>variation of parameters</i> to find a particular solution \(X_p\) to
+\[
+X' =
+\begin{bmatrix}
+2 & 2 \\
+1 & 3
+\end{bmatrix}
+X
++
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}.
+\]
+
+Step 1: Fundamental matrix
+
+From the homogeneous system (given previously), we have two solutions:
+\[
+X_1 = e^{4t}
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}, \quad
+X_2 = e^{t}
+\begin{bmatrix}
+2 \\
+-1
+\end{bmatrix}.
+\]
+
+Thus the fundamental matrix is
+\[
+\Phi(t) =
+\begin{bmatrix}
+e^{4t} & 2e^{t} \\
+e^{4t} & -e^{t}
+\end{bmatrix}.
+\]
+
+Step 2: Compute \(\Phi^{-1}(t)\)
+
+
+\[
+\det(\Phi) =
+e^{4t}(-e^{t}) - 2e^{t}(e^{4t})
+= -e^{5t} - 2e^{5t}
+= -3e^{5t}.
+\]
+
+So,
+\[
+\Phi^{-1}(t)
+= \frac{1}{-3e^{5t}}
+\begin{bmatrix}
+- e^{t} & -2e^{t} \\
+- e^{4t} & e^{4t}
+\end{bmatrix}.
+\]
+
+Step 3: Compute \(\Phi^{-1}(t)F(t)\)
+
+\[
+F(t) =
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}.
+\]
+
+\[
+\Phi^{-1}(t)F(t)
+=
+\frac{1}{-3e^{5t}}
+\begin{bmatrix}
+- e^{t} & -2e^{t} \\
+- e^{4t} & e^{4t}
+\end{bmatrix}
+\begin{bmatrix}
+-8 \\
+3
+\end{bmatrix}.
+\]
+
+
+\[
+\Phi^{-1}(t)F(t)
+=
+\frac{1}{-3e^{5t}}
+\begin{bmatrix}
+2e^{t} \\
+11e^{4t}
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\frac{2}{3}e^{-4t} \\
+-\frac{11}{3}e^{-t}
+\end{bmatrix}.
+\]
+
+Step 4: Integrate
+
+\[
+\int \Phi^{-1}(t)F(t)\,dt
+=
+\begin{bmatrix}
+\int -\frac{2}{3}e^{-4t} dt \\
+\int -\frac{11}{3}e^{-t} dt
+\end{bmatrix}.
+\]
+
+\[
+=
+\begin{bmatrix}
+\frac{1}{6}e^{-4t} \\
+\frac{11}{3}e^{-t}
+\end{bmatrix}.
+\]
+
+Step 5: Multiply by \(\Phi(t)\)
+
+\[
+X_p = \Phi(t)
+\begin{bmatrix}
+\frac{1}{6}e^{-4t} \\
+\frac{11}{3}e^{-t}
+\end{bmatrix}.
+\]
+
+\[
+=
+\begin{bmatrix}
+e^{4t} & 2e^{t} \\
+e^{4t} & -e^{t}
+\end{bmatrix}
+\begin{bmatrix}
+\frac{1}{6}e^{-4t} \\
+\frac{11}{3}e^{-t}
+\end{bmatrix}.
+\]
+
+Compute:
+
+Top:
+\[
+e^{4t}\cdot \frac{1}{6}e^{-4t} + 2e^{t}\cdot \frac{11}{3}e^{-t}
+= \frac{1}{6} + \frac{22}{3}
+= \frac{45}{6} = \frac{15}{2}.
+\]
+
+Bottom:
+\[
+e^{4t}\cdot \frac{1}{6}e^{-4t} - e^{t}\cdot \frac{11}{3}e^{-t}
+= \frac{1}{6} - \frac{11}{3}
+= -\frac{21}{6} = -\frac{7}{2}.
+\]
+
+Step 6: Particular solution
+
+\[
+X_p =
+\begin{bmatrix}
+\frac{15}{2} \\
+-\frac{7}{2}
+\end{bmatrix}.
+\]
+
+</div>
 
    
   </main>
