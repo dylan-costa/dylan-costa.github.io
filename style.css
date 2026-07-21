@@ -31,10 +31,29 @@ h3 {
 }
 
 /* Text */
-p, li, td, th, a {
+p, li, td, th {
   font-family: 'Baskervville', serif;
   font-size: 18px;
   color: #222;
+}
+
+/* Body links */
+a {
+  font-family: 'Baskervville', serif;
+  font-size: 18px;
+  color: #0645AD;
+}
+
+a:visited {
+  color: #0645AD;
+}
+
+a:hover {
+  color: #0b61d8;
+}
+
+a:active {
+  color: #0645AD;
 }
 
 /* Notes container */
