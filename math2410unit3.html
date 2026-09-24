@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>MATH 2410 — Differential Equations Lecture Notes</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax -->
   <script>
@@ -21,7 +22,7 @@
 
   <!-- Top Navigation -->
   <div class="topnav">
-    <a href="index.html">Home</a>	
+    <a href="index.html">Home</a>
     <a href="notes.html">Notes</a>
     <div class="dropdown">
       <button class="dropbtn">Teaching</button>
@@ -43,1725 +44,630 @@
 
     <!-- Table of Contents -->
     <nav class="toc" id="top">
-	  <strong>The following set of lectures follows Chapter 7 of the textbook:</strong><br>
-	  <strong>Unit 3</strong>:
-	  <a href="#lecture16">Lecture 16</a> |
-	  <a href="#lecture17">Lecture 17</a> |
-	  <a href="#lecture18">Lecture 18</a> |
-	  <a href="#lecture19">Lecture 19</a> |
-	  <a href="#lecture20">Lecture 20</a> |
-	  <a href="#lecture21">Lecture 21</a> |
-	  <a href="#lecture22">Lecture 22</a> |
-	  <a href="#lecture23">Lecture 23</a> |
-	  
-	</nav>
-
-
-	
-	<h2 id="lecture16">
-	  Lecture 16: Section 7.1 - Introduction to Laplace Transform
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-
-	<p>
-In Unit 3, we introduce the Laplace Transform and develop methods to solve initial value problems.
-We begin by defining what a transform is and then build toward the Laplace Transform.
-</p>
-
-<div class="definition">
-<b>Definition.</b><br>
-A <b>transform</b> \(T\) is an operation that converts a function into another function.
-</div>
-
-<p>
-Common examples include differentiation and integration:
-</p>
-
-\[
-x^n \mapsto nx^{n-1}, \quad e^x \mapsto e^x.
-\]
-
-<div class="remark">
-<b>Remark.</b><br>
-Transforms are linear. For constants \(c_1, c_2\) and functions \(f, g\):
-\[
-T(c_1f \pm c_2g) = c_1T(f) \pm c_2T(g).
-\]
-</div>
-
-<h2>Generalized Integral Transform</h2>
-
-<p>
-Consider a function of two variables \(f(x,y)\):
-</p>
-
-\[
-\int_a^b f(x,y)\,dx = F(b,y) - F(a,y),
-\]
-
-<p>
-This transforms a function of two variables into a function of one variable.
-</p>
-
-<div class="example">
-<b>Example 1</b><br>
-
-Let \(f(x,y) = 2xy^2.\)
-
-\[
-\int_1^3 2xy^2\,dx = y^2 \int_1^3 2x\,dx
-\]
-
-\[
-= y^2[x^2]_1^3 = y^2(9 - 1) = 8y^2.
-\]
-</div>
-
-<p>
-To build the Laplace Transform:
-</p>
-
-<ol>
-<li>
-Start with
-\[
-\int_a^b K(s,t)f(t)\,dt
-\]
-</li>
-
-<li>
-Extend to infinity:
-\[
-F(s) = \int_0^\infty K(s,t)f(t)\,dt
-\]
-</li>
-</ol>
-
-<p>
-We choose the function \(K(s,t) = e^{-st}\) since it decays to 0 faster than any polynomial decay.
-</p>
-
-<div class="definition">
-<b>Definition.</b><br>
-The <b>Laplace Transform</b> of \(f(t)\) is
-\[
-\mathcal{L}\{f(t)\} = \int_0^\infty e^{-st}f(t)\,dt,
-\]
-defined for values of \(s\) where the integral converges.
-</div>
+      <strong>The following set of sections follows Chapter 7 of the textbook:</strong><br>
+      <strong>Unit 3</strong>:
+      <a href="#sec7-1">Section 7.1</a> |
+      <a href="#sec7-2">Section 7.2</a> |
+      <a href="#sec7-3">Section 7.3</a> |
+      <a href="#sec7-4">Section 7.4</a>
+    </nav>
+
+    <!-- ================= SECTION 7.1 ================= -->
+    <div class="unit-divider" id="sec7-1">
+      <div class="part-label">Section 7.1</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Introduction to the Laplace Transform</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">What Is a Transform?</h2>
+
+    <p>
+    A <strong>transform</strong> is an operation that converts one type of function into a
+    different kind of function. We have already seen several examples of this idea:
+    differentiation transforms \(x^2\) into \(2x\) and \(\ln(x)\) into \(1/x\); integration
+    transforms \(e^{kx}\) into \(\tfrac1ke^{kx}\).
+    </p>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      All of the transforms we will study have a <strong>linearity</strong> property.
+    </div>
+
+    <p>
+    <strong>Integral transforms.</strong> Suppose we have a function \(f(x,y)\) and hold
+    \(y\) constant. Then
+    </p>
+    \[
+    \int_a^b f(x,y)\,dx = F(b,y)-F(a,y), \qquad \text{where } F_x(x,y)=f(x,y),
+    \]
+    <p>turns a function of two variables into a function of one variable \(y\).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \int_1^3 2xy^2\,dx = x^2y^2\Big|_{x=1}^{x=3} = 9y^2 - y^2 = 8y^2.
+      \]
+    </div>
+
+    <p>
+    We now generalize this idea in two ways: (1) integrate \(f(t)\) against some fixed
+    "kernel" function \(K(s,t)\), and (2) integrate over the unbounded interval
+    \([0,\infty)\):
+    </p>
+    \[
+    \int_0^\infty K(s,t)f(t)\,dt
+      = \lim_{b\to\infty}\int_0^b K(s,t)f(t)\,dt,
+    \]
+    <p>
+    where \(s\) is a real variable. Choosing \(K(s,t)=e^{-st}\) gives the
+    <strong>Laplace transform</strong>.
+    </p>
+
+    <h2 class="tex-section">The Laplace Transform</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      Let \(f\) be defined on \([0,\infty)\). The <strong>Laplace transform</strong> of \(f\) is
+      \[
+      \mathcal{L}\{f(t)\} = F(s) = \int_0^\infty e^{-st}f(t)\,dt,
+      \]
+      defined for all values of \(s\) where the improper integral converges.
+    </div>
+
+    <div class="theorem">
+      <span class="label">Theorem (Linearity)</span>
+      For constants \(c_1,c_2\) and functions \(f(t),g(t)\) defined on \([0,\infty)\),
+      \[
+      \mathcal{L}\{c_1f(t)+c_2g(t)\} = c_1\mathcal{L}\{f(t)\}+c_2\mathcal{L}\{g(t)\}.
+      \]
+    </div>
+
+    <p>This follows immediately from linearity of the integral:</p>
+    \[
+    \mathcal{L}\{c_1f+c_2g\} = \int_0^\infty e^{-st}(c_1f+c_2g)\,dt
+      = c_1\int_0^\infty e^{-st}f(t)\,dt + c_2\int_0^\infty e^{-st}g(t)\,dt
+      = c_1\mathcal{L}\{f(t)\}+c_2\mathcal{L}\{g(t)\}.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{k\}\) where \(k\) is a constant.
+      <p>By linearity, \(\mathcal{L}\{k\}=k\,\mathcal{L}\{1\}\), so it suffices to find</p>
+      \[
+      \mathcal{L}\{1\} = \int_0^\infty e^{-st}\,dt
+        = \lim_{b\to\infty}\int_0^b e^{-st}\,dt
+        = \lim_{b\to\infty}\left(-\frac1se^{-st}\right)\Big|_0^b
+        = \lim_{b\to\infty}\left(\frac1s - \frac{e^{-sb}}{s}\right).
+      \]
+      <p>This limit is \(\tfrac1s\) if \(s>0\) (and diverges if \(s\le 0\)). So</p>
+      \[
+      \boxed{\mathcal{L}\{k\} = \frac{k}{s}, \qquad s>0.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{mt+k\}\), where \(m,k\) are constants.
+      <p>By linearity, \(\mathcal{L}\{mt+k\} = m\,\mathcal{L}\{t\}+\mathcal{L}\{k\}\), so we need</p>
+      \[
+      \mathcal{L}\{t\} = \int_0^\infty te^{-st}\,dt
+        = \lim_{b\to\infty}\int_0^b te^{-st}\,dt.
+      \]
+      <p>
+      Using integration by parts (\(u=t\), \(dv=e^{-st}dt\), so \(du=dt\),
+      \(v=-\tfrac1se^{-st}\)),
+      </p>
+      \[
+      \int_0^b te^{-st}\,dt
+        = \left(-\frac ts e^{-st} - \frac{1}{s^2}e^{-st}\right)\Big|_0^b
+        = -\frac bs e^{-sb} - \frac{1}{s^2}e^{-sb} + \frac{1}{s^2}.
+      \]
+      <p>
+      As \(b\to\infty\), the first two terms vanish for \(s>0\), leaving
+      \(\mathcal{L}\{t\} = \tfrac{1}{s^2}\) for \(s>0\). Thus
+      </p>
+      \[
+      \boxed{\mathcal{L}\{mt+k\} = \frac{m}{s^2}+\frac{k}{s}, \qquad s>0.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{\sin t\}\).
+      \[
+      \mathcal{L}\{\sin t\} = \int_0^\infty e^{-st}\sin(t)\,dt.
+      \]
+      <p>
+      Integrating by parts twice (first with \(u=e^{-st}\), \(dv=\sin(t)dt\), then again on
+      the resulting integral),
+      </p>
+      \[
+      \int_0^\infty e^{-st}\sin(t)\,dt
+        = \Big[-e^{-st}\cos(t) - se^{-st}\sin(t)\Big]_0^\infty
+          - s^2\int_0^\infty e^{-st}\sin(t)\,dt.
+      \]
+      <p>Moving the last term to the left-hand side,</p>
+      \[
+      (1+s^2)\,\mathcal{L}\{\sin t\} =
+        \lim_{b\to\infty}\Big(-e^{-sb}\cos(b)-se^{-sb}\sin(b)\Big) - (-1-0)
+        = 1 \qquad (s>0),
+      \]
+      <p>since the boundary terms vanish as \(b\to\infty\) for \(s>0\). Thus</p>
+      \[
+      \boxed{\mathcal{L}\{\sin t\} = \frac{1}{1+s^2}, \qquad s>0.}
+      \]
+    </div>
+
+    <table class="tex-table">
+      <tr>
+        <th>\(f(t)\)</th>
+        <th>\(\mathcal{L}\{f(t)\}\)</th>
+      </tr>
+      <tr>
+        <td>\(1\)</td>
+        <td>\(\dfrac1s\)</td>
+      </tr>
+      <tr>
+        <td>\(t^n\)</td>
+        <td>\(\dfrac{n!}{s^{n+1}}\)</td>
+      </tr>
+      <tr>
+        <td>\(e^{at}\)</td>
+        <td>\(\dfrac{1}{s-a}\)</td>
+      </tr>
+      <tr>
+        <td>\(\sin(kt)\)</td>
+        <td>\(\dfrac{k}{s^2+k^2}\)</td>
+      </tr>
+      <tr>
+        <td>\(\cos(kt)\)</td>
+        <td>\(\dfrac{s}{s^2+k^2}\)</td>
+      </tr>
+    </table>
+    <p style="text-align:center;"><em>Common Laplace transforms (all valid for \(s\) sufficiently large).</em></p>
+
+    <!-- ================= SECTION 7.2 ================= -->
+    <div class="unit-divider" id="sec7-2">
+      <div class="part-label">Section 7.2</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Inverse Transforms and Solving IVPs</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Inverse Laplace Transforms</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      If \(\mathcal{L}\{f(t)\} = F(s)\), then \(f(t)\) is called the
+      <strong>inverse Laplace transform</strong> of \(F(s)\), written
+      \(f(t) = \mathcal{L}^{-1}\{F(s)\}\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Just like the Laplace transform itself, the inverse transform has the
+      <strong>linearity</strong> property:
+      \[
+      \mathcal{L}^{-1}\{c_1F(s)+c_2G(s)\} = c_1\mathcal{L}^{-1}\{F(s)\}
+        + c_2\mathcal{L}^{-1}\{G(s)\}.
+      \]
+    </div>
+
+    <p>Reading the transform table from Section 7.1 in reverse gives us a small table of inverse transforms:</p>
+    \[
+    \mathcal{L}^{-1}\left\{\frac1s\right\}=1, \qquad
+    \mathcal{L}^{-1}\left\{\frac{1}{s^2}\right\}=t, \qquad
+    \mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\}=e^{-3t}.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}^{-1}\left\{\dfrac{-2s+6}{s^2+4}\right\}\).
+      <p>By linearity,</p>
+      \[
+      \mathcal{L}^{-1}\left\{\frac{-2s+6}{s^2+4}\right\}
+        = -2\,\mathcal{L}^{-1}\left\{\frac{s}{s^2+4}\right\}
+        + 6\,\mathcal{L}^{-1}\left\{\frac{1}{s^2+4}\right\}.
+      \]
+      <p>
+      Using \(\mathcal{L}\{\cos(2t)\}=\dfrac{s}{s^2+4}\) and
+      \(\mathcal{L}\{\sin(2t)\}=\dfrac{2}{s^2+4}\),
+      </p>
+      \[
+      \boxed{\mathcal{L}^{-1}\left\{\frac{-2s+6}{s^2+4}\right\}
+        = -2\cos(2t)+6\sin(2t).}
+      \]
+    </div>
+
+    <p>When the denominator doesn't match a known form directly, we turn to <strong>partial fractions</strong>.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}^{-1}\left\{\dfrac{6s+2}{s^2-1}\right\}\).
+      <p>
+      Since the inverse transform works with sums and differences but not with products or
+      quotients, we first factor and decompose:
+      </p>
+      \[
+      \frac{6s+2}{(s-1)(s+1)} = \frac{A}{s-1}+\frac{B}{s+1}.
+      \]
+      <p>
+      Then \(6s+2 = A(s+1)+B(s-1)\). Setting \(s=1\): \(8=2A \Rightarrow A=4\). Setting
+      \(s=-1\): \(-4=-2B \Rightarrow B=2\). So
+      </p>
+      \[
+      \mathcal{L}^{-1}\left\{\frac{6s+2}{(s-1)(s+1)}\right\}
+        = \mathcal{L}^{-1}\left\{\frac{4}{s-1}\right\}
+        + \mathcal{L}^{-1}\left\{\frac{2}{s+1}\right\}
+        = \boxed{4e^{t}+2e^{-t}.}
+      \]
+    </div>
+
+    <h2 class="tex-section">Solving Initial Value Problems with the Laplace Transform</h2>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Suppose \(f,f',\dots,f^{(n-1)}\) are continuous on \([0,\infty)\) and \(f^{(n)}\) is
+      piecewise continuous on \([0,\infty)\). Then for \(s\) sufficiently large,
+      \[
+      \mathcal{L}\{f^{(n)}(t)\}
+        = s^nF(s) - s^{n-1}f(0) - s^{n-2}f'(0) - \cdots - f^{(n-1)}(0),
+      \]
+      where \(F(s)=\mathcal{L}\{f(t)\}\).
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Method of Solving</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Apply the Laplace transform to both sides of the differential equation.</li>
+          <li>Use the theorem above to rewrite each derivative term, and solve the resulting algebraic equation for \(F(s)=\mathcal{L}\{y(t)\}\).</li>
+          <li>Apply the inverse Laplace transform (using partial fractions if needed) to recover \(y(t) = \mathcal{L}^{-1}\{F(s)\}\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y'+3y=16e^t\), \(y(0)=1\).
+      <p>Taking the Laplace transform of both sides,</p>
+      \[
+      \mathcal{L}\{y'\}+3\mathcal{L}\{y\}
+        = \big(sF(s)-y(0)\big)+3F(s) = \frac{16}{s-1}.
+      \]
+      <p>Substituting \(y(0)=1\) and solving for \(F(s)\),</p>
+      \[
+      F(s)(s+3) = \frac{16}{s-1}+1 = \frac{s+15}{s-1}
+      \;\Longrightarrow\;
+      F(s) = \frac{s+15}{(s+3)(s-1)}.
+      \]
+      <p>
+      Using partial fractions, \(\dfrac{s+15}{(s+3)(s-1)} = \dfrac{A}{s+3}
+      +\dfrac{B}{s-1}\), so \(s+15=A(s-1)+B(s+3)\). Setting \(s=1\): \(16=4B
+      \Rightarrow B=4\). Setting \(s=-3\): \(12=-4A \Rightarrow A=-3\). So
+      </p>
+      \[
+      y = \mathcal{L}^{-1}\{F(s)\}
+        = \mathcal{L}^{-1}\left\{\frac{-3}{s+3}\right\}
+        + \mathcal{L}^{-1}\left\{\frac{4}{s-1}\right\}
+        = \boxed{-3e^{-3t}+4e^{t}.}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      This method works for any linear differential equation with constant coefficients.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y''+5y'+4y=0\), \(y(0)=1\), \(y'(0)=0\).
+      <p>Taking the Laplace transform of both sides,</p>
+      \[
+      \mathcal{L}\{y''\}+5\mathcal{L}\{y'\}+4\mathcal{L}\{y\}
+        = \big(s^2F(s)-sy(0)-y'(0)\big) + 5\big(sF(s)-y(0)\big) + 4F(s)
+        = 0.
+      \]
+      <p>Substituting \(y(0)=1\), \(y'(0)=0\),</p>
+      \[
+      F(s)(s^2+5s+4) - s - 5 = 0
+      \;\Longrightarrow\;
+      F(s) = \frac{s+5}{(s+4)(s+1)}.
+      \]
+      <p>
+      Using partial fractions, \(\dfrac{s+5}{(s+4)(s+1)} = \dfrac{A}{s+4}
+      +\dfrac{B}{s+1}\), so \(s+5=A(s+1)+B(s+4)\). Setting \(s=-4\): \(1=-3A
+      \Rightarrow A=-\tfrac13\). Setting \(s=-1\): \(4=3B \Rightarrow
+      B=\tfrac43\). So
+      </p>
+      \[
+      y = \mathcal{L}^{-1}\left\{\frac{-1/3}{s+4}\right\}
+        + \mathcal{L}^{-1}\left\{\frac{4/3}{s+1}\right\}
+        = \boxed{\frac43e^{-t}-\frac13e^{-4t}.}
+      \]
+    </div>
+
+    <!-- ================= SECTION 7.3 ================= -->
+    <div class="unit-divider" id="sec7-3">
+      <div class="part-label">Section 7.3</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Translation Theorems</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">The First Translation Theorem</h2>
+
+    <div class="theorem">
+      <span class="label">Theorem (First Translation Theorem)</span>
+      If \(\mathcal{L}\{f(t)\}=F(s)\) exists for \(s>c\), and \(a\) is any real number, then
+      \[
+      \mathcal{L}\{e^{at}f(t)\} = F(s-a), \qquad \text{for } s>a+c.
+      \]
+    </div>
+
+    <p>To see why, substitute directly into the definition:</p>
+    \[
+    \mathcal{L}\{e^{at}f(t)\} = \int_0^\infty e^{-st}e^{at}f(t)\,dt
+      = \int_0^\infty e^{-(s-a)t}f(t)\,dt = F(s-a).
+    \]
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      In words: multiplying \(f(t)\) by \(e^{at}\) shifts the transform <em>horizontally</em>
+      by \(a\), replacing every \(s\) in \(F(s)\) with \(s-a\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Since \(\mathcal{L}\{t^3\}=\dfrac{3!}{s^4}=\dfrac{6}{s^4}\), the First Translation
+      Theorem gives
+      \[
+      \boxed{\mathcal{L}\{e^{5t}t^3\} = \frac{6}{(s-5)^4}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y'-y = 1+te^t\), \(y(0)=0\).
+      <p>Taking the Laplace transform of both sides,</p>
+      \[
+      \mathcal{L}\{y'\}-\mathcal{L}\{y\} = \big(sF(s)-y(0)\big)-F(s)
+        = F(s)(s-1).
+      \]
+      <p>
+      On the right, \(\mathcal{L}\{1\}=\dfrac1s\), and by the First Translation Theorem,
+      \(\mathcal{L}\{te^t\} = \dfrac{1}{(s-1)^2}\) (since \(\mathcal{L}\{t\}=1/s^2\)). So
+      </p>
+      \[
+      F(s)(s-1) = \frac1s+\frac{1}{(s-1)^2}
+      \;\Longrightarrow\;
+      F(s) = \frac{1}{s(s-1)}+\frac{1}{(s-1)^3}.
+      \]
+      <p>Using partial fractions, \(\dfrac{1}{s(s-1)} = -\dfrac1s+\dfrac{1}{s-1}\), so</p>
+      \[
+      F(s) = -\frac1s+\frac{1}{s-1}+\frac{1}{(s-1)^3}.
+      \]
+      <p>
+      Since \(\mathcal{L}^{-1}\{1/s^3\}=t^2/2\), the First Translation Theorem gives
+      \(\mathcal{L}^{-1}\{1/(s-1)^3\} = \tfrac12t^2e^t\). Thus
+      </p>
+      \[
+      \boxed{y = -1+e^t+\frac12t^2e^t.}
+      \]
+    </div>
+
+    <h2 class="tex-section">The Unit Step Function and the Second Translation Theorem</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>unit step function</strong> is
+      \[
+      \mathscr{U}(t-a) = \begin{cases} 0 & 0\le t\lt a \\ 1 & t\ge a\end{cases}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{f(t)\}\) where
+      \[
+      f(t) = (2t-3)\mathscr{U}(t-1) =
+        \begin{cases} 0 & 0\le t\le 1 \\ 2t-3 & t>1\end{cases}.
+      \]
+      <p>Since \(f(t)=0\) for \(t\lt 1\),</p>
+      \[
+      \mathcal{L}\{f(t)\} = \int_1^\infty e^{-st}(2t-3)\,dt
+        = 2\int_1^\infty te^{-st}\,dt - 3\int_1^\infty e^{-st}\,dt.
+      \]
+      <p>Evaluating each piece (using integration by parts on the first),</p>
+      \[
+      \int_1^\infty e^{-st}\,dt = \frac{e^{-s}}{s}, \qquad
+      \int_1^\infty te^{-st}\,dt = \frac{e^{-s}}{s}+\frac{e^{-s}}{s^2}.
+      \]
+      <p>So</p>
+      \[
+      \mathcal{L}\{f(t)\}
+        = 2\left(\frac{e^{-s}}{s}+\frac{e^{-s}}{s^2}\right) - 3\frac{e^{-s}}{s}
+        = \boxed{\frac{2}{s^2}e^{-s} - \frac1s e^{-s}.}
+      \]
+    </div>
+
+    <p>
+    More generally, for \(\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\}\), split the integral at
+    \(t=a\) (the piece below \(a\) vanishes) and substitute \(v=t-a\):
+    </p>
+    \[
+    \mathcal{L}\{f(t-a)\mathscr{U}(t-a)\}
+      = \int_a^\infty e^{-st}f(t-a)\,dt
+      = \int_0^\infty e^{-s(v+a)}f(v)\,dv
+      = e^{-as}\int_0^\infty e^{-sv}f(v)\,dv = e^{-as}F(s).
+    \]
+
+    <div class="theorem">
+      <span class="label">Theorem (Second Translation Theorem)</span>
+      If \(\mathcal{L}\{f(t)\}=F(s)\) exists for \(s>c\ge0\), and \(a>0\), then
+      \[
+      \mathcal{L}\{f(t-a)\mathscr{U}(t-a)\} = e^{-as}F(s), \qquad s>c.
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      In words: delaying \(f(t)\) by \(a\) units and switching it on at \(t=a\) multiplies
+      the transform by \(e^{-as}\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{f(t)\}\) where
+      \[
+      f(t) = \begin{cases} 2 & 0\le t\lt 3 \\ -2 & t\ge3\end{cases}
+        = 2 - 4\mathscr{U}(t-3).
+      \]
+      <p>By linearity and the Second Translation Theorem,</p>
+      \[
+      \boxed{\mathcal{L}\{f(t)\} = \mathcal{L}\{2\} - 4\mathcal{L}\{\mathscr{U}(t-3)\}
+        = \frac2s - \frac4s e^{-3s}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y'+y=f(t)\), \(y(0)=0\), where
+      \[
+      f(t) = \begin{cases} 0 & 0\le t\lt 1 \\ 5 & t\ge1\end{cases}
+        = 5\mathscr{U}(t-1).
+      \]
+      <p>Taking the Laplace transform of both sides,</p>
+      \[
+      \big(sF(s)-y(0)\big)+F(s) = F(s)(s+1)
+        = 5\mathcal{L}\{\mathscr{U}(t-1)\} = \frac{5}{s}e^{-s}.
+      \]
+      <p>So</p>
+      \[
+      F(s) = \frac{5e^{-s}}{s(s+1)}
+        = 5e^{-s}\left(\frac1s-\frac{1}{s+1}\right).
+      \]
+      <p>Applying the Second Translation Theorem to each piece,</p>
+      \[
+      \boxed{y = 5\mathscr{U}(t-1) - 5e^{-(t-1)}\mathscr{U}(t-1).}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y''+4y = \sin(t)\mathscr{U}(t-2\pi)\), \(y(0)=1\),
+      \(y'(0)=0\).
+      <p>
+      Since \(\sin(t)\) is periodic with period \(2\pi\), \(\sin(t-2\pi)=\sin(t)\), so we can
+      write the forcing term as \(\sin(t-2\pi)\mathscr{U}(t-2\pi)\) — exactly the form needed
+      for the Second Translation Theorem, with \(f(t)=\sin(t)\), \(F(s) =
+      \dfrac{1}{s^2+1}\). Taking the Laplace transform of both sides,
+      </p>
+      \[
+      \big(s^2F(s)-s\cdot1-0\big)+4F(s) = (s^2+4)F(s)-s
+        = e^{-2\pi s}\cdot\frac{1}{s^2+1}.
+      \]
+      <p>So</p>
+      \[
+      F(s) = \frac{s}{s^2+4} + \frac{e^{-2\pi s}}{(s^2+1)(s^2+4)}.
+      \]
+      <p>
+      Using partial fractions, \(\dfrac{1}{(s^2+1)(s^2+4)}
+        = \dfrac{1/3}{s^2+1} - \dfrac{1/3}{s^2+4}\), so
+      </p>
+      \[
+      F(s) = \frac{s}{s^2+4}
+        + \frac{e^{-2\pi s}}{3}\cdot\frac{1}{s^2+1}
+        - \frac{e^{-2\pi s}}{3}\cdot\frac{1}{s^2+4}.
+      \]
+      <p>
+      Taking the inverse transform of each piece (applying the Second Translation Theorem to
+      the last two, and using \(\sin(t-2\pi)=\sin(t)\), \(\sin(2(t-2\pi))=\sin(2t)\)),
+      </p>
+      \[
+      \boxed{y = \cos(2t) + \frac13\sin(t)\mathscr{U}(t-2\pi)
+        - \frac16\sin(2t)\mathscr{U}(t-2\pi).}
+      \]
+    </div>
+
+    <!-- ================= SECTION 7.4 ================= -->
+    <div class="unit-divider" id="sec7-4">
+      <div class="part-label">Section 7.4</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Derivatives of Transforms</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Differentiating a Laplace Transform</h2>
+
+    <p>
+    Suppose \(F(s) = \mathcal{L}\{f(t)\}\). Since \(F(s)\) is defined by an integral in \(t\)
+    with parameter \(s\), we can differentiate under the integral sign with respect to \(s\):
+    </p>
+    \[
+    \frac{d}{ds}F(s) = \frac{d}{ds}\int_0^\infty e^{-st}f(t)\,dt
+      = \int_0^\infty \frac{\partial}{\partial s}\big(e^{-st}\big)f(t)\,dt
+      = \int_0^\infty -te^{-st}f(t)\,dt
+      = -\mathcal{L}\{tf(t)\}.
+    \]
+    <p>So \(\mathcal{L}\{tf(t)\} = -F'(s)\). Differentiating a second time,</p>
+    \[
+    \frac{d^2}{ds^2}F(s) = \int_0^\infty \frac{\partial^2}{\partial s^2}
+      \big(e^{-st}\big)f(t)\,dt = \int_0^\infty t^2e^{-st}f(t)\,dt
+      = \mathcal{L}\{t^2f(t)\}.
+    \]
+    <p>Continuing this pattern gives the general result.</p>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Suppose \(f(t)\) is piecewise continuous on \([0,\infty)\) and
+      \(\mathcal{L}\{f(t)\}=F(s)\). Then for any integer \(n\ge1\),
+      \[
+      \mathcal{L}\{t^nf(t)\} = (-1)^n\frac{d^n}{ds^n}F(s).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{t\sin(4t)\}\).
+      <p>We know \(\mathcal{L}\{\sin(4t)\} = F(s) = \dfrac{1}{s^2+16}\). By the theorem with \(n=1\),</p>
+      \[
+      \mathcal{L}\{t\sin(4t)\} = -F'(s)
+        = -\frac{d}{ds}\left(\frac{1}{s^2+16}\right)
+        = -\left(\frac{-2s}{(s^2+16)^2}\right).
+      \]
+      <p>Thus</p>
+      \[
+      \boxed{\mathcal{L}\{t\sin(4t)\} = \frac{2s}{(s^2+16)^2}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\mathcal{L}\{t^2\cos(2t)\}\).
+      <p>
+      We know \(\mathcal{L}\{\cos(2t)\} = F(s) = \dfrac{s}{s^2+4}\). By the theorem with
+      \(n=2\), we need \(F''(s)\). First,
+      </p>
+      \[
+      F'(s) = \frac{(s^2+4)-s(2s)}{(s^2+4)^2} = \frac{4-s^2}{(s^2+4)^2}.
+      \]
+      <p>
+      Differentiating again (quotient rule, with \(u=4-s^2\), \(v=(s^2+4)^{-2}\), so
+      \(u'=-2s\), \(v'=-4s(s^2+4)^{-3}\)),
+      </p>
+      \[
+      F''(s) = -2s(s^2+4)^{-2} + (4-s^2)\big({-4s(s^2+4)^{-3}}\big)
+        = \frac{-2s(s^2+4) - 4s(4-s^2)}{(s^2+4)^3}
+        = \frac{2s^3-24s}{(s^2+4)^3}.
+      \]
+      <p>So \(F''(s) = \dfrac{2s(s^2-12)}{(s^2+4)^3}\), and since \((-1)^2=1\),</p>
+      \[
+      \boxed{\mathcal{L}\{t^2\cos(2t)\} = \frac{2s(s^2-12)}{(s^2+4)^3}.}
+      \]
+    </div>
 
-<div class="example">
-<b>Example 2</b><br>
-Compute the Laplace Transform of a constant \(k\).
-
-
-\[
-\mathcal{L}\{k\} = \int_0^\infty e^{-st}k\,dt = k\int_0^\infty e^{-st}\,dt
-\]
-
-\[
-= k \left[ \frac{-1}{s}e^{-st} \right]_0^\infty
-\]
-
-\[
-= k\lim_{b \to \infty}\left[ \frac{-1}{s}e^{-sb} + \frac{1}{s}e^{-s(0)} \right]
-\]
-
-As \(b \to \infty\), \(e^{-sb} \to 0\) (for \(s>0\)):
-
-\[
-\mathcal{L}\{k\} = \frac{k}{s}, \quad s>0.
-\]
-</div>
-
-<div class="example">
-<b>Example 3</b><br>
-Compute the Laplace Transform of \(f(t)=mt+b\).
-
-
-Using linearity:
-
-\[
-\mathcal{L}\{mt+b\} = m\mathcal{L}\{t\} + \mathcal{L}\{b\}
-\]
-
-Compute \(\mathcal{L}\{t\}\):
-
-\[
-\mathcal{L}\{t\} = \int_0^\infty te^{-st}\,dt
-\]
-
-Integration by parts:
-
-Let \(u=t\), \(dv=e^{-st}dt\)
-
-\[
-du=dt, \quad v=\frac{-1}{s}e^{-st}
-\]
-
-\[
-\mathcal{L}\{t\}
-= \left[ \frac{-t}{s}e^{-st} \right]_0^\infty + \frac{1}{s}\int_0^\infty e^{-st}\,dt
-\]
-
-\[
-= 0 + \frac{1}{s}\cdot \frac{1}{s}
-\]
-
-\[
-= \frac{1}{s^2}
-\]
-
-Also:
-
-\[
-\mathcal{L}\{b\} = \frac{b}{s}
-\]
-
-Thus:
-
-\[
-\mathcal{L}\{mt+b\}
-= m\left(\frac{1}{s^2}\right) + \frac{b}{s}
-= \frac{m}{s^2} + \frac{b}{s}, \quad s>0.
-\]
-</div>
-
-<div class="example">
-<b>Example 4</b><br>
-Compute the Laplace Transform of
-\[
-f(t)=
-\begin{cases}
-t, & 0 \le t \le 1\\
-1, & t \ge 1
-\end{cases}
-\]
-
-<b>Solution:</b>
-
-\[
-\mathcal{L}\{f(t)\} = \int_0^1 te^{-st}\,dt + \int_1^\infty e^{-st}\,dt
-\]
-
-First integral:
-
-Let \(u=t\), \(dv=e^{-st}dt\)
-
-\[
-v=\frac{-1}{s}e^{-st}
-\]
-
-\[
-\int_0^1 te^{-st}\,dt
-= \left[ \frac{-t}{s}e^{-st} \right]_0^1 + \frac{1}{s}\int_0^1 e^{-st}\,dt
-\]
-
-\[
-= \left(\frac{-1}{s}e^{-s}\right) + \frac{1}{s}\left[\frac{-1}{s}e^{-st}\right]_0^1
-\]
-
-\[
-= \frac{-1}{s}e^{-s} + \frac{1}{s}\left(\frac{-1}{s}e^{-s} + \frac{1}{s}\right)
-\]
-
-\[
-= \frac{-1}{s}e^{-s} - \frac{1}{s^2}e^{-s} + \frac{1}{s^2}
-\]
-
-Second integral:
-
-\[
-\int_1^\infty e^{-st}\,dt
-= \left[\frac{-1}{s}e^{-st}\right]_1^\infty
-\]
-
-\[
-= 0 + \frac{1}{s}e^{-s}
-\]
-
-Add:
-
-\[
-\mathcal{L}\{f(t)\}
-= \left(\frac{-1}{s}e^{-s} - \frac{1}{s^2}e^{-s} + \frac{1}{s^2}\right)
-+ \frac{1}{s}e^{-s}
-\]
-
-\[
-= \frac{1}{s^2} - \frac{1}{s^2}e^{-s}
-\]
-
-Factor:
-
-\[
-\mathcal{L}\{f(t)\} = \frac{1 - e^{-s}}{s^2}, \quad s>0.
-\]
-</div>
-
-<h2>Common Laplace Transforms</h2>
-
-<table border="1" cellpadding="8" cellspacing="0">
-<tr>
-<th>Function \(f(t)\)</th>
-<th>\(\mathcal{L}\{f(t)\}\)</th>
-<th>Condition</th>
-</tr>
-
-<tr>
-<td>\(k\)</td>
-<td>\(\frac{k}{s}\)</td>
-<td>\(s>0\)</td>
-</tr>
-
-<tr>
-<td>\(t^n\)</td>
-<td>\(\frac{n!}{s^{n+1}}\)</td>
-<td>\(s>0\)</td>
-</tr>
-
-<tr>
-<td>\(e^{at}\)</td>
-<td>\(\frac{1}{s-a}\)</td>
-<td>\(s>a\)</td>
-</tr>
-
-<tr>
-<td>\(\sin(kt)\)</td>
-<td>\(\frac{k}{s^2+k^2}\)</td>
-<td>\(s>0\)</td>
-</tr>
-
-<tr>
-<td>\(\cos(kt)\)</td>
-<td>\(\frac{s}{s^2+k^2}\)</td>
-<td>\(s>0\)</td>
-</tr>
-
-</table>
-
-
-	<h2 id="lecture17">
-	  Lecture 17: Section 7.2 - Inverse Transform
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<h2>Inverse Transform</h2>
-
-<p>
-To accompany the Laplace Transform, we have the inverse transform. This allows us to recover the original function that we took the transform of.
-</p>
-
-<p>
-To keep the analogy with other transforms, consider:
-</p>
-
-\[
-\frac{d}{dx}(f(x)) = f'(x)
-\]
-
-\[
-\int f'(x)\,dx = f(x) + C
-\]
-
-<p>
-Similarly:
-</p>
-
-\[
-\mathcal{L}^{-1}\{\mathcal{L}\{f(t)\}\} = f(t)
-\]
-
-<div class="definition">
-<b>Definition.</b><br>
-If \(F(s) = \mathcal{L}\{f(t)\}\), then
-\[
-f(t) = \mathcal{L}^{-1}\{F(s)\}
-\]
-is the <b>inverse Laplace transform</b>.
-</div>
-
-<p>
-The inverse transform is linear:
-</p>
-
-\[
-\mathcal{L}^{-1}\{aF(s) + bG(s)\}
-= a\mathcal{L}^{-1}\{F(s)\} + b\mathcal{L}^{-1}\{G(s)\}
-\]
-
-<br>
-
-<div class="example">
-<b>Example 1</b><br>
-
-Compute
-\[
-\mathcal{L}^{-1}\left\{\frac{6s+1}{s^2+25}\right\}
-\]
-
-<b>Solution:</b>
-
-\[
-= \mathcal{L}^{-1}\left\{\frac{6s}{s^2+25}\right\}
-+ \mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\}
-\]
-
-\[
-= 6\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\}
-+ \mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\}
-\]
-
-Using known transforms:
-
-\[
-\mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\} = \cos(at)
-\]
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s^2+a^2}\right\} = \frac{1}{a}\sin(at)
-\]
-
-\[
-= 6\cos(5t) + \frac{1}{5}\sin(5t)
-\]
-</div>
-
-<br>
-
-<p><b>Strategy:</b> Use partial fractions to match known Laplace forms.</p>
-
-<br>
-
-<div class="example">
-<b>Example 2</b><br>
-
-Find
-\[
-\mathcal{L}^{-1}\left\{\frac{2s}{s^2+3s+2}\right\}
-\]
-
-<b>Solution:</b>
-
-Factor:
-
-\[
-s^2+3s+2 = (s+1)(s+2)
-\]
-
-Partial fractions:
-
-\[
-\frac{2s}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
-\]
-
-Multiply:
-
-\[
-2s = A(s+2) + B(s+1)
-\]
-
-Expand:
-
-\[
-2s = (A+B)s + (2A+B)
-\]
-
-Match coefficients:
-
-\[
-A + B = 2, \quad 2A + B = 0
-\]
-
-Solve:
-
-\[
-A = -2, \quad B = 4
-\]
-
-Thus:
-
-\[
-\frac{2s}{(s+1)(s+2)} = \frac{-2}{s+1} + \frac{4}{s+2}
-\]
-
-Inverse transforms:
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s-a}\right\} = e^{at}
-\]
-
-\[
-= -2e^{-t} + 4e^{-2t}
-\]
-</div>
-
-<br>
-
-<div class="example">
-<b>Example 3</b><br>
-
-Find
-\[
-\mathcal{L}^{-1}\left\{\frac{6s-2}{s^2-1}\right\}
-\]
-
-<b>Solution:</b>
-
-Factor:
-
-\[
-s^2 - 1 = (s-1)(s+1)
-\]
-
-Partial fractions:
-
-\[
-\frac{6s-2}{(s-1)(s+1)} = \frac{A}{s-1} + \frac{B}{s+1}
-\]
-
-Multiply:
-
-\[
-6s - 2 = A(s+1) + B(s-1)
-\]
-
-Expand:
-
-\[
-6s - 2 = (A+B)s + (A-B)
-\]
-
-Match coefficients:
-
-\[
-A + B = 6, \quad A - B = -2
-\]
-
-Solve:
-
-\[
-A = 2, \quad B = 4
-\]
-
-Thus:
-
-\[
-\frac{6s-2}{s^2-1} = \frac{2}{s-1} + \frac{4}{s+1}
-\]
-
-Inverse transforms:
-
-\[
-= 2e^{t} + 4e^{-t}
-\]
-</div>
-
-<br>
-
-<div class="example">
-<b>Example 4</b><br>
-
-Find
-\[
-\mathcal{L}^{-1}\left\{\frac{s+1}{s^3+25s}\right\}
-\]
-
-<b>Solution:</b>
-
-Factor:
-
-\[
-s^3 + 25s = s(s^2+25)
-\]
-
-Partial fractions:
-
-\[
-\frac{s+1}{s(s^2+25)} = \frac{A}{s} + \frac{Bs + C}{s^2+25}
-\]
-
-Multiply:
-
-\[
-s+1 = A(s^2+25) + (Bs+C)s
-\]
-
-Expand:
-
-\[
-s+1 = (A+B)s^2 + Cs + 25A
-\]
-
-Match coefficients:
-
-\[
-A + B = 0, \quad C = 1, \quad 25A = 1
-\]
-
-Solve:
-
-\[
-A = \frac{1}{25}, \quad B = -\frac{1}{25}, \quad C = 1
-\]
-
-Thus:
-
-\[
-= \frac{1}{25}\frac{1}{s}
--\frac{1}{25}\frac{s}{s^2+25}
-+ \frac{1}{s^2+25}
-\]
-
-Inverse transforms:
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1
-\]
-
-\[
-\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\} = \cos(5t)
-\]
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s^2+25}\right\} = \frac{1}{5}\sin(5t)
-\]
-
-Final answer:
-
-\[
-= \frac{1}{25}
-- \frac{1}{25}\cos(5t)
-+ \frac{1}{5}\sin(5t)
-\]
-</div>
-	
-	
-	
-		<h2 id="lecture18">
-	  Lecture 18: Section 7.2 (cont'd) - Laplace Transforms to Solve IVPs
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-
-<h2>Solving Initial Value Problems using Laplace Transforms</h2>
-
-<p>
-From the last two lectures, we know how to take Laplace transforms and recover functions using inverse transforms. To solve differential equations, we need to understand how Laplace transforms interact with derivatives.
-</p>
-
-<div class="theorem">
-<b>Theorem.</b><br>
-Let \(F(s) = \mathcal{L}\{y(t)\}\). Then
-\[
-\mathcal{L}\{y^{(n)}(t)\}
-= s^nF(s) - s^{n-1}y(0) - \cdots - sy^{(n-2)}(0) - y^{(n-1)}(0).
-\]
-</div>
-
-<p>
-This tells us that solving an IVP using Laplace transforms reduces the problem to algebra, provided we know the initial conditions.
-</p>
-
-<div class="remark">
-<b>Remark.</b><br>
-For first and second derivatives:
-\[
-\mathcal{L}\{y'(t)\} = sF(s) - y(0),
-\]
-\[
-\mathcal{L}\{y''(t)\} = s^2F(s) - sy(0) - y'(0).
-\]
-</div>
-
-<h3>Procedure</h3>
-<ol>
-<li>Take the Laplace transform of both sides.</li>
-<li>Solve algebraically for \(F(s)\).</li>
-<li>Take the inverse Laplace transform to find \(y(t)\).</li>
-</ol>
-
-<br>
-
-<div class="example">
-<b>Example 1</b><br>
-
-Use the Laplace transform to solve
-\[
-y' + 4y = 16e^t, \quad y(0)=1.
-\]
-
-<b>Solution:</b>
-
-Take Laplace transforms:
-\[
-sF(s) - 1 + 4F(s) = \frac{16}{s-1}.
-\]
-
-\[
-(s+4)F(s) = \frac{16}{s-1} + 1.
-\]
-
-Write \(1 = \dfrac{s-1}{s-1}\):
-\[
-(s+4)F(s) = \frac{16 + (s-1)}{s-1} = \frac{s+15}{s-1}.
-\]
-
-\[
-F(s) = \frac{s+15}{(s-1)(s+4)}.
-\]
-
-<b>Partial Fractions:</b>
-\[
-\frac{s+15}{(s-1)(s+4)} = \frac{A}{s-1} + \frac{B}{s+4}.
-\]
-
-\[
-s+15 = A(s+4) + B(s-1).
-\]
-
-Expand:
-\[
-s+15 = (A+B)s + (4A - B).
-\]
-
-Match coefficients:
-\[
-A+B = 1, \quad 4A - B = 15.
-\]
-
-Solve:
-\[
-A = \frac{16}{5}, \quad B = -\frac{11}{5}.
-\]
-
-Thus,
-\[
-F(s) = \frac{16/5}{s-1} - \frac{11/5}{s+4}.
-\]
-
-\[
-y(t) = \frac{16}{5}e^t - \frac{11}{5}e^{-4t}.
-\]
-</div>
-
-<br>
-
-<div class="example">
-<b>Example 2</b><br>
-
-Use the Laplace transform to solve
-\[
-y'' + 5y' + 4y = 0, \quad y(0)=1,\; y'(0)=0.
-\]
-
-<b>Solution:</b>
-
-Take Laplace transforms:
-\[
-(s^2F(s) - s) + 5(sF(s) - 1) + 4F(s) = 0.
-\]
-
-\[
-s^2F(s) - s + 5sF(s) - 5 + 4F(s) = 0.
-\]
-
-\[
-(s^2 + 5s + 4)F(s) = s + 5.
-\]
-
-Factor:
-\[
-s^2 + 5s + 4 = (s+1)(s+4).
-\]
-
-\[
-F(s) = \frac{s+5}{(s+1)(s+4)}.
-\]
-
-<b>Partial Fractions:</b>
-\[
-\frac{s+5}{(s+1)(s+4)} = \frac{A}{s+1} + \frac{B}{s+4}.
-\]
-
-\[
-s+5 = A(s+4) + B(s+1).
-\]
-
-\[
-s+5 = (A+B)s + (4A + B).
-\]
-
-Match:
-\[
-A+B=1, \quad 4A+B=5.
-\]
-
-Solve:
-\[
-A=\frac{4}{3}, \quad B=-\frac{1}{3}.
-\]
-
-Thus,
-\[
-F(s) = \frac{4/3}{s+1} - \frac{1/3}{s+4}.
-\]
-
-\[
-y(t) = \frac{4}{3}e^{-t} - \frac{1}{3}e^{-4t}.
-\]
-</div>
-
-<br>
-
-<div class="example">
-<b>Example 3</b><br>
-
-Use the Laplace transform to solve
-\[
-y'' + 4y = 10\cos(5t), \quad y(0)=0,\; y'(0)=0.
-\]
-
-<b>Solution:</b>
-
-Take Laplace transforms:
-\[
-s^2F(s) + 4F(s) = \frac{10s}{s^2+25}.
-\]
-
-\[
-(s^2+4)F(s) = \frac{10s}{s^2+25}.
-\]
-
-\[
-F(s) = \frac{10s}{(s^2+4)(s^2+25)}.
-\]
-
-<b>Partial Fractions:</b>
-\[
-\frac{10s}{(s^2+4)(s^2+25)} = \frac{As+B}{s^2+4} + \frac{Cs+D}{s^2+25}.
-\]
-
-Multiply:
-\[
-10s = (As+B)(s^2+25) + (Cs+D)(s^2+4).
-\]
-
-Expand:
-\[
-10s = (A+C)s^3 + (B+D)s^2 + (25A+4C)s + (25B+4D).
-\]
-
-Match coefficients:
-\[
-A+C=0, \quad B+D=0,
-\]
-\[
-25A+4C=10, \quad 25B+4D=0.
-\]
-
-Solve:
-\[
-C=-A,\quad D=-B.
-\]
-
-\[
-25A - 4A = 10 \Rightarrow 21A=10 \Rightarrow A=\frac{10}{21},\quad C=-\frac{10}{21}.
-\]
-
-\[
-25B - 4B = 0 \Rightarrow 21B=0 \Rightarrow B=0,\quad D=0.
-\]
-
-Thus,
-\[
-F(s) = \frac{10/21 \, s}{s^2+4} - \frac{10/21 \, s}{s^2+25}.
-\]
-
-Take inverse transforms:
-\[
-\mathcal{L}^{-1}\left\{\frac{s}{s^2+4}\right\} = \cos(2t),
-\quad
-\mathcal{L}^{-1}\left\{\frac{s}{s^2+25}\right\} = \cos(5t).
-\]
-
-\[
-y(t) = \frac{10}{21}\cos(2t) - \frac{10}{21}\cos(5t).
-\]
-</div>
-	
-	
-	
-		<h2 id="lecture19">
-	  Lecture 19: Section 7.3 - Translation Theorems
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-
-<p>
-In this lecture, we derive and study the translation theorems. These theorems allow us to use known Laplace transforms 
-\(\mathcal{L}\{f(t)\}\) to compute transforms of modified functions such as \(e^{at}f(t)\) and shifted functions involving unit step functions.
-</p>
-
-<h2>First Translation Theorem</h2>
-
-<p>
-Suppose \(\mathcal{L}\{f(t)\} = F(s)\). Then
-</p>
-
-\[
-\mathcal{L}\{e^{at}f(t)\}
-= \int_0^\infty e^{-st}e^{at}f(t)\,dt
-= \int_0^\infty e^{-(s-a)t}f(t)\,dt
-= F(s-a).
-\]
-
-<div class="theorem">
-<b>Theorem.</b><br>
-If \(F(s) = \mathcal{L}\{f(t)\}\), then
-\[
-\mathcal{L}\{e^{at}f(t)\} = F(s-a).
-\]
-</div>
-
-<div class="example">
-<b>Example 1</b><br>
-Find
-\[
-\mathcal{L}\{e^{3t}\cos(5t)\}.
-\]
-
-<b>Solution:</b>
-
-We know:
-\[
-\mathcal{L}\{\cos(5t)\} = \frac{s}{s^2+25}.
-\]
-
-Apply the shift \(s \to s-3\):
-\[
-\mathcal{L}\{e^{3t}\cos(5t)\}
-=
-\frac{s-3}{(s-3)^2+25}.
-\]
-</div>
-
-
-<div class="example">
-<b>Example 2</b><br>
-Solve
-\[
-y'' + y = te^t,\quad y(0)=1,\; y'(0)=0.
-\]
-
-<b>Step 1:</b> Take Laplace transforms
-
-\[
-\mathcal{L}\{y''\} = s^2F(s) - sy(0) - y'(0) = s^2F(s)-s.
-\]
-
-
-We setup the equation
-
-\[
-(s^2+1)F(s) - s = \mathcal{L}\{te^t\}
-\]
-
-Using translation:
-\[
-\mathcal{L}\{te^t\} = \frac{1}{(s-1)^2}
-\]
-
-\[
-(s^2+1)F(s) = s + \frac{1}{(s-1)^2}
-\]
-
-We have
-
-\[
-F(s) = \frac{s}{s^2+1} + \frac{1}{(s-1)^2(s^2+1)}
-\]
-
-<b>Step 2:</b> Partial fractions
-
-\[
-\frac{1}{(s-1)^2(s^2+1)}
-=
-\frac{A}{s-1} + \frac{B}{(s-1)^2} + \frac{Cs+D}{s^2+1}
-\]
-
-After solving:
-\[
-A=-\frac{1}{2},\quad B=\frac{1}{2},\quad C=\frac{1}{2},\quad D=0
-\]
-
-\[
-=
--\frac{1}{2}\frac{1}{s-1}
-+
-\frac{1}{2}\frac{1}{(s-1)^2}
-+
-\frac{1}{2}\frac{s}{s^2+1}
-\]
-
-<b>Step 3:</b> Inverse Laplace
-
-\[
-\mathcal{L}^{-1}\left\{\frac{s}{s^2+1}\right\} = \cos t
-\]
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s-1}\right\} = e^t
-\quad
-\mathcal{L}^{-1}\left\{\frac{1}{(s-1)^2}\right\} = te^t
-\]
-
-Thus:
-\[
-y(t)
-=
-\cos t
-+
-\left(-\frac{1}{2}e^t + \frac{1}{2}te^t + \frac{1}{2}\cos t\right)
-\]
-
-<b>Final Answer</b>
-
-\[
-y(t)
-=
-\frac{3}{2}\cos t
-+
-\frac{1}{2}te^t
--
-\frac{1}{2}e^t.
-\]
-</div>
-
-
-<h2>Second Translation Theorem</h2>
-
-<div class="definition">
-<b>Definition.</b><br>
-The unit step function is
-\[
-\mathscr{U}(t-a)=
-\begin{cases}
-0, & 0 \le t < a \\
-1, & t \ge a
-\end{cases}
-\]
-</div>
-
-<div class="theorem">
-<b>Theorem (Second Translation).</b><br>
-If \(F(s)=\mathcal{L}\{f(t)\}\), then
-\[
-\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\} = e^{-as}F(s).
-\]
-</div>
-
-<p><b>Proof:</b></p>
-
-\[
-\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\}
-=
-\int_0^\infty e^{-st} f(t-a)\mathscr{U}(t-a)\,dt
-\]
-
-\[
-= \int_a^\infty e^{-st} f(t-a)\,dt
-\]
-
-Let \(u=t-a\):
-
-\[
-= \int_0^\infty e^{-s(u+a)} f(u)\,du
-= e^{-as} \int_0^\infty e^{-su} f(u)\,du
-= e^{-as}F(s)
-\]
-
-
-<div class="remark">
-<b>Remark.</b><br>
-Expressions must be written in the form \(f(t-a)\mathscr{U}(t-a)\).
-</div>
-
-
-<div class="example">
-<b>Example 3</b><br>
-Write \(f(t)\) in terms of unit step functions, where
-\[
-f(t)=
-\begin{cases}
-1, & 0 \le t \le 3 \\
-t^2, & t>3
-\end{cases}
-\]
-
-<b>Solution:</b>
-
-\[
-f(t) = 1 + (t^2-1)\mathscr{U}(t-3)
-\]
-
-Rewrite:
-\[
-t^2 = (t-3)^2 + 6(t-3) + 9
-\]
-
-\[
-t^2 - 1 = (t-3)^2 + 6(t-3) + 8
-\]
-
-\[
-f(t)
-=
-1 + [(t-3)^2 + 6(t-3) + 8]\mathscr{U}(t-3)
-\]
-</div>
-
-
-<div class="example">
-<b>Example 4</b><br>
-Find \(\mathcal{L}\{f(t)\}\) where
-\[
-f(t)=
-\begin{cases}
-1, & 0 \le t \le 2 \\
-t+3, & t>2
-\end{cases}
-\]
-
-<b>Solution:</b>
-
-\[
-f(t)=1+(t+2)\mathscr{U}(t-2)
-\]
-
-Rewrite:
-\[
-t+2=(t-2)+4
-\]
-
-\[
-f(t)=1+[(t-2)+4]\mathscr{U}(t-2)
-\]
-
-Take transforms:
-\[
-\mathcal{L}\{f(t)\}
-=
-\frac{1}{s}
-+
-e^{-2s}\left(\frac{1}{s^2}+\frac{4}{s}\right)
-\]
-</div>
-
-
-<div class="example">
-<b>Example 5</b><br>
-Find
-\[
-\mathcal{L}\{\sin(t)\mathscr{U}(t-2\pi)\}
-\]
-
-<b>Solution:</b>
-
-\[
-\sin(t)=\sin(t-2\pi)
-\]
-
-\[
-\mathcal{L}\{\sin(t)\mathscr{U}(t-2\pi)\}
-=
-e^{-2\pi s}\mathcal{L}\{\sin t\}
-=
-\frac{e^{-2\pi s}}{s^2+1}
-\]
-</div>
-
-
-<div class="example">
-<b>Example 6</b><br>
-Solve
-\[
-y'' + 4y = f(t),\quad y(0)=0,\; y'(0)=0
-\]
-
-\[
-f(t)=
-\begin{cases}
-t+1, & 0 \le t \le 1 \\
-t-1, & t>1
-\end{cases}
-\]
-
-<b>Step 1:</b> Rewrite forcing function using unit step
-
-Start with the first expression:
-\[
-f(t) = t+1
-\]
-
-At \(t=1\), the function changes from \(t+1\) to \(t-1\).  
-So we correct it using a step function:
-
-\[
-f(t) = (t+1) + [(t-1) - (t+1)]\mathscr{U}(t-1)
-\]
-
-Simplify:
-\[
-(t-1) - (t+1) = -2
-\]
-
-Thus:
-\[
-f(t) = (t+1) - 2\mathscr{U}(t-1)
-\]
-
-
-
-<b>Step 2:</b> Take Laplace transforms
-
-Let \(F(s)=\mathcal{L}\{y(t)\}\)
-
-\[
-\mathcal{L}\{y''\} = s^2F(s) - sy(0) - y'(0)
-\]
-
-Since \(y(0)=0,\; y'(0)=0\):
-
-\[
-\mathcal{L}\{y''\} = s^2F(s)
-\]
-
-So the equation becomes:
-
-\[
-(s^2+4)F(s) = \mathcal{L}\{t+1\} - 2\mathcal{L}\{\mathscr{U}(t-1)\}
-\]
-
-
-
-<b>Step 3:</b> Compute each Laplace transform
-
-\[
-\mathcal{L}\{t\} = \frac{1}{s^2}, \quad \mathcal{L}\{1\} = \frac{1}{s}
-\]
-
-So:
-\[
-\mathcal{L}\{t+1\} = \frac{1}{s^2} + \frac{1}{s}
-\]
-
-For the step function:
-\[
-\mathcal{L}\{\mathscr{U}(t-1)\} = \frac{e^{-s}}{s}
-\]
-
-Thus:
-
-\[
-(s^2+4)F(s)
-=
-\frac{1}{s^2} + \frac{1}{s} - \frac{2e^{-s}}{s}
-\]
-
-
-
-<b>Step 4:</b> Solve for \(F(s)\)
-
-\[
-F(s)
-=
-\frac{1}{s^2(s^2+4)}
-+
-\frac{1}{s(s^2+4)}
--
-\frac{2e^{-s}}{s(s^2+4)}
-\]
-
-
-
-
-<b>Step 5:</b> Inverse Laplace (non-shifted terms)
-
-First term:
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s^2(s^2+4)}\right\}
-=
-\frac{t}{4} - \frac{1}{8}\sin(2t)
-\]
-
-Second term:
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}
-=
-\frac{1}{4}(1 - \cos(2t))
-\]
-
-
-
-<b>Step 6:</b> Handle the shifted term
-
-We use the Second Translation Theorem:
-
-\[
-\mathcal{L}^{-1}\left\{\frac{e^{-s}}{s(s^2+4)}\right\}
-=
-\left[\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}\right]_{t \to (t-1)} \mathscr{U}(t-1)
-\]
-
-We already know:
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s(s^2+4)}\right\}
-=
-\frac{1}{4}(1 - \cos(2t))
-\]
-
-So replace \(t\) with \(t-1\):
-
-\[
-=
-\frac{1}{4}\big(1 - \cos(2(t-1))\big)\mathscr{U}(t-1)
-\]
-
-Now multiply by \(-2\):
-
-\[
-=
--\frac{1}{2}\big(1 - \cos(2(t-1))\big)\mathscr{U}(t-1)
-\]
-
-
-
-<b>Step 7:</b> Final solution
-
-Combine all pieces:
-
-\[
-y(t)
-=
-\left(\frac{t}{4} - \frac{1}{8}\sin(2t)\right)
-+
-\frac{1}{4}(1 - \cos(2t))
--
-\frac{1}{2}(1 - \cos(2(t-1)))\mathscr{U}(t-1)
-\]
-
-</div>
-   
-   
-
-   
-   
-<h2 id="lecture20">
-  Lecture 20: Section 7.4 - Derivatives of Transforms and Convolutions
-  <span style="font-size: 0.7em; margin-left: 10px;">
-    <a href="#top">↑ Back to top</a>
-  </span>
-</h2>
-<p>
-In this lecture, we derive and study the relationship between the Laplace transform and other transforms such as the derivative and integral.
-</p>
-
-<div class="section">
-<h3>Derivative of Transform</h3>
-
-<p>
-Let \( F(s) = \mathcal{L}\{f(t)\} = \int_0^\infty e^{-st} f(t)\,dt \). We want to differentiate \(F(s)\) with respect to \(s\):
-</p>
-
-\[
-F'(s) = \frac{d}{ds} \int_0^\infty e^{-st} f(t)\,dt
-\]
-
-<p>
-We interchange the derivative and integral. That is,
-</p>
-
-\[
-F'(s) = \int_0^\infty \frac{\partial}{\partial s}(e^{-st}) f(t)\,dt
-= \int_0^\infty (-t e^{-st}) f(t)\,dt
-\]
-
-<p>
-Thus,
-</p>
-
-\[
-F'(s) = - \int_0^\infty t f(t) e^{-st}\,dt = -\mathcal{L}\{t f(t)\}.
-\]
-
-<p>
-It appears that taking the transform \( \mathcal{L}\{t^nf(t)\} \) would be related (up to some sort of potential scaling) to the \(n\)th derivative of \(F(s).\) To get a clean formula, we take the second derivative to get
-</p>
-
-\[
-F''(s) = -\frac{d}{ds} \mathcal{L}\{t f(t)\}
-= -\left(-\mathcal{L}\{t^2 f(t)\}\right).
-\]
-
-<p>
-We can see that there is also some alternating component, which leads us to the following theorem:
-</p>
-
-<div class="theorem">
-<div class="env-title">Theorem</div>
-If \( \mathcal{L}\{f(t)\} = F(s) \), then
-\[
-\mathcal{L}\{t^n f(t)\} = (-1)^n \frac{d^n}{ds^n} F(s)
-\]
-</div>
-
-<div class="example">
-<b>Example.</b> Find \( \mathcal{L}\{t \sin(4t)\} \).
-
-<p><b>Solution:</b></p>
-
-<p>
-We begin by recalling the Laplace transform:
-</p>
-
-\[
-\mathcal{L}\{\sin(4t)\} = \frac{4}{s^2 + 16}.
-\]
-
-<p>
-Let \(F(s) = \frac{4}{s^2 + 16}\).
-</p>
-
-<p>
-Using the differentiation property of Laplace transforms,
-</p>
-
-\[
-\mathcal{L}\{t f(t)\} = -\frac{d}{ds}F(s),
-\]
-
-<p>
-we compute the derivative of \(F(s)\).
-</p>
-
-\[
-F'(s) = \frac{d}{ds}\left(\frac{4}{s^2 + 16}\right)
-= 4 \cdot \frac{d}{ds}(s^2 + 16)^{-1}.
-\]
-
-<p>Applying the chain rule,</p>
-
-\[
-F'(s) = 4(-1)(s^2 + 16)^{-2}(2s)
-= -\frac{8s}{(s^2 + 16)^2}.
-\]
-
-<p>Therefore,</p>
-
-\[
-\mathcal{L}\{t \sin(4t)\} = -F'(s) 
-= \frac{8s}{(s^2 + 16)^2}.
-\]
-</div>
-
-<div class="example">
-<b>Example.</b> Find \( \mathcal{L}\{e^{2t} t^2 \cos(t)\} \).
-
-<p><b>Solution:</b></p>
-
-<p>
-We begin by recalling the Laplace transform of \(\cos(t)\):
-</p>
-
-\[
-\mathcal{L}\{\cos(t)\} = \frac{s}{s^2 + 1}.
-\]
-
-<p>
-Using the first translation theorem,
-</p>
-
-\[
-\mathcal{L}\{e^{at} f(t)\} = F(s-a),
-\]
-
-<p>
-we replace \(s\) with \(s-2\). Thus,
-</p>
-
-\[
-\mathcal{L}\{e^{2t} \cos(t)\} = \frac{s-2}{(s-2)^2 + 1}.
-\]
-
-<p>Let</p>
-
-\[
-F(s) = \frac{s-2}{(s-2)^2 + 1}.
-\]
-
-<p><b>Step 1: First derivative</b></p>
-
-<p>Let \(u = s-2\) for simplicity. Then</p>
-
-\[
-F(s) = \frac{u}{u^2 + 1}.
-\]
-
-<p>Using the quotient rule,</p>
-
-\[
-F'(s) = \frac{(u^2+1)(1) - u(2u)}{(u^2+1)^2}
-= \frac{u^2 + 1 - 2u^2}{(u^2+1)^2}
-= \frac{1 - u^2}{(u^2+1)^2}.
-\]
-
-<p><b>Step 2: Second derivative</b></p>
-
-\[
-F''(s) = \frac{d}{ds}\left(\frac{1 - u^2}{(u^2+1)^2}\right).
-\]
-
-\[
-F''(s) = \frac{(-2u)(u^2+1)^2 - (1-u^2)\cdot 2(u^2+1)(2u)}{(u^2+1)^4}.
-\]
-
-\[
-F''(s) = \frac{-2u(u^2+1)\left[(u^2+1) + 2(1-u^2)\right]}{(u^2+1)^4}.
-\]
-
-\[
-(u^2+1) + 2(1-u^2) = 3 - u^2.
-\]
-
-\[
-F''(s) = \frac{-2u(3-u^2)}{(u^2+1)^3}.
-\]
-
-<p>Substitute back \(u = s-2\):</p>
-
-\[
-\mathcal{L}\{e^{2t} t^2 \cos(t)\} = F''(s)
-= \frac{-2(s-2)(3-(s-2)^2)}{\big((s-2)^2+1\big)^3}.
-\]
-</div>
-
-<style>
-.definition, .theorem, .example, .remark {
-    background-color: #f5f5f5;
-    border-left: 5px solid #888;
-    padding: 12px 16px;
-    margin: 20px 0;
-}
-.env-title {
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-</style>
-
-<div class="section">
-<h3>Convolutions</h3>
-
-<div class="definition">
-<div class="env-title">Definition</div>
-Let \(f\) and \(g\) be piecewise continuous functions defined on the interval \([0,\infty)\). Then we defined the convolution of \(f\) and \(g\) as
-\[
-(f * g)(t) = \int_0^t f(\tau)\, g(t-\tau)\, d\tau
-\]
-</div>
-
-<div class="theorem">
-<div class="env-title">Theorem (Convolution Theorem)</div>
-<p>
-If \( \mathcal{L}\{f(t)\} = F(s) \) and \( \mathcal{L}\{g(t)\} = G(s) \), then
-</p>
-\[
-\mathcal{L}\{(f * g)(t)\} = F(s)G(s)
-\]
-</div>
-
-<div class="remark">
-<div class="env-title">Remark</div>
-<p>
-This theorem is especially useful for computing inverse Laplace transforms of products. If we encounter a product \(F(s)G(s)\) that is difficult to invert directly, we can instead write:
-</p>
-\[
-\mathcal{L}^{-1}\{F(s)G(s)\} = (f * g)(t)
-\]
-</div>
-
-<div class="example">
-<div class="env-title">Example</div>
-<p>
-Find \( \mathcal{L}^{-1}\left\{\frac{1}{s(s-1)}\right\} \) using convolution.
-</p>
-
-<p><b>Solution:</b></p>
-
-<p>
-We begin by expressing the function as a product:
-</p>
-
-\[
-\frac{1}{s(s-1)} = \frac{1}{s} \cdot \frac{1}{s-1}.
-\]
-
-<p>
-Recall the inverse Laplace transforms:
-</p>
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1, \quad
-\mathcal{L}^{-1}\left\{\frac{1}{s-1}\right\} = e^{t}.
-\]
-
-<p>
-By the convolution theorem,
-</p>
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s(s-1)}\right\}
-= (1 * e^t)(t)
-= \int_0^t 1 \cdot e^{t-\tau}\, d\tau.
-\]
-
-<p>
-We now compute the integral:
-</p>
-
-\[
-= \int_0^t e^{t-\tau} d\tau
-= e^t \int_0^t e^{-\tau} d\tau.
-\]
-
-\[
-= e^t \left[ -e^{-\tau} \right]_0^t
-= e^t (1 - e^{-t})
-= e^t - 1.
-\]
-</div>
-
-<div class="example">
-<div class="env-title">Example</div>
-<p>
-Find \( \mathcal{L}^{-1}\left\{\frac{1}{(s+2)(s+3)}\right\} \) using convolution.
-</p>
-
-<p><b>Solution:</b></p>
-
-<p>
-We rewrite the expression as a product:
-</p>
-
-\[
-\frac{1}{(s+2)(s+3)} = \frac{1}{s+2} \cdot \frac{1}{s+3}.
-\]
-
-<p>
-Recall:
-</p>
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s+2}\right\} = e^{-2t}, \quad
-\mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} = e^{-3t}.
-\]
-
-<p>
-Using convolution,
-</p>
-
-\[
-(f * g)(t) = \int_0^t e^{-2\tau} e^{-3(t-\tau)}\, d\tau.
-\]
-
-<p>
-Simplify the integrand:
-</p>
-
-\[
-= \int_0^t e^{-2\tau} e^{-3t + 3\tau} d\tau
-= e^{-3t} \int_0^t e^{\tau} d\tau.
-\]
-
-\[
-= e^{-3t} \left[ e^{\tau} \right]_0^t
-= e^{-3t}(e^t - 1).
-\]
-
-\[
-= e^{-2t} - e^{-3t}.
-\]
-</div>
-
-<div class="example">
-<div class="env-title">Example</div>
-<p>
-Find \( \mathcal{L}^{-1}\left\{\frac{2}{s(s^2+4)}\right\} \) using convolution.
-</p>
-
-<p><b>Solution:</b></p>
-
-<p>
-We first write the expression as a product:
-</p>
-
-\[
-\frac{2}{s(s^2+4)} = \frac{1}{s} \cdot \frac{2}{s^2+4}.
-\]
-
-<p>
-Recall:
-</p>
-
-\[
-\mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1, \quad
-\mathcal{L}^{-1}\left\{\frac{2}{s^2+4}\right\} = \sin(2t).
-\]
-
-<p>
-Thus, using convolution,
-</p>
-
-\[
-\mathcal{L}^{-1}\left\{\frac{2}{s(s^2+4)}\right\}
-= (1 * \sin(2t))(t)
-= \int_0^t \sin(2(t-\tau))\, d\tau.
-\]
-
-<p>
-Let \(u = t - \tau\). Then as \(\tau\) goes from \(0\) to \(t\), \(u\) goes from \(t\) to \(0\). Reversing limits,
-</p>
-
-\[
-= \int_0^t \sin(2u)\, du.
-\]
-
-<p>
-Now compute the integral:
-</p>
-
-\[
-= \left[-\frac{1}{2}\cos(2u)\right]_0^t
-= -\frac{1}{2}\cos(2t) + \frac{1}{2}.
-\]
-
-\[
-= \frac{1 - \cos(2t)}{2}.
-\]
-</div>
-
-</div>
-
-</div>
-
-   
   </main>
 </body>
 </html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Unit 1 Practice / Review Problems — MATH 2410</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax for LaTeX -->
   <script>
@@ -35,7 +36,7 @@
 
   <!-- Top Navigation -->
   <div class="topnav">
-    <a href="index.html">Home</a>	
+    <a href="index.html">Home</a>
     <a href="notes.html">Notes</a>
     <div class="dropdown">
       <button class="dropbtn">Teaching</button>
@@ -53,6 +54,15 @@
     <p>← <a href="courseresources.html">Back to Course Resources</a></p>
 
     <h1>Practice / Review Problems — MATH 2410</h1>
+    <p class="subtitle">Each problem is tagged by difficulty —
+      <span class="diff-tag diff-easy">Easy</span>
+      <span class="diff-tag diff-medium">Medium</span>
+      <span class="diff-tag diff-hard">Hard</span>
+      <span class="diff-tag diff-conceptual">Conceptual</span>
+      — and within each section the problems are ordered from easiest to hardest, ending with a
+      conceptual question, so you can warm up, push yourself, and then test your understanding of
+      the ideas rather than just the mechanics.
+    </p>
     <hr>
 
     <!-- Table of Contents by Section -->
@@ -60,1141 +70,1788 @@
       <strong>Jump to Section:</strong>
       <a href="#sec1.1">Section 1.1</a> |
       <a href="#sec1.2">Section 1.2</a> |
-	  <a href="#sec1.3">Section 1.3</a> |
-	  <a href="#sec2.1">Section 2.1</a> |
-	  <a href="#sec2.2">Section 2.2</a> |
-	  <a href="#sec2.3">Section 2.3</a> |
-	  <a href="#sec2.4">Section 2.4</a> |
+      <a href="#sec1.3">Section 1.3</a> |
+      <a href="#sec2.1">Section 2.1</a> |
+      <a href="#sec2.2">Section 2.2</a> |
+      <a href="#sec2.3">Section 2.3</a> |
+      <a href="#sec2.4">Section 2.4</a> |
+      <a href="#sec2.5">Section 2.5</a>
     </nav>
     <hr>
 
     <!-- Section 1.1 -->
-    <h2 id="sec1.1">Section 1.1
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-    <!-- Problem 1 -->
+    <h2 id="sec1.1" class="tex-section">Section 1.1
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 1 (was 1) -->
     <div class="problem">
-      <h3 id="prob1">Problem 1</h3>
-      <p>Verify that 
+      <h3 id="prob1">Problem 1 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>Verify that
       \[
       y = e^{-x/2}
-      \] 
-      is a solution to 
+      \]
+      is a solution to
       \[
       2y' + y = 0
-      \] 
+      \]
       on \((-\infty, \infty)\).</p>
       <button onclick="toggleSolution('sol1', this)">Show Solution</button>
       <div id="sol1" class="solution" style="display:none;">
         <p><strong>Solution:</strong></p>
-        Compute \(y'\):
+        <p>To verify a proposed solution, we substitute it into the differential equation and check that the equation becomes an identity. First compute \(y'\):</p>
         \[
-        y' = \frac{d}{dx} e^{-x/2} = -\frac{1}{2} e^{-x/2}
+        y' = \frac{d}{dx} e^{-x/2} = -\frac{1}{2} e^{-x/2}.
         \]
-        Substitute into the DE:
+        <p>Now substitute both \(y\) and \(y'\) into the left-hand side of the differential equation:</p>
         \[
-        2y' + y = 2\left(-\frac{1}{2} e^{-x/2}\right) + e^{-x/2} = 0
+        2y' + y = 2\left(-\frac{1}{2} e^{-x/2}\right) + e^{-x/2} = -e^{-x/2}+e^{-x/2} = 0.
         \]
-        So \(y = e^{-x/2}\) is a solution on \((-\infty, \infty)\).
+        <p>Since this matches the right-hand side of the equation for every \(x\), and \(y=e^{-x/2}\) is continuous and differentiable on all of \((-\infty,\infty)\), we conclude that \(y = e^{-x/2}\) is indeed a solution on \((-\infty, \infty)\).</p>
       </div>
     </div>
 
-    <!-- Problem 2 -->
+    <!-- Problem 2 (was 5) -->
     <div class="problem">
-      <h3 id="prob2">Problem 2</h3>
-      <p>Verify that the one-parameter family of functions 
+      <h3 id="prob2">Problem 2 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>Classify the following differential equation by <strong>type</strong>,
+      <strong>order</strong>, and <strong>linearity</strong>:
       \[
-      x^2 + y^2 = c, \quad c > 0
-      \]
-      is a solution to 
-      \[
-      y' = -\frac{x}{y}.
+      y'' + 5\tan(x)y' - 2y = e^x.
       \]</p>
       <button onclick="toggleSolution('sol2', this)">Show Solution</button>
       <div id="sol2" class="solution" style="display:none;">
         <p><strong>Solution:</strong></p>
-        Differentiate implicitly:
-        \[
-        \frac{d}{dx}(x^2 + y^2) = 0 \implies 2x + 2y \frac{dy}{dx} = 0
-        \]
-        Solve for \(y'\):
-        \[
-        \frac{dy}{dx} = -\frac{x}{y}
-        \]
-        So the family satisfies the DE. The interval excludes points where \(y=0\).
+        <ul>
+          <li><strong>Type:</strong> Ordinary differential equation, since only ordinary derivatives of \(y\) (with respect to the single variable \(x\)) appear.</li>
+          <li><strong>Order:</strong> Second order, because the highest derivative present is \(y''\).</li>
+          <li><strong>Linearity:</strong> Linear. Even though the coefficient \(5\tan(x)\) in front of \(y'\) is a complicated function of \(x\), what matters for linearity is how \(y\) and its derivatives appear — here \(y\), \(y'\), and \(y''\) each appear only to the first power, are not multiplied by each other, and are not plugged into any other function (like \(\sin(y)\) or \(y^2\)).</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Problem 3 -->
+    <!-- Problem 3 (was 6) -->
     <div class="problem">
-      <h3 id="prob3">Problem 3</h3>
-      <p>Verify that 
+      <h3 id="prob3">Problem 3 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>Classify the following differential equation by <strong>type</strong>,
+      <strong>order</strong>, and <strong>linearity</strong>:
       \[
-      y = \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt
-      \]
-      is a solution to 
-      \[
-      2xy' - y = 2x \cos(x)
-      \].</p>
+      y' + y^2 = \sin(x).
+      \]</p>
       <button onclick="toggleSolution('sol3', this)">Show Solution</button>
       <div id="sol3" class="solution" style="display:none;">
         <p><strong>Solution:</strong></p>
-        Compute \(y'\):
+        <ul>
+          <li><strong>Type:</strong> Ordinary differential equation.</li>
+          <li><strong>Order:</strong> First order, since the highest derivative is \(y'\).</li>
+          <li><strong>Linearity:</strong> Nonlinear, because the term \(y^2\) involves the unknown function raised to a power greater than one. A single such term is enough to make the whole equation nonlinear, regardless of how simple the rest of the equation is.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Problem 4 (was 7) -->
+    <div class="problem">
+      <h3 id="prob4">Problem 4 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>Classify the following differential equation by <strong>type</strong>,
+      <strong>order</strong>, and <strong>linearity</strong>:
+      \[
+      \frac{\partial^2 u}{\partial x^2} + \frac{\partial u}{\partial t} = x.
+      \]</p>
+      <button onclick="toggleSolution('sol4', this)">Show Solution</button>
+      <div id="sol4" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <ul>
+          <li><strong>Type:</strong> Partial differential equation, since \(u\) depends on two variables (\(x\) and \(t\)) and partial derivatives with respect to both appear.</li>
+          <li><strong>Order:</strong> Second order, because the highest derivative is \(\frac{\partial^2 u}{\partial x^2}\).</li>
+          <li><strong>Linearity:</strong> Linear, since \(u\) and its partial derivatives appear only to the first power and are not multiplied together.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Problem 5 (was 2) -->
+    <div class="problem">
+      <h3 id="prob5">Problem 5 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>Verify that the one-parameter family of functions
+      \[
+      x^2 + y^2 = c, \quad c > 0
+      \]
+      is a solution to
+      \[
+      y' = -\frac{x}{y}.
+      \]</p>
+      <button onclick="toggleSolution('sol5', this)">Show Solution</button>
+      <div id="sol5" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This family is given <em>implicitly</em> — \(y\) is not solved for in terms of \(x\) — so we differentiate both sides of the equation with respect to \(x\), treating \(y\) as a function of \(x\) and using the chain rule on the \(y^2\) term:</p>
         \[
-        y' = \frac{1}{2\sqrt{x}} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt + \cos(x)
+        \frac{d}{dx}(x^2 + y^2) = \frac{d}{dx}(c) \quad\Longrightarrow\quad 2x + 2y \frac{dy}{dx} = 0.
         \]
-        Multiply by \(2x\):
+        <p>Solving this for \(y'\):</p>
         \[
-        2x y' = 2x \cos(x) + \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}} dt = 2x \cos(x) + y
+        2y\frac{dy}{dx} = -2x \quad\Longrightarrow\quad \frac{dy}{dx} = -\frac{x}{y}.
         \]
-        Hence,
+        <p>This is exactly the given differential equation, so the family satisfies it. Note the family only defines \(y\) implicitly, and the derivative \(y'=-x/y\) is undefined when \(y=0\); the solution circles \(x^2+y^2=c\) must therefore be split into upper and lower semicircular arcs (where \(y\neq 0\)) to be viewed as genuine functions \(y(x)\).</p>
+      </div>
+    </div>
+
+    <!-- Problem 6 (was 4) -->
+    <div class="problem">
+      <h3 id="prob6">Problem 6 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>Verify that the one-parameter family
+      \[
+      y = ce^{x} - x - 1
+      \]
+      is a solution of
+      \[
+      y' - y = x
+      \]
+      for every value of the constant \(c\).</p>
+      <button onclick="toggleSolution('sol6', this)">Show Solution</button>
+      <div id="sol6" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Differentiate \(y\) with respect to \(x\):</p>
         \[
-        2xy' - y = 2x \cos(x)
+        y' = ce^{x} - 1.
+        \]
+        <p>Substitute \(y\) and \(y'\) into the left-hand side of the differential equation:</p>
+        \[
+        y' - y = (ce^x - 1) - (ce^x - x - 1) = ce^x - 1 - ce^x + x + 1 = x.
+        \]
+        <p>The \(ce^x\) terms cancel completely, regardless of the value of \(c\) — this is exactly what it means for \(y=ce^x-x-1\) to be a whole <em>family</em> of solutions rather than a single one: every choice of \(c\) produces a different curve, but all of them satisfy \(y'-y=x\).</p>
+      </div>
+    </div>
+
+    <!-- Problem 7 (was 3) -->
+    <div class="problem">
+      <h3 id="prob7">Problem 7 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>Verify that
+      \[
+      y = \sqrt{x} \int_4^x \frac{\cos(t)}{\sqrt{t}}\, dt
+      \]
+      is a solution to
+      \[
+      2xy' - y = 2x \cos(x).
+      \]</p>
+      <button onclick="toggleSolution('sol7', this)">Show Solution</button>
+      <div id="sol7" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This example is harder because \(y\) is written as a product of \(\sqrt{x}\) with an integral whose upper limit is the variable \(x\). To differentiate it we need both the product rule and the Fundamental Theorem of Calculus (which tells us \(\frac{d}{dx}\int_4^x g(t)\,dt = g(x)\)). Applying the product rule,</p>
+        \[
+        y' = \frac{d}{dx}\left(\sqrt{x}\right) \int_4^x \frac{\cos(t)}{\sqrt{t}}\,dt \;+\; \sqrt{x}\cdot \frac{d}{dx}\int_4^x \frac{\cos(t)}{\sqrt{t}}\,dt.
+        \]
+        <p>The first factor's derivative is \(\frac{1}{2\sqrt{x}}\), and by the Fundamental Theorem of Calculus the second derivative is just the integrand evaluated at \(t=x\), namely \(\frac{\cos(x)}{\sqrt{x}}\). So</p>
+        \[
+        y' = \frac{1}{2\sqrt{x}} \int_4^x \frac{\cos(t)}{\sqrt{t}}\, dt + \sqrt{x}\cdot\frac{\cos(x)}{\sqrt{x}}
+           = \frac{1}{2\sqrt{x}} \int_4^x \frac{\cos(t)}{\sqrt{t}}\, dt + \cos(x).
+        \]
+        <p>Now multiply both sides by \(2x\), which is the coefficient of \(y'\) in the differential equation:</p>
+        \[
+        2xy' = 2x\cos(x) + \sqrt{x}\int_4^x \frac{\cos(t)}{\sqrt{t}}\, dt = 2x\cos(x) + y,
+        \]
+        <p>where in the last step we recognized \(\sqrt{x}\int_4^x \frac{\cos(t)}{\sqrt{t}}\,dt\) as exactly \(y\) itself. Rearranging,</p>
+        \[
+        2xy' - y = 2x\cos(x),
+        \]
+        <p>which is the original differential equation, so \(y\) is indeed a solution.</p>
+      </div>
+    </div>
+
+    <!-- Problem 8 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob8">Problem 8 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Explain why a differential equation cannot be classified as "nonlinear" just because it
+      <em>looks</em> complicated. As an example, is
+      \[
+      x^2 y' + \cos(x)\, y = e^x
+      \]
+      linear or nonlinear? Justify your answer.
+      </p>
+      <button onclick="toggleSolution('sol8', this)">Show Solution</button>
+      <div id="sol8" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Linearity is a statement about how the <em>unknown function</em> \(y\) and its derivatives
+        appear in the equation — not about how complicated the coefficients in front of them are.
+        A differential equation is linear as long as it can be written in the form
+        \[
+        a_n(x) y^{(n)} + \cdots + a_1(x) y' + a_0(x) y = g(x),
+        \]
+        where the coefficients \(a_i(x)\) are allowed to be <em>any</em> functions of \(x\) alone —
+        they can be as complicated as we like (polynomials, trig functions, exponentials, etc.),
+        as long as they never multiply \(y\) by \(y'\), never raise \(y\) or its derivatives to a
+        power other than one, and never plug \(y\) into another function like \(\sin(y)\) or \(e^y\).
+        </p>
+        <p>
+        In \(x^2y' + \cos(x)y = e^x\), the coefficients \(a_1(x)=x^2\) and \(a_0(x)=\cos(x)\) are
+        both functions of \(x\) only. The unknown function \(y\) and its derivative \(y'\) each
+        appear to the first power, with no products of \(y\) and \(y'\) and no \(y\) inside another
+        function. So despite looking intimidating, this equation is <strong>linear</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 1.2 -->
+    <h2 id="sec1.2" class="tex-section">Section 1.2
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 9 (was 11) -->
+    <div class="problem">
+      <h3 id="prob9">Problem 9 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Verify that \(y = ce^{-2x}\) is a solution of \(y' + 2y = 0\), and find the particular
+      solution satisfying \(y(0) = 5\).
+      </p>
+      <button onclick="toggleSolution('sol9', this)">Show Solution</button>
+      <div id="sol9" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Differentiate:</p>
+        \[
+        y' = -2ce^{-2x}.
+        \]
+        <p>Substitute into the differential equation:</p>
+        \[
+        y' + 2y = -2ce^{-2x} + 2ce^{-2x} = 0,
+        \]
+        <p>so \(y=ce^{-2x}\) is a solution for every \(c\). Applying the initial condition \(y(0)=5\):</p>
+        \[
+        y(0) = ce^{0} = c = 5,
+        \]
+        <p>so the particular solution is</p>
+        \[
+        \boxed{y = 5e^{-2x}.}
         \]
       </div>
     </div>
-		<!-- Problem 4 -->
-	<div class="problem">
-	  <h3 id="prob4">Problem 4</h3>
-	  <p>Classify the following differential equation by <strong>type</strong>,
-	  <strong>order</strong>, and <strong>linearity</strong>:
-	  \[
-	  y'' + 5\tan(x)y' - 2y = e^x.
-	  \]</p>
-	  <button onclick="toggleSolution('sol4', this)">Show Solution</button>
-	  <div id="sol4" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-		<ul>
-		  <li><strong>Type:</strong> Ordinary differential equation, since only ordinary derivatives of \(y\) appear.</li>
-		  <li><strong>Order:</strong> Second order, because the highest derivative is \(y''\).</li>
-		  <li><strong>Linearity:</strong> Linear, since \(y\) and its derivatives appear only to the first power and are not multiplied together.</li>
-		</ul>
-	  </div>
-	</div>
-
-	<!-- Problem 5 -->
-	<div class="problem">
-	  <h3 id="prob5">Problem 5</h3>
-	  <p>Classify the following differential equation by <strong>type</strong>,
-	  <strong>order</strong>, and <strong>linearity</strong>:
-	  \[
-	  y' + y^2 = \sin(x).
-	  \]</p>
-	  <button onclick="toggleSolution('sol5', this)">Show Solution</button>
-	  <div id="sol5" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-		<ul>
-		  <li><strong>Type:</strong> Ordinary differential equation.</li>
-		  <li><strong>Order:</strong> First order, since the highest derivative is \(y'\).</li>
-		  <li><strong>Linearity:</strong> Nonlinear, because the term \(y^2\) involves the unknown function raised to a power greater than one.</li>
-		</ul>
-	  </div>
-	</div>
-
-	<!-- Problem 6 -->
-	<div class="problem">
-	  <h3 id="prob6">Problem 6</h3>
-	  <p>Classify the following differential equation by <strong>type</strong>,
-	  <strong>order</strong>, and <strong>linearity</strong>:
-	  \[
-	  \frac{\partial^2 u}{\partial x^2} + \frac{\partial u}{\partial t} = x.
-	  \]</p>
-	  <button onclick="toggleSolution('sol6', this)">Show Solution</button>
-	  <div id="sol6" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-		<ul>
-		  <li><strong>Type:</strong> Partial differential equation, since partial derivatives with respect to multiple variables appear.</li>
-		  <li><strong>Order:</strong> Second order, because the highest derivative is \(\frac{\partial^2 u}{\partial x^2}\).</li>
-		  <li><strong>Linearity:</strong> Linear, since \(u\) and its derivatives appear only to the first power and are not multiplied together.</li>
-		</ul>
-	  </div>
-	</div>
-
-
-
-    <!-- Section 1.2 -->
-    <h2 id="sec1.2">Section 1.2
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	 </span>
-	</h2>
-	
-	
-	<div class="problem">
-	  <h3 id="prob7">Problem 7</h3>
-	  <p>
-	  Verify that
-	  \[
-	  y = \frac{1}{x^2 + c}
-	  \]
-	  is a solution to the differential equation
-	  \[
-	  y' + 2xy^2 = 0,
-	  \]
-	  and find the particular solution such that
-	  \[
-	  y(2) = \frac{1}{3}.
-	  \]
-	  Give the largest interval \(I\) over which the solution is defined.
-	  </p>
-
-	  <button onclick="toggleSolution('sol7', this)">Show Solution</button>
-
-	  <div id="sol7" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		We begin by computing the derivative of
-		\[
-		y = \frac{1}{x^2 + c} = (x^2 + c)^{-1}.
-		\]
-		</p>
-
-		<p>
-		Using the chain rule,
-		\[
-		y' = -1(x^2 + c)^{-2}(2x) = -\frac{2x}{(x^2 + c)^2}.
-		\]
-		</p>
-
-		<p>
-		Next, compute the term \(2xy^2\):
-		\[
-		y^2 = \left(\frac{1}{x^2 + c}\right)^2 = \frac{1}{(x^2 + c)^2},
-		\]
-		so
-		\[
-		2xy^2 = \frac{2x}{(x^2 + c)^2}.
-		\]
-		</p>
-
-		<p>
-		Substitute into the differential equation:
-		\[
-		y' + 2xy^2
-		= -\frac{2x}{(x^2 + c)^2}
-		+ \frac{2x}{(x^2 + c)^2}
-		= 0.
-		\]
-		</p>
-
-		<p>
-		Therefore, \(y = \frac{1}{x^2 + c}\) is a solution.
-		</p>
-
-		<p>
-		Now apply the initial condition \(y(2) = \frac{1}{3}\):
-		\[
-		\frac{1}{2^2 + c} = \frac{1}{3}
-		\Rightarrow 4 + c = 3
-		\Rightarrow c = -1.
-		\]
-		</p>
-
-		<p>
-		The particular solution is
-		\[
-		y = \frac{1}{x^2 - 1}.
-		\]
-		</p>
-
-		<p>
-		This solution is undefined when \(x^2 - 1 = 0\), i.e., at \(x = \pm 1\).
-		Since the initial condition occurs at \(x = 2\), the largest interval
-		containing \(2\) is
-		\[
-		(1, \infty).
-		\]
-		</p>
-	  </div>
-	</div>
-
-		
-	<div class="problem">
-	  <h3 id="prob8">Problem 8</h3>
-	  <p>
-	  Determine a region of the \(xy\)-plane for which the differential equation
-	  \[
-	  y' = \sqrt{xy}
-	  \]
-	  has a unique solution whose graph passes through a point \((x_0, y_0)\).
-	  </p>
-
-	  <button onclick="toggleSolution('sol8', this)">Show Solution</button>
-
-	  <div id="sol8" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		We write the differential equation in the form
-		\[
-		y' = f(x,y),
-		\quad \text{where} \quad
-		f(x,y) = \sqrt{xy}.
-		\]
-		</p>
-
-		<p>
-		For the existence and uniqueness theorem to apply, both \(f(x,y)\) and
-		\(\frac{\partial f}{\partial y}\) must be continuous in a region containing
-		the point \((x_0, y_0)\).
-		</p>
-
-		<p>
-		First, observe that \(\sqrt{xy}\) is defined only when
-		\[
-		xy \ge 0.
-		\]
-		</p>
-
-		<p>
-		Next, compute the partial derivative with respect to \(y\):
-		\[
-		\frac{\partial f}{\partial y}
-		= \frac{\partial}{\partial y} (xy)^{1/2}
-		= \frac{1}{2}(xy)^{-1/2} \cdot x
-		= \frac{x}{2\sqrt{xy}}.
-		\]
-		</p>
-
-		<p>
-		This expression is undefined when \(xy = 0\) and not real when \(xy < 0\).
-		Therefore, both \(f(x,y)\) and \(\frac{\partial f}{\partial y}\) are continuous
-		only when
-		\[
-		xy > 0.
-		\]
-		</p>
-
-		<p>
-		One such region is
-		\[
-		x > 0 \quad \text{and} \quad y > 0.
-		\]
-		</p>
-
-		<p>
-		In this region, the hypotheses of the existence and uniqueness theorem are
-		satisfied, so there exists a unique solution whose graph passes through any
-		point \((x_0, y_0)\) with \(x_0 > 0\) and \(y_0 > 0\).
-		</p>
-	  </div>
-	</div>
-	
-	
-		<!-- Section 1.3 -->
-	<h2 id="sec1.3">Section 1.3
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-
-	<div class="problem">
-	  <h3 id="prob9">Problem 9</h3>
-	  <p>
-	  Using the concept of net rate, determine a model for a population \(P(t)\) if
-	  the birth rate is proportional to the population present at time \(t\), but
-	  the death rate is proportional to the square of the population present at time
-	  \(t\).
-	  </p>
-
-	  <button onclick="toggleSolution('sol9', this)">Show Solution</button>
-
-	  <div id="sol9" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		Let \(P(t)\) denote the population at time \(t\).
-		</p>
-
-		<p>
-		The birth rate is proportional to the population, so we model it as
-		\[
-		\text{Birth rate} = aP,
-		\]
-		where \(a > 0\) is a constant.
-		</p>
-
-		<p>
-		The death rate is proportional to the square of the population, so it is
-		modeled as
-		\[
-		\text{Death rate} = bP^2,
-		\]
-		where \(b > 0\) is a constant.
-		</p>
-
-		<p>
-		The net rate of change of the population is given by
-		\[
-		\frac{dP}{dt} = (\text{birth rate}) - (\text{death rate}).
-		\]
-		</p>
-
-		<p>
-		Substituting the expressions above, we obtain the differential equation
-		\[
-		\frac{dP}{dt} = aP - bP^2.
-		\]
-		</p>
-
-		<p>
-		This is a first-order, nonlinear differential equation known as the
-		<em>logistic equation</em>.
-		</p>
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob10">Problem 10</h3>
-	  <p>
-	  Suppose that a large mixing tank initially holds \(300\) gallons of water in
-	  which \(50\) pounds of salt have been dissolved. Another brine solution is
-	  pumped into the tank at a rate of \(3\) gal/min, and when the solution is well
-	  stirred, it is pumped out at a rate of \(2\) gal/min. If the concentration of
-	  the solution entering is \(2\) lb/gal, determine a differential equation for
-	  the amount of salt \(A(t)\) in the tank at time \(t > 0\).
-	  </p>
-
-	  <button onclick="toggleSolution('sol10', this)">Show Solution</button>
-
-	  <div id="sol10" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		Let \(A(t)\) be the amount of salt (in pounds) in the tank at time \(t\).
-		</p>
-
-		<p>
-		The rate of change of salt in the tank is given by
-		\[
-		\frac{dA}{dt} = (\text{rate in}) - (\text{rate out}).
-		\]
-		</p>
-
-		<p>
-		<strong>Rate in:</strong><br>
-		The incoming solution has concentration \(2\) lb/gal and enters at
-		\(3\) gal/min, so
-		\[
-		\text{Rate in} = (2)(3) = 6 \text{ lb/min}.
-		\]
-		</p>
-
-		<p>
-		<strong>Rate out:</strong><br>
-		The volume of liquid in the tank is increasing because the inflow exceeds
-		the outflow:
-		\[
-		V(t) = 300 + (3 - 2)t = 300 + t \text{ gal}.
-		\]
-		</p>
-
-		<p>
-		The concentration of salt in the tank at time \(t\) is
-		\[
-		\frac{A(t)}{300 + t} \text{ lb/gal}.
-		\]
-		</p>
-
-		<p>
-		Since the solution is pumped out at \(2\) gal/min, the rate of salt leaving
-		the tank is
-		\[
-		\text{Rate out} = 2 \cdot \frac{A(t)}{300 + t}.
-		\]
-		</p>
-
-		<p>
-		Therefore, the differential equation is
-		\[
-		\frac{dA}{dt} = 6 - \frac{2A}{300 + t}.
-		\]
-		</p>
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob11">Problem 11</h3>
-	  <p>
-	  A drug is infused into a patient's bloodstream at a constant rate of \(r\)
-	  grams per second. Simultaneously, the drug is removed at a rate proportional
-	  to the amount \(x(t)\) of the drug present at time \(t\). Determine a
-	  differential equation for the amount \(x(t)\).
-	  </p>
-
-	  <button onclick="toggleSolution('sol11', this)">Show Solution</button>
-
-	  <div id="sol11" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		Let \(x(t)\) denote the amount of drug in the bloodstream at time \(t\).
-		</p>
-
-		<p>
-		The rate of change of the drug amount is given by
-		\[
-		\frac{dx}{dt} = (\text{rate in}) - (\text{rate out}).
-		\]
-		</p>
-
-		<p>
-		The drug is infused at a constant rate \(r\) grams per second, so
-		\[
-		\text{Rate in} = r.
-		\]
-		</p>
-
-		<p>
-		The drug is removed at a rate proportional to the amount present, so
-		\[
-		\text{Rate out} = kx,
-		\]
-		where \(k > 0\) is a proportionality constant.
-		</p>
-
-		<p>
-		Substituting into the net rate equation, we obtain
-		\[
-		\frac{dx}{dt} = r - kx.
-		\]
-		</p>
-
-		<p>
-		This is a first-order linear differential equation commonly used in
-		pharmacokinetics.
-		</p>
-	  </div>
-	</div>
-	
-	<h2 id="sec2.1">Section 2.1.1
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-	<div class="problem">
-	  <h3 id="prob12">Problem 12</h3>
-	  <p>
-		Find the critical points and phase portrait of the autonomous differential equation
-		\[
-		y' = y^2 - y^3.
-		\]
-		Classify each critical point as asymptotically stable, unstable, or semi-stable.
-	  </p>
-
-	  <button onclick="toggleSolution('sol12', this)">Show Solution</button>
-
-	  <div id="sol12" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		First, factor the right-hand side:
-		\[
-		y' = y^2(1 - y).
-		\]
-		</p>
-
-		<p>
-		Critical points occur when \( y' = 0 \):
-		\[
-		y = 0, \quad y = 1.
-		\]
-		</p>
-
-		<p>
-		To analyze stability, examine the sign of \(y'\):
-		</p>
-
-		<ul>
-		  <li>For \(y < 0\): \(y^2 > 0\) and \(1-y > 0\), so \(y' > 0\)</li>
-		  <li>For \(0 < y < 1\): \(y' > 0\)</li>
-		  <li>For \(y > 1\): \(1-y < 0\), so \(y' < 0\)</li>
-		</ul>
-		
-		<p>
-		Classification:
-		</p>
-
-		<ul>
-		  <li>\(y=0\): semi-stable</li>
-		  <li>\(y=1\): asymptotically stable</li>
-		</ul>
-
-		
-	  </div>
-	</div>
-	
-	
-	<div class="problem">
-	  <h3 id="prob13">Problem 13</h3>
-	  <p>
-		Find the critical points and phase portrait of the autonomous differential equation
-		\[
-		y' = y(8 - 6y + y^2).
-		\]
-		Classify each critical point.
-	  </p>
-
-	  <button onclick="toggleSolution('sol13', this)">Show Solution</button>
-
-	  <div id="sol13" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		Factor the expression:
-		\[
-		y' = y(y^2 - 6y + 8) = y(y-2)(y-4).
-		\]
-		</p>
-
-		<p>
-		Critical points occur when \(y' = 0\):
-		\[
-		y = 0, \quad y = 2, \quad y = 4.
-		\]
-		</p>
-
-		<p>
-		Sign analysis:
-		</p>
-
-		<ul>
-		  <li>\(y < 0\): \(y' < 0\)</li>
-		  <li>\(0 < y < 2\): \(y' > 0\)</li>
-		  <li>\(2 < y < 4\): \(y' < 0\)</li>
-		  <li>\(y > 4\): \(y' > 0\)</li>
-		</ul>
-
-		<p>
-		Classification:
-		</p>
-
-		<ul>
-		  <li>\(y=0\): unstable</li>
-		  <li>\(y=2\): asymptotically stable</li>
-		  <li>\(y=4\): unstable</li>
-		</ul>
-	  </div>
-	</div>
-
-
-
-
-	<div class="problem">
-	  <h3 id="prob14">Problem 14</h3>
-	  <p>
-		Find the critical points and phase portrait of the autonomous differential equation
-		\[
-		y' = \frac{y e^y - 9y}{e^y}.
-		\]
-		Classify each critical point.
-	  </p>
-
-	  <button onclick="toggleSolution('sol14', this)">Show Solution</button>
-
-	  <div id="sol14" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		Factor the numerator:
-		\[
-		y' = \frac{y(e^y - 9)}{e^y}.
-		\]
-		</p>
-
-		<p>
-		Since \(e^y > 0\) for all \(y\), the sign of \(y'\) depends only on
-		\(y(e^y - 9)\).
-		</p>
-
-		<p>
-		Critical points occur when:
-		\[
-		y = 0, \quad e^y = 9 \Rightarrow y = \ln 9.
-		\]
-		</p>
-
-		<p>
-		Sign analysis:
-		</p>
-
-		<ul>
-		  <li>\(y < 0\): \(y' > 0\)</li>
-		  <li>\(0 < y < \ln 9\): \(y' < 0\)</li>
-		  <li>\(y > \ln 9\): \(y' > 0\)</li>
-		</ul>
-
-		<p>
-		Classification:
-		</p>
-
-		<ul>
-		  <li>\(y=0\): asymptotically stable</li>
-		  <li>\(y=\ln 9\): unstable</li>
-		</ul>
-	  </div>
-	</div>
-
-
-	<div class="problem">
-	  <h3 id="prob15">Problem 15</h3>
-	  <p>
-		Suppose that \(y(x)\) is a nonconstant solution of the autonomous equation
-		\(y' = f(y)\) with \(y=c\) being a critical point.
-		Why can't the graph of \(y(x)\) cross the solution curve \(y=c\)?
-	  </p>
-
-	  <button onclick="toggleSolution('sol15', this)">Show Solution</button>
-
-	  <div id="sol15" class="solution" style="display:none;">
-		<p><strong>Solution:</strong></p>
-
-		<p>
-		A critical point \(y=c\) satisfies \(f(c)=0\), so \(y=c\) is itself a constant
-		solution to the differential equation.
-		</p>
-
-		<p>
-		If a nonconstant solution \(y(x)\) were to cross \(y=c\), then at the crossing
-		point both solutions would have the same value.
-		</p>
-
-		<p>
-		However, the existence and uniqueness theorem guarantees that a first-order
-		autonomous differential equation has a unique solution through any initial
-		point \((x_0, y_0)\).
-		</p>
-
-		<p>
-		Therefore, once a solution reaches \(y=c\), it must remain there for all \(x\),
-		and crossing is impossible.
-		</p>
-
-		<p>
-		This is why solution curves of autonomous equations never cross equilibrium
-		solutions.
-		</p>
-	  </div>
-	</div>
-	
-	<h2 id="sec2.2">Section 2.2
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-		<div class="problem">
-  <h3 id="prob16">Problem 16</h3>
-	  <p>
-	  Find the general solution to the following differential equation:
-	  \[ e^{x}y\frac{dy}{dx} = e^{-y}e^{-2x-y} \]
-	  </p>
-
-	  <button onclick="toggleSolution('sol16', this)">Show Solution</button>
-
-	  <div id="sol16" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  <p>Rewrite the equation:</p>
-
-	  \[
-	  e^x y \frac{dy}{dx} = e^{-2x-2y}
-	  \]
-
-	  <p>Multiply both sides by \(e^{-x}\):</p>
-
-	  \[
-	  y\frac{dy}{dx} = e^{-3x-2y}
-	  \]
-
-	  <p>Separate variables:</p>
-
-	  \[
-	  y e^{2y} dy = e^{-3x} dx
-	  \]
-
-	  <p>Integrate both sides:</p>
-
-	  \[
-	  \int y e^{2y} dy = \int e^{-3x} dx
-	  \]
-
-	  <p>Use integration by parts on the left:</p>
-
-	  \[
-	  \frac{1}{2}ye^{2y}-\frac{1}{4}e^{2y} = -\frac{1}{3}e^{-3x}+C
-	  \]
-
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob17">Problem 17</h3>
-	  <p>
-	  Find the general solution to the following differential equation:
-	  \[2y\cos^3(3x)\frac{dy}{dx}=-\sin(3x)\]
-	  </p>
-
-	  <button onclick="toggleSolution('sol17', this)">Show Solution</button>
-
-	  <div id="sol17" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  <p>Separate variables:</p>
-
-	  \[
-	  2y dy = \frac{-\sin(3x)}{\cos^3(3x)} dx
-	  \]
-
-	  <p>Simplify:</p>
-
-	  \[
-	  2y dy = -\tan(3x)\sec^2(3x) dx
-	  \]
-
-	  <p>Integrate:</p>
-
-	  \[
-	  \int 2y dy = -\int \tan(3x)\sec^2(3x) dx
-	  \]
-
-	  <p>Let \(u=\tan(3x)\):</p>
-
-	  \[
-	  y^2 = -\frac{1}{3}\tan^2(3x)+C
-	  \]
-
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob18">Problem 18</h3>
-	  <p>
-	  Find the particular solution to the following initial value problem:
-	  \[ \frac{dy}{dx}=-y\ln(y), \quad y(0)=e \]
-	  </p>
-
-	  <button onclick="toggleSolution('sol18', this)">Show Solution</button>
-
-	  <div id="sol18" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  <p>Separate variables:</p>
-
-	  \[
-	  \frac{dy}{y\ln(y)}=-dx
-	  \]
-
-	  <p>Integrate:</p>
-
-	  \[
-	  \int \frac{1}{y\ln(y)}dy=-\int dx
-	  \]
-
-	  \[
-	  \ln|\ln(y)|=-x+C
-	  \]
-
-	  <p>Exponentiate:</p>
-
-	  \[
-	  \ln(y)=Ce^{-x}
-	  \]
-
-	  <p>Apply initial condition:</p>
-
-	  \[
-	  \ln(e)=C \Rightarrow C=1
-	  \]
-
-	  <p>Final Answer:</p>
-
-	  \[
-	  y=e^{e^{-x}}
-	  \]
-
-	  </div>
-	</div>
-	
-	<h2 id="sec2.3">Section 2.3
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-	<div class="problem">
-  <h3 id="prob19">Problem 19</h3>
-	  <p>
-	  Find the general solution to the following differential equation:
-	  \[3y'+12y=4\]
-	  </p>
-
-	  <button onclick="toggleSolution('sol19', this)">Show Solution</button>
-
-	  <div id="sol19" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  <p>Standard form:</p>
-
-	  \[
-	  y'+4y=\frac{4}{3}
-	  \]
-
-	  <p>Integrating factor:</p>
-
-	  \[
-	  \mu(x)=e^{4x}
-	  \]
-
-	  <p>Multiply equation:</p>
-
-	  \[
-	  \frac{d}{dx}(e^{4x}y)=\frac{4}{3}e^{4x}
-	  \]
-
-	  <p>Integrate:</p>
-
-	  \[
-	  e^{4x}y=\frac{1}{3}e^{4x}+C
-	  \]
-
-	  <p>Final Answer:</p>
-
-	  \[
-	  y=\frac{1}{3}+Ce^{-4x}
-	  \]
-
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob20">Problem 20</h3>
-	  <p>
-	  Find the general solution to the following differential equation:
-	  \[y'=2y+x^2+5\]
-	  </p>
-
-	  <button onclick="toggleSolution('sol20', this)">Show Solution</button>
-
-	  <div id="sol20" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  \[
-	  y'-2y=x^2+5
-	  \]
-
-	  \[
-	  \mu=e^{-2x}
-	  \]
-
-	  \[
-	  \frac{d}{dx}(e^{-2x}y)=e^{-2x}(x^2+5)
-	  \]
-
-	  <p>Integrate:</p>
-
-	  \[
-	  y=\frac{x^2}{2}+\frac{x}{2}+\frac{11}{4}+Ce^{2x}
-	  \]
-
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob21">Problem 21</h3>
-	  <p>
-	  Find the particular solution to the following initial value problem:
-	  \[yy'-x=2y^2, \quad y(1)=5\]
-	  </p>
-
-	  <button onclick="toggleSolution('sol21', this)">Show Solution</button>
-
-	  <div id="sol21" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  <p>Rewrite:</p>
-
-	  \[
-	  y' -2y=\frac{x}{y}
-	  \]
-
-	  <p>Multiply by \(y\):</p>
-
-	  \[
-	  y y' -2y^2=x
-	  \]
-
-	  <p>Let \(u=y^2\):</p>
-
-	  \[
-	  \frac{du}{dx}-4u=2x
-	  \]
-
-	  \[
-	  u=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
-	  \]
-
-	  \[
-	  y^2=Ce^{4x}-\frac{x}{2}-\frac{1}{8}
-	  \]
-
-	  <p>Use initial condition:</p>
-
-	  \[
-	  25=C e^4-\frac{1}{2}-\frac{1}{8}
-	  \]
-
-	  </div>
-	</div>
-
-	<div class="problem">
-	  <h3 id="prob22">Problem 22</h3>
-	  <p>
-	  Find the particular solution to the following initial value problem:
-	  \[y'-\tan(x)y=\cos^2(x), \quad y(0)=-1\]
-	  </p>
-
-	  <button onclick="toggleSolution('sol22', this)">Show Solution</button>
-
-	  <div id="sol22" class="solution" style="display:none;">
-	  <p><strong>Solution:</strong></p>
-
-	  \[
-	  \mu=e^{\int -\tan(x)dx}=\cos(x)
-	  \]
-
-	  \[
-	  \frac{d}{dx}(y\cos x)=\cos^3 x
-	  \]
-
-	  \[
-	  y\cos x=\int \cos^3 x dx
-	  \]
-
-	  \[
-	  y\cos x=\sin x-\frac{\sin^3 x}{3}+C
-	  \]
-
-	  <p>Apply initial condition:</p>
-
-	  \[
-	  C=-1
-	  \]
-
-	  </div>
-	</div>
-	
-	<h2 id="sec2.4">Section 2.4
-	<span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#toc">↑ Back to top</a>
-	  </span>
-	</h2>
-
-<div class="problem">
-  <h3 id="prob23">Problem 23</h3>
-  <p>
-  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
-  \[(2x+y)dx-(x+6y)dy=0\]
-  </p>
-
-  <button onclick="toggleSolution('sol23', this)">Show Solution</button>
-
-  <div id="sol23" class="solution" style="display:none;">
-  <p><strong>Solution:</strong></p>
-
-  \[
-  M=2x+y, \quad N=-(x+6y)
-  \]
-
-  \[
-  M_y=1, \quad N_x=-1
-  \]
-
-  <p>Not exact.</p>
-
-  </div>
-</div>
-
-<div class="problem">
-  <h3 id="prob24">Problem 24</h3>
-  <p>
-  Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
-  \[(5y-2x)dy-2y dx=0\]
-  </p>
-
-  <button onclick="toggleSolution('sol24', this)">Show Solution</button>
-
-  <div id="sol24" class="solution" style="display:none;">
-  <p><strong>Solution:</strong></p>
-
-  \[
-  M=-2y, \quad N=5y-2x
-  \]
-
-  \[
-  M_y=-2, \quad N_x=-2
-  \]
-
-  <p>Exact.</p>
-
-  \[
-  f=\int -2y dx=-2xy+g(y)
-  \]
-
-  \[
-  \frac{\partial f}{\partial y}=-2x+g'(y)=5y-2x
-  \]
-
-  \[
-  g'(y)=5y \Rightarrow g=\frac{5}{2}y^2
-  \]
-
-  \[
-  -2xy+\frac{5}{2}y^2=C
-  \]
-
-  </div>
-</div>
-
-<div class="problem">
-  <h3 id="prob25">Problem 25</h3>
-  <p>
-  Find \(k\) so that the equation is exact:
-  \[
-  (6xy^3+\cos y)dx+(2kx^2y^2-x\sin y)dy=0
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol25', this)">Show Solution</button>
-
-  <div id="sol25" class="solution" style="display:none;">
-  <p><strong>Solution:</strong></p>
-
-  \[
-  M_y=18xy^2-\sin y
-  \]
-
-  \[
-  N_x=4kxy^2-\sin y
-  \]
-
-  \[
-  18xy^2=4kxy^2 \Rightarrow k=\frac{9}{2}
-  \]
-
-  </div>
-</div>
 
-
-
-
-
-
-
-
-
+    <!-- Problem 10 (was 9) -->
+    <div class="problem">
+      <h3 id="prob10">Problem 10 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Verify that
+      \[
+      y = \frac{1}{x^2 + c}
+      \]
+      is a solution to the differential equation
+      \[
+      y' + 2xy^2 = 0,
+      \]
+      and find the particular solution such that
+      \[
+      y(2) = \frac{1}{3}.
+      \]
+      Give the largest interval \(I\) over which the solution is defined.
+      </p>
+
+      <button onclick="toggleSolution('sol10', this)">Show Solution</button>
+
+      <div id="sol10" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        We begin by computing the derivative of
+        \[
+        y = \frac{1}{x^2 + c} = (x^2 + c)^{-1}.
+        \]
+        </p>
+
+        <p>
+        Using the chain rule,
+        \[
+        y' = -1(x^2 + c)^{-2}(2x) = -\frac{2x}{(x^2 + c)^2}.
+        \]
+        </p>
+
+        <p>
+        Next, compute the term \(2xy^2\):
+        \[
+        y^2 = \left(\frac{1}{x^2 + c}\right)^2 = \frac{1}{(x^2 + c)^2},
+        \]
+        so
+        \[
+        2xy^2 = \frac{2x}{(x^2 + c)^2}.
+        \]
+        </p>
+
+        <p>
+        Substitute into the differential equation:
+        \[
+        y' + 2xy^2
+        = -\frac{2x}{(x^2 + c)^2}
+        + \frac{2x}{(x^2 + c)^2}
+        = 0.
+        \]
+        </p>
+
+        <p>
+        Therefore, \(y = \frac{1}{x^2 + c}\) is a solution for every constant \(c\).
+        </p>
+
+        <p>
+        Now apply the initial condition \(y(2) = \frac{1}{3}\):
+        \[
+        \frac{1}{2^2 + c} = \frac{1}{3}
+        \Rightarrow 4 + c = 3
+        \Rightarrow c = -1.
+        \]
+        </p>
+
+        <p>
+        The particular solution is
+        \[
+        y = \frac{1}{x^2 - 1}.
+        \]
+        </p>
+
+        <p>
+        This solution is undefined when \(x^2 - 1 = 0\), i.e., at \(x = \pm 1\). The domain
+        \((-\infty,\infty)\) is therefore split into three pieces by these two points:
+        \((-\infty,-1)\), \((-1,1)\), and \((1,\infty)\). Since the initial condition occurs at
+        \(x = 2\), we need the piece that contains \(2\), which is
+        \[
+        (1, \infty).
+        \]
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 11 (was 10) -->
+    <div class="problem">
+      <h3 id="prob11">Problem 11 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Determine a region of the \(xy\)-plane for which the differential equation
+      \[
+      y' = \sqrt{xy}
+      \]
+      has a unique solution whose graph passes through a point \((x_0, y_0)\).
+      </p>
+
+      <button onclick="toggleSolution('sol11', this)">Show Solution</button>
+
+      <div id="sol11" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        We write the differential equation in the form
+        \[
+        y' = f(x,y),
+        \quad \text{where} \quad
+        f(x,y) = \sqrt{xy}.
+        \]
+        </p>
+
+        <p>
+        For the existence and uniqueness theorem to apply, we need to find a rectangle around
+        \((x_0,y_0)\) on which both \(f(x,y)\) and \(\frac{\partial f}{\partial y}\) are continuous.
+        </p>
+
+        <p>
+        First, observe that \(\sqrt{xy}\) is only real-valued (hence only continuous, as opposed to
+        undefined) when
+        \[
+        xy \ge 0.
+        \]
+        </p>
+
+        <p>
+        Next, compute the partial derivative with respect to \(y\):
+        \[
+        \frac{\partial f}{\partial y}
+        = \frac{\partial}{\partial y} (xy)^{1/2}
+        = \frac{1}{2}(xy)^{-1/2} \cdot x
+        = \frac{x}{2\sqrt{xy}}.
+        \]
+        </p>
+
+        <p>
+        This expression has \(\sqrt{xy}\) in the denominator, so it is undefined when \(xy = 0\)
+        (division by zero) and not real when \(xy < 0\) (same issue as before). So
+        \(\frac{\partial f}{\partial y}\) is continuous only on the strictly stronger condition
+        \[
+        xy > 0.
+        \]
+        </p>
+
+        <p>
+        One region satisfying \(xy>0\) — and the natural one to pick, since it is an open
+        rectangle-friendly region — is
+        \[
+        x > 0 \quad \text{and} \quad y > 0.
+        \]
+        (The region \(x<0,\ y<0\) also satisfies \(xy>0\) and would work equally well.)
+        </p>
+
+        <p>
+        In this region, both hypotheses of the existence and uniqueness theorem are satisfied, so
+        there exists a unique solution whose graph passes through any point \((x_0, y_0)\) with
+        \(x_0 > 0\) and \(y_0 > 0\).
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 12 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob12">Problem 12 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      The initial value problem
+      \[
+      y' = 3y^{2/3}, \qquad y(0) = 0
+      \]
+      has more than one solution: both \(y=0\) and \(y=x^3\) satisfy it. Verify both, and explain
+      why this does not contradict the existence-uniqueness theorem from this section.
+      </p>
+      <button onclick="toggleSolution('sol12', this)">Show Solution</button>
+      <div id="sol12" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        First, \(y=0\) is a constant function, so \(y'=0\), and the right-hand side is
+        \(3(0)^{2/3}=0\) — the equation holds, and \(y(0)=0\) is satisfied.
+        </p>
+        <p>
+        For \(y=x^3\): \(y'=3x^2\), and the right-hand side is
+        \[
+        3y^{2/3} = 3(x^3)^{2/3} = 3x^2
+        \]
+        (squaring first removes the sign ambiguity, so this holds for every real \(x\), positive or
+        negative). So \(y'=3x^2\) matches the right-hand side, and \(y(0)=0^3=0\) is satisfied as well.
+        Both functions genuinely solve the IVP.
+        </p>
+        <p>
+        This does not contradict the theorem because the theorem is a <em>sufficient</em> condition
+        for uniqueness, not a necessary one — it guarantees uniqueness only where its hypotheses
+        actually hold. Here, \(f(x,y)=3y^{2/3}\), so
+        \[
+        \frac{\partial f}{\partial y} = 2y^{-1/3},
+        \]
+        which blows up (is discontinuous) exactly at \(y=0\) — precisely the point our initial
+        condition sits on. Since the hypothesis "\(\partial f/\partial y\) continuous near
+        \((x_0,y_0)\)" fails at \((0,0)\), the theorem simply does not apply there, and it should be
+        no surprise that uniqueness actually fails at that point.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 1.3 -->
+    <h2 id="sec1.3" class="tex-section">Section 1.3
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 13 (was 15) -->
+    <div class="problem">
+      <h3 id="prob13">Problem 13 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      A drug is infused into a patient's bloodstream at a constant rate of \(r\)
+      grams per second. Simultaneously, the drug is removed at a rate proportional
+      to the amount \(x(t)\) of the drug present at time \(t\). Determine a
+      differential equation for the amount \(x(t)\).
+      </p>
+
+      <button onclick="toggleSolution('sol13', this)">Show Solution</button>
+
+      <div id="sol13" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        Let \(x(t)\) denote the amount of drug in the bloodstream at time \(t\), so once again
+        \[
+        \frac{dx}{dt} = (\text{rate in}) - (\text{rate out}).
+        \]
+        </p>
+
+        <p>
+        The drug is infused at a constant rate \(r\), so
+        \[
+        \text{Rate in} = r.
+        \]
+        </p>
+
+        <p>
+        The drug is removed at a rate proportional to the amount present, so
+        \[
+        \text{Rate out} = kx,
+        \]
+        where \(k > 0\) is a proportionality constant.
+        </p>
+
+        <p>
+        Substituting into the net-rate equation gives
+        \[
+        \boxed{\frac{dx}{dt} = r - kx.}
+        \]
+        This is a first-order linear differential equation commonly used in pharmacokinetics.
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 14 (was 16) -->
+    <div class="problem">
+      <h3 id="prob14">Problem 14 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      A radioactive isotope decays at a rate proportional to the amount present. If \(A(t)\)
+      denotes the amount (in grams) present at time \(t\), write down — but do not solve — the
+      differential equation and initial condition describing this situation, given that there are
+      initially \(A_0\) grams present.
+      </p>
+      <button onclick="toggleSolution('sol14', this)">Show Solution</button>
+      <div id="sol14" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        "Rate proportional to the amount present" translates directly to \(k\cdot A\) for some
+        constant \(k\). Since the substance is decaying, the amount is decreasing, which corresponds
+        to \(k<0\). The initial condition just restates "initially \(A_0\) grams" as \(A(0)=A_0\).
+        Altogether,
+        \[
+        \boxed{\frac{dA}{dt} = kA, \qquad A(0) = A_0, \qquad k<0.}
+        \]
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 15 (was 13) -->
+    <div class="problem">
+      <h3 id="prob15">Problem 15 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Using the concept of net rate, determine a model for a population \(P(t)\) if
+      the birth rate is proportional to the population present at time \(t\), but
+      the death rate is proportional to the square of the population present at time
+      \(t\).
+      </p>
+
+      <button onclick="toggleSolution('sol15', this)">Show Solution</button>
+
+      <div id="sol15" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        Let \(P(t)\) denote the population at time \(t\). The overall strategy for any
+        "net rate" modeling problem is the same: identify every rate flowing in, identify every
+        rate flowing out, and write
+        \[
+        \frac{d(\text{quantity})}{dt} = (\text{rate in}) - (\text{rate out}).
+        \]
+        </p>
+
+        <p>
+        Here, births add to the population and deaths remove from it, so births play the role of
+        "rate in" and deaths play the role of "rate out." The birth rate is proportional to the
+        population, so we model it as
+        \[
+        \text{Birth rate} = aP,
+        \]
+        where \(a > 0\) is a proportionality constant. The death rate is proportional to the
+        <em>square</em> of the population, so it is modeled as
+        \[
+        \text{Death rate} = bP^2,
+        \]
+        where \(b > 0\) is a proportionality constant.
+        </p>
+
+        <p>
+        The net rate of change of the population is then
+        \[
+        \frac{dP}{dt} = (\text{birth rate}) - (\text{death rate}) = aP - bP^2.
+        \]
+        </p>
+
+        <p>
+        This is a first-order, nonlinear differential equation (because of the \(P^2\) term) known
+        as the <em>logistic equation</em> — it is the standard model for a population growing in an
+        environment with limited resources.
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 16 (was 14) -->
+    <div class="problem">
+      <h3 id="prob16">Problem 16 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Suppose that a large mixing tank initially holds \(300\) gallons of water in
+      which \(50\) pounds of salt have been dissolved. Another brine solution is
+      pumped into the tank at a rate of \(3\) gal/min, and when the solution is well
+      stirred, it is pumped out at a rate of \(2\) gal/min. If the concentration of
+      the solution entering is \(2\) lb/gal, determine a differential equation for
+      the amount of salt \(A(t)\) in the tank at time \(t > 0\).
+      </p>
+
+      <button onclick="toggleSolution('sol16', this)">Show Solution</button>
+
+      <div id="sol16" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        Let \(A(t)\) be the amount of salt (in pounds) in the tank at time \(t\). As with any
+        mixing-tank problem, the rate of change of the amount of salt is
+        \[
+        \frac{dA}{dt} = (\text{rate in}) - (\text{rate out}).
+        \]
+        </p>
+
+        <p>
+        <strong>Rate in:</strong> The incoming solution has concentration \(2\) lb/gal and enters at
+        \(3\) gal/min, so the salt enters at
+        \[
+        \text{Rate in} = (2\ \text{lb/gal})(3\ \text{gal/min}) = 6\ \text{lb/min}.
+        \]
+        </p>
+
+        <p>
+        <strong>Rate out</strong> is trickier here, because the inflow (\(3\) gal/min) and outflow
+        (\(2\) gal/min) are <em>different</em>, so the volume of liquid in the tank is not constant
+        — it grows at a net rate of \(3-2=1\) gal/min. Starting from \(300\) gallons,
+        \[
+        V(t) = 300 + (3 - 2)t = 300 + t \ \text{gal}.
+        \]
+        </p>
+
+        <p>
+        Because the mixture is well-stirred, the concentration of salt anywhere in the tank at time
+        \(t\) is the same, namely the total salt divided by the total volume:
+        \[
+        \text{concentration at time } t = \frac{A(t)}{300 + t} \ \text{lb/gal}.
+        \]
+        </p>
+
+        <p>
+        Since the mixture leaves at \(2\) gal/min, the rate at which salt leaves the tank is that
+        concentration times the outflow rate:
+        \[
+        \text{Rate out} = 2 \cdot \frac{A(t)}{300 + t}.
+        \]
+        </p>
+
+        <p>
+        Combining rate in and rate out gives the differential equation
+        \[
+        \boxed{\frac{dA}{dt} = 6 - \frac{2A}{300 + t}.}
+        \]
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 17 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob17">Problem 17 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Water leaks from a cylindrical tank of radius \(4\) ft through a circular hole of radius
+      \(2\) inches at the bottom, where (as in the lecture notes) the outflow rate has magnitude
+      \(cA_h\sqrt{2gh}\) with \(c=0.6\) and \(g=32\ \text{ft/sec}^2\). Determine the differential
+      equation for the height \(h(t)\) of water in the tank.
+      </p>
+      <button onclick="toggleSolution('sol17', this)">Show Solution</button>
+      <div id="sol17" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        This is the same modeling setup as the draining-tank example in Section 1.3, just with
+        different numbers — so the strategy is identical: relate \(\frac{dV}{dt}\) to the outflow
+        rate, relate \(V\) to \(h\) through the shape of the tank, then combine the two.
+        </p>
+        <p>
+        First, convert the hole's radius to feet: \(2\) inches \(=\frac{1}{6}\) ft, so the area of
+        the hole is
+        \[
+        A_h = \pi\left(\frac{1}{6}\right)^2 = \frac{\pi}{36}\ \text{ft}^2.
+        \]
+        </p>
+        <p>
+        The volume is leaving the tank, so \(\frac{dV}{dt}\) is the <em>negative</em> of the outflow
+        magnitude:
+        \[
+        \frac{dV}{dt} = -cA_h\sqrt{2gh}
+        = -(0.6)\left(\frac{\pi}{36}\right)\sqrt{(2)(32)h}
+        = -(0.6)\left(\frac{\pi}{36}\right)(8\sqrt{h}).
+        \]
+        </p>
+        <p>
+        Simplifying the constant:
+        \[
+        (0.6)\left(\frac{\pi}{36}\right)(8) = \frac{4.8\pi}{36} = \frac{2\pi}{15},
+        \]
+        so
+        \[
+        \frac{dV}{dt} = -\frac{2\pi}{15}\sqrt{h}.
+        \]
+        </p>
+        <p>
+        Since the tank is cylindrical with radius \(4\) ft, its cross-sectional area is constant:
+        \(A_w = \pi(4)^2 = 16\pi\ \text{ft}^2\), and \(V(t)=A_wh(t)\), so
+        \(\frac{dV}{dt} = A_w\frac{dh}{dt} = 16\pi\frac{dh}{dt}\). Combining this with the expression
+        above,
+        \[
+        16\pi\frac{dh}{dt} = -\frac{2\pi}{15}\sqrt{h}
+        \quad\Longrightarrow\quad
+        \frac{dh}{dt} = -\frac{2\pi}{15\cdot 16\pi}\sqrt{h}
+        = -\frac{1}{120}\sqrt{h}.
+        \]
+        </p>
+        <p>
+        So the differential equation modeling the height of water is
+        \[
+        \boxed{\frac{dh}{dt} = -\frac{\sqrt{h}}{120}.}
+        \]
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 18 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob18">Problem 18 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Two population models are proposed for the same species: (a) \(\dfrac{dP}{dt}=kP\), and
+      (b) \(\dfrac{dP}{dt}=kP\left(1-\dfrac{P}{N}\right)\). Without solving either equation, explain
+      what additional real-world assumption model (b) captures that model (a) does not.
+      </p>
+      <button onclick="toggleSolution('sol18', this)">Show Solution</button>
+      <div id="sol18" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Model (a) is the pure exponential growth model: the growth rate is always proportional to
+        the current population, no matter how large \(P\) gets, so it implicitly assumes unlimited
+        resources — space, food, etc. — forever.
+        </p>
+        <p>
+        Model (b), the logistic model, includes the extra factor \(\left(1-\frac{P}{N}\right)\),
+        which is close to \(1\) (so it behaves like model (a)) when \(P\) is small compared to
+        \(N\), but shrinks toward \(0\) as \(P\) approaches \(N\), and would even become negative if
+        \(P\) exceeded \(N\). This builds in a <strong>carrying capacity</strong> \(N\): the maximum
+        population the environment can sustain given limited resources. As the population
+        approaches that capacity, the growth rate automatically slows down and levels off, rather
+        than growing without bound the way model (a) does.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2.1 -->
+    <h2 id="sec2.1" class="tex-section">Section 2.1
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 19 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob19">Problem 19 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find and classify the critical point(s) of the autonomous equation
+      \[
+      y' = 4 - 2y.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol19', this)">Show Solution</button>
+      <div id="sol19" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Set \(y'=0\) and solve for the critical point:</p>
+        \[
+        4-2y=0 \quad\Longrightarrow\quad y=2.
+        \]
+        <p>
+        We can also write \(y' = -2(y-2)\), which makes the sign of \(y'\) easy to read off:
+        </p>
+        <ul>
+          <li>For \(y<2\): \((y-2)<0\), so \(y'=-2(y-2)>0\) — solutions increase toward \(y=2\).</li>
+          <li>For \(y>2\): \((y-2)>0\), so \(y'=-2(y-2)<0\) — solutions decrease toward \(y=2\).</li>
+        </ul>
+        <p>
+        Since solutions approach \(y=2\) from both sides, the critical point \(y=2\) is
+        <strong>asymptotically stable</strong> (an attractor).
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 20 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob20">Problem 20 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the critical points and phase portrait of the autonomous differential equation
+      \[
+      y' = y^2 - y^3.
+      \]
+      Classify each critical point as asymptotically stable, unstable, or semi-stable.
+      </p>
+
+      <button onclick="toggleSolution('sol20', this)">Show Solution</button>
+
+      <div id="sol20" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>First, factor the right-hand side to see the critical points clearly:</p>
+        \[
+        y' = y^2(1 - y).
+        \]
+
+        <p>Critical points occur when \( y' = 0 \):</p>
+        \[
+        y = 0, \quad y = 1.
+        \]
+
+        <p>To classify each one, examine the sign of \(y'\) on the intervals it creates:</p>
+
+        <ul>
+          <li>For \(y < 0\): \(y^2 > 0\) and \(1-y > 0\), so \(y' > 0\) (increasing).</li>
+          <li>For \(0 < y < 1\): \(y^2 > 0\) and \(1-y > 0\), so \(y' > 0\) (increasing).</li>
+          <li>For \(y > 1\): \(y^2>0\) but \(1-y < 0\), so \(y' < 0\) (decreasing).</li>
+        </ul>
+
+        <p>
+        At \(y=0\): just below \(0\), solutions increase <em>toward</em> \(0\); just above \(0\),
+        solutions increase <em>away from</em> \(0\). Approaching from one side but not the other
+        makes \(y=0\) <strong>semi-stable</strong>.
+        </p>
+        <p>
+        At \(y=1\): just below \(1\), solutions increase toward \(1\); just above \(1\), solutions
+        decrease toward \(1\). Approaching from both sides makes \(y=1\)
+        <strong>asymptotically stable</strong>.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Problem 21 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob21">Problem 21 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the critical points and phase portrait of the autonomous differential equation
+      \[
+      y' = y(8 - 6y + y^2).
+      \]
+      Classify each critical point.
+      </p>
+
+      <button onclick="toggleSolution('sol21', this)">Show Solution</button>
+
+      <div id="sol21" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Factor the quadratic factor:</p>
+        \[
+        y' = y(y^2 - 6y + 8) = y(y-2)(y-4).
+        \]
+
+        <p>Critical points occur when \(y' = 0\):</p>
+        \[
+        y = 0, \quad y = 2, \quad y = 4.
+        \]
+
+        <p>Sign analysis (checking one test point in each of the four intervals):</p>
+
+        <ul>
+          <li>\(y < 0\): all three factors \(y\), \((y-2)\), \((y-4)\) are negative, so their product is negative: \(y' < 0\).</li>
+          <li>\(0 < y < 2\): \(y>0\), \((y-2)<0\), \((y-4)<0\): two negatives and one positive give \(y'>0\).</li>
+          <li>\(2 < y < 4\): \(y>0\), \((y-2)>0\), \((y-4)<0\): \(y'<0\).</li>
+          <li>\(y > 4\): all three factors positive, so \(y'>0\).</li>
+        </ul>
+
+        <p>Reading off the behavior on each side of each critical point:</p>
+
+        <ul>
+          <li>\(y=0\): decreasing below, increasing above — moves away on both sides — <strong>unstable</strong>.</li>
+          <li>\(y=2\): increasing below, decreasing above — approaches from both sides — <strong>asymptotically stable</strong>.</li>
+          <li>\(y=4\): decreasing below, increasing above — moves away on both sides — <strong>unstable</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- Problem 22 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob22">Problem 22 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find the critical points and phase portrait of the autonomous differential equation
+      \[
+      y' = \frac{y e^y - 9y}{e^y}.
+      \]
+      Classify each critical point.
+      </p>
+
+      <button onclick="toggleSolution('sol22', this)">Show Solution</button>
+
+      <div id="sol22" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Factor \(y\) out of the numerator:</p>
+        \[
+        y' = \frac{y(e^y - 9)}{e^y}.
+        \]
+
+        <p>
+        Since \(e^y > 0\) for every real \(y\), it never contributes a sign change (in the numerator
+        or as the denominator), so the sign of \(y'\) is determined entirely by \(y(e^y-9)\).
+        </p>
+
+        <p>Critical points occur when the numerator is zero:</p>
+        \[
+        y = 0, \qquad e^y = 9 \Rightarrow y = \ln 9.
+        \]
+        <p>(Note \(\ln 9 \approx 2.197\), so \(0 < \ln 9\).)</p>
+
+        <p>Sign analysis:</p>
+
+        <ul>
+          <li>\(y < 0\): \(y<0\), and \(e^y<1<9\) so \(e^y-9<0\). Product of two negatives: \(y'>0\).</li>
+          <li>\(0 < y < \ln 9\): \(y>0\), but \(e^y<9\) still (since \(y<\ln 9\)), so \(e^y-9<0\). Product of a positive and a negative: \(y'<0\).</li>
+          <li>\(y > \ln 9\): \(y>0\) and now \(e^y>9\), so \(e^y-9>0\). Product of two positives: \(y'>0\).</li>
+        </ul>
+
+        <p>Classification:</p>
+
+        <ul>
+          <li>\(y=0\): increasing below, decreasing above — approaches from both sides — <strong>asymptotically stable</strong>.</li>
+          <li>\(y=\ln 9\): decreasing below, increasing above — moves away on both sides — <strong>unstable</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- Problem 23 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob23">Problem 23 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Suppose that \(y(x)\) is a nonconstant solution of the autonomous equation
+      \(y' = f(y)\) with \(y=c\) being a critical point.
+      Why can't the graph of \(y(x)\) cross the solution curve \(y=c\)?
+      </p>
+
+      <button onclick="toggleSolution('sol23', this)">Show Solution</button>
+
+      <div id="sol23" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        A critical point \(y=c\) satisfies \(f(c)=0\), so the constant function \(y(x)=c\) is itself
+        a solution to the differential equation.
+        </p>
+
+        <p>
+        If a nonconstant solution \(y(x)\) were to cross \(y=c\), then at the crossing point \(x_0\),
+        both the constant solution and the nonconstant solution would pass through the same point
+        \((x_0,c)\).
+        </p>
+
+        <p>
+        But the existence-and-uniqueness theorem guarantees that a first-order differential equation
+        (with \(f\) and \(\partial f/\partial y\) continuous, which is typically the case for the
+        nice functions \(f(y)\) we work with) has only <em>one</em> solution through any given point.
+        Two different solutions cannot both pass through \((x_0,c)\).
+        </p>
+
+        <p>
+        Therefore, once a solution's graph reaches \(y=c\), it must in fact <em>be</em> the constant
+        solution from that point on — crossing is impossible, which is exactly why solution curves of
+        autonomous equations never cross equilibrium (constant) solutions.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2.2 -->
+    <h2 id="sec2.2" class="tex-section">Section 2.2
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 24 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob24">Problem 24 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find the general solution to the differential equation
+      \[
+      \frac{dy}{dx} = \frac{x}{y}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol24', this)">Show Solution</button>
+      <div id="sol24" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Separate variables).</span></p>
+        \[
+        y\,dy = x\,dx.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Integrate both sides).</span></p>
+        \[
+        \int y\,dy = \int x\,dx \quad\Longrightarrow\quad \frac{y^2}{2} = \frac{x^2}{2} + C.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Simplify).</span></p>
+        <p>Multiplying through by \(2\) and renaming the constant, the implicit general solution is</p>
+        \[
+        \boxed{y^2 = x^2 + C.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 25 (was 26) -->
+    <div class="problem">
+      <h3 id="prob25">Problem 25 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the general solution to the following differential equation:
+      \[2y\cos^3(3x)\frac{dy}{dx}=-\sin(3x)\]
+      </p>
+
+      <button onclick="toggleSolution('sol25', this)">Show Solution</button>
+
+      <div id="sol25" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Separate variables by dividing both sides by \(\cos^3(3x)\):</p>
+        \[
+        2y\, dy = \frac{-\sin(3x)}{\cos^3(3x)}\, dx.
+        \]
+
+        <p>It helps to rewrite the right side as a product of tangent and secant, since \(\frac{\sin(3x)}{\cos(3x)}=\tan(3x)\) and \(\frac{1}{\cos^2(3x)}=\sec^2(3x)\):</p>
+        \[
+        2y\, dy = -\tan(3x)\sec^2(3x)\, dx.
+        \]
+
+        <p>Integrate both sides:</p>
+        \[
+        \int 2y\, dy = -\int \tan(3x)\sec^2(3x)\, dx.
+        \]
+
+        <p>The left side is immediate: \(\int 2y\,dy = y^2\). For the right side, use the substitution \(u=\tan(3x)\), so \(du = 3\sec^2(3x)\,dx\), i.e. \(\sec^2(3x)\,dx = \frac{1}{3}du\):</p>
+        \[
+        \int \tan(3x)\sec^2(3x)\,dx = \int u \cdot \frac{1}{3}\,du = \frac{1}{3}\cdot\frac{u^2}{2} = \frac{1}{6}\tan^2(3x).
+        \]
+
+        <p>So the right-hand integral becomes \(-\frac{1}{6}\tan^2(3x)\), and the implicit general solution is</p>
+        \[
+        \boxed{y^2 = -\frac{1}{6}\tan^2(3x)+C.}
+        \]
+        <p>
+        (You can double-check this by differentiating implicitly: \(2yy' = -\frac{1}{6}\cdot 2\tan(3x)\sec^2(3x)\cdot 3 = -\tan(3x)\sec^2(3x)\), which matches the original equation once you divide both sides by \(2y\).)
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 26 (was 27) -->
+    <div class="problem">
+      <h3 id="prob26">Problem 26 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the particular solution to the following initial value problem:
+      \[ \frac{dy}{dx}=-y\ln(y), \quad y(0)=e \]
+      </p>
+
+      <button onclick="toggleSolution('sol26', this)">Show Solution</button>
+
+      <div id="sol26" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Separate variables by dividing both sides by \(y\ln(y)\):</p>
+        \[
+        \frac{dy}{y\ln(y)}=-dx.
+        \]
+
+        <p>For the left side, use the substitution \(w=\ln(y)\), so \(dw=\frac{1}{y}dy\), turning the integral into \(\int \frac{dw}{w}\):</p>
+        \[
+        \int \frac{1}{y\ln(y)}dy=\int\frac{dw}{w} = \ln|w| = \ln|\ln(y)|.
+        \]
+
+        <p>So integrating both sides of the differential equation gives</p>
+        \[
+        \ln|\ln(y)|=-x+C.
+        \]
+
+        <p>Exponentiate both sides to remove the outer logarithm (absorbing the sign and the constant of exponentiation into a single new constant \(C\)):</p>
+        \[
+        \ln(y)=Ce^{-x}.
+        \]
+
+        <p>Apply the initial condition \(y(0)=e\), i.e. \(\ln(y(0)) = \ln(e) = 1\):</p>
+        \[
+        1=Ce^{0} \Rightarrow C=1.
+        \]
+
+        <p>So \(\ln(y)=e^{-x}\), and exponentiating one more time gives the particular solution:</p>
+        \[
+        \boxed{y=e^{e^{-x}}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 27 (was 25) -->
+    <div class="problem">
+      <h3 id="prob27">Problem 27 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find the general solution to the following differential equation:
+      \[ e^{x}y\frac{dy}{dx} = e^{-y}e^{-2x-y} \]
+      </p>
+
+      <button onclick="toggleSolution('sol27', this)">Show Solution</button>
+
+      <div id="sol27" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>First, combine the exponentials on the right-hand side, since they share a base:</p>
+        \[
+        e^x y \frac{dy}{dx} = e^{-2x-2y}.
+        \]
+
+        <p>To separate variables, we want all the \(x\)-dependence on one side. Multiply both sides by \(e^{-x}\):</p>
+        \[
+        y\frac{dy}{dx} = e^{-x}\cdot e^{-2x-2y} = e^{-3x-2y}.
+        \]
+
+        <p>Now split the exponential \(e^{-3x-2y} = e^{-3x}e^{-2y}\), and move the \(e^{-2y}\) factor to the left side (dividing) so that all \(y\)'s are on the left and all \(x\)'s are on the right:</p>
+        \[
+        y\, e^{2y}\, dy = e^{-3x}\, dx.
+        \]
+
+        <p>Integrate both sides:</p>
+        \[
+        \int y e^{2y}\, dy = \int e^{-3x}\, dx.
+        \]
+
+        <p>The right side is immediate: \(\int e^{-3x}dx = -\frac{1}{3}e^{-3x}+C\). The left side needs integration by parts, with \(u=y\), \(dv=e^{2y}dy\) (so \(du=dy\), \(v=\frac{1}{2}e^{2y}\)):</p>
+        \[
+        \int y e^{2y}\,dy = \frac{1}{2}ye^{2y} - \int \frac{1}{2}e^{2y}\,dy = \frac{1}{2}ye^{2y}-\frac{1}{4}e^{2y}.
+        \]
+
+        <p>Putting both sides together, the implicit general solution is</p>
+        \[
+        \boxed{\frac{1}{2}ye^{2y}-\frac{1}{4}e^{2y} = -\frac{1}{3}e^{-3x}+C.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 28 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob28">Problem 28 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Without fully solving it, explain why \(\dfrac{dy}{dx} = \dfrac{y}{x}\) cannot have a
+      <em>unique</em> solution curve through the origin. What goes wrong with the standard
+      separation-of-variables method there?
+      </p>
+      <button onclick="toggleSolution('sol28', this)">Show Solution</button>
+      <div id="sol28" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Separating variables gives \(\frac{dy}{y}=\frac{dx}{x}\), which integrates to
+        \(\ln|y|=\ln|x|+C\), i.e. \(y=Cx\) for an arbitrary constant \(C\). But every line
+        \(y=Cx\), no matter what \(C\) is, passes through the origin \((0,0)\) — so infinitely
+        many solution curves all pass through that one point, meaning there cannot be a unique
+        solution there.
+        </p>
+        <p>
+        The underlying issue is that \(f(x,y)=y/x\) is not even defined at \(x=0\) (division by
+        zero), so \(f\) fails to be continuous at the origin. Since the existence-uniqueness
+        theorem's hypotheses (continuity of \(f\) and \(\partial f/\partial y\) in a rectangle
+        around the point) fail right at \((0,0)\), the theorem simply gives no guarantee there —
+        and, as we just saw, uniqueness genuinely does fail. (Separately, the separation step
+        itself divides by \(x\), which is exactly the operation that breaks down at \(x=0\).)
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2.3 -->
+    <h2 id="sec2.3" class="tex-section">Section 2.3
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+    <!-- Problem 29 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob29">Problem 29 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find the general solution to the following differential equation:
+      \[3y'+12y=4\]
+      </p>
+
+      <button onclick="toggleSolution('sol29', this)">Show Solution</button>
+
+      <div id="sol29" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Divide by \(3\) to put the equation in standard form \(y'+P(x)y=f(x)\):</p>
+        \[
+        y'+4y=\frac{4}{3}.
+        \]
+
+        <p>The integrating factor is \(\mu(x)=e^{\int 4\,dx}\):</p>
+        \[
+        \mu(x)=e^{4x}.
+        \]
+
+        <p>Multiplying the standard-form equation by \(\mu(x)\) collapses the left side into the derivative of a product:</p>
+        \[
+        \frac{d}{dx}(e^{4x}y)=\frac{4}{3}e^{4x}.
+        \]
+
+        <p>Integrate both sides:</p>
+        \[
+        e^{4x}y=\frac{4}{3}\cdot\frac{1}{4}e^{4x}+C=\frac{1}{3}e^{4x}+C.
+        \]
+
+        <p>Divide by \(e^{4x}\) to solve for \(y\):</p>
+        \[
+        \boxed{y=\frac{1}{3}+Ce^{-4x}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 30 (was 33) -->
+    <div class="problem">
+      <h3 id="prob30">Problem 30 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find the general solution to the following differential equation:
+      \[y'+3y=6\]
+      </p>
+      <button onclick="toggleSolution('sol30', this)">Show Solution</button>
+      <div id="sol30" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This is already in standard form, with integrating factor</p>
+        \[
+        \mu(x)=e^{\int 3\,dx}=e^{3x}.
+        \]
+        <p>Multiplying through:</p>
+        \[
+        \frac{d}{dx}(e^{3x}y)=6e^{3x}.
+        \]
+        <p>Integrating both sides:</p>
+        \[
+        e^{3x}y=2e^{3x}+C.
+        \]
+        <p>Dividing by \(e^{3x}\):</p>
+        \[
+        \boxed{y=2+Ce^{-3x}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 31 (was 30) -->
+    <div class="problem">
+      <h3 id="prob31">Problem 31 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the general solution to the following differential equation:
+      \[y'=2y+x^2+5\]
+      </p>
+
+      <button onclick="toggleSolution('sol31', this)">Show Solution</button>
+
+      <div id="sol31" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Move the \(y\)-term to the left to reach standard form:</p>
+        \[
+        y'-2y=x^2+5.
+        \]
+
+        <p>The integrating factor is</p>
+        \[
+        \mu(x)=e^{\int -2\,dx}=e^{-2x}.
+        \]
+
+        <p>Multiplying through:</p>
+        \[
+        \frac{d}{dx}(e^{-2x}y)=e^{-2x}(x^2+5).
+        \]
+
+        <p>
+        The right side needs integration by parts twice (or the tabular/reduction-formula shortcut)
+        to handle \(x^2e^{-2x}\). Using
+        \(\int x^2 e^{-2x}\,dx = e^{-2x}\left(-\frac{x^2}{2}-\frac{x}{2}-\frac{1}{4}\right)+C\)
+        together with \(\int 5e^{-2x}\,dx = -\frac{5}{2}e^{-2x}+C\):
+        </p>
+        \[
+        \int e^{-2x}(x^2+5)\,dx
+        = e^{-2x}\left(-\frac{x^2}{2}-\frac{x}{2}-\frac{1}{4}-\frac{5}{2}\right)+C
+        = e^{-2x}\left(-\frac{x^2}{2}-\frac{x}{2}-\frac{11}{4}\right)+C.
+        \]
+
+        <p>So</p>
+        \[
+        e^{-2x}y = e^{-2x}\left(-\frac{x^2}{2}-\frac{x}{2}-\frac{11}{4}\right)+C,
+        \]
+        <p>and dividing by \(e^{-2x}\) gives</p>
+        \[
+        \boxed{y=-\frac{x^2}{2}-\frac{x}{2}-\frac{11}{4}+Ce^{2x}.}
+        \]
+        <p>
+        (You can check this answer by plugging it back into \(y'-2y=x^2+5\) directly — the
+        \(Ce^{2x}\) terms should cancel completely, leaving exactly \(x^2+5\).)
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 32 (was 32) -->
+    <div class="problem">
+      <h3 id="prob32">Problem 32 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the particular solution to the following initial value problem:
+      \[y'-\tan(x)y=\cos^2(x), \quad y(0)=-1\]
+      </p>
+
+      <button onclick="toggleSolution('sol32', this)">Show Solution</button>
+
+      <div id="sol32" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>The equation is already in standard form with \(P(x)=-\tan(x)\), so the integrating factor is</p>
+        \[
+        \mu(x)=e^{\int -\tan(x)\,dx}=e^{\ln|\cos x|}=\cos(x).
+        \]
+
+        <p>Multiplying through by \(\cos(x)\):</p>
+        \[
+        \frac{d}{dx}(y\cos x)=\cos(x)\cdot\cos^2(x) = \cos^3 x.
+        \]
+
+        <p>To integrate \(\cos^3x\), split off one cosine and use \(\cos^2x=1-\sin^2x\):</p>
+        \[
+        \int\cos^3x\,dx = \int\cos x(1-\sin^2x)\,dx = \sin x-\frac{\sin^3x}{3}+C.
+        \]
+
+        <p>So</p>
+        \[
+        y\cos x=\sin x-\frac{\sin^3x}{3}+C.
+        \]
+
+        <p>Apply the initial condition \(y(0)=-1\): at \(x=0\), \(\cos(0)=1\) and \(\sin(0)=0\), so</p>
+        \[
+        (-1)(1) = 0-0+C \quad\Longrightarrow\quad C=-1.
+        \]
+
+        <p>So \(y\cos x = \sin x - \frac{1}{3}\sin^3x-1\), and dividing by \(\cos x\) gives the particular solution:</p>
+        \[
+        \boxed{y=\frac{\sin x-\frac{1}{3}\sin^3x-1}{\cos x}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 33 (was 31) -->
+    <div class="problem">
+      <h3 id="prob33">Problem 33 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find the particular solution to the following initial value problem:
+      \[yy'-x=2y^2, \quad y(1)=5\]
+      </p>
+
+      <button onclick="toggleSolution('sol33', this)">Show Solution</button>
+
+      <div id="sol33" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        This equation is not linear in \(y\), but it becomes linear if we substitute
+        \(u=y^2\). First, rewrite the equation as
+        \[
+        yy'-2y^2=x.
+        \]
+        </p>
+
+        <p>Let \(u=y^2\). Then \(\dfrac{du}{dx}=2y\dfrac{dy}{dx}=2yy'\), so \(yy'=\dfrac{1}{2}\dfrac{du}{dx}\). Substituting,</p>
+        \[
+        \frac{1}{2}\frac{du}{dx}-2u=x \quad\Longrightarrow\quad \frac{du}{dx}-4u=2x.
+        \]
+
+        <p>This is now a first-order linear equation in \(u\). The integrating factor is \(\mu(x)=e^{-4x}\), and</p>
+        \[
+        \frac{d}{dx}(e^{-4x}u)=2xe^{-4x}.
+        \]
+
+        <p>Integrating the right side (using \(\int xe^{ax}dx = e^{ax}\left(\frac{x}{a}-\frac{1}{a^2}\right)\) with \(a=-4\)):</p>
+        \[
+        \int 2xe^{-4x}\,dx = e^{-4x}\left(-\frac{x}{2}-\frac{1}{8}\right)+C.
+        \]
+
+        <p>So</p>
+        \[
+        u = Ce^{4x}-\frac{x}{2}-\frac{1}{8},
+        \]
+        <p>and recalling \(u=y^2\),</p>
+        \[
+        y^2=Ce^{4x}-\frac{x}{2}-\frac{1}{8}.
+        \]
+
+        <p>Now apply the initial condition \(y(1)=5\), i.e. \(y^2=25\) when \(x=1\):</p>
+        \[
+        25=Ce^4-\frac{1}{2}-\frac{1}{8} = Ce^4-\frac{5}{8}
+        \quad\Longrightarrow\quad
+        Ce^4 = 25+\frac{5}{8}=\frac{205}{8}
+        \quad\Longrightarrow\quad
+        C=\frac{205}{8}e^{-4}.
+        \]
+
+        <p>So \(Ce^{4x} = \frac{205}{8}e^{-4}e^{4x} = \frac{205}{8}e^{4(x-1)}\), and the particular solution is</p>
+        \[
+        \boxed{y^2=\frac{205}{8}e^{4(x-1)}-\frac{x}{2}-\frac{1}{8}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 34 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob34">Problem 34 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Explain why the integrating-factor method works for \(y'+P(x)y=f(x)\), but would fail if
+      applied the same way to the nonlinear equation \(y'+y^2=x\). Specifically, what property of
+      the left-hand side is essential to the method, and why does the \(y^2\) term break it?
+      </p>
+      <button onclick="toggleSolution('sol34', this)">Show Solution</button>
+      <div id="sol34" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        The entire method hinges on one algebraic trick: multiplying the standard-form equation by
+        \(\mu(x)\) turns the left side into the exact derivative of a product,
+        \[
+        \mu(x)y' + \mu(x)P(x)y = \frac{d}{dx}\big(\mu(x)y\big),
+        \]
+        which is possible only because \(y\) and \(y'\) each appear to the first power (linearly)
+        and are not multiplied by each other — that is exactly what makes the product rule
+        \(\frac{d}{dx}(\mu y) = \mu y' + \mu' y\) line up with the left side of the equation once
+        \(\mu\) is chosen correctly.
+        </p>
+        <p>
+        If we try the same idea on \(y'+y^2=x\), multiplying by some \(\mu(x)\) gives
+        \(\mu(x)y' + \mu(x)y^2\). For this to be a total derivative of some product, we would need
+        something like \(\frac{d}{dx}(\mu y) = \mu y' + \mu' y\) — but our second term is
+        \(\mu(x)y^2\), not \(\mu'(x)y\). There is no function \(\mu(x)\) depending on \(x\) alone
+        that can turn \(\mu(x)y^2\) into a matching term, because the derivative of any product
+        involving \(y^2\) naturally produces a \(2yy'\) term (via the chain rule), which is not
+        present in our expression at all. So the product-rule trick that makes the whole method
+        work is fundamentally tied to \(y\) appearing linearly — it breaks down as soon as \(y\) is
+        raised to a power other than one.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2.4 -->
+    <h2 id="sec2.4" class="tex-section">Section 2.4
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 35 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob35">Problem 35 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+      \[(2x+y)dx-(x+6y)dy=0\]
+      </p>
+
+      <button onclick="toggleSolution('sol35', this)">Show Solution</button>
+
+      <div id="sol35" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Identify \(M\) and \(N\) from \(M\,dx+N\,dy=0\):</p>
+        \[
+        M=2x+y, \qquad N=-(x+6y).
+        \]
+
+        <p>The equation is exact exactly when \(M_y=N_x\), so compute both partial derivatives:</p>
+        \[
+        M_y=\frac{\partial}{\partial y}(2x+y)=1, \qquad N_x=\frac{\partial}{\partial x}\big(-(x+6y)\big)=-1.
+        \]
+
+        <p>Since \(M_y=1\neq -1=N_x\), the equation is <strong>not exact</strong>, and the method of this section does not apply to it directly (it would require an integrating factor, which is beyond this section).</p>
+      </div>
+    </div>
+
+    <!-- Problem 36 (was 38) -->
+    <div class="problem">
+      <h3 id="prob36">Problem 36 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Determine whether the following differential equation is exact. If it is, find the general solution.
+      \[(2xy-3)\,dx+(x^2+4y)\,dy=0\]
+      </p>
+      <button onclick="toggleSolution('sol36', this)">Show Solution</button>
+      <div id="sol36" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Here \(M=2xy-3\) and \(N=x^2+4y\). Check exactness:</p>
+        \[
+        M_y=2x, \qquad N_x=2x.
+        \]
+        <p>Since \(M_y=N_x\), the equation is <strong>exact</strong>.</p>
+        <p>Integrate \(M\) with respect to \(x\):</p>
+        \[
+        f=\int(2xy-3)\,dx = x^2y-3x+g(y).
+        \]
+        <p>Differentiate with respect to \(y\) and match to \(N\):</p>
+        \[
+        \frac{\partial f}{\partial y}=x^2+g'(y)\stackrel{\text{set}}{=}x^2+4y \quad\Longrightarrow\quad g'(y)=4y \quad\Longrightarrow\quad g(y)=2y^2.
+        \]
+        <p>The implicit general solution is</p>
+        \[
+        \boxed{x^2y-3x+2y^2=C.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 37 (was 36) -->
+    <div class="problem">
+      <h3 id="prob37">Problem 37 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Determine whether the following differential equation is exact or not. If it is exact, find the general solution.
+      \[(5y-2x)dy-2y\, dx=0\]
+      </p>
+
+      <button onclick="toggleSolution('sol37', this)">Show Solution</button>
+
+      <div id="sol37" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>Rewrite the equation in the standard order \(M\,dx+N\,dy=0\):</p>
+        \[
+        M=-2y, \qquad N=5y-2x.
+        \]
+
+        <p>Check exactness:</p>
+        \[
+        M_y=-2, \qquad N_x=-2.
+        \]
+        <p>Since \(M_y=N_x\), the equation is <strong>exact</strong>.</p>
+
+        <p>To find \(f(x,y)\) with \(f_x=M\), integrate \(M\) with respect to \(x\) (treating \(y\) as a constant), which introduces an unknown function \(g(y)\) instead of a constant:</p>
+        \[
+        f=\int -2y\,dx=-2xy+g(y).
+        \]
+
+        <p>Differentiate this with respect to \(y\) and match it to \(N\):</p>
+        \[
+        \frac{\partial f}{\partial y}=-2x+g'(y) \stackrel{\text{set}}{=} 5y-2x
+        \quad\Longrightarrow\quad
+        g'(y)=5y.
+        \]
+
+        <p>Integrate to find \(g(y)\):</p>
+        \[
+        g(y)=\frac{5}{2}y^2.
+        \]
+
+        <p>Assembling \(f(x,y)\), the implicit general solution \(f(x,y)=C\) is</p>
+        \[
+        \boxed{-2xy+\frac{5}{2}y^2=C.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 38 (was 37) -->
+    <div class="problem">
+      <h3 id="prob38">Problem 38 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find \(k\) so that the equation is exact:
+      \[
+      (6xy^3+\cos y)dx+(2kx^2y^2-x\sin y)dy=0
+      \]
+      </p>
+
+      <button onclick="toggleSolution('sol38', this)">Show Solution</button>
+
+      <div id="sol38" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+
+        <p>
+        Here \(M=6xy^3+\cos y\) and \(N=2kx^2y^2-x\sin y\) involve the unknown constant \(k\); we
+        need to choose \(k\) to force \(M_y=N_x\). Compute both partial derivatives:
+        </p>
+        \[
+        M_y=18xy^2-\sin y, \qquad N_x=4kxy^2-\sin y.
+        \]
+
+        <p>Setting \(M_y=N_x\), the \(-\sin y\) terms cancel from both sides, leaving</p>
+        \[
+        18xy^2=4kxy^2.
+        \]
+
+        <p>Since this must hold for all \(x\) and \(y\) (not just specific values), we can divide both sides by \(xy^2\) (assuming it's nonzero) to compare coefficients directly:</p>
+        \[
+        18=4k \quad\Longrightarrow\quad k=\frac{9}{2}.
+        \]
+        <p>
+        With this value of \(k\), the equation is exact for every \(x\) and \(y\), and could then be
+        solved by the usual method (integrate \(M\) in \(x\), match \(\partial f/\partial y\) to
+        \(N\), and solve for the unknown function of \(y\)).
+        </p>
+      </div>
+    </div>
+
+    <!-- Problem 39 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob39">Problem 39 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      If \(M_y\neq N_x\) for a given equation \(M\,dx+N\,dy=0\), is it necessarily impossible to
+      find an implicit solution curve? What kind of technique (not covered in this section) might
+      rescue the situation?
+      </p>
+      <button onclick="toggleSolution('sol39', this)">Show Solution</button>
+      <div id="sol39" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        No — \(M_y\neq N_x\) only tells us that \(M\,dx+N\,dy\) is not <em>already</em> an exact
+        differential; it does not mean the equation has no solution at all, only that the specific
+        method of this section (integrate \(M\), match to \(N\)) does not apply directly.
+        </p>
+        <p>
+        The standard rescue is to multiply the whole equation by a well-chosen
+        <strong>integrating factor</strong> \(\mu(x)\) or \(\mu(y)\) (a function of \(x\) alone, or
+        of \(y\) alone, depending on the equation), turning \(\mu M\,dx+\mu N\,dy=0\) into an exact
+        equation even though the original one wasn't. This is a different (and more general) use of
+        the phrase "integrating factor" than the one from Section 2.3, though the underlying idea —
+        multiplying by a function to make a derivative pattern appear — is philosophically the same
+        trick.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 2.5 -->
+    <h2 id="sec2.5" class="tex-section">Section 2.5
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 40 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob40">Problem 40 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find the solutions to
+      \[
+      \frac{dy}{dx} = (x+y-1)^2.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol40', this)">Show Solution</button>
+      <div id="sol40" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Substitute).</span></p>
+        <p>
+        The right side depends only on the combination \(x+y-1\), so let \(u=x+y-1\). Then
+        \(\dfrac{du}{dx}=1+\dfrac{dy}{dx}\), i.e. \(\dfrac{dy}{dx}=\dfrac{du}{dx}-1\).
+        </p>
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Rewrite the DE in terms of \(u\)).</span></p>
+        \[
+        \frac{du}{dx}-1=u^2 \quad\Longrightarrow\quad \frac{du}{dx}=u^2+1.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Separate and integrate).</span></p>
+        \[
+        \frac{du}{u^2+1}=dx \quad\Longrightarrow\quad \int\frac{du}{u^2+1}=\int dx \quad\Longrightarrow\quad \tan^{-1}(u)=x+C.
+        \]
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Return to the original variables).</span></p>
+        <p>Solving for \(u\), \(u=\tan(x+C)\). Since \(u=x+y-1\), this gives \(x+y-1=\tan(x+C)\), so</p>
+        \[
+        \boxed{y=\tan(x+C)-x+1.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 41 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob41">Problem 41 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find the general solution to
+      \[
+      \frac{dy}{dx} = 1+\sqrt{y-x+2}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol41', this)">Show Solution</button>
+      <div id="sol41" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Substitute).</span></p>
+        <p>Let \(u=y-x+2\), so \(\dfrac{du}{dx}=\dfrac{dy}{dx}-1\), i.e. \(\dfrac{dy}{dx}=\dfrac{du}{dx}+1\).</p>
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Rewrite the DE in terms of \(u\)).</span></p>
+        \[
+        \frac{du}{dx}+1=1+\sqrt{u} \quad\Longrightarrow\quad \frac{du}{dx}=\sqrt{u}.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Separate and integrate).</span></p>
+        \[
+        \frac{du}{\sqrt{u}}=dx \quad\Longrightarrow\quad \int u^{-1/2}\,du=\int dx \quad\Longrightarrow\quad 2\sqrt{u}=x+C.
+        \]
+        <p>Solving for \(u\):</p>
+        \[
+        u=\frac{(x+C)^2}{4}.
+        \]
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Return to the original variables).</span></p>
+        <p>Since \(u=y-x+2\), we get \(y-x+2=\dfrac{(x+C)^2}{4}\), so</p>
+        \[
+        \boxed{y=x-2+\frac{(x+C)^2}{4}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 42 (unchanged) -->
+    <div class="problem">
+      <h3 id="prob42">Problem 42 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find the general solution to
+      \[
+      \frac{dy}{dx} = x^2+2xy+y^2-1.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol42', this)">Show Solution</button>
+      <div id="sol42" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        This one is harder because the substitution isn't handed to you — you have to notice that
+        \(x^2+2xy+y^2\) is a perfect square:
+        \[
+        x^2+2xy+y^2=(x+y)^2,
+        \]
+        so the equation is really
+        \[
+        \frac{dy}{dx}=(x+y)^2-1,
+        \]
+        which now has the familiar form \(f(Ax+By+C)\) with \(A=B=1\), \(C=0\).
+        </p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Substitute).</span></p>
+        <p>Let \(u=x+y\), so \(\dfrac{du}{dx}=1+\dfrac{dy}{dx}\), i.e. \(\dfrac{dy}{dx}=\dfrac{du}{dx}-1\).</p>
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Rewrite the DE in terms of \(u\)).</span></p>
+        \[
+        \frac{du}{dx}-1=u^2-1 \quad\Longrightarrow\quad \frac{du}{dx}=u^2.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Separate and integrate).</span></p>
+        \[
+        \frac{du}{u^2}=dx \quad\Longrightarrow\quad \int u^{-2}\,du=\int dx \quad\Longrightarrow\quad -\frac{1}{u}=x+C.
+        \]
+        <p>Solving for \(u\):</p>
+        \[
+        u=-\frac{1}{x+C}.
+        \]
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Return to the original variables).</span></p>
+        <p>Since \(u=x+y\), we get \(x+y=-\dfrac{1}{x+C}\), so</p>
+        \[
+        \boxed{y=-x-\frac{1}{x+C}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 43 (unchanged, conceptual) -->
+    <div class="problem">
+      <h3 id="prob43">Problem 43 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Explain why the substitution \(u=Ax+By+C\) always converts \(\dfrac{dy}{dx}=f(Ax+By+C)\) into
+      a separable equation in \(u\) and \(x\). What role does the assumption \(B\neq 0\) play, and
+      what goes wrong (or becomes unnecessary) if \(B=0\)?
+      </p>
+      <button onclick="toggleSolution('sol43', this)">Show Solution</button>
+      <div id="sol43" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Differentiating \(u=Ax+By+C\) with respect to \(x\) gives
+        \(\dfrac{du}{dx}=A+B\dfrac{dy}{dx}\). As long as \(B\neq 0\), we can solve this for
+        \(\dfrac{dy}{dx}\):
+        \[
+        \frac{dy}{dx}=\frac{1}{B}\left(\frac{du}{dx}-A\right).
+        \]
+        Substituting this into the original equation replaces \(\dfrac{dy}{dx}\) with an expression
+        purely in \(\dfrac{du}{dx}\), and the right-hand side \(f(Ax+By+C)\) is already just \(f(u)\)
+        — so the whole equation becomes a relationship between \(\dfrac{du}{dx}\), \(u\), and \(x\)
+        only, with no \(y\) left anywhere. That is precisely what "separable in \(u\) and \(x\)"
+        means, and it is always achievable this way <em>because</em> \(B\neq 0\) let us isolate
+        \(dy/dx\).
+        </p>
+        <p>
+        If \(B=0\), the substitution \(u=Ax+C\) would not involve \(y\) at all, so there would be no
+        way to recover \(\dfrac{dy}{dx}\) from \(\dfrac{du}{dx}\) — the substitution loses all
+        information about \(y\) and becomes useless. But this case is also not a problem in
+        practice: if \(B=0\), the original equation is \(\dfrac{dy}{dx}=f(Ax+C)\), whose right-hand
+        side already depends on \(x\) alone. Such an equation is already directly integrable
+        (\(y=\int f(Ax+C)\,dx\)) without needing any substitution trick at all.
+        </p>
+      </div>
+    </div>
 
   </main>
 

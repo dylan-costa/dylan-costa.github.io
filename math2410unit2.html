@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>MATH 2410 — Differential Equations Lecture Notes</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax -->
   <script>
@@ -21,7 +22,7 @@
 
   <!-- Top Navigation -->
   <div class="topnav">
-    <a href="index.html">Home</a>	
+    <a href="index.html">Home</a>
     <a href="notes.html">Notes</a>
     <div class="dropdown">
       <button class="dropbtn">Teaching</button>
@@ -43,1566 +44,1034 @@
 
     <!-- Table of Contents -->
     <nav class="toc" id="top">
-	  <strong>The following set of lectures follows Chapters 3-4 of the textbook:</strong><br>
-	  <strong>Unit 2</strong>:
-	  <a href="#lecture8">Lecture 8</a> |
-	  <a href="#lecture9">Lecture 9</a> |
-	  <a href="#lecture10">Lecture 10</a> |
-	  <a href="#lecture11">Lecture 11</a> |
-	  <a href="#lecture12">Lecture 12</a> |
-	  <a href="#lecture13">Lecture 13</a> |
-	  <a href="#lecture14">Lecture 14</a> |
-	  <a href="#lecture15">Lecture 15</a> |
-	  
-	</nav>
-
-
-	
-	<h2 id="lecture8">
-	  Lecture 8: Section 3.1 - Mathematical Modeling (Linear)
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-
-	<p>
-	In this lecture, we will use some of the methods discussed in 
-	Lecture 3 on how to construct models for certain real-world situations/systems 
-	and now solve those differential equations.
-	</p>
-
-	<hr>
-
-	<h3>Example: Radioactive Decay</h3>
-
-	<p>
-	Suppose that we have a substance that decays at a rate proportional to the amount 
-	present at time $t$, and that has a half-life of $3.3$ hours. If $1$g of the substance 
-	is present initially, how long will it take for $90\%$ of the substance to decay?
-	</p>
-
-	<p>First, we define the variables:</p>
-
-	\[
-	\begin{aligned}
-	A(t) &= \text{amount of substance present at time } t \\
-	t &= \text{time in hours} \\
-	A'(t) &= \text{rate of decay}
-	\end{aligned}
-	\]
-
-	<p>
-	The statement “decays at a rate proportional to the amount present” gives
-	</p>
-
-	\[
-	\frac{dA}{dt} = -kA, \quad k>0.
-	\]
-
-	<p>
-	The half-life of $3.3$ hours means
-	</p>
-
-	\[
-	A(3.3) = \frac{1}{2}A(0).
-	\]
-
-	<p>
-	Since initially $A(0)=1$, we obtain
-	</p>
-
-	\[
-	A(3.3) = \frac{1}{2}.
-	\]
-
-	<p>
-	If $90\%$ decays, then $10\%$ remains, so we want
-	</p>
-
-	\[
-	A(t) = \frac{1}{10}.
-	\]
-
-	<p>
-	The differential equation is separable, giving the general solution
-	</p>
-
-	\[
-	A(t) = Ce^{-kt}.
-	\]
-
-	<p>
-	Using the initial condition:
-	</p>
-
-	\[
-	1 = A(0) = C.
-	\]
-
-	<p>
-	Using the half-life:
-	</p>
-
-	\[
-	\frac{1}{2} = e^{-k(3.3)}
-	\quad \Rightarrow \quad
-	k = \frac{-1}{3.3}\ln\!\left(\frac{1}{2}\right).
-	\]
-
-	<p>
-	Finally:
-	</p>
-
-	\[
-	e^{-kt} = \frac{1}{10}
-	\quad \Rightarrow \quad
-	t = \frac{-1}{k}\ln\!\left(\frac{1}{10}\right)
-	\approx 10.96 \text{ hours}.
-	\]
-
-	<hr>
-
-	<p>
-	This type of model is used for exponential growth and decay processes, 
-	including population growth.
-	</p>
-
-	<hr>
-
-	<h3>Example: SI Model for Infectious Disease</h3>
-
-	<p>
-	Suppose that we have a fixed isolated population of $n$ people and we introduce 
-	one infected person into the population. The rate of spread of the disease is 
-	proportional to the number of interactions between susceptible and infected individuals.
-	</p>
-
-	<p>Define the variables:</p>
-
-	\[
-	\begin{aligned}
-	S(t) &= \text{number of susceptible individuals at time } t \\
-	I(t) &= \text{number of infected individuals at time } t \\
-	t &= \text{time} \\
-	I'(t) &= \text{rate of spread of the disease}
-	\end{aligned}
-	\]
-
-	<p>
-	The statement that the disease spreads proportional to encounters between 
-	susceptible and infected individuals gives:
-	</p>
-
-	\[
-	\frac{dI}{dt} = kSI.
-	\]
-
-	<p>
-	Since the population is fixed and starts with one infected person:
-	</p>
-
-	\[
-	S + I = n + 1
-	\]
-
-	\[
-	I(0)=1, \quad S(0)=n.
-	\]
-
-	<p>
-	Substituting $S = n+1-I$ gives the model:
-	</p>
-
-	\[
-	I'(t) = kI(n+1-I), 
-	\qquad I(0)=1.
-	\]
-
-	<p>
-	This is a logistic-type differential equation that models the spread of infection 
-	over time.
-	</p>
-
-	<hr>
-
-	</div>
-	<h2 id="lecture9">
-	  Lecture 9: Section 3.2 - Mathematical Modeling (Nonlinear)
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<p>
-	So far, many models we have studied were linear differential equations. 
-	However, real systems often depend on multiple interacting factors, leading 
-	to nonlinear models.
-	</p>
-
-	<h3>General Nonlinear Growth Model</h3>
-
-	<p>
-	Suppose a growth rate depends both on the amount present and another factor 
-	that itself depends on the amount present. Then we may have a model of the form
-	</p>
-
-	<div class="math">
-	\[
-	\frac{dx}{dt} = x f(x)
-	\]
-	</div>
-
-	<p>
-	This is nonlinear because the dependent variable appears multiplied by a function 
-	of itself.
-	</p>
-
-	<h3>Carrying Capacity and Logistic Equation</h3>
-
-	<p>
-	Suppose an environment has a carrying capacity for a population. Then we model
-	</p>
-
-	<div class="math">
-	\[
-	\frac{dP}{dt} = P f(P)
-	\]
-	</div>
-
-	<p>
-	where
-	</p>
-
-	<div class="math">
-	\[
-	f(K)=0
-	\]
-	</div>
-
-	<p>
-	and \(K\) is the carrying capacity.
-	</p>
-
-	A common choice is a linear function:
-
-	<div class="math">
-	\[
-	f(P)=a-bP
-	\]
-	</div>
-
-	which produces the **logistic equation**
-
-	<div class="math">
-	\[
-	\frac{dP}{dt}=P(a-bP).
-	\]
-	</div>
-
-	---
-
-	<h3>Solving the Logistic Equation</h3>
-
-	Separate variables:
-
-	<div class="math">
-	\[
-	\frac{dP}{P(a-bP)} = dt.
-	\]
-	</div>
-
-	Using partial fractions:
-
-	<div class="math">
-	\[
-	\frac{1}{P(a-bP)} = \frac{C_1}{P} + \frac{C_2}{a-bP}.
-	\]
-	</div>
-
-	After integration and algebra:
-
-	<div class="math">
-	\[
-	P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}.
-	\]
-	</div>
-
-	---
-
-	<h3>Example — Disease Spread</h3>
-
-	<p>
-	A student carrying a flu virus returns to a school of 1000 students. 
-	The rate of spread is proportional to both infected students and 
-	not infected students.
-	</p>
-
-	Model:
+      <strong>The following set of sections follows Chapters 3&ndash;4 of the textbook:</strong><br>
+      <strong>Unit 2</strong>:
+      <a href="#sec3-1">Section 3.1</a> |
+      <a href="#sec3-2">Section 3.2</a> |
+      <a href="#sec3-3">Section 3.3</a> |
+      <a href="#sec4-1">Section 4.1</a> |
+      <a href="#sec4-2">Section 4.2</a> |
+      <a href="#sec4-3">Section 4.3</a> |
+      <a href="#sec4-4">Sections 4.4&ndash;4.6</a>
+    </nav>
+
+    <!-- ================= SECTION 3.1 ================= -->
+    <div class="unit-divider" id="sec3-1">
+      <div class="part-label">Section 3.1</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Linear Models</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Growth and Decay Models</h2>
+
+    <p>Recall from Section 1.3 the basic growth/decay model</p>
+    \[
+    \frac{dx}{dt} = kx, \qquad x(t_0) = x_0,
+    \]
+    <p>where \(k\) is a constant of proportionality. This differential equation is both separable and linear.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      A substance decays at a rate proportional to the amount present at time \(t\) and has a half-life of \(3.3\) hours. If \(1\) g of the substance is present initially, how long will it take for \(90\%\) of the substance to decay?
+      <p>We are told \(\dfrac{dx}{dt} = -kx\). Separating variables,</p>
+      \[
+      \frac{dx}{x} = -k\,dt
+      \;\Longrightarrow\;
+      \int \frac{dx}{x} = \ln|x| = -kt+C
+      \;\Longrightarrow\;
+      x(t) = Ce^{-kt}.
+      \]
+      <p>Since \(x(0) = 1\) g, \(C=1\), so \(x(t) = e^{-kt}\). Using the half-life,</p>
+      \[
+      x(3.3) = \frac{1}{2}x(0) = \frac{1}{2}
+      \;\Longrightarrow\;
+      e^{-3.3k} = \frac{1}{2}
+      \;\Longrightarrow\;
+      k = -\frac{1}{3.3}\ln\!\left(\frac{1}{2}\right).
+      \]
+      <p>We want the time at which \(x(t) = 0.1\) (i.e. \(90\%\) has decayed):</p>
+      \[
+      0.1 = e^{-kt} \;\Longrightarrow\; t = -\frac{\ln(0.1)}{k} \approx 10.96.
+      \]
+      <p>Thus</p>
+      \[
+      \boxed{t \approx 11 \text{ hours}.}
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Newton's Law of Cooling</h3>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      <strong>Newton's Law of Cooling</strong> states that the rate of change of the temperature \(T(t)\) of an object is proportional to the difference between the object's temperature and the temperature \(T_m\) of the surrounding medium:
+      \[
+      \frac{dT}{dt} = k(T-T_m).
+      \]
+    </div>
+
+    <p>Solving by separation of variables,</p>
+    \[
+    \frac{dT}{T-T_m} = k\,dt
+    \;\Longrightarrow\;
+    \int \frac{dT}{T-T_m} = \int k\,dt
+    \;\Longrightarrow\;
+    \ln|T-T_m| = kt+C
+    \;\Longrightarrow\;
+    T(t) = T_m + Ce^{kt}.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      A thermometer reading \(70^\circ\)F is placed in an oven preheated to a constant temperature. The thermometer reads \(110^\circ\)F after \(1\) minute and \(145^\circ\)F after \(2\) minutes. How hot is the oven?
+      <p>Let \(T_m\) be the (constant) oven temperature and \(T(t)\) the thermometer reading at time \(t\) (in minutes). Then</p>
+      \[
+      T(0) = T_m + Ce^{k(0)} = T_m+C = 70 \;\Longrightarrow\; C = 70-T_m,
+      \]
+      <p>so \(T(t) = T_m + (70-T_m)e^{kt}\). Using the two given readings,</p>
+      \[
+      \begin{aligned}
+      T(1) &= T_m + (70-T_m)e^{k} = 110
+        \;\Longrightarrow\; e^{k} = \frac{110-T_m}{70-T_m}, \\
+      T(2) &= T_m + (70-T_m)e^{2k} = 145
+        \;\Longrightarrow\; e^{2k} = \frac{145-T_m}{70-T_m}.
+      \end{aligned}
+      \]
+      <p>Since \(e^{2k} = (e^k)^2\),</p>
+      \[
+      \frac{145-T_m}{70-T_m} = \left(\frac{110-T_m}{70-T_m}\right)^2
+      \;\Longrightarrow\;
+      (145-T_m)(70-T_m) = (110-T_m)^2.
+      \]
+      <p>Expanding both sides,</p>
+      \[
+      10150 - 215T_m + T_m^2 = 12100 - 220T_m + T_m^2
+      \;\Longrightarrow\;
+      5T_m = 1950.
+      \]
+      <p>Thus</p>
+      \[
+      \boxed{T_m = 390^\circ\text{F}.}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      All the models we have worked with so far are <em>linear</em> differential equations. We now turn to nonlinear models.
+    </div>
+
+    <!-- ================= SECTION 3.2 ================= -->
+    <div class="unit-divider" id="sec3-2">
+      <div class="part-label">Section 3.2</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Nonlinear Models</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Nonlinear Population Models</h2>
+
+    <p>Suppose we track a rate of growth that depends on both the amount present and another factor that is itself dependent on the amount present: \(\dfrac{dP}{dt} = P\cdot f(P)\), a <em>nonlinear</em> model.</p>
+
+    <p>Suppose an environment has a carrying capacity for a population, so that</p>
+    \[
+    \frac{dP}{dt} = P\cdot f(P), \qquad f(K) = 0, \quad f(0) = r,
+    \]
+    <p>where \(K\) is the <strong>carrying capacity</strong>. If \(f(P)\) is linear, we obtain</p>
+    \[
+    \frac{dP}{dt} = P\left(r - \frac{r}{K}P\right),
+    \]
+    <p>called the <strong>logistic equation</strong>.</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>logistic equation</strong> is the differential equation
+      \[
+      \frac{dP}{dt} = P(a-bP).
+      \]
+    </div>
+
+    <p><strong>Solving the logistic equation.</strong> Separating variables,</p>
+    \[
+    \frac{dP}{P(a-bP)} = dt.
+    \]
+    <p>Using partial fractions, \(\dfrac{1}{P(a-bP)} = \dfrac{1/a}{P} + \dfrac{b/a}{a-bP}\), so</p>
+    \[
+    \frac{1}{a}\int \frac{dP}{P} + \frac{b}{a}\int \frac{dP}{a-bP} = \int dt
+    \;\Longrightarrow\;
+    \frac{1}{a}\ln\!\left(\frac{P}{a-bP}\right) = t+C.
+    \]
+    <p>Solving for \(P\),</p>
+    \[
+    \frac{P}{a-bP} = ce^{at} \;\Longrightarrow\;
+    P = \frac{ace^{at}}{1-bce^{at}}.
+    \]
+    <p>If \(P(0) = P_0\) with \(P_0 \ne a/b\), then \(c = P_0/(a-bP_0)\), and the solution can be written as</p>
+    \[
+    \boxed{P(t) = \frac{aP_0}{bP_0+(a-bP_0)e^{-at}}.}
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      A student carrying the flu virus returns to an isolated school of \(1000\) students. Suppose the rate of spread is proportional to both the number of students infected and the number not infected. Determine the number of students infected after \(6\) days if \(x(4)=50\).
+      <p>The model is \(\dfrac{dx}{dt} = kx(1000-x)\), \(x(0)=1\), matching the logistic equation with \(a=1000k\), \(b=k\). Then</p>
+      \[
+      x(t) = \frac{1000k}{k+999ke^{-1000kt}} = \frac{1000}{1+999e^{-1000kt}}.
+      \]
+      <p>Using \(x(4)=50\):</p>
+      \[
+      50 = \frac{1000}{1+999e^{-4000k}}
+      \;\Longrightarrow\;
+      e^{-4000k} = \frac{19}{999}
+      \;\Longrightarrow\;
+      k = -\frac{1}{4000}\ln\!\left(\frac{19}{999}\right).
+      \]
+      <p>Then</p>
+      \[
+      \boxed{x(6) \approx 276 \text{ students}.}
+      \]
+    </div>
+
+    <h2 class="tex-section">Adjusting Population Models</h2>
+
+    <p>Recall the logistic model can be written in terms of the carrying capacity \(K\) and intrinsic growth rate \(r\) by setting \(a=r\), \(b=r/K\):</p>
+    \[
+    \frac{dP}{dt} = P\left(r-\frac{r}{K}P\right).
+    \]
+
+    <p>How can we make the model more realistic? Suppose a constant number \(h\) of the population is removed (harvested) per unit time. Then</p>
+    \[
+    \frac{dP}{dt} = P\left(r-\frac{r}{K}P\right) - h, \qquad h>0,
+    \]
+    <p>which is still separable and autonomous.</p>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      The critical points of the harvested model are different from those of the unharvested model! Setting \(\dfrac{dP}{dt}=0\) gives the quadratic equation
+      \[
+      -\frac{r}{K}P^2 + rP - h = 0,
+      \]
+      so
+      \[
+      P = \frac{-r \pm \sqrt{r^2 - 4rh/K}}{-2r/K}.
+      \]
+      If \(h>0\), these critical points shift away from \(P=0\) and \(P=K\).
+    </div>
+
+    <!-- ================= SECTION 3.3 ================= -->
+    <div class="unit-divider" id="sec3-3">
+      <div class="part-label">Section 3.3</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Modeling with Systems of Differential Equations</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Systems of First-Order Differential Equations</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A system
+      \[
+      \begin{aligned}
+      \frac{dx}{dt} &= g_1(t,x,y) \\
+      \frac{dy}{dt} &= g_2(t,x,y)
+      \end{aligned}
+      \]
+      is a <strong>linear system</strong> if both \(g_1\) and \(g_2\) are linear in the variables \(x\) and \(y\), i.e.
+      \[
+      g_1(t,x,y) = c_1x+c_2y+f_1(t), \qquad
+      g_2(t,x,y) = c_3x+c_4y+f_2(t).
+      \]
+      If the system is not linear, it is said to be <strong>nonlinear</strong>.
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Systems of differential equations are used to understand two or more interacting quantities, such as predator-prey populations, multi-tank mixing problems, and multi-step radioactive decay.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      <strong>Radioactive decay series.</strong> Suppose element \(X\) decays into element \(Y\) at rate \(\lambda_1\), which in turn decays into a stable element \(Z\) at rate \(\lambda_2\):
+      \[
+      X \xrightarrow{\ \lambda_1\ } Y \xrightarrow{\ \lambda_2\ } Z.
+      \]
+      If all elements decay at a rate proportional to the amount present, the system is
+      \[
+      \begin{aligned}
+      \frac{dx}{dt} &= -\lambda_1x, \\
+      \frac{dy}{dt} &= -\lambda_2y+\lambda_1x, \\
+      \frac{dz}{dt} &= \lambda_2y.
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      <strong>Multi-tank mixing.</strong> Tank A receives fresh water at \(3\) gal/min and also receives mixed inflow from Tank B at \(1\) gal/min. Tank A's outflow is pumped into Tank B at \(4\) gal/min, and Tank B's outflow leaves the system at \(3\) gal/min. Initially, Tank A holds \(50\) gal of water with \(25\) lb of dissolved salt, and Tank B holds \(50\) gal of pure water.
+      <p>Let \(x_1(t)\) and \(x_2(t)\) denote the amount of salt (in lb) in Tanks A and B, respectively. Since each tank maintains a constant volume of \(50\) gal, the concentration in Tank A is \(x_1/50\) and in Tank B is \(x_2/50\). Then</p>
+      \[
+      \begin{aligned}
+      \frac{dx_1}{dt}
+        &= \underbrace{(3)(0)}_{\text{fresh water in}}
+         + \underbrace{(1)\frac{x_2}{50}}_{\text{from Tank B}}
+         - \underbrace{(4)\frac{x_1}{50}}_{\text{out to Tank B}}
+         = -\frac{2}{25}x_1 + \frac{1}{50}x_2, \\[4pt]
+      \frac{dx_2}{dt}
+        &= \underbrace{(4)\frac{x_1}{50}}_{\text{from Tank A}}
+         - \underbrace{(3)\frac{x_2}{50}}_{\text{leaves system}}
+         - \underbrace{(1)\frac{x_2}{50}}_{\text{to Tank A}}
+         = \frac{2}{25}x_1 - \frac{2}{25}x_2,
+      \end{aligned}
+      \]
+      <p>with initial conditions \(x_1(0)=25\), \(x_2(0)=0\).</p>
+    </div>
+
+    <!-- ================= SECTION 4.1 ================= -->
+    <div class="unit-divider" id="sec4-1">
+      <div class="part-label">Section 4.1</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Preliminary Theory &mdash; Linear Equations</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Homogeneous Linear Equations and Superposition</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A linear \(n\)th-order differential equation of the form
+      \[
+      a_n(x)y^{(n)} + a_{n-1}(x)y^{(n-1)} + \cdots + a_1(x)y' + a_0(x)y = 0
+      \]
+      is said to be <strong>homogeneous</strong>. If instead
+      \[
+      a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = g(x)
+      \]
+      with \(g(x)\ne 0\), the equation is said to be <strong>nonhomogeneous</strong>.
+    </div>
+
+    <p>Throughout, we assume the coefficients \(a_i(x)\) are continuous and \(a_n(x)\) is nonzero on the interval under consideration.</p>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Homogeneous linear differential equations always admit the constant solution \(y=0\).
+    </div>
+
+    <div class="theorem">
+      <span class="label">Theorem (Superposition Principle)</span>
+      Let \(y_1,\dots,y_n\) be solutions of a homogeneous linear \(n\)th-order differential equation
+      \[
+      a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = 0
+      \]
+      on an interval \(I\). Then for any constants \(c_1,\dots,c_n\),
+      \[
+      y = c_1y_1 + c_2y_2 + \cdots + c_ny_n
+      \]
+      is also a solution of the equation on \(I\).
+    </div>
+
+    <p>To see why, suppose \(y_1\) and \(y_2\) are solutions. Then for any constant \(c_1\),</p>
+    \[
+    a_n(x)\frac{d^n}{dx^n}(c_1y_1) + \cdots + a_1(x)\frac{d}{dx}(c_1y_1) +
+    a_0(x)(c_1y_1)
+    = c_1\Big(a_n(x)y_1^{(n)} + \cdots + a_1(x)y_1' + a_0(x)y_1\Big)
+    = c_1(0) = 0,
+    \]
+    <p>so \(c_1y_1\) is also a solution. Likewise,</p>
+    \[
+    a_n(x)\frac{d^n}{dx^n}(y_1+y_2) + \cdots + a_1(x)\frac{d}{dx}(y_1+y_2) +
+    a_0(x)(y_1+y_2) = 0 + 0 = 0,
+    \]
+    <p>so \(y_1+y_2\) is also a solution. Together, these two facts give the superposition principle stated above.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Verify that \(y_1=x^2\) and \(y_2=x^2\ln(x)\) are solutions to \(x^3y'''-2xy'+4y=0\) on \((0,\infty)\).
+      <p>For \(y_1=x^2\): \(y_1'=2x\), \(y_1''=2\), \(y_1'''=0\), so</p>
+      \[
+      x^3(0) - 2x(2x) + 4(x^2) = -4x^2+4x^2 = 0. \checkmark
+      \]
+      <p>For \(y_2=x^2\ln x\): \(y_2' = 2x\ln x + x\), \(y_2'' = 2\ln x+3\), \(y_2''' = 2/x\), so</p>
+      \[
+      x^3\left(\frac{2}{x}\right) - 2x(2x\ln x+x) + 4(x^2\ln x)
+      = 2x^2 - 4x^2\ln x - 2x^2 + 4x^2\ln x = 0. \checkmark
+      \]
+      <p>By the superposition principle,</p>
+      \[
+      \boxed{y = c_1x^2+c_2x^2\ln(x)}
+      \]
+      <p>is also a solution, for any constants \(c_1,c_2\).</p>
+    </div>
+
+    <h2 class="tex-section">Linear Independence and the Wronskian</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A set of functions \(f_1(x),\dots,f_n(x)\) is said to be <strong>linearly dependent</strong> on an interval \(I\) if there exist constants \(c_1,\dots,c_n\), not all zero, such that
+      \[
+      c_1f_1(x) + \cdots + c_nf_n(x) = 0 \qquad \text{for all } x \in I.
+      \]
+      Otherwise, the set is said to be <strong>linearly independent</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The set \(f_1(x)=x\), \(f_2(x)=x^2\) is linearly independent on \((-\infty,\infty)\). If \(c_1f_1(x)+c_2f_2(x) = c_1x+c_2x^2 = 0\) for all \(x\), then \(c_2x^2=-c_1x\), i.e. \(-c_1 = c_2x\) for all \(x\) — but the left side is constant while the right side is not (unless \(c_1=c_2=0\)). So the only solution is \(c_1=c_2=0\), and the set is linearly independent.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The set \(f_1(x)=x\), \(f_2(x)=x^2\), \(f_3(x)=4x+3x^2\) is linearly dependent, since
+      \[
+      -4f_1(x) - 3f_2(x) + f_3(x) = -4x-3x^2+4x+3x^2 = 0. \checkmark
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The set \(f_1(x)=5\), \(f_2(x)=\cos^2x\), \(f_3(x)=\sin^2x\) is linearly dependent on \((-\infty,\infty)\), since
+      \[
+      f_1(x) - 5f_2(x) - 5f_3(x) = 5 - 5(\cos^2x+\sin^2x) = 5-5 = 0.
+      \]
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      For functions \(f_1,\dots,f_n\) that are each \((n-1)\)-times differentiable, the <strong>Wronskian</strong> is
+      \[
+      W(f_1,\dots,f_n) =
+      \det\begin{pmatrix}
+      f_1 & f_2 & \cdots & f_n \\
+      f_1' & f_2' & \cdots & f_n' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      f_1^{(n-1)} & f_2^{(n-1)} & \cdots & f_n^{(n-1)}
+      \end{pmatrix}.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      A set of functions \(f_1,\dots,f_n\) is linearly independent on \(I\) if and only if \(W(f_1,\dots,f_n) \ne 0\) for all \(x \in I\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Recall that for a \(2\times 2\) matrix, \(\det\begin{pmatrix} a&b\\c&d \end{pmatrix} = ad-bc\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f_1(x)=e^x\), \(f_2(x)=e^{-x}\). Then
+      \[
+      W(f_1,f_2) =
+      \begin{vmatrix} e^x & e^{-x} \\ e^x & -e^{-x} \end{vmatrix}
+      = e^x(-e^{-x}) - e^{-x}(e^x) = -1-1 = -2 \ne 0,
+      \]
+      so \(f_1\) and \(f_2\) are linearly independent on \((-\infty,\infty)\).
+    </div>
+
+    <h2 class="tex-section">Fundamental Sets and General Solutions</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      Any set of \(n\) linearly independent solutions \(f_1,\dots,f_n\) of a homogeneous linear \(n\)th-order differential equation on an interval \(I\) is said to be a <strong>fundamental set of solutions</strong> on \(I\).
+    </div>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Let \(f_1,\dots,f_n\) be a fundamental set of solutions of a homogeneous linear \(n\)th-order differential equation on \(I\). Then the <strong>general solution</strong> of the equation on \(I\) is
+      \[
+      y = c_1f_1+c_2f_2+\cdots+c_nf_n,
+      \]
+      where \(c_1,\dots,c_n\) are arbitrary constants.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The functions \(y_1=e^{3x}\), \(y_2=e^{-3x}\) are solutions of \(y''-9y=0\) on \((-\infty,\infty)\). Since
+      \[
+      W(e^{3x},e^{-3x}) =
+      \begin{vmatrix} e^{3x} & e^{-3x} \\ 3e^{3x} & -3e^{-3x} \end{vmatrix}
+      = -3-3 = -6 \ne 0,
+      \]
+      \(\{y_1,y_2\}\) is a fundamental set of solutions, so the general solution is
+      \[
+      \boxed{y = c_1e^{3x}+c_2e^{-3x}.}
+      \]
+    </div>
+
+    <p>Now consider the <em>nonhomogeneous</em> case.</p>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Let \(y_p\) be a particular solution of the nonhomogeneous linear \(n\)th-order equation, and let \(y_1,\dots,y_n\) be a fundamental set of solutions of the corresponding homogeneous equation. Then
+      \[
+      y = c_1y_1+\cdots+c_ny_n+y_p
+      \]
+      is a general solution of the nonhomogeneous equation.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Since \(y_p=\sin(x)\) is a solution of \(y''-y=-2\sin(x)\), and \(y_1=e^x\), \(y_2=e^{-x}\) are solutions of the corresponding homogeneous equation \(y''-y=0\), the general solution of \(y''-y=-2\sin(x)\) is
+      \[
+      \boxed{y = c_1e^x+c_2e^{-x}+\sin(x).}
+      \]
+    </div>
+
+    <!-- ================= SECTION 4.2 ================= -->
+    <div class="unit-divider" id="sec4-2">
+      <div class="part-label">Section 4.2</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Reduction of Order</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Reduction of Order</h2>
+
+    <p>Given a homogeneous linear differential equation, how do we locate more than one solution? Consider a second-order linear homogeneous DE</p>
+    \[
+    y'' + P(x)y' + Q(x)y = 0,
+    \]
+    <p>with \(P(x),Q(x)\) continuous on the interval we consider, and suppose we already know one solution \(y_1(x)\). We want to locate a second, linearly independent solution \(y_2(x)\).</p>
+
+    <p>Since \(y_1,y_2\) must be linearly independent, the ratio \(u(x) = y_2(x)/y_1(x)\) is nonconstant. Write \(y_2(x) = u(x)y_1(x)\), so</p>
+    \[
+    y_2' = u'y_1+uy_1', \qquad
+    y_2'' = u''y_1+2u'y_1'+uy_1''.
+    \]
+    <p>Substituting into the differential equation,</p>
+    \[
+    \begin{aligned}
+    y_2''+Py_2'+Qy_2
+      &= u''y_1+2u'y_1'+uy_1'' + P(u'y_1+uy_1') + Quy_1 \\
+      &= u''y_1 + 2u'y_1' + Pu'y_1 + u\underbrace{(y_1''+Py_1'+Qy_1)}_{0} \\
+      &= y_1u'' + (2y_1'+Py_1)u'.
+    \end{aligned}
+    \]
+    <p>We need this to equal zero, so letting \(w=u'\),</p>
+    \[
+    y_1w' + (2y_1'+Py_1)w = 0,
+    \]
+    <p>which is a first-order linear DE in \(w\). Its integrating factor is</p>
+    \[
+    \mu(x) = e^{\int \frac{2y_1'+Py_1}{y_1}dx}
+      = e^{\int \left(\frac{2y_1'}{y_1}+P\right)dx}
+      = e^{2\ln|y_1|}e^{\int P\,dx} = y_1^2\,e^{\int P\,dx}.
+    \]
+    <p>Since \(\dfrac{d}{dx}(\mu(x)w)=0\), we get \(\mu(x)w=c\), so</p>
+    \[
+    w = \frac{c}{y_1^2\,e^{\int P\,dx}} = c\cdot\frac{e^{-\int P\,dx}}{y_1^2}.
+    \]
+    <p>Choosing \(c=1\) and integrating,</p>
+    \[
+    u = \int \frac{e^{-\int P\,dx}}{y_1^2}\,dx.
+    \]
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      If \(y_1(x)\) is a known solution of \(y''+P(x)y'+Q(x)y=0\) on an interval \(I\), then a second, linearly independent solution is
+      \[
+      y_2(x) = y_1(x)\int \frac{e^{-\int P(x)\,dx}}{y_1(x)^2}\,dx.
+      \]
+      One can check that \(W(y_1,y_2) = e^{-\int P(x)\,dx} \ne 0\), so \(\{y_1,y_2\}\) is a fundamental set of solutions and the general solution is \(y=c_1y_1+c_2y_2\).
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Method of Solving</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Write the DE in standard form \(y''+P(x)y'+Q(x)y=0\) and identify the known solution \(y_1(x)\).</li>
+          <li>Set \(y_2 = u(x)y_1(x)\) and substitute into the DE.</li>
+          <li>The \(u\) terms will cancel, leaving a first-order linear DE in \(w=u'\).</li>
+          <li>Solve for \(w\) using an integrating factor, then integrate to find \(u\).</li>
+          <li>Form \(y_2 = u(x)y_1(x)\), and write the general solution \(y=c_1y_1+c_2y_2\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Given that \(y_1=e^x\) is a solution to \(y''-y=0\) on \((-\infty,\infty)\), find the general solution.
+      <p>Let \(y_2=u(x)e^x\). Then</p>
+      \[
+      y_2' = e^x(u+u'), \qquad y_2'' = e^x(u''+2u'+u).
+      \]
+      <p>Substituting,</p>
+      \[
+      y_2''-y_2 = e^x(u''+2u'+u) - ue^x = e^x(u''+2u').
+      \]
+      <p>We want \(u''+2u'=0\), so with \(w=u'\): \(w'+2w=0\). The integrating factor is \(\mu(x)=e^{2x}\), so</p>
+      \[
+      \frac{d}{dx}\big(e^{2x}w\big)=0 \;\Longrightarrow\; e^{2x}w=c_2
+      \;\Longrightarrow\; w = c_2e^{-2x}.
+      \]
+      <p>Integrating, \(u = -\tfrac12c_2e^{-2x}+c_1\). Choosing \(c_2=-2\), \(c_1=0\) gives \(u=e^{-2x}\), so \(y_2 = e^{-2x}e^x = e^{-x}\). Thus</p>
+      \[
+      \boxed{y = c_1e^x+c_2e^{-x}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Given that \(y_1=x^2\) is a solution to \(x^2y''-3xy'+4y=0\) on \((0,\infty)\), find the general solution.
+      <p>Standard form: \(y''-\dfrac3xy'+\dfrac{4}{x^2}y=0\). Let \(y_2=u(x)x^2\). Then</p>
+      \[
+      y_2' = u'x^2+2xu, \qquad y_2'' = u''x^2+4xu'+2u.
+      \]
+      <p>Substituting,</p>
+      \[
+      y_2''-\frac3xy_2'+\frac{4}{x^2}y_2
+        = (u''x^2+4xu'+2u) - \frac3x(u'x^2+2xu)+\frac{4}{x^2}(ux^2)
+        = u''x^2+xu'.
+      \]
+      <p>We want \(u''x^2+xu'=0\), so with \(w=u'\): \(x^2w'+xw=0\), i.e. \(w'+\dfrac1xw=0\). The integrating factor is \(\mu(x)=e^{\int (1/x)dx}=x\), so</p>
+      \[
+      \frac{d}{dx}(xw)=0 \;\Longrightarrow\; xw=c_1
+      \;\Longrightarrow\; w=\frac{c_1}{x}.
+      \]
+      <p>Integrating, \(u = c_1\ln(x)+c_2\). Choosing \(c_1=1\), \(c_2=0\) gives \(u=\ln(x)\), so \(y_2=x^2\ln(x)\). Checking,</p>
+      \[
+      W(y_1,y_2) = \begin{vmatrix}x^2 & x^2\ln(x)\\ 2x & 2x\ln(x)+x
+      \end{vmatrix} = x^3+2x^3\ln(x)-2x^3\ln(x) = x^3 \ne 0
+      \]
+      <p>on \((0,\infty)\), so</p>
+      \[
+      \boxed{y = c_1x^2+c_2x^2\ln(x).}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Given that \(y_1=1\) is a solution to \((1-x^2)y''+2xy'=0\), find the general solution.
+      <p>Let \(y_2=u\). Then \(y_2'=u'\), \(y_2''=u''\), and substituting,</p>
+      \[
+      (1-x^2)u''+2xu'=0 \;\Longrightarrow\; u''+\frac{2x}{1-x^2}u'=0.
+      \]
+      <p>With \(w=u'\): \(w'+\dfrac{2x}{1-x^2}w=0\). The integrating factor is</p>
+      \[
+      \mu(x) = e^{\int \frac{2x}{1-x^2}dx} = e^{-\ln(1-x^2)}
+        = \frac{1}{1-x^2}.
+      \]
+      <p>Then \(\dfrac{d}{dx}\left(\dfrac{w}{1-x^2}\right)=0\), so \(\dfrac{w}{1-x^2}=c_1\), i.e. \(w=c_1(1-x^2)\). Integrating,</p>
+      \[
+      u = c_1\left(x-\frac{x^3}{3}\right)+c_2.
+      \]
+      <p>Choosing \(c_1=1\), \(c_2=0\) gives \(y_2 = x-\dfrac{x^3}{3}\). Checking,</p>
+      \[
+      W(y_1,y_2) = \begin{vmatrix}1 & x-\frac{x^3}{3}\\ 0 & 1-x^2
+      \end{vmatrix} = 1-x^2 \ne 0
+      \]
+      <p>away from \(x=\pm1\), so</p>
+      \[
+      \boxed{y = c_1+c_2\left(x-\frac{x^3}{3}\right).}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Given that \(y_1=\sin x\) is a solution to \(y''+2(\tan x)y'-y=0\), find the general solution.
+      <p>Let \(y_2=u(x)\sin x\). Then</p>
+      \[
+      y_2' = u'\sin x+u\cos x, \qquad
+      y_2'' = u''\sin x+2u'\cos x-u\sin x.
+      \]
+      <p>Substituting,</p>
+      \[
+      \begin{aligned}
+      y_2''+2\tan x\,y_2'-y_2
+        &= (u''\sin x+2u'\cos x-u\sin x) + 2\tan x(u'\sin x+u\cos x) - u\sin x \\
+        &= u''\sin x + 2u'\left(\cos x+\tan x\sin x\right)
+          + u\left(-2\sin x+2\tan x\cos x\right).
+      \end{aligned}
+      \]
+      <p>Since \(\cos x+\tan x\sin x = \dfrac{\cos^2x+\sin^2x}{\cos x} = \sec x\) and \(-2\sin x+2\tan x\cos x = -2\sin x+2\sin x = 0\), this simplifies to</p>
+      \[
+      u''\sin x + 2\sec x\,u' = 0.
+      \]
+      <p>With \(w=u'\): \(\sin x\,w'+2\sec x\,w=0\), so</p>
+      \[
+      \frac{w'}{w} = -\frac{2\sec x}{\sin x} = -\frac{2}{\sin x\cos x}
+        = -4\csc(2x).
+      \]
+      <p>Integrating, \(\ln|w| = -2\ln|\tan x|+c_1\), so \(w = c_1\cot^2x\). Then</p>
+      \[
+      u = c_1\int \cot^2x\,dx = c_1\int(\csc^2x-1)\,dx
+        = c_1(-\cot x - x)+c_2.
+      \]
+      <p>Choosing \(c_1=-1\), \(c_2=0\) gives \(u = \cot x + x\), so</p>
+      \[
+      y_2 = (\cot x+x)\sin x = \cos x + x\sin x.
+      \]
+      <p>Checking,</p>
+      \[
+      W(\sin x,\, \cos x+x\sin x)
+        = \sin x(x\cos x) - (\cos x+x\sin x)\cos x
+        = x\sin x\cos x - \cos^2x - x\sin x\cos x = -\cos^2x \ne 0
+      \]
+      <p>away from \(x=\pi/2+k\pi\), so</p>
+      \[
+      \boxed{y = c_1\sin x + c_2(\cos x+x\sin x).}
+      \]
+    </div>
+
+    <!-- ================= SECTION 4.3 ================= -->
+    <div class="unit-divider" id="sec4-3">
+      <div class="part-label">Section 4.3</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Homogeneous Equations with Constant Coefficients</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">The Auxiliary Equation</h2>
+
+    <p>We now specialize to homogeneous linear differential equations whose coefficients are all <em>constants</em>. We will focus on the second-order case,</p>
+    \[
+    ay'' + by' + cy = 0, \qquad a\ne 0,
+    \]
+    <p>though the same idea extends to any order.</p>
+
+    <p>Since \(y=e^{mx}\) reproduces itself (up to a constant multiple) under differentiation, it is a natural guess for a solution. Substituting \(y=e^{mx}\), \(y'=me^{mx}\), \(y''=m^2e^{mx}\) into the DE,</p>
+    \[
+    am^2e^{mx}+bme^{mx}+ce^{mx} = e^{mx}\big(am^2+bm+c\big) = 0.
+    \]
+    <p>Since \(e^{mx}\ne 0\) for any \(x\), this holds exactly when</p>
+    \[
+    am^2+bm+c=0.
+    \]
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The equation \(am^2+bm+c=0\) is called the <strong>auxiliary equation</strong> (or <strong>characteristic equation</strong>) of \(ay''+by'+cy=0\). Every root \(m\) of the auxiliary equation produces a solution \(y=e^{mx}\) of the differential equation.
+    </div>
+
+    <p>Since the auxiliary equation is a quadratic in \(m\), the quadratic formula</p>
+    \[
+    m = \frac{-b\pm\sqrt{b^2-4ac}}{2a}
+    \]
+    <p>gives one of three possible outcomes, depending on the sign of the discriminant \(b^2-4ac\): two distinct real roots, one repeated real root, or a pair of complex conjugate roots. Each case produces a different form for the general solution.</p>
+
+    <h3 class="tex-subsection">Case 1: Distinct Real Roots</h3>
+
+    <p>If \(b^2-4ac>0\), the auxiliary equation has two distinct real roots \(m_1\ne m_2\), giving two solutions \(y_1=e^{m_1x}\) and \(y_2=e^{m_2x}\). Since \(y_2/y_1 = e^{(m_2-m_1)x}\) is nonconstant, \(y_1\) and \(y_2\) are linearly independent, so the general solution is</p>
+    \[
+    y = c_1e^{m_1x}+c_2e^{m_2x}.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''-5y'+6y=0\).
+      <p>The auxiliary equation is \(m^2-5m+6=0\), which factors as \((m-2)(m-3)=0\), giving roots \(m=2\) and \(m=3\). Thus</p>
+      \[
+      \boxed{y = c_1e^{2x}+c_2e^{3x}.}
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Case 2: Repeated Real Root</h3>
+
+    <p>If \(b^2-4ac=0\), the auxiliary equation has a single repeated root \(m=-b/(2a)\), giving only one solution \(y_1=e^{mx}\) directly. To find a second, linearly independent solution, we apply <strong>reduction of order</strong> (Section 4.2) with \(y_1=e^{mx}\): since \(y_1\) solves the DE with \(P(x) = b/a\) constant,</p>
+    \[
+    y_2 = y_1\int \frac{e^{-\int (b/a)\,dx}}{y_1^2}\,dx
+      = e^{mx}\int \frac{e^{-(b/a)x}}{e^{2mx}}\,dx.
+    \]
+    <p>Since \(m=-b/(2a)\), we have \(e^{2mx}=e^{-(b/a)x}\), so the integrand is simply \(1\), giving \(y_2 = e^{mx}\int 1\,dx = xe^{mx}\). Thus the general solution is</p>
+    \[
+    y = c_1e^{mx}+c_2xe^{mx}.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''-6y'+9y=0\).
+      <p>The auxiliary equation is \(m^2-6m+9=0\), i.e. \((m-3)^2=0\), giving the repeated root \(m=3\). Thus</p>
+      \[
+      \boxed{y = c_1e^{3x}+c_2xe^{3x}.}
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Case 3: Complex Conjugate Roots</h3>
+
+    <p>If \(b^2-4ac<0\), the auxiliary equation has a complex conjugate pair of roots \(m = \alpha\pm i\beta\), where \(\alpha = -b/(2a)\) and \(\beta = \sqrt{4ac-b^2}/(2a)\). Formally, this gives solutions \(e^{(\alpha+i\beta)x}\) and \(e^{(\alpha-i\beta)x}\). Using Euler's formula \(e^{i\theta} = \cos\theta+i\sin\theta\),</p>
+    \[
+    e^{(\alpha\pm i\beta)x} = e^{\alpha x}\big(\cos(\beta x)\pm i\sin(\beta x)\big).
+    \]
+    <p>Taking suitable linear combinations of these two (complex) solutions produces two real-valued, linearly independent solutions, \(e^{\alpha x}\cos(\beta x)\) and \(e^{\alpha x}\sin(\beta x)\), so the general solution is</p>
+    \[
+    y = e^{\alpha x}\big(c_1\cos(\beta x)+c_2\sin(\beta x)\big).
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''+4y'+13y=0\).
+      <p>The auxiliary equation is \(m^2+4m+13=0\), so</p>
+      \[
+      m = \frac{-4\pm\sqrt{16-52}}{2} = \frac{-4\pm\sqrt{-36}}{2}
+        = -2\pm 3i.
+      \]
+      <p>Here \(\alpha=-2\) and \(\beta=3\), so</p>
+      \[
+      \boxed{y = e^{-2x}\big(c_1\cos(3x)+c_2\sin(3x)\big).}
+      \]
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Method of Solving</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Write the auxiliary equation \(am^2+bm+c=0\).</li>
+          <li>Find its roots using factoring or the quadratic formula.</li>
+          <li><strong>Distinct real roots \(m_1,m_2\):</strong> \(y=c_1e^{m_1x}+c_2e^{m_2x}\).</li>
+          <li><strong>Repeated real root \(m\):</strong> \(y=c_1e^{mx}+c_2xe^{mx}\).</li>
+          <li><strong>Complex roots \(\alpha\pm i\beta\):</strong> \(y=e^{\alpha x}\big(c_1\cos(\beta x)+c_2\sin(\beta x)\big)\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      The same three cases apply to higher-order constant-coefficient homogeneous equations \(a_ny^{(n)}+\cdots+a_1y'+a_0y=0\): form the degree-\(n\) auxiliary equation \(a_nm^n+\cdots+a_1m+a_0=0\), and each real root of multiplicity \(k\) contributes solutions \(e^{mx},xe^{mx},\dots,x^{k-1}e^{mx}\), while each complex conjugate pair \(\alpha\pm i\beta\) of multiplicity \(k\) contributes \(e^{\alpha x}\cos(\beta x),\dots,x^{k-1}e^{\alpha x}\cos(\beta x)\) and the analogous sine terms.
+    </div>
+
+    <!-- ================= SECTIONS 4.4-4.6 ================= -->
+    <div class="unit-divider" id="sec4-4">
+      <div class="part-label">Sections 4.4&ndash;4.6</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Undetermined Coefficients and Variation of Parameters</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Undetermined Coefficients</h2>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Given a nonhomogeneous linear differential equation
+      \[
+      a_ny^{(n)}+\cdots+a_1y'+a_0y = g(x), \qquad g(x)\ne 0,
+      \]
+      the general solution is \(y = c_1y_1+\cdots+c_ny_n+y_p\), where \(c_1y_1+\cdots+c_ny_n\) is the general solution to the associated homogeneous equation and \(y_p\) is any single (particular) solution to the nonhomogeneous equation.
+    </div>
+
+    <p>The <strong>method of undetermined coefficients</strong> is a way to guess the correct form of \(y_p\) directly, and it applies whenever:</p>
+    <ol>
+      <li>the coefficients \(a_i\) are constants, and</li>
+      <li>\(g(x)\) is a polynomial, an exponential, \(\sin(\beta x)\), \(\cos(\beta x)\), or a sum or product of these.</li>
+    </ol>
+
+    <table class="tex-table">
+      <tr>
+        <th>\(g(x)\)</th>
+        <th>Guess for \(y_p\)</th>
+      </tr>
+      <tr>
+        <td>\(k\) (constant)</td>
+        <td>\(A\)</td>
+      </tr>
+      <tr>
+        <td>\(mx+b\)</td>
+        <td>\(Ax+B\)</td>
+      </tr>
+      <tr>
+        <td>\(ax^2+bx+c\)</td>
+        <td>\(Ax^2+Bx+C\)</td>
+      </tr>
+      <tr>
+        <td>\(\sin(\beta x)\) or \(\cos(\beta x)\)</td>
+        <td>\(A\sin(\beta x)+B\cos(\beta x)\)</td>
+      </tr>
+      <tr>
+        <td>\(e^{mx}\)</td>
+        <td>\(Ae^{mx}\)</td>
+      </tr>
+    </table>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      If a term in your guess for \(y_p\) already appears in the homogeneous solution \(y_c\), multiply that guess by \(x\) (or by \(x^2\) if needed) until no term duplicates a solution of the homogeneous equation.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''+5y'-6y=-6x^2-2x+1\).
+      <p><strong>Homogeneous part.</strong> Guess \(y_c=e^{mx}\):</p>
+      \[
+      m^2+5m-6 = (m+6)(m-1) = 0 \;\Longrightarrow\; m=-6,\ m=1.
+      \]
+      <p>So \(y_c = c_1e^{-6x}+c_2e^{x}\).</p>
+      <p><strong>Particular solution.</strong> Guess \(y_p=Ax^2+Bx+C\), so \(y_p'=2Ax+B\) and \(y_p''=2A\). Substituting,</p>
+      \[
+      y_p''+5y_p'-6y_p = 2A+5(2Ax+B)-6(Ax^2+Bx+C)
+        = -6Ax^2+(10A-6B)x+(2A+5B-6C).
+      \]
+      <p>Matching coefficients with \(-6x^2-2x+1\):</p>
+      \[
+      -6A=-6 \Rightarrow A=1, \qquad 10A-6B=-2 \Rightarrow B=2, \qquad
+      2A+5B-6C=1 \Rightarrow C=\tfrac{11}{6}.
+      \]
+      <p>So \(y_p = x^2+2x+\tfrac{11}{6}\). Thus</p>
+      \[
+      \boxed{y = c_1e^{-6x}+c_2e^{x}+x^2+2x+\frac{11}{6}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''-5y'+4y=\sin(2x)\).
+      <p><strong>Homogeneous part.</strong> Guess \(y_c=e^{mx}\):</p>
+      \[
+      m^2-5m+4 = (m-1)(m-4)=0 \;\Longrightarrow\; m=1,\ m=4.
+      \]
+      <p>So \(y_c=c_1e^{x}+c_2e^{4x}\).</p>
+      <p><strong>Particular solution.</strong> Guess \(y_p=A\cos(2x)+B\sin(2x)\), so \(y_p'=-2A\sin(2x)+2B\cos(2x)\) and \(y_p''=-4A\cos(2x)-4B\sin(2x)\). Substituting,</p>
+      \[
+      \begin{aligned}
+      y_p''-5y_p'+4y_p
+        &= -4A\cos(2x)-4B\sin(2x) -10B\cos(2x)+10A\sin(2x) \\
+        &\qquad +4A\cos(2x)+4B\sin(2x) \\
+        &= 10A\sin(2x) - 10B\cos(2x).
+      \end{aligned}
+      \]
+      <p>Matching with \(\sin(2x)\): \(10A=1 \Rightarrow A=\tfrac{1}{10}\), and \(-10B=0 \Rightarrow B=0\). So \(y_p=\tfrac{1}{10}\cos(2x)\). Thus</p>
+      \[
+      \boxed{y = c_1e^{x}+c_2e^{4x}+\frac{1}{10}\cos(2x).}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the initial value problem \(y''+y=10x+e^{6x}\), \(y(0)=1\), \(y'(0)=0\).
+      <p><strong>Homogeneous part.</strong> Guess \(y_c=e^{mx}\): \(m^2+1=0 \Rightarrow m=\pm i\), so \(y_c = c_1\cos x+c_2\sin x\).</p>
+      <p><strong>Particular solution.</strong> Since \(g(x)=10x+e^{6x}\) is a sum, find a particular solution for each piece. For \(10x\), guess \(y_{p_1}=Ax+B\): then \(y_{p_1}''+y_{p_1}=Ax+B=10x \Rightarrow A=10\), \(B=0\). For \(e^{6x}\), guess \(y_{p_2}=Ae^{6x}\): then \(y_{p_2}''=36Ae^{6x}\), so</p>
+      \[
+      y_{p_2}''+y_{p_2} = 37Ae^{6x} = e^{6x} \;\Longrightarrow\; A=\frac{1}{37}.
+      \]
+      <p>So \(y_p = 10x+\dfrac{1}{37}e^{6x}\), and</p>
+      \[
+      y = c_1\cos x+c_2\sin x+10x+\frac{1}{37}e^{6x}.
+      \]
+      <p><strong>Apply initial conditions.</strong></p>
+      \[
+      y(0) = c_1+\frac{1}{37} = 1 \;\Longrightarrow\; c_1 = \frac{36}{37}.
+      \]
+      <p>Since \(y' = -c_1\sin x+c_2\cos x+10+\tfrac{6}{37}e^{6x}\),</p>
+      \[
+      y'(0) = c_2+10+\frac{6}{37} = 0
+      \;\Longrightarrow\; c_2 = -\frac{376}{37}.
+      \]
+      <p>Thus</p>
+      \[
+      \boxed{y = \frac{36}{37}\cos x - \frac{376}{37}\sin x + 10x +
+        \frac{1}{37}e^{6x}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''+4y'+4y=4-x^2\).
+      <p><strong>Homogeneous part.</strong> The auxiliary equation is \(m^2+4m+4=(m+2)^2=0\), a repeated root \(m=-2\), so (by Section 4.3) \(y_c = c_1e^{-2x}+c_2xe^{-2x}\).</p>
+      <p><strong>Particular solution.</strong> Guess \(y_p=Ax^2+Bx+C\), so \(y_p'=2Ax+B\) and \(y_p''=2A\). Substituting,</p>
+      \[
+      y_p''+4y_p'+4y_p = 4Ax^2+(8A+4B)x+(2A+4B+4C) = 4-x^2.
+      \]
+      <p>Matching coefficients:</p>
+      \[
+      4A=-1 \Rightarrow A=-\tfrac14, \qquad
+      8A+4B=0 \Rightarrow B=\tfrac12, \qquad
+      2A+4B+4C=4 \Rightarrow C=\tfrac58.
+      \]
+      <p>So \(y_p = -\tfrac14x^2+\tfrac12x+\tfrac58\). Thus</p>
+      \[
+      \boxed{y = c_1e^{-2x}+c_2xe^{-2x} - \frac14x^2+\frac12x+\frac58.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''-9y=x\sin(x)\).
+      <p><strong>Homogeneous part.</strong> \(m^2-9=0 \Rightarrow m=\pm3\), so \(y_c = c_1e^{3x}+c_2e^{-3x}\).</p>
+      <p><strong>Particular solution.</strong> Since \(g(x)=x\sin(x)\) is a product of a polynomial and \(\sin(x)\), guess \(y_p = (Ax+B)\sin(x)+(Cx+D)\cos(x)\). Carrying out the differentiation twice,</p>
+      \[
+      y_p'' = \big(-Ax-B-2C\big)\sin(x) + \big(2A-Cx-D\big)\cos(x).
+      \]
+      <p>So</p>
+      \[
+      y_p''-9y_p = \big(-10Ax-10B-2C\big)\sin(x) + \big(2A-10Cx-10D\big)\cos(x).
+      \]
+      <p>Matching with \(x\sin(x) + 0\cdot\cos(x)\):</p>
+      \[
+      -10A=1 \Rightarrow A=-\tfrac{1}{10}, \qquad
+      -10C=0 \Rightarrow C=0,
+      \]
+      \[
+      -10B-2C=0 \Rightarrow B=0, \qquad
+      2A-10D=0 \Rightarrow D=\tfrac{A}{5}=-\tfrac{1}{50}.
+      \]
+      <p>So \(y_p = -\tfrac{1}{10}x\sin(x)-\tfrac{1}{50}\cos(x)\). Thus</p>
+      \[
+      \boxed{y = c_1e^{3x}+c_2e^{-3x} - \frac{1}{10}x\sin(x) -
+        \frac{1}{50}\cos(x).}
+      \]
+    </div>
+
+    <h2 class="tex-section">Variation of Parameters</h2>
+
+    <p>Undetermined coefficients only works when \(g(x)\) has one of a few special forms. <strong>Variation of parameters</strong> is a more general method that works for <em>any</em> nonhomogeneous linear DE, once a fundamental set of solutions to the homogeneous equation is known.</p>
+
+    <p>Given \(y''+P(x)y'+Q(x)y=f(x)\) with homogeneous general solution \(y_c=c_1y_1+c_2y_2\), look for a particular solution of the form \(y_p = u_1(x)y_1(x)+u_2(x)y_2(x)\).</p>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Method of Solving</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Find \(y_c = c_1y_1+c_2y_2\), the general solution to the homogeneous equation.</li>
+          <li>Compute the Wronskian \(W=W(y_1,y_2)\), along with
+            \[
+            W_1 = \begin{vmatrix}0 & y_2\\ f(x) & y_2'\end{vmatrix}, \qquad
+            W_2 = \begin{vmatrix}y_1 & 0\\ y_1' & f(x)\end{vmatrix}.
+            \]
+          </li>
+          <li>Find \(u_1' = W_1/W\) and \(u_2'=W_2/W\).</li>
+          <li>Integrate to find \(u_1\) and \(u_2\).</li>
+          <li>The general solution is \(y = y_c+y_p = c_1y_1+c_2y_2+u_1y_1+u_2y_2\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general solution to \(y''+y=\tan(x)\).
+      <p>Undetermined coefficients does not apply here, since \(\tan(x)\) is not a polynomial, exponential, sine, or cosine. We use variation of parameters instead.</p>
+      <p><strong>Homogeneous part.</strong> \(y_c=c_1\sin x+c_2\cos x\), so \(y_1=\sin x\), \(y_2=\cos x\), and \(f(x)=\tan x\).</p>
+      <p><strong>Wronskians.</strong></p>
+      \[
+      W(y_1,y_2) = \begin{vmatrix}\sin x & \cos x\\ \cos x & -\sin x
+      \end{vmatrix} = -\sin^2x-\cos^2x = -1,
+      \]
+      \[
+      W_1 = \begin{vmatrix}0 & \cos x\\ \tan x & -\sin x\end{vmatrix}
+        = -\cos x\tan x = -\sin x, \qquad
+      W_2 = \begin{vmatrix}\sin x & 0\\ \cos x & \tan x\end{vmatrix}
+        = \sin x\tan x.
+      \]
+      <p><strong>Solve for \(u_1',u_2'\).</strong></p>
+      \[
+      u_1' = \frac{W_1}{W} = \frac{-\sin x}{-1} = \sin x, \qquad
+      u_2' = \frac{W_2}{W} = \frac{\sin x\tan x}{-1} = -\sin x\tan x.
+      \]
+      <p><strong>Integrate.</strong></p>
+      \[
+      u_1 = \int \sin x\,dx = -\cos x.
+      \]
+      <p>For \(u_2\), write \(-\sin x\tan x = -\dfrac{\sin^2x}{\cos x} =
+      -\dfrac{1-\cos^2x}{\cos x} = -\sec x+\cos x\), so</p>
+      \[
+      u_2 = \int(-\sec x+\cos x)\,dx = -\ln|\sec x+\tan x|+\sin x.
+      \]
+      <p><strong>Assemble.</strong> \(y_p = u_1y_1+u_2y_2 = -\cos x\sin x +
+      \big(-\ln|\sec x+\tan x|+\sin x\big)\cos x\), so</p>
+      \[
+      \boxed{y = c_1\sin x+c_2\cos x - \sin x\cos x
+        + \big(\sin x-\ln|\sec x+\tan x|\big)\cos x.}
+      \]
+    </div>
 
-	<div class="math">
-	\[
-	\frac{dx}{dt}=k x(1000-x).
-	\]
-	</div>
-
-	With initial condition:
-
-	<div class="math">
-	\[
-	x(0)=1.
-	\]
-	</div>
-
-	Solution form:
-
-	<div class="math">
-	\[
-	x(t)=\frac{1000}{1+999e^{-1000kt}}.
-	\]
-	</div>
-
-	Using data \(x(4)=50\), we can solve for \(k\) and predict future infections.
-
-	---
-
-	<h3>Adjusting Logistic Models</h3>
-
-	Suppose a constant number of individuals is removed (harvesting):
-
-	<div class="math">
-	\[
-	\frac{dP}{dt}=P\left(r-\frac{r}{K}P\right)-h, \quad h>0.
-	\]
-	</div>
-
-	This equation is still:
-
-	<ul>
-	<li>Separable</li>
-	<li>Autonomous</li>
-	</ul>
-
-	But the **critical points change** because of the constant removal term.
-
-
-	
-	<h2 id="lecture10">
-	  Lecture 10: Section 3.3 - Mathematical Modeling (Systems of Linear Equations)
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	
-	<h3>Definition of a System</h3>
-
-	A system of first-order differential equations has the form
-
-	<div class="math">
-	\[
-	\frac{dx}{dt}=g_1(t,x,y), \qquad
-	\frac{dy}{dt}=g_2(t,x,y).
-	\]
-	</div>
-
-	---
-	
-	A system is linear if both equations are linear in the dependent variables.
-
-	<div class="math">
-	\[
-	\frac{dx}{dt}=c_1x+c_2y+f_1(t)
-	\]
-
-	\[
-	\frac{dy}{dt}=c_3x+c_4y+f_2(t).
-	\]
-	</div>
-
-	If the system is not linear, then it is nonlinear.
-
-	---
-
-	<h3>Why Systems?</h3>
-
-	Systems model interactions between multiple quantities, such as:
-
-	<ul>
-	<li>Predator–prey populations</li>
-	<li>Mixing tanks</li>
-	<li>Multi-step radioactive decay</li>
-	<li>Economic models</li>
-	</ul>
-
-	---
-
-	<h3>Example — Radioactive Decay Chain</h3>
-
-	Suppose substances decay in sequence:
-
-	<p style="text-align:center;">
-	X → Y → Z
-	</p>
-
-	Model:
-
-	<div class="math">
-	\[
-	\frac{dx}{dt}=-\lambda_1 x
-	\]
-
-	\[
-	\frac{dy}{dt}=-\lambda_2 y + \lambda_1 x
-	\]
-
-	\[
-	\frac{dz}{dt}=\lambda_2 y.
-	\]
-	</div>
-
-	Each equation depends on another variable, so we must solve them together.
-
-	---
-
-	<h3>Example — Mixing Tanks</h3>
-
-	Two tanks exchange fluid.
-
-	Let:
-
-	<ul>
-	<li>\(x_1(t)\) = salt in tank A</li>
-	<li>\(x_2(t)\) = salt in tank B</li>
-	</ul>
-
-	Then:
-
-	<div class="math">
-	\[
-	\frac{dx_1}{dt}=-\frac{2}{25}x_1+\frac{1}{50}x_2
-	\]
-
-	\[
-	\frac{dx_2}{dt}=\frac{2}{25}x_1-\frac{2}{25}x_2.
-	\]
-	</div>
-
-	Initial conditions:
-
-	<div class="math">
-	\[
-	x_1(0)=25, \qquad x_2(0)=0.
-	\]
-	</div>
-
-	This is a linear system with constant coefficients.
-
-	---
-
-	<h2>Key Takeaways</h2>
-
-	<ul>
-	<li>Nonlinear models often arise when growth depends on interactions.</li>
-	<li>The logistic equation models limited growth with carrying capacity.</li>
-	<li>Systems of ODEs model multiple interacting variables.</li>
-	<li>Linear systems have special structure that simplifies solving.</li>
-	</ul>
-
-	</div>
-	
-	<h2 id="lecture11">
-	  Lecture 11: Section 4.1 - Higher-Order Differential Equations
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	<p>
-	In the previous lectures, we have looked at methods to solve certain types of first-order differential equations.
-	Now, we will look at methods of solving higher-order linear differential equations.
-	Let’s begin with a definition.
-	</p>
-
-	<div class="definition">
-	<span class="label">Definition</span>
-	<p>
-	A linear \(n\)th-order differential equation of the form
-	\[
-	a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y'+a_0(x)y = 0
-	\]
-	is said to be <b>homogeneous.</b> Otherwise, we have
-	\[
-	a_n(x)y^{(n)}+a_{n-1}(x)y^{(n-1)}+\cdots + a_1(x)y'+a_0(x)y = g(x)
-	\]
-	where \(g(x) \neq 0\), which is said to be <b>nonhomogeneous.</b>
-	</p>
-	</div>
-
-	<p>
-	Here we insist that the functions \(a_i(x)\) depend only on \(x\) and are continuous on the interval we are considering.
-	</p>
-
-	<div class="remark">
-	<span class="label">Remark</span>
-	<p>
-	All homogeneous differential equations have a trivial constant solution \(y=0\).
-	So we are more interested in finding non-constant solutions.
-	From now on, when we refer to “solutions,” we mean a nontrivial solution.
-	</p>
-	</div>
-
-	<p>
-	When we find one solution to a higher-order linear differential equation, we actually find infinitely many.
-	Suppose that \(y\) is a solution to
-	\[
-	a_n(x)y^{(n)}+\cdots + a_1(x)y'+a_0(x)y =0
-	\]
-	and \(c\) is a constant. Then
-	\[
-	a_n(x)(cy)^{(n)}+\cdots+a_0(x)(cy)
-	= c\left(a_n(x)y^{(n)}+\cdots+a_0(x)y\right)=0.
-	\]
-	</p>
-
-	<p>
-	This reveals that for any constant \(c\), the curve \(cy\) is also a solution.
-	This follows from the linearity of derivatives:
-	\[
-	(cy)' = cy', \qquad (y_1+y_2)' = y_1'+y_2'.
-	\]
-	</p>
-
-	<p>
-	Similarly, if \(y_1\) and \(y_2\) are solutions, then
-	\[
-	a_n(x)(y_1+y_2)^{(n)}+\cdots+a_0(x)(y_1+y_2)=0,
-	\]
-	so \(y_1+y_2\) is also a solution.
-	</p>
-
-	<div class="theorem">
-	<span class="label">Theorem</span>
-	<p>
-	Let \(y_1, \dots, y_n\) be solutions to a homogeneous differential equation.
-	Then for any constants \(c_1, \dots , c_n\),
-	\[
-	y = c_1y_1 + \cdots + c_ny_n
-	\]
-	is also a solution.
-	</p>
-	</div>
-
-	<p>
-	The question remains: how do we find all the solutions?
-	</p>
-
-	<div class="definition">
-	<span class="label">Definition</span>
-	<p>
-	A set of functions \(f_1(x), \dots, f_n(x)\) are said to be <b>linearly dependent</b> on an interval \(I\)
-	if there exist constants \(c_1, \dots, c_n\) (not all zero) such that
-	\[
-	c_1f_1(x) + \cdots + c_nf_n(x) = 0
-	\]
-	for all \(x\) in \(I\). Otherwise, the set is said to be <b>linearly independent.</b>
-	</p>
-	</div>
-
-	<p>
-	To find all solutions, we need a set of linearly independent solutions.
-	Any solution can then be written as a linear combination of these.
-	</p>
-
-	<div class="example">
-	<span class="label">Example</span>
-	<p>
-	Show that \(f_1(x)=x\) and \(f_2(x)=x^2\) are linearly independent.
-	</p>
-
-	<p>
-	We set
-	\[
-	c_1x+c_2x^2=0.
-	\]
-	Factoring gives
-	\[
-	x(c_1+c_2x)=0.
-	\]
-	This would require \(c_2=-c_1/x\), which is not constant.
-	Thus the only constants that work are \(c_1=c_2=0\), so the functions are linearly independent.
-	</p>
-	</div>
-
-	<p>
-	An alternative way to check linear independence is using the <b>Wronskian.</b>
-	</p>
-
-	<div class="theorem">
-	<span class="label">Theorem (Wronskian Test)</span>
-	<p>
-	The functions \(f_1,\dots,f_n\) are linearly independent if
-	\[
-	W(f_1,\dots,f_n)=
-	\det
-	\begin{bmatrix}
-	f_1 & \cdots & f_n\\
-	\vdots & \ddots & \vdots\\
-	f_1^{(n-1)} & \cdots & f_n^{(n-1)}
-	\end{bmatrix}
-	\neq 0.
-	\]
-	</p>
-	</div>
-
-	<p>
-	For the previous example,
-	\[
-	W(x,x^2)=
-	\det
-	\begin{bmatrix}
-	x & x^2\\
-	1 & 2x
-	\end{bmatrix}
-	= x(2x)-x^2(1)=x^2 \neq 0.
-	\]
-	Thus the functions are linearly independent.
-	</p>
-
-	<div class="remark">
-	<span class="label">Remark</span>
-	<p>
-	For two functions, remember
-	\[
-	\det
-	\begin{bmatrix}
-	a & b\\
-	c & d
-	\end{bmatrix}
-	= ad-bc.
-	\]
-	</p>
-	</div>
-
-	<div class="definition">
-	<span class="label">Definition</span>
-	<p>
-	Any set of \(n\) linearly independent solutions to an \(n\)th-order homogeneous differential equation
-	is called a <b>fundamental set of solutions.</b>
-	</p>
-	</div>
-
-	<div class="theorem">
-	<span class="label">Theorem</span>
-	<p>
-	Given a fundamental set of solutions, the <b>general solution</b> is
-	\[
-	y = c_1f_1 + \cdots + c_nf_n
-	\]
-	where \(c_1,\dots,c_n\) are constants.
-	</p>
-	</div>
-
-	<div class="example">
-	<span class="label">Example</span>
-	<p>
-	The differential equation
-	\[
-	y''+y=0
-	\]
-	has general solution
-	\[
-	y=c_1\sin(x)+c_2\cos(x).
-	\]
-	</p>
-
-	<p>
-	We check independence using the Wronskian:
-	\[
-	\det
-	\begin{bmatrix}
-	\sin(x) & \cos(x)\\
-	\cos(x) & -\sin(x)
-	\end{bmatrix}
-	=
-	\sin^2(x)+\cos^2(x)=1\neq 0.
-	\]
-	</p>
-
-	<p>
-	Since the equation is second order, we only need two linearly independent solutions.
-	</p>
-	</div>
-
-	</div>
-	
-	<h2 id="lecture12">
-	  Lecture 12: Section 4.2 - Reduction of Order
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<p>
-	In this lecture, we discuss a method called <b>reduction of order</b>, which allows us to
-	find a second linearly independent solution of a second-order linear homogeneous
-	differential equation when one solution is already known.
-	</p>
-
-	<div class="definition">
-	<span class="label">Definition</span>
-	Consider the second-order linear homogeneous differential equation
-	\[
-	y'' + P(x)y' + Q(x)y = 0.
-	\]
-	If one nontrivial solution \(y_1(x)\) is known, the method of
-	<b>reduction of order</b> can be used to find a second solution \(y_2(x)\)
-	that is linearly independent from \(y_1\).
-	</div>
-
-	<h3>Idea of the Method</h3>
-
-	<p>
-	We assume the second solution has the form
-	\[
-	y_2 = v(x)y_1(x),
-	\]
-	where \(v(x)\) is an unknown nonconstant function to be determined.
-	</p>
-
-	<p>
-	Then via product rule
-	\[
-	y_2' = v'y_1 + vy_1', \quad
-	y_2'' = v''y_1 + 2v'y_1' + vy_1''.
-	\]
-	</p>
-
-	<p>
-	Substituting into the differential equation and using the fact that
-	\(y_1\) satisfies the equation simplifies the expression and eventually
-	leads to a first-order equation in \(v'\).
-	</p>
-
-	<div class="theorem">
-	<span class="label">Theorem (Reduction of Order Formula)</span>
-	If \(y_1(x)\) is a known solution to
-	\[
-	y'' + P(x)y' + Q(x)y = 0,
-	\]
-	then a second solution is given by
-	\[
-	y_2 = y_1(x)\int \frac{e^{-\int P(x)\,dx}}{(y_1(x))^2}\,dx.
-	\]
-	</div>
-
-	<div class="remark">
-	<span class="label">Remark</span>
-	The two solutions \(y_1\) and \(y_2\) will be linearly independent provided
-	the Wronskian is nonzero.
-	</div>
-
-	<h3>Example 1</h3>
-
-	<div class="example">
-	<span class="label">Example</span>
-	Find a second solution of
-	\[
-	y'' + y = 0
-	\]
-	given that \(y_1 = \cos x\) is a solution.
-	</div>
-
-	<p>
-	Here \(P(x)=0\), so the formula becomes
-	\[
-	y_2 = y_1 \int \frac{1}{y_1^2}\,dx.
-	\]
-	</p>
-
-	<p>
-	Thus,
-	\[
-	y_2 = \cos x \int \frac{1}{\cos^2 x}\,dx
-	= \cos x \int \sec^2 x\,dx
-	= \cos x \tan x
-	= \sin x.
-	\]
-	</p>
-
-	<p>
-	So the general solution is
-	\[
-	y = c_1\cos x + c_2\sin x.
-	\]
-	</p>
-
-	<h3>Example 2</h3>
-
-	<div class="example">
-	<span class="label">Example</span>
-	Find a second solution of
-	\[
-	y'' - y = 0
-	\]
-	given \(y_1 = e^x.\)
-	</div>
-
-	<p>
-	Again \(P(x)=0\), so
-	\[
-	y_2 = y_1 \int \frac{1}{y_1^2}\,dx
-	= e^x \int e^{-2x}\,dx.
-	\]
-	</p>
-
-	<p>
-	Compute the integral:
-	\[
-	\int e^{-2x}\,dx = -\frac{1}{2}e^{-2x}.
-	\]
-	</p>
-
-	<p>
-	Therefore,
-	\[
-	y_2 = e^x\left(-\frac{1}{2}e^{-2x}\right)
-	= -\frac{1}{2}e^{-x}.
-	\]
-	</p>
-
-	<p>
-	Since constants do not matter for linear independence, we take
-	\[
-	y_2 = e^{-x}.
-	\]
-	</p>
-
-	<p>
-	Hence the general solution is
-	\[
-	y = c_1 e^x + c_2 e^{-x}.
-	\]
-	</p>
-
-	<h3>Summary</h3>
-
-	<ul>
-	<li>Reduction of order is used when one solution is already known.</li>
-	<li>Assume \(y_2 = v(x)y_1(x)\).</li>
-	<li>This converts the problem into a first-order equation.</li>
-	<li>The formula provides a direct shortcut.</li>
-	</ul>
-
-	</div>
-	
-	
-	<h2 id="lecture13">
-	  Lecture 13: Section 4.3 - Auxillary Equations
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<p>
-	Now that we have seen the method of reduction of order, we know how to find more
-	linearly independent solutions to a higher-order differential equation once we
-	have one solution already.
-	</p>
-
-	<p>
-	The missing piece in solving homogeneous differential equations is finding the
-	<i>first</i> solution.
-	</p>
-
-	<p>
-	We now focus on equations of the form
-	</p>
-
-	\[
-	y^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_1y' + a_0y = 0
-	\]
-
-	<p>
-	where each \(a_i\) is a constant.
-	</p>
-
-
-
-	<h3>Choosing a Candidate Solution</h3>
-
-	<p>
-	We want a function whose derivatives are constant multiples of itself.
-	The most natural choice is
-	</p>
-
-	\[
-	y_1 = e^{mx}.
-	\]
-
-	<p>
-	Substituting into the differential equation gives:
-	</p>
-
-	\[
-	e^{mx}(m^n + a_{n-1}m^{n-1} + \cdots + a_1m + a_0).
-	\]
-
-	<div class="definition">
-	<b>Definition (Auxiliary Equation)</b><br>
-	The polynomial
-	\[
-	f(m) = m^n + a_{n-1}m^{n-1} + \cdots + a_1m + a_0
-	\]
-	is called the <b>auxiliary equation</b> (or characteristic equation).
-	</div>
-
-	<p>
-	Roots of the auxiliary equation determine solutions of the differential equation.
-	</p>
-
-	<hr>
-
-	<h2>Second-Order Case</h2>
-
-	Consider
-
-	\[
-	y'' + a_1 y' + a_2 y = 0.
-	\]
-
-	The auxiliary equation is
-
-	\[
-	m^2 + a_1 m + a_2 = 0.
-	\]
-
-	There are three possible cases.
-
-
-
-	<h3>Case 1: Two Distinct Real Roots</h3>
-
-	If
-
-	\[
-	f(m) = (m-a)(m-b), \quad a \neq b,
-	\]
-
-	then the solutions are
-
-	\[
-	y = c_1 e^{ax} + c_2 e^{bx}.
-	\]
-
-	This is the simplest case.
-
-
-
-	<h3>Case 2: Repeated Root</h3>
-
-	If
-
-	\[
-	f(m) = (m-a)^2,
-	\]
-
-	then we only get one solution \(y_1 = e^{ax}\).
-
-	We must use reduction of order.
-
-	<div class="example">
-	<b>Example</b><br>
-	Solve
-	\[
-	y'' - 2ay' + a^2 y = 0.
-	\]
-		<p>
-	Auxiliary equation:
-	\[
-	(m-a)^2 = 0.
-	\]
-	</p>
-
-	First solution:
-
-	\[
-	y_1 = e^{ax}.
-	\]
-
-	Let \(y_2 = u e^{ax}\).
-
-	Substitution simplifies to:
-
-	\[
-	u'' e^{ax} = 0.
-	\]
-
-	So
-
-	\[
-	u'' = 0.
-	\]
-
-	Integrating twice:
-
-	\[
-	u = c_1 x + c_2.
-	\]
-
-	To maintain independence, take \(u = x\).
-
-	Thus
-
-	\[
-	y_2 = x e^{ax}.
-	\]
-
-	General solution:
-
-	\[
-	y = c_1 e^{ax} + c_2 x e^{ax}.
-	\]
-	</div>
-
-
-
-
-
-	<h3>Case 3: Complex Roots</h3>
-
-	If the auxiliary equation has complex roots
-
-	\[
-	m = \alpha \pm i\beta,
-	\]
-
-	we use Euler's identity
-
-	\[
-	e^{i\theta} = \cos(\theta) + i\sin(\theta).
-	\]
-
-	The real-valued solution becomes
-
-	\[
-	y = e^{\alpha x}\left( c_1 \cos(\beta x) + c_2 \sin(\beta x) \right).
-	\]
-
-	Special case:
-
-	\[
-	y'' + k^2 y = 0
-	\]
-
-	has general solution
-
-	\[
-	y = c_1 \cos(kx) + c_2 \sin(kx).
-	\]
-
-
-
-	<h2>Worked Examples</h2>
-
-	<div class="example">
-	<b>Example 1</b><br>
-	Solve
-	\[
-	y'' + 4y' + 3y = 0.
-	\]
-	Auxiliary equation:
-
-	\[
-	m^2 + 4m + 3 = 0.
-	\]
-
-	Factor:
-
-	\[
-	(m+1)(m+3)=0.
-	\]
-
-	Roots:
-
-	\[
-	m=-1, \quad m=-3.
-	\]
-
-	General solution:
-
-	\[
-	y = c_1 e^{-x} + c_2 e^{-3x}.
-	\]
-
-	</div>
-
-
-
-
-	<div class="example">
-	<b>Example 2</b><br>
-	Solve
-	\[
-	y'' + 2y' + y = 0.
-	\]
-	
-	Auxiliary equation:
-
-	\[
-	m^2 + 2m + 1 = 0.
-	\]
-
-	Factor:
-
-	\[
-	(m+1)^2=0.
-	\]
-
-	Repeated root \(m=-1\).
-
-	General solution:
-
-	\[
-	y = c_1 e^{-x} + c_2 x e^{-x}.
-	\]
-	</div>
-
-
-
-
-	<h2>Summary</h2>
-
-	<ul>
-	<li>Write the auxiliary equation.</li>
-	<li>Solve for its roots.</li>
-	<li>Three cases: distinct real, repeated real, complex conjugate.</li>
-	<li>Each case gives a different form of the general solution.</li>
-	</ul>
-
-	</div>
-
-
-	<h2 id="lecture14">
-	  Lecture 14: Section 4.4 - Method of Undetermined Coefficients
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	We now study equations of the form
-
-	\[
-	y'' + a_1 y' + a_2 y = g(x),
-	\]
-
-	where \(g(x) \neq 0\).
-
-	The general solution has the form
-
-	\[
-	y = y_h + y_p,
-	\]
-
-	where:
-
-	<ul>
-	<li>\(y_h\) solves the associated homogeneous equation</li>
-	<li>\(y_p\) is a particular solution</li>
-	</ul>
-
-
-
-	<h2>Idea of the Method</h2>
-
-	The method of undetermined coefficients works when \(g(x)\) is one of:
-
-	<ul>
-	<li>Polynomials</li>
-	<li>Exponentials \(e^{ax}\)</li>
-	<li>Sines and cosines</li>
-	<li>Sums,Differences, or Products of the above</li>
-	</ul>
-
-	We guess a form for \(y_p\) with unknown constants and determine them by substitution.
-
-
-
-	<h2>Step-by-Step Procedure</h2>
-
-	<ol>
-	<li>Solve the homogeneous equation to find \(y_h\).</li>
-	<li>Guess the form of \(y_p\) based on \(g(x)\).</li>
-	<li>If guess duplicates a homogeneous term, multiply by \(x\).</li>
-	<li>Plug into the equation and solve for coefficients.</li>
-	</ol>
-
-
-
-	<h2>Table of Guesses</h2>
-
-	<table border="1" cellpadding="8">
-	<tr>
-	<th>\(g(x)\)</th>
-	<th>Guess for \(y_p\)</th>
-	</tr>
-	<tr>
-	<td>Polynomial degree n</td>
-	<td>General polynomial degree n</td>
-	</tr>
-	<tr>
-	<td>\(e^{ax}\)</td>
-	<td>\(Ae^{ax}\)</td>
-	</tr>
-	<tr>
-	<td>\(\sin kx\), \(\cos kx\)</td>
-	<td>\(A\cos kx + B\sin kx\)</td>
-	</tr>
-	<tr>
-	<td>Sum/Difference/Product or functions above</td>
-	<td>Product of guesses</td>
-	</tr>
-	</table>
-
-
-
-	<div class="example">
-	<b>Example 1</b><br>
-	Solve
-	\[
-	y''+5y'-6y = -6x^2-2x+1.
-	\]
-
-	<b>Step 1:</b> Homogeneous Solution
-
-	Auxiliary equation:
-
-	\[
-	m^2+5m-6=0.
-	\]
-
-	Factor:
-
-	\[
-	(m+6)(m-1)=0.
-	\]
-
-	\[
-	m=-6, \quad m=1.
-	\]
-
-	\[
-	y_h = c_1 e^{-6x}+c_2 e^{x}.
-	\]
-
-	<b>Step 2:</b> Guess Particular Solution
-
-	Since the right-hand side is a quadratic polynomial, guess
-
-	\[
-	y_p=Ax^2+Bx+C.
-	\]
-
-	<b>Step 3:</b> Compute Derivatives
-
-	\[
-	y_p'=2Ax+B
-	\]
-
-	\[
-	y_p''=2A
-	\]
-
-	<b>Step 4:</b> Substitute
-
-	\[
-	y''+5y'-6y
-	\]
-
-	Substitute:
-
-	\[
-	2A + 5(2Ax+B) -6(Ax^2+Bx+C).
-	\]
-
-	Simplify:
-
-	\[
-	-6Ax^2 + (10A-6B)x + (2A+5B-6C).
-	\]
-
-	Match coefficients with
-
-	\[
-	-6x^2-2x+1.
-	\]
-
-	System:
-
-	\[
-	-6A=-6
-	\]
-
-	\[
-	10A-6B=-2
-	\]
-
-	\[
-	2A+5B-6C=1
-	\]
-
-	Solve:
-
-	\[
-	A=1
-	\]
-
-	\[
-	10-6B=-2 \Rightarrow B=2
-	\]
-
-	\[
-	2+10-6C=1 \Rightarrow C=\frac{11}{6}.
-	\]
-
-	<b>Final Answer</b>
-
-	\[
-	y=c_1 e^{-6x}+c_2 e^{x}+x^2+2x+\frac{11}{6}.
-	\]
-
-	</div>
-
-		
-
-	<div class="example">
-	<b>Example 2</b><br>
-	Solve
-	\[
-	y''-5y'+4y=\sin(2x).
-	\]
-
-	<b>Step 1:</b> Homogeneous Solution
-
-	Auxiliary equation:
-
-	\[
-	m^2-5m+4=0.
-	\]
-
-	Factor:
-
-	\[
-	(m-1)(m-4)=0.
-	\]
-
-	\[
-	y_h=c_1 e^{x}+c_2 e^{4x}.
-	\]
-
-	<b>Step 2:</b> Guess Particular Solution
-
-	Since the right-hand side is \(\sin(2x)\), guess
-
-	\[
-	y_p=A\cos(2x)+B\sin(2x).
-	\]
-
-	<b>Step 3:</b> Compute Derivatives
-
-	\[
-	y_p'=-2A\sin(2x)+2B\cos(2x)
-	\]
-
-	\[
-	y_p''=-4A\cos(2x)-4B\sin(2x)
-	\]
-
-	<b>Step 4:</b> Substitute
-
-	Substitute into
-
-	\[
-	y''-5y'+4y.
-	\]
-
-	After simplifying:
-
-	\[
-	(10A-10B)\cos(2x) + (10A+10B)\sin(2x).
-	\]
-
-	Match coefficients with \(\sin(2x)\):
-
-	\[
-	10A-10B=0
-	\]
-
-	\[
-	10A+10B=1
-	\]
-
-	Solve:
-
-	\[
-	A=B
-	\]
-
-	\[
-	20A=1 \Rightarrow A=\frac{1}{20}, \quad B=\frac{1}{20}.
-	\]
-
-	<b>Final Answer</b>
-
-	\[
-	y=c_1 e^{x}+c_2 e^{4x}
-	+\frac{1}{20}\cos(2x)
-	+\frac{1}{20}\sin(2x).
-	\]
-
-	</div>
-	<div class="example">
-	<b>Example 3</b><br>
-	Solve
-	\[
-	y''+y=10x+e^{5x}, \quad y(0)=1.
-	\]
-
-	<b>Step 1:</b> Homogeneous Solution
-
-	Auxiliary equation:
-
-	\[
-	m^2+1=0.
-	\]
-
-	\[
-	y_h=c_1\cos x+c_2\sin x.
-	\]
-
-	<b>Step 2:</b> Guess Particular Solution
-
-	Split RHS into two parts:
-
-	Polynomial \(10x\) → guess \(Ax+B\)
-
-	Exponential \(e^{5x}\) → guess \(Ce^{5x}\)
-
-	So,
-
-	\[
-	y_p=Ax+B+Ce^{5x}.
-	\]
-
-	<b>Step 3:</b> Compute Derivatives
-
-	\[
-	y_p'=A+5Ce^{5x}
-	\]
-
-	\[
-	y_p''=25Ce^{5x}
-	\]
-
-	<b>Step 4:</b> Substitute
-
-	\[
-	y''+y
-	\]
-
-	Substitute:
-
-	\[
-	25Ce^{5x} + Ax+B+Ce^{5x}.
-	\]
-
-	\[
-	=Ax+B+26Ce^{5x}.
-	\]
-
-	Match coefficients with
-
-	\[
-	10x+e^{5x}.
-	\]
-
-	System:
-
-	\[
-	A=10
-	\]
-
-	\[
-	B=0
-	\]
-
-	\[
-	26C=1 \Rightarrow C=\frac{1}{26}.
-	\]
-
-	Thus
-
-	\[
-	y=c_1\cos x+c_2\sin x+10x+\frac{1}{26}e^{5x}.
-	\]
-
-	Apply initial condition:
-
-	\[
-	y(0)=c_1+\frac{1}{26}=1.
-	\]
-
-	\[
-	c_1=\frac{25}{26}.
-	\]
-
-	<b>Final Answer</b>
-
-	\[
-	y=\frac{25}{26}\cos x
-	+c_2\sin x
-	+10x
-	+\frac{1}{26}e^{5x}.
-	\]
-
-	</div>
-
-
-
-	When the Method Fails
-
-	This method does NOT work if:
-
-	<ul>
-	<li>\(g(x)\) is not of special type (like \(\ln x\), \(\tan x\), etc.)</li>
-	<li>Coefficients are not constant</li>
-	</ul>
-
-	In those cases, we use <b>variation of parameters</b> (next lecture).
-
-
-
-	<h2>Summary</h2>
-
-	<ul>
-	<li>General solution = homogeneous + particular</li>
-	<li>Guess form based on RHS</li>
-	<li>Multiply by \(x\) if duplication occurs</li>
-	<li>Plug in and solve for constants</li>
-	</ul>
-
-	</div>
-	
-	
-	
-	
-	<h2 id="lecture15">
-	  Lecture 15: Section 4.6 - Variation of Parameters
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-   
   </main>
 </body>
 </html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>MATH 2410 — Differential Equations Lecture Notes</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax -->
   <script>
@@ -21,7 +22,7 @@
 
   <!-- Top Navigation -->
   <div class="topnav">
-    <a href="index.html">Home</a>	
+    <a href="index.html">Home</a>
     <a href="notes.html">Notes</a>
     <div class="dropdown">
       <button class="dropbtn">Teaching</button>
@@ -43,2871 +44,960 @@
 
     <!-- Table of Contents -->
     <nav class="toc" id="top">
-	  <strong>The following set of lectures follows Appendix B and Chapter 8 of the textbook:</strong><br>
-	  <strong>Unit 4</strong>:
-	  <a href="#lecture21">Lecture 21</a> |
-	  <a href="#lecture22">Lecture 22</a> |
-	  <a href="#lecture23">Lecture 23</a> |
-	  <a href="#lecture24">Lecture 24</a> |
-	  <a href="#lecture25">Lecture 25</a> |
-	  <a href="#lecture26">Lecture 26</a> |
-	  
-	  
-	  	</nav>
-		
-		
-		
-		
-<h2 id="lecture21">
-	  Lecture 21: Appendix B.1 - Introduction to Linear Algebra
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<div class="definition">
-<p><span class="label">Definition.</span>
-A <strong>matrix</strong> is a rectangular array of numbers arranged in rows and columns. The entries of a matrix are called its <em>elements</em>.
-</p>
-
-$$
-A = 
-\begin{pmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{m1} & a_{m2} & \cdots & a_{mn}
-\end{pmatrix} = (a_{ij})
-$$
-
-<p>
-the <strong>size</strong> or <strong>order</strong> of a matrix is given by the number of rows and columns.
-</p>
-</div>
-
-<div class="remark">
-<p><span class="label">Remark.</span>
-For this course, we will mostly be interacting with square matrices which are size $n \times n.$
-</p>
-</div>
-
-<div class="example">
-<p><span class="label">Example.</span></p>
-
-$$
-A =
-\begin{pmatrix}
-1 & 2 & 3 \\
-4 & 5 & 6
-\end{pmatrix}
-$$
-
-<p>
-This matrix has 2 rows and 3 columns, so its size is $2 \times 3$.
-</p>
-</div>
-
-<h2>Operations with Matrices</h2>
-
-<p>
-Much like with real numbers, we can perform basic operations with matrices, such as addition, subtraction, and multiplication. Although some operations have a different look than we might expect.
-</p>
-
-<h3>Addition</h3>
-
-<p>Matrices of the same size can be added by adding the corresponding entries.</p>
-
-<div class="example">
-$$
-A =
-\begin{pmatrix}
-1 & 2 \\
-3 & 4
-\end{pmatrix}, \quad
-B =
-\begin{pmatrix}
-5 & 6 \\
-7 & 8
-\end{pmatrix}
-$$
-
-$$
-A + B =
-\begin{pmatrix}
-1+5 & 2+6 \\
-3+7 & 4+8
-\end{pmatrix}
-=
-\begin{pmatrix}
-6 & 8 \\
-10 & 12
-\end{pmatrix}
-$$
-</div>
-
-<h3>Subtraction</h3>
-
-<p>
-Matrices of the same size can be subtracted by subtracting the corresponding entries. Continuing with the matrices $A$ and $B$ from the previous example,
-</p>
-
-<div class="example">
-$$
-A - B =
-\begin{pmatrix}
-1-5 & 2-6 \\
-3-7 & 4-8
-\end{pmatrix}
-=
-\begin{pmatrix}
--4 & -4 \\
--4 & -4
-\end{pmatrix}
-$$
-</div>
-
-<h3>Scalar Multiplication</h3>
-
-<p>
-We can multiply matrices by a constant by multiplying every entry by that constant. Continuing with the matrix $A$ from the previous example,
-</p>
-
-<div class="example">
-$$
-2A =
-2 \begin{pmatrix}
-1 & 2 \\
-3 & 4
-\end{pmatrix}
-=
-\begin{pmatrix}
-2\cdot1 & 2\cdot2 \\
-2\cdot3 & 2\cdot4
-\end{pmatrix}
-=
-\begin{pmatrix}
-2 & 4 \\
-6 & 8
-\end{pmatrix}
-$$
-</div>
-
-<h2>Matrix Multiplication</h2>
-
-<p>
-To multiply two matrices, we look at the $i$th row of $A$ and the $j$th column of $B.$ we take the dot product of both of those vectors and that goes into position $(i,j)$ in the resulting matrix. We provide some examples below.
-</p>
-
-<h3>2 × 2 Case (Formula)</h3>
-
-$$
-A =
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}, \quad
-B =
-\begin{pmatrix}
-e & f \\
-g & h
-\end{pmatrix}
-$$
-
-$$
-AB =
-\begin{pmatrix}
-ae + bg & af + bh \\
-ce + dg & cf + dh
-\end{pmatrix}
-$$
-
-<div class="example">
-$$
-A =
-\begin{pmatrix}
-1 & 2 \\
-3 & 4
-\end{pmatrix}, \quad
-B =
-\begin{pmatrix}
-5 & 6 \\
-7 & 8
-\end{pmatrix}
-$$
-
-$$
-AB =
-\begin{pmatrix}
-(1)(5) + (2)(7) & (1)(6) + (2)(8) \\
-(3)(5) + (4)(7) & (3)(6) + (4)(8)
-\end{pmatrix}
-=
-\begin{pmatrix}
-5 + 14 & 6 + 16 \\
-15 + 28 & 18 + 32
-\end{pmatrix}
-=
-\begin{pmatrix}
-19 & 22 \\
-43 & 50
-\end{pmatrix}
-$$
-</div>
-
-<div class="remark">
-<p><span class="label">Remark.</span>
-Matrix multiplication is <strong>NOT</strong> commutative. That is, $AB \ne BA$ most of the time.
-</p>
-</div>
-
-<h2>Multiplicative Identity</h2>
-
-<div class="definition">
-<p><span class="label">Definition.</span>
-The <strong>identity matrix</strong> is a square matrix with 1's on the diagonal and 0's elsewhere.
-</p>
-</div>
-
-<div class="example">
-$$
-I_2 =
-\begin{pmatrix}
-1 & 0 \\
-0 & 1
-\end{pmatrix}
-$$
-
-$$
-I_3 =
-\begin{pmatrix}
-1 & 0 & 0 \\
-0 & 1 & 1 \\
-0 & 0 & 1
-\end{pmatrix}
-$$
-</div>
-
-<p>
-The property that the identity matrix has is for any matrix $A,$
-</p>
-
-$$
-AI = IA = A.
-$$
-
-<p>
-Notice that this is analogous to "multiplication by $1$."
-</p>
-
-<h2>Determinants</h2>
-
-<p>
-We saw determinants when we computed the Wronksian to show linear independence of functions. To review,
-</p>
-
-$$
-A =
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-$$
-
-$$
-\det(A) = ad - bc
-$$
-
-<div class="example">
-$$
-A =
-\begin{pmatrix}
-3 & 4 \\
-2 & 5
-\end{pmatrix}
-$$
-
-$$
-\det(A) = (3)(5) - (4)(2) = 15 - 8 = 7
-$$
-</div>
-
-<div class="example">
-$$
-A =
-\begin{pmatrix}
-1 & 2 & 3 \\
-0 & 4 & 5 \\
-1 & 0 & 6
-\end{pmatrix}
-$$
-
-<p>Expand along first row:</p>
-
-$$
-\det(A) =
-1
-\begin{vmatrix}
-4 & 5 \\
-0 & 6
-\end{vmatrix}
-- 2
-\begin{vmatrix}
-0 & 5 \\
-1 & 6
-\end{vmatrix}
-+ 3
-\begin{vmatrix}
-0 & 4 \\
-1 & 0
-\end{vmatrix}
-$$
-
-<p>Compute each minor:</p>
-
-$$
-\begin{vmatrix}
-4 & 5 \\
-0 & 6
-\end{vmatrix}
-= (4)(6) - (5)(0) = 24
-$$
-
-$$
-\begin{vmatrix}
-0 & 5 \\
-1 & 6
-\end{vmatrix}
-= (0)(6) - (5)(1) = -5
-$$
-
-$$
-\begin{vmatrix}
-0 & 4 \\
-1 & 0
-\end{vmatrix}
-= (0)(0) - (4)(1) = -4
-$$
-
-<p>Substitute:</p>
-
-$$
-\det(A) = 1(24) - 2(-5) + 3(-4)
-$$
-
-$$
-= 24 + 10 - 12 = 22
-$$
-</div>
-
-<h2>Multiplicative Inverses</h2>
-
-<div class="definition">
-<p><span class="label">Definition.</span>
-A matrix $A$ of size $n\times n$ is invertible if there exists $A^{-1}$ such that:
-</p>
-
-$$
-AA^{-1} = A^{-1}A = I_n.
-$$
-</div>
-
-<p>
-Note that a square matrix is only invertible when its determinant is nonzero. In the $2 \times 2$ case, we have a formula:
-</p>
-
-$$
-A =
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-$$
-
-$$
-A^{-1} = \frac{1}{ad - bc}
-\begin{pmatrix}
-d & -b \\
--c & a
-\end{pmatrix}
-$$
-
-
-<h2 id="lecture22">
-	  Lecture 22: Appendix B.2 - Gaussian Elimination
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-
-
-
-<div class="definition">
-<b>Definition.</b> Gaussian elimination is a systematic method used to solve systems of linear equations. The idea is to use <b>elementary row operations</b> in order to transform the system into an equivalent system that is less complex to solve.
-</div>
-
-<div class="definition">
-<b>Definition.</b> The allowed <b>elementary row operations</b> that keep the system the same are 
-<ul>
-<li>Swap rows</li>
-<li>Multiply a row by a constant</li>
-<li>Add or subtract constant multiples of one row to another row.</li>
-</ul>
-</div>
-
-<p>The idea is the following:</p>
-<ol>
-<li>Set up the <b>augmented matrix</b> representation for the system of equations.</li>
-<li>Starting with the first column, obtain a pivot and use the pivot position and row operations to eliminate (make \(0\)) the rest of the column.</li>
-<li>Rewrite the system of equations given your reduced augmented matrix.</li>
-<li>Solve this system to obtain solution.</li>
-</ol>
-
-<div class="example">
-<b>Example.</b> Solve the system:
-\[
-\begin{cases}
-x + y = 5 \\
-2x - y = 1
-\end{cases}
-\]
-
-Write the augmented matrix:
-\[
-\left[
-\begin{array}{cc|c}
-1 & 1 & 5 \\
-2 & -1 & 1
-\end{array}
-\right]
-\]
-
-Let the top left entry be our first pivot. Now we perform the row operation \(R_2 \to R_2 - 2R_1.\) We get
-
-\[
-\left[
-\begin{array}{cc|c}
-1 & 1 & 5 \\
-2-2(1) & -1-2(1) & 1-2(5)
-\end{array}
-\right]
-=
-\left[
-\begin{array}{cc|c}
-1 & 1 & 5 \\
-0 & -3 & -9
-\end{array}
-\right]
-\]
-
-Now we need a pivot in the second column. Let the \(-3\) entry be the next pivot position. We perform the row operation \(R_2 \to -\frac{1}{3}R_2.\) We get
-
-\[
-\left[
-\begin{array}{cc|c}
-1 & 1 & 5 \\
-0 & 1 & 3
-\end{array}
-\right]
-\]
-
-Lastly, we will do the row operation \(R_1 \to R_1 - R_2\) to get
-
-\[
-\left[
-\begin{array}{cc|c}
-1 & 0 & 2 \\
-0 & 1 & 3
-\end{array}
-\right]
-\]
-
-Now we rewrite the system as
-\[
-x=2, y=3.
-\]
-
-Thus, our final solution is:
-\[
-(x,y) = (2,3).
-\]
-</div>
-
-<div class="remark">
-<b>Remark.</b> Ideally, every pivot we choose would be a \(1\) so that we can do row operations with integer values and not fractions. The rule of choosing pivots is that we want a pivot in every column of the augmented matrix, but we cannot pick a pivot in the same row as another pivot.
-</div>
-
-<div class="example">
-<b>Example.</b> Solve the system:
-\[
-\begin{cases}
-x + y + z = 6 \\
-2x - y - z = 3 \\
-3x + y + 2z = 10
-\end{cases}
-\]
-
-Augmented matrix:
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 6 \\
-2 & -1 & -1 & 3 \\
-3 & 1 & 2 & 10
-\end{array}
-\right]
-\]
-
-We perform row operations. First, \(R_2 \to R_2 - 2R_1, \text{and } R_3 \to R_3 - 3R_1:\)
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 6 \\
-0 & -3 & -3 & -9 \\
-0 & -2 & -1 & -8
-\end{array}
-\right]
-\]
-
-Next, \(R_2 \to -\frac{1}{3}R_2:\)
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 6 \\
-0 & 1 & 1 & 3 \\
-0 & -2 & -1 & -8
-\end{array}.
-\right]
-\]
-
-Next, \(R_1 \to R_1-R_2, ~R_3 \to R_3+2R_2:\)
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 0 & 0 & 3 \\
-0 & 1 & 1 & 3 \\
-0 & 0 & 1 & -2
-\end{array}.
-\right]
-\]
-
-Lastly, \(R_2 \to R_2 - R_3:\)
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 0 & 0 & 3 \\
-0 & 1 & 0 & 5 \\
-0 & 0 & 1 & -2
-\end{array}.
-\right]
-\]
-
-Now we rewrite the system and get the solution:
-\[
-(x,y,z) = (3,5,-2)
-\]
-</div>
-
-<div class="remark">
-<b>Remark.</b> A system of \(n\) linear equations with \(n\) unknowns can have a unique solution OR infinitely many solutions. The following will be an example of the latter.
-</div>
-
-<div class="example">
-<b>Example.</b> Solve the system:
-\[
-\begin{cases}
-x + y + z = 2 \\
-2x + 2y + 2z = 4 \\
-x - y + z = 0
-\end{cases}
-\]
-
-Augmented matrix:
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 2 \\
-2 & 2 & 2 & 4 \\
-1 & -1 & 1 & 0
-\end{array}
-\right]
-\]
-
-Now we perform row operations. Notice if we perform \(R_2 \to R_2-2R_1\) and \(R_3 \to R_3 - R_1\) we get
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 2 \\
-0 & 0 & 0 & 0 \\
-0 & -2 & 0 & -2
-\end{array}
-\right]
-\]
-
-Then we do \(R_3 \to -\frac{1}{2}R_3\) then \(R_1 \to R_1-R_3\) we arrive at a reduced matrix
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 1 & 1 & 2 \\
-0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 1
-\end{array}
-\right]
-\]
-
-\[
-\left[
-\begin{array}{ccc|c}
-1 & 0 & 1 & 1 \\
-0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 1
-\end{array}
-\right]
-\]
-
-Notice there is a row of \(0.\) This means there are more equations than unknowns in the resulting system. We rewrite as 
-\[
-x+z = 1, y=0.
-\]
-
-One of \(x\) or \(z\) is a free variable. When we solve for \(x\):
-\[
-x = 1 - z
-\]
-
-Let \(z = t\) (free variable).
-
-\[
-x = 1 - t, \quad y = 1, \quad z = t
-\]
-
-Solution:
-\[
-(x,y,z) = (1 - t, 1, t), \quad t \in \mathbb{R}
-\]
-</div>
-
-</div>
-
-
-<h2 id="lecture23">
-	  Lecture 23: Appendix B.3 - Eigenvalues and Eigenvectors
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-
-<div class="definition">
-<b>Definition.</b> Let \(A\) be an \(n \times n\) matrix. A nonzero vector \(\mathbf{v}\) is called an <b>eigenvector</b> of \(A\) if there exists a scalar \(\lambda\) such that
-\[
-A\mathbf{v} = \lambda \mathbf{v}.
-\]
-The scalar \(\lambda\) is called an <b>eigenvalue</b> of \(A\).
-</div>
-
-<div class="definition">
-<b>Definition.</b> To find eigenvalues, we solve the <b>characteristic equation</b>:
-\[
-\det(A - \lambda I) = 0.
-\]
-</div>
-
-<p>The process is:</p>
-<ol>
-<li>Compute \(A - \lambda I\)</li>
-<li>Find \(\det(A - \lambda I)\)</li>
-<li>Solve for \(\lambda\)</li>
-<li>For each \(\lambda\), solve \((A - \lambda I)\mathbf{v} = 0\)</li>
-</ol>
-
-<div class="example">
-<b>Example.</b> Find eigenvalues and eigenvectors of
-\[
-A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}.
-\]
-
-Step 1: Compute \(A - \lambda I\):
-\[
-A - \lambda I =
-\begin{bmatrix}
-2 - \lambda & 1 \\
-1 & 2 - \lambda
-\end{bmatrix}
-\]
-
-Step 2: Compute determinant:
-\[
-\det(A - \lambda I) = (2-\lambda)(2-\lambda) - (1)(1)
-\]
-\[
-= (2-\lambda)^2 - 1
-\]
-\[
-= 4 - 4\lambda + \lambda^2 - 1
-\]
-\[
-= \lambda^2 - 4\lambda + 3
-\]
-
-Step 3: Solve:
-\[
-\lambda^2 - 4\lambda + 3 = 0
-\]
-\[
-(\lambda - 1)(\lambda - 3) = 0
-\]
-
-\[
-\lambda = 1, \quad \lambda = 3
-\]
-
-Step 4: Find eigenvectors
-
-For \(\lambda = 1\):
-\[
-A - I =
-\begin{bmatrix}
-1 & 1 \\
-1 & 1
-\end{bmatrix}
-\]
-
-Solve \((A - I)\mathbf{v} = 0\):
-\[
-A - I =
-\begin{bmatrix}
-1 & 1 \\
-1 & 1
-\end{bmatrix}\begin{bmatrix}
-x \\
-y
-\end{bmatrix} = \begin{bmatrix}
-x + y\\
-x + y
-\end{bmatrix} = \begin{bmatrix}
-0 \\
-0
-\end{bmatrix}
-\]
-
-Both components give the same equation. That is,
-\[
-x + y = 0 \Rightarrow y = -x
-\]
-
-Eigenvector:
-\[
-\mathbf{v}_1 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}
-\]
-
-For \(\lambda = 3\):
-\[
-A - 3I =
-\begin{bmatrix}
--1 & 1 \\
-1 & -1
-\end{bmatrix}
-\]
-
-Solve \((A - 3I)\mathbf{v} = 0\):
-\[
-A - 3I =
-\begin{bmatrix}
--1 & 1 \\
-1 & -1
-\end{bmatrix}\begin{bmatrix}
-x \\
-y
-\end{bmatrix} = \begin{bmatrix}
--x + y\\
-x - y
-\end{bmatrix} = \begin{bmatrix}
-0 \\
-0
-\end{bmatrix}
-\]
-
-Both components give the same equation. That is,
-\[
-x - y =0  \Rightarrow y = x
-\]
-
-
-Eigenvector:
-\[
-\mathbf{v}_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
-\]
-</div>
-
-<div class="remark">
-<b>Remark.</b> Notice that when we try to determine eigenvector, we expect to have a free variable. There are infinitely many eigenvectors that correspond to each eigenvalue, it is up to a choice of free variable. That is, every eigenvector is off by a constant multiple.
-</div>
-
-<div class="remark">
-<b>Remark.</b> Since the characteristic equation is a polynomial, there are a couple of cases to consider. On the one hand, we could have distinct eigenvalues. Alternatively, we could have repeated eigenvalues or complex eigenvalues.</div>
-
-<div class="example">
-<b>Example.</b> Find eigenvalues and eigenvectors of
-\[
-A = \begin{bmatrix} 2 & 1 \\ 0 & 2 \end{bmatrix}.
-\]
-
-Step 1:
-\[
-A - \lambda I =
-\begin{bmatrix}
-2 - \lambda & 1 \\
-0 & 2 - \lambda
-\end{bmatrix}
-\]
-
-Step 2:
-\[
-\det(A - \lambda I) = (2-\lambda)^2
-\]
-
-Step 3:
-\[
-(2-\lambda)^2 = 0 \Rightarrow \lambda = 2
-\]
-
-Step 4:
-\[
-A - 2I =
-\begin{bmatrix}
-0 & 1 \\
-0 & 0
-\end{bmatrix}
-\]
-
-Solve \((A - 2I)\mathbf{v} = 0\):
-\[
-A - 2I =
-\begin{bmatrix}
-0 & 1 \\
-0 & 0
-\end{bmatrix}\begin{bmatrix}
-x \\
-y
-\end{bmatrix} = \begin{bmatrix}
-y\\
-0
-\end{bmatrix} = \begin{bmatrix}
-0 \\
-0
-\end{bmatrix}
-\]
-
-Only the top equation gives information about the variables. That is,
-\[
-y=0.
-\]
-
-Since an eigenvector must be nonzero, x is a free variable and we get an eigenvector of
-\[
-\mathbf{v} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
-\]
-
-</div>
-
-<div class="remark">
-<b>Remark.</b> When an eigenvalue is repeated, there may be fewer independent eigenvectors than its multiplicity. This is important in determining whether a matrix is diagonalizable.
-</div>
-
-<div class="example">
-<b>Example.</b> Find eigenvalues and eigenvectors of
-\[
-A =
-\begin{bmatrix}
-3 & 0 & 0 \\
-0 & 2 & 0 \\
-4 & 0 & 1
-\end{bmatrix}.
-\]
-
-Step 1:
-\[
-A - \lambda I =
-\begin{bmatrix}
-3-\lambda & 0 & 0 \\
-0 & 2-\lambda & 0 \\
-4 & 0 & 1-\lambda
-\end{bmatrix}
-\]
-
-Step 2: Compute the determinant
-\[
-\det(A - \lambda I) =
-\begin{vmatrix}
-3-\lambda & 0 & 0 \\
-0 & 2-\lambda & 0 \\
-4 & 0 & 1-\lambda
-\end{vmatrix}
-\]
-
-Expand along the first row:
-\[
-= (3-\lambda)
-\begin{vmatrix}
-2-\lambda & 0 \\
-0 & 1-\lambda
-\end{vmatrix}
-\]
-
-\[
-= (3-\lambda)\left[(2-\lambda)(1-\lambda)\right]
-\]
-
-Step 3: Solve for eigenvalues
-\[
-(3-\lambda)(2-\lambda)(1-\lambda) = 0
-\]
-
-\[
-\lambda = 3, \quad 2, \quad 1
-\]
-
-Step 4: Find eigenvectors
-
-First, for \(\lambda = 3\):
-
-\[
-A - 3I =
-\begin{bmatrix}
-0 & 0 & 0 \\
-0 & -1 & 0 \\
-4 & 0 & -2
-\end{bmatrix}
-\]
-
-Solve \((A - 3I)\mathbf{v} = 0\):
-\[
-\begin{bmatrix}
-0 & 0 & 0 \\
-0 & -1 & 0 \\
-4 & 0 & -2
-\end{bmatrix}
-\begin{bmatrix}
-x \\
-y \\
-z
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 \\
--y \\
-4x - 2z
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 \\
-0 \\
-0
-\end{bmatrix}
-\]
-
-This gives:
-\[
--y = 0 \Rightarrow y = 0
-\]
-\[
-4x - 2z = 0 \Rightarrow 2x - z = 0 \Rightarrow z = 2x
-\]
-
-Let \(x = t\). Then:
-\[
-\mathbf{v}_1 =
-\begin{bmatrix}
-1 \\
-0 \\
-2
-\end{bmatrix}
-\]
-
----
-
-Next, for \(\lambda = 2\):
-
-\[
-A - 2I =
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 0 & 0 \\
-4 & 0 & -1
-\end{bmatrix}
-\]
-
-Solve \((A - 2I)\mathbf{v} = 0\):
-\[
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 0 & 0 \\
-4 & 0 & -1
-\end{bmatrix}
-\begin{bmatrix}
-x \\
-y \\
-z
-\end{bmatrix}
-=
-\begin{bmatrix}
-x \\
-0 \\
-4x - z
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 \\
-0 \\
-0
-\end{bmatrix}
-\]
-
-This gives:
-\[
-x = 0
-\]
-\[
-4x - z = 0 \Rightarrow z = 0
-\]
-
-So \(y\) is free. Let \(y = t\). Then:
-\[
-\mathbf{v}_2 =
-\begin{bmatrix}
-0 \\
-1 \\
-0
-\end{bmatrix}
-\]
-
----
-
-Finally, for \(\lambda = 1\):
-
-\[
-A - I =
-\begin{bmatrix}
-2 & 0 & 0 \\
-0 & 1 & 0 \\
-4 & 0 & 0
-\end{bmatrix}
-\]
-
-Solve \((A - I)\mathbf{v} = 0\):
-\[
-\begin{bmatrix}
-2 & 0 & 0 \\
-0 & 1 & 0 \\
-4 & 0 & 0
-\end{bmatrix}
-\begin{bmatrix}
-x \\
-y \\
-z
-\end{bmatrix}
-=
-\begin{bmatrix}
-2x \\
-y \\
-4x
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 \\
-0 \\
-0
-\end{bmatrix}
-\]
-
-This gives:
-\[
-2x = 0 \Rightarrow x = 0
-\]
-\[
-y = 0
-\]
-
-No restriction on \(z\), so let \(z = t\). Then:
-\[
-\mathbf{v}_3 =
-\begin{bmatrix}
-0 \\
-0 \\
-1
-\end{bmatrix}
-\]
-
-</div>
-
-<div class="remark">
-<b>Remark.</b> This is only one way to solve for eigenvalues and eigenvectors. We can also use Gaussian elimination to do this process of finding an eigenvector once we have all the eigenvalues.</div>
-
-These values and vectors will become very important in the coming sections.
-
-
-
-
-</div>
-
-
-<h2 id="lecture24">
-	  Lecture 24: Section 8.1 - System of Linear Equations (revisited)
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	
-
-<p>
-The goal of this section is to gain a different perspective on all system problems we saw in Chapter 3. That is, we will be able to restate all linear differential equation problems in terms of matrices and use linear algebra techniques to solve them.
-</p>
-
-
-<p>
-Suppose we have a system of first-order linear differential equations:
-</p>
-
-\[
-\begin{cases}
-x_1' = a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n + f_1(t) \\
-x_2' = a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n + f_2(t) \\
-\vdots \\
-x_n' = a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n + f_n(t)
-\end{cases}
-\]
-
-<p>
-We can rewrite this system in matrix form by using the following remark.
-</p>
-<div class="remark">
-<b>Remark.</b> To take the derivative or integral of a matrix \(A = (a_{ij})\),
-\[\frac{d}{dt}A = A' = (\frac{d}{dt}(a)_{ij})\]
-or
-\[\int A dt = \left(\int a_{ij}dt\right).\]
-</div>
-
-Using this remark, we can rewrite the system above as:
-
-\[
-X =
-\begin{bmatrix}
-x_1 \\
-x_2 \\
-\vdots \\
-x_n
-\end{bmatrix}, \quad
-A =
-\begin{bmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{n1} & a_{n2} & \cdots & a_{nn}
-\end{bmatrix}, \quad
-F(t) =
-\begin{bmatrix}
-f_1(t) \\
-f_2(t) \\
-\vdots \\
-f_n(t)
-\end{bmatrix}
-\]
-
-<p>
-Then the system becomes:
-</p>
-
-\[
-X' = AX + F(t)
-\]
-This is what we call the matrix representation of the system or the matrix equation.
-
-<h2>Homogeneous vs Nonhomogeneous Systems</h2>
-
-
-<div class="definition">
-<b>Definition.</b> Let a system of linear differential equations have matrix representation \(X' = AX + F\). 
-If \(F = 0\) then the system is called <b>homogeneous.</b> Otherwise, the system is considered <b> nonhomogeneous.</b>
-</div>
-
-
-
-<div class="example">
-<b>Example (Homogeneous).</b> Convert the system to matrix form:
-\[
-\begin{cases}
-x' = 2x + y \\
-y' = 5x + 3y
-\end{cases}
-\]
-
-Step 1: Define the vector
-\[
-X =
-\begin{bmatrix}
-x \\
-y
-\end{bmatrix}
-\]
-
-Step 2: Write coefficient matrix
-\[
-A =
-\begin{bmatrix}
-2 & 1 \\
-5 & 3
-\end{bmatrix}
-\]
-
-Step 3: Write matrix equation
-\[
-X' = AX =
-\begin{bmatrix}
-2 & 1 \\
-5 & 3
-\end{bmatrix}
-\begin{bmatrix}
-x \\
-y
-\end{bmatrix}
-\]
-</div>
-
-<div class="example">
-<b>Example (Nonhomogeneous).</b> Convert the system to matrix form:
-\[
-\begin{cases}
-x' = 2x + y + t \\
-y' = 5x + 3y + e^t
-\end{cases}
-\]
-
-Step 1: Define vectors
-\[
-X =
-\begin{bmatrix}
-x \\
-y
-\end{bmatrix}, \quad
-F(t) =
-\begin{bmatrix}
-t \\
-e^t
-\end{bmatrix}
-\]
-
-Step 2: Matrix form
-\[
-X' = AX + F(t) =
-\begin{bmatrix}
-2 & 1 \\
-5 & 3
-\end{bmatrix}
-\begin{bmatrix}
-x \\
-y
-\end{bmatrix}
-+
-\begin{bmatrix}
-t \\
-e^t
-\end{bmatrix}
-\]
-</div>
-
-<h2>Higher-Order Differential Equations in Matrix Form</h2>
-
-<p>
-We can convert higher-order ODEs into systems of first-order equations.
-</p>
-
-<div class="example">
-<b>Example.</b> Convert
-\[
-y''' - 3y'' + 5y' - y = 2e^{-2t}
-\]
-
-Step 1: Define new variables
-\[
-x_1 = y, \quad x_2 = y', \quad x_3 = y''
-\]
-
-Then:
-\[
-x_1' = x_2, \quad x_2' = x_3
-\]
-
-Step 2: Express \(x_3'\)
-\[
-x_3' = y''' = 3y'' - 5y' + y + 2e^{-2t}
-\]
-
-Substitute:
-\[
-x_3' = 3x_3 - 5x_2 + x_1 + 2e^{-2t}
-\]
-
-Step 3: Write system
-\[
-\begin{cases}
-x_1' = x_2 \\
-x_2' = x_3 \\
-x_3' = x_1 - 5x_2 + 3x_3 + 2e^{-2t}
-\end{cases}
-\]
-
-Step 4: Matrix form
-\[
-X' =
-\begin{bmatrix}
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-1 & -5 & 3
-\end{bmatrix}
-X +
-\begin{bmatrix}
-0 \\
-0 \\
-2e^{-2t}
-\end{bmatrix}
-\]
-</div>
-
-We now want to extend the definitions learned in Chapter 4 into terms for systems of linear differential equations. We start with the definition of a solution vector.
-
-
-<div class="definition">
-<b>Definition.</b> A vector function \(X(t)\) is called a <b>solution vector</b> on an interval \(I\) if it satisfies the matrix equation \(X' = AX+F\) for all \(t \in I\).
-</div>
-
-<div class="example">
-<b>Example (Verification).</b> Verify that
-\[
-X_1 =
-\begin{bmatrix}
-e^{-2t} \\
--e^{2t}
-\end{bmatrix}
-\]
-and 
-\[
-X_2 =
-\begin{bmatrix}
-3e^{6t} \\
-5e^{6t}\end{bmatrix}
-\]
-is a solution to
-\[
-X' =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-X.
-\]
-
-Step 1: Compute derivative
-\[
-X_1' =
-\begin{bmatrix}
--2e^{-2t} \\
-2e^{-2t}
-\end{bmatrix}
-\]
-\[
-X_2' = \begin{bmatrix}
-18e^{6t} \\
-30e^{6t}
-\end{bmatrix}
-
-\]
-
-Step 2: Compute \(AX\)
-\[
-AX_1 =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-\begin{bmatrix}
-e^{-2t} \\
--e^{-2t}
-\end{bmatrix}
-=
-\begin{bmatrix}
-e^{-2t} -3e^{-2t} \\
-5e^{-2t} -3e^{-2t}
-\end{bmatrix}
-=
-\begin{bmatrix}
--2e^{-2t} \\
-2e^{-2t}
-\end{bmatrix} = X_1'
-\]
-
-and 
-\[
-
-AX_2 =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-\begin{bmatrix}
-3e^{6t} \\
-5e^{6t}
-\end{bmatrix}
-=
-\begin{bmatrix}
-3e^{6t}+15e^{6t} \\
-15e^{6t} + 15e^{6t}
-\end{bmatrix}
-=
-\begin{bmatrix}
-18e^{-2t} \\
-30e^{-2t}
-\end{bmatrix} = X_2'
-
-\]
-
-Since \(X_1' = AX_1\) and \(X_2' = AX_2\), then both \(X_1\) and \(X_2\) are solutions.
-</div>
-
-
-
-<div class="definition">
-<b>Definition.</b> A set of solutions \(\{X_1(t), X_2(t), \dots, X_n(t)\}\) is called a <b>fundamental set of solutions</b> if the vectors are linearly independent.
-</div>
-
-
-
-<div class="remark">
-<b>Remark.</b> We test linear independence the same way as before (using determinant / Wronskian ideas).</div>
-
-<div class="example">
-<b>Example.</b> Consider the system from the previous example.
-\[
-X' =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-X.
-\]
-
-We will show the set \(\left\{X_1 =
-\begin{bmatrix}
-e^{-2t} \\
--e^{-2t}
-\end{bmatrix}, \quad
-X_2 =
-\begin{bmatrix}
-3e^{6t} \\
-5e^{6t}
-\end{bmatrix}\right\}\) form a fundamental set of solutions to the system.
-
-We saw in the previous example both \(X_1\) and \(X_2\) are solutions to the system. Now we show linear independence.
-
-Step 2: Compute Wronksian
-\[
-W(X_1,X_2) = \det\begin{bmatrix}
-e^{-2t} & 3e^{6t} \\
--e^{-2t} & 5e^{6t}
-\end{bmatrix} = 5e^{4t}+3e^{4t} = 3e^{4t} \ne 0.
-\]
-
-Since the Wronksian is never zero, the solutions are linearly independent.
-
-Therefore, \(\{X_1, X_2\}\) forms a fundamental set of solutions.
-</div>
-
-Now we arrive at the definition of general solution
-<div class="definition">
-<b>Definition.</b> Given a fundamental set of solutions \(\{X_1, \cdots , X_n\}\) to the system \(X' = AX+F\). Then, the <b>general solution</b> to the system is
-
-\[X = c_1X_1 + \cdots + c_nX_n.\]
-</div>
-
-
-<h2>Connection</h2>
-
-Here is the thing to notice about the connection between the linear algebra techniques learned in the past lectures and solutions vectors.
-
-<div class="example">
-<b>Example.</b> Continuing with this example
-\[
-X' =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-X,
-\]
-
-notice \(X_1 =
-\begin{bmatrix}
-e^{-2t} \\
--e^{-2t}
-\end{bmatrix} =
-e^{-2t}\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}\) is a solution. Then
-
-\[
-X_1' = -2e^{-2t}\begin{bmatrix}
-1 \\
--1
-\end{bmatrix} = AX_1 = \begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}e^{-2t}\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}.
-\]
-
-We conclude that
-\[
--2\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}= \begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}.
-
-\]
-
-In other words, the value \(-2\) is an eigenvalue with corresponding eigenvector \(\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}\).
-
-
-</div>
-
-So there is clearly a relationship between finding eigenvalues and eigenvectors to the matrix representation for a system of linear differential equations, and finding solution vectors.
-
-
-
-</div>
-
-<h2 id="lecture25">
-	  Lecture 25: Section 8.2 - General Solution to Homogeneous Systems of DEs
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-
-
-As we saw in the connection above, there is a way take the matrix representation for a system \(X' = AX+F\) and relate the solution vectors of that equation to the eigenvalues and eigenvectors for the system. For this section, we will consider a homogeneous system first, that is the matrix representations
-we are looking at come in the form \(X' = AX\).
-	
-<div class="definition">
-<b>Definition.</b> <p>
-Consider the homogeneous system
-\[
-X' = AX
-\]
-where \(A\) is an \(n \times n\) constant matrix.
-</p>
-
-<p>
-If \(A\) has <b>n distinct eigenvalues</b> \(\lambda_1, \dots, \lambda_n\) with corresponding eigenvectors
-\(\mathbf{v}_1, \dots, \mathbf{v}_n\), then the <b>general solution</b> is
-</p>
-
-\[
-X(t) = c_1 e^{\lambda_1 t}\mathbf{v}_1
-+ c_2 e^{\lambda_2 t}\mathbf{v}_2
-+ \cdots
-+ c_n e^{\lambda_n t}\mathbf{v}_n.
-\]
-
-<p>
-Each term \(e^{\lambda t}\mathbf{v}\) is a solution vector, and linear independence follows from distinct eigenvalues.
-</p>
-</div>
-
-
-
-<div class="example">
-<b>Example.</b> 
-For the system 
-\[
-X' =
-\begin{bmatrix}
-1 & 3 \\
-5 & 3
-\end{bmatrix}
-X.
-\]
-
-We proved the set \(\left\{X_1 =
-\begin{bmatrix}
-e^{-2t} \\
--e^{-2t}
-\end{bmatrix}, \quad
-X_2 =
-\begin{bmatrix}
-3e^{6t} \\
-5e^{6t}
-\end{bmatrix}\right\}\) form a fundamental set of solutions to the system. Therefore, the general solution for this system by the thorem above is
-
-\[
-X = c_1
-\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}e^{-2t}+c_2
-\begin{bmatrix}
-3 \\
-5
-\end{bmatrix}e^{6t}.
-
-\]
-
-</div>
-
-<p>The idea is the following:</p>
-<ol>
-<li>Create the matrix representation for the system.
-<li>Find all the eigenvalues, and check how the characteristic equation factors
-<li>Find all corresponding eigenvectors (when possible)
-<li>Create the general solution
-</ol>
-
-<div class="example">
-<b>Example.</b> 
-Solve
-
-\[
-\begin{cases}
-x' = 2x + 3y \\
-y' = 2x + y
-\end{cases}
-\]
-
-<p><b>Step 1: Matrix form.</b></p>
-
-\[
-X' =
-\begin{bmatrix}
-2 & 3 \\
-2 & 1
-\end{bmatrix}
-X
-\]
-
-
-<p><b>Step 2: Eigenvalues.</b></p>
-
-\[
-\det(A-\lambda I)
-=
-\begin{vmatrix}
-2-\lambda & 3 \\
-2 & 1-\lambda
-\end{vmatrix}
-\]
-
-\[
-= (2-\lambda)(1-\lambda)-6
-\]
-
-\[
-= \lambda^2 -3\lambda -4
-= (\lambda-4)(\lambda+1)
-\]
-
-\[
-\lambda=4,-1
-\]
-
-
-
-<p><b>Step 3: Eigenvectors.</b></p>
-
-For \(\lambda=4\):
-
-\[
-A-4I=
-\begin{bmatrix}
--2 & 3 \\
-2 & -3
-\end{bmatrix}
-\]
-
-\[
--2x+3y=0 \Rightarrow y=\frac{2}{3}x
-\]
-
-Choose \(x=3\), \(y=2\).
-
-\[
-\mathbf{v}_1=
-\begin{bmatrix}
-3\\
-2
-\end{bmatrix}
-\]
-
-
-
-For \(\lambda=-1\):
-
-\[
-A+I=
-\begin{bmatrix}
-3 & 3 \\
-2 & 2
-\end{bmatrix}
-\]
-
-\[
-3x+3y=0 \Rightarrow y=-x
-\]
-
-\[
-\mathbf{v}_2=
-\begin{bmatrix}
-1\\
--1
-\end{bmatrix}
-\]
-
-
-
-<p><b>Step 4: General solution.</b></p>
-
-\[
-X(t)=
-c_1 e^{4t}
-\begin{bmatrix}
-3\\
-2
-\end{bmatrix}
-+
-c_2 e^{-t}
-\begin{bmatrix}
-1\\
--1
-\end{bmatrix}
-\]
-
-</div>
-
-The question is the following: in Chapter 4, we saw that the auxiliary equation corresponding to a higher order differential equation did not have to give us all distinct roots. What happens
-if we obtain a repeated root in the characteristic equation? That is, what if we have an \(n \times n\) matrix with less than \(n\) distinct eigenvalues.
-
-<div class="remark">
-<b>Remark.</b> <p>
-If \(A\) is (for example) a \(2 \times 2\) matrix with a repeated eigenvalue \(\lambda\) and only one eigenvector \(K\),
-then the second solution has the form
-</p>
-
-\[
-X_2 = K t e^{\lambda t} + P e^{\lambda t}
-\]
-
-<p>
-where \(P\) satisfies
-\[
-(A-\lambda I)P = K.
-\]
-</p>
-
-Together, the set \(\{K, X_2\}\) form a fundamental set of solutions. This process can be mimicked in the higher order cases as well.
-</p></div>
-
-
-
-<div class="example">
-<b>Example.</b> 
-
-\[
-X'=
-\begin{bmatrix}
-3 & -18 \\
-2 & -9
-\end{bmatrix}
-X
-\]
-
-<p><b>Step 1: Eigenvalues.</b></p>
-
-\[
-\det(A-\lambda I)
-=
-\lambda^2+6\lambda+9
-=
-(\lambda+3)^2
-\]
-
-\[
-\lambda=-3
-\]
-
-
-
-<p><b>Step 2: Eigenvector.</b></p>
-
-\[
-A+3I=
-\begin{bmatrix}
-6 & -18 \\
-2 & -6
-\end{bmatrix}
-\]
-
-\[
-6x-18y=0 \Rightarrow x=3y
-\]
-
-\[
-K=
-\begin{bmatrix}
-3\\
-1
-\end{bmatrix}
-\]
-
-
-
-<p><b>Step 3: Find \(P\).</b></p>
-
-Solve
-\[
-(A+3I)P=K.
-\]
-
-Let \(P=\begin{bmatrix}p_1\\p_2\end{bmatrix}\).
-
-\[
-6p_1-18p_2=3
-\]
-
-Choose \(p_2=0\):
-
-\[
-6p_1=3 \Rightarrow p_1=\frac12
-\]
-
-\[
-P=
-\begin{bmatrix}
-\frac12\\
-0
-\end{bmatrix}
-\]
-
-
-
-<p><b>General solution:</b></p>
-
-\[
-X(t)=
-c_1 e^{-3t}
-\begin{bmatrix}
-3\\
-1
-\end{bmatrix}
-+
-c_2 e^{-3t}
-\left(
-t
-\begin{bmatrix}
-3\\
-1
-\end{bmatrix}
-+
-\begin{bmatrix}
-\frac12\\
-0
-\end{bmatrix}
-\right)
-\] 
-</div>
-
-
-
-If eigenvalues are complex, solutions involve sine and cosine terms.
-See textbook for full treatment.
-   
-   
-   
-   
-<div class="example">
-<b>Example.</b> Find the general solution to the system
-
-\[
-\begin{cases}
-x' = x+y-z \\
-y' = 2y \\
-z' = y-z
-\end{cases}.
-\]
-
-<p><b>Step 1: Matrix form.</b></p>
-
-\[
-A=
-\begin{bmatrix}
-1 & 1 & -1\\
-0 & 2 & 0\\
-0 & 1 & -1
-\end{bmatrix}
-\]
-
-
-
-<p><b>Step 2: Eigenvalues.</b></p>
-
-\[
-\det(A-\lambda I)
-=
-(2-\lambda)
-\begin{vmatrix}
-1-\lambda & -1\\
-0 & -1-\lambda
-\end{vmatrix}
-\]
-
-\[
-=
-(2-\lambda)(1-\lambda)(-1-\lambda)
-\]
-
-\[
-\lambda=2,1,-1
-\]
-
-
-
-<p><b>Step 3: Eigenvectors.</b></p>
-
-For \(\lambda=2\):
-
-\[
-
-A-2I=
-\begin{bmatrix}
--1 & 1 & -1\\
-0 & 0 & 0\\
-0 & 1 & -3
-\end{bmatrix}
-, \quad \mathbf{v}_1=
-\begin{bmatrix}
-2\\
-3\\
-1
-\end{bmatrix}
-\]
-
-For \(\lambda=1\):
-
-\[
-A-I=
-\begin{bmatrix}
-0 & 1 & -1\\
-0 & 1 & 0\\
-0 & 1 & 0
-\end{bmatrix}
-, \quad 
-\mathbf{v}_2=
-\begin{bmatrix}
-1\\
-0\\
-0
-\end{bmatrix}
-\]
-
-For \(\lambda=-1\):
-
-\[
-A-(-1)I=
-\begin{bmatrix}
-2 & 1 & -1\\
-0 & 3 & 0\\
-0 & 1 & 0
-\end{bmatrix}
-, \quad 
-\mathbf{v}_3=
-\begin{bmatrix}
-1\\
-0\\
-2
-\end{bmatrix}
-\]
-
-
-
-<p><b>General solution:</b></p>
-
-\[
-X(t)=
-c_1 e^{2t}\mathbf{v}_1
-+
-c_2 e^{t}\mathbf{v}_2
-+
-c_3 e^{-t}\mathbf{v}_3
-\]
-
-</div>
-
-
-<h2>Math Modeling Systems problem.</h2>
-
-For our last example, lets connect this to the models we were looking at in chapter 3. We will look at the interaction between two tanks of fluid and solve the corresponding homoegenous system.
-
-<div class="example">
-<b>Example.</b> Two tanks each contain 100 gallons of brine. Let \(x_A(t)\) and \(x_B(t)\) be the number of pounds of salt in tanks A and B, respectively.
-
-Flow rates:
-<ul>
-<li>Pure water into tank A: \(2\) gal/min</li>
-<li>Out of tank A (to drain): \(1\) gal/min</li>
-<li>From A to B: \(2\) gal/min</li>
-<li>From B to A: \(1\) gal/min</li>
-<li>Out of tank B (to drain): \(1\) gal/min</li>
-</ul>
-
-Since inflow = outflow for each tank, both tanks remain at \(100\) gallons. We define concentrations
-
-\[
-\text{Concentration in A} = \frac{x_A}{100}, \quad
-\text{Concentration in B} = \frac{x_B}{100}
-\]
-
-Write equation for tank A
-
-Rate of change = (rate in) − (rate out)
-
-Inflow to A:
-<ul>
-<li>From B: \(1\) gal/min with concentration \(\frac{x_B}{100}\)</li>
-<li>Pure water contributes \(0\) salt</li>
-</ul>
-
-\[
-\text{Salt in} = 1 \cdot \frac{x_B}{100} = \frac{x_B}{100}
-\]
-
-Outflow from A:
-<ul>
-<li>To drain: \(1\) gal/min</li>
-<li>To B: \(2\) gal/min</li>
-<li>Total outflow: \(3\) gal/min with concentration \(\frac{x_A}{100}\)</li>
-</ul>
-
-\[
-\text{Salt out} = 3 \cdot \frac{x_A}{100} = \frac{3x_A}{100}
-\]
-
-Thus,
-\[
-\frac{dx_A}{dt} = \frac{x_B}{100} - \frac{3x_A}{100}
-\]
-
-Write equation for tank B
-
-Inflow to B:
-<ul>
-<li>From A: \(2\) gal/min with concentration \(\frac{x_A}{100}\)</li>
-</ul>
-
-\[
-\text{Salt in} = 2 \cdot \frac{x_A}{100} = \frac{2x_A}{100}
-\]
-
-Outflow from B:
-<ul>
-<li>To A: \(1\) gal/min</li>
-<li>To drain: \(1\) gal/min</li>
-<li>Total: \(2\) gal/min with concentration \(\frac{x_B}{100}\)</li>
-</ul>
-
-\[
-\text{Salt out} = 2 \cdot \frac{x_B}{100} = \frac{2x_B}{100}
-\]
-
-Thus,
-\[
-\frac{dx_B}{dt} = \frac{2x_A}{100} - \frac{2x_B}{100}
-\]
-
-Final system of differential equations
-
-\[
-\begin{cases}
-\frac{dx_A}{dt} = \frac{1}{100}x_B - \frac{3}{100}x_A \\
-\frac{dx_B}{dt} = \frac{2}{100}x_A - \frac{2}{100}x_B
-\end{cases}
-\]
-
-Write in matrix form
-
-Let
-\[
-X =
-\begin{bmatrix}
-x_A \\
-x_B
-\end{bmatrix}
-\]
-
-Then
-\[
-X' =
-\begin{bmatrix}
--\frac{3}{100} & \frac{1}{100} \\
-\frac{2}{100} & -\frac{2}{100}
-\end{bmatrix}
-X
-\]
-
-We can use the method above to get the general solution
-\[
-X = c_1\begin{bmatrix}
-1 \\
--1
-\end{bmatrix}e^{-t/25} + c_2\begin{bmatrix}
-1 \\
-2
-\end{bmatrix}e^{-t/100}
-
-\]
-
-</div>
-
-
-
-<h2 id="lecture26">
-	  Lecture 26: Section 8.3 - Solving Nonhomogeneous Systems
-	  <span style="font-size: 0.7em; margin-left: 10px;">
-		<a href="#top">↑ Back to top</a>
-	  </span>
-	</h2>
-	
-	<div class="definition">
-<b>Definition.</b> Consider the nonhomogeneous system
-\[
-X' = AX + F(t),
-\]
-where \(A\) is an \(n \times n\) constant matrix and \(F(t)\) is a vector-valued function.
-
-The <b>general solution</b> is given by
-\[
-X(t) = X_c(t) + X_p(t),
-\]
-where:
-<ul>
-<li>\(X_c(t)\) is the general solution to the associated homogeneous system
+      <strong>The following set of sections follows Appendix B and Chapter 8 of the textbook:</strong><br>
+      <strong>Unit 4</strong>:
+      <a href="#secB-1">Appendix B.1</a> |
+      <a href="#secB-2">Appendix B.2</a> |
+      <a href="#secB-3">Appendix B.3</a> |
+      <a href="#sec8-1">Section 8.1</a> |
+      <a href="#sec8-2">Section 8.2</a> |
+      <a href="#sec8-3">Section 8.3</a>
+    </nav>
+
+    <!-- ================= APPENDIX B.1 ================= -->
+    <div class="unit-divider" id="secB-1">
+      <div class="part-label">Appendix B.1</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Introduction to Matrices</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Matrices and Basic Operations</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>matrix</strong> is any rectangular array of numbers (or functions),
+      \[
+      A = \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+      \end{pmatrix}.
+      \]
+      The <strong>size</strong> of \(A\) is \(m\times n\) (rows \(\times\) columns). If \(m=n\), \(A\) is called a <strong>square matrix of order \(n\)</strong>.
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      Two \(m\times n\) matrices \(A=(a_{ij})\) and \(B=(b_{ij})\) are <strong>equal</strong> if \(a_{ij}=b_{ij}\) for every \(i,j\).
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>column matrix</strong> (or <strong>vector</strong>) is any matrix with \(n\) rows and exactly one column.
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>zero matrix</strong> \(0\) is the matrix (of any size) whose entries are all \(0\). The <strong>\(n\times n\) identity matrix</strong> \(I_n\) has \(1\)'s down the main diagonal and \(0\)'s elsewhere:
+      \[
+      I_n = \begin{pmatrix}
+        1 & 0 & \cdots & 0 \\
+        0 & 1 & \cdots & 0 \\
+        \vdots & & \ddots & \vdots \\
+        0 & 0 & \cdots & 1
+      \end{pmatrix}.
+      \]
+      It satisfies \(IA = AI = A\) for every square matrix \(A\) of the same size.
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>transpose</strong> of an \(m\times n\) matrix \(A=(a_{ij})\), denoted \(A^T\), is the \(n\times m\) matrix obtained by turning the rows of \(A\) into columns: \(A^T = (a_{ji})\). A square matrix with \(A=A^T\) is called <strong>symmetric</strong>. A square matrix whose only nonzero entries lie on the main diagonal is called a <strong>diagonal matrix</strong>.
+    </div>
+
+    <h3 class="tex-subsection">Scalar Multiplication and Addition</h3>
+
+    <p>For a constant \(k\) and a matrix \(A=(a_{ij})_{m\times n}\),
     \[
-    X' = AX,
-    \]</li>
-<li>\(X_p(t)\) is any particular solution to the nonhomogeneous system
+    kA = (k\cdot a_{ij})_{m\times n}.
+    \]
+    </p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      5\begin{pmatrix}1&2\\3&4\\0&5\end{pmatrix}
+        = \begin{pmatrix}5&10\\15&20\\0&25\end{pmatrix}, \qquad
+      -2\begin{pmatrix}1&3\\2&7\end{pmatrix}
+        = \begin{pmatrix}-2&-6\\-4&-14\end{pmatrix}, \qquad
+      e^t\begin{pmatrix}1\\3\\5\end{pmatrix}
+        = \begin{pmatrix}e^t\\3e^t\\5e^t\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Note that \(kA=Ak\) for every constant \(k\).
+    </div>
+
+    <p>For two matrices of the <em>same</em> size, \(A=(a_{ij})_{m\times n}\) and \(B=(b_{ij})_{m\times n}\),
     \[
-    X' = AX + F(t).
-    \]</li>
-
-</ul>
-
-</div>
-
-To find the general solution to a nonhomogeneous system \(X'=AX+F\) is the following:
-<ul>
-<li>Find general solution to \(X' = AX\) via method used in previous section (eigenvalues/ eigenvectors). This is \(X_c\)</li>
-<li>Use a method to find a particular solution \(X_p\)</li>
-<li>Form the general solution</li>
-
-</ul>
-
-<br>
-
-<b>Methods for Finding \(X_p(t)\):</b>
-
-In this section, we will isolate the method to finding the particular solution \(X_p\). We have two choices,
-
-<ol>
-    <li>Method of Undetermined Coefficients</li>
-    <li>Method of Variation of Parameters</li>
-</ol>
-	
-<h2>Method of Undetermined Coefficients</h2>
-<div class="remark">
-This method works when \(F(t)\) consists of functions such as polynomials, exponentials, sines, or cosines (or combinations of these).
-</div>
-
-The way to solve this is by inspecting \(F\) and choosing the most general form (using the guesses from 4.4) of each component.
-
-<h2>Table of Guesses</h2>
-
-	<table border="1" cellpadding="8">
-	<tr>
-	<th>\(g(x)\)</th>
-	<th>Guess for \(y_p\)</th>
-	</tr>
-	<tr>
-	<td>Polynomial degree n</td>
-	<td>General polynomial degree n</td>
-	</tr>
-	<tr>
-	<td>\(e^{ax}\)</td>
-	<td>\(Ae^{ax}\)</td>
-	</tr>
-	<tr>
-	<td>\(\sin kx\), \(\cos kx\)</td>
-	<td>\(A\cos kx + B\sin kx\)</td>
-	</tr>
-	<tr>
-	<td>Sum/Difference/Product or functions above</td>
-	<td>Product of guesses</td>
-	</tr>
-	</table>
-
-
-<div class="example">
-<b>Example.</b> Solve the system
-\[
-X' =
-\begin{bmatrix}
-2 & 2 \\
-1 & 3
-\end{bmatrix}
-X
-+
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}.
-\]
-
-Notice the general solution to the homogeneous system \(X' = AX\) is
-\[
-X_c =
-c_1 e^t
-\begin{bmatrix}
--2 \\
-1
-\end{bmatrix}
-+
-c_2 e^{4t}
-\begin{bmatrix}
-1 \\
-1
-\end{bmatrix}.
-\]
-
-Now, we want to find a particular solution \(X_p\).
-
-Since the forcing term is constant, we try a constant solution:
-\[
-X_p =
-\begin{bmatrix}
-a \\
-b
-\end{bmatrix}.
-\]
-
-Then
-\[
-X_p' =
-\begin{bmatrix}
-0 \\
-0
-\end{bmatrix}.
-\]
-
-Using the guess and the derivative of the guess, we plug into the differential equation to get
-
-\[
-X_p' = AX_p + F
-\]
-
-\[
-\begin{bmatrix}
-0 \\
-0
-\end{bmatrix}
-=
-\begin{bmatrix}
-2 & 2 \\
-1 & 3
-\end{bmatrix}
-\begin{bmatrix}
-a \\
-b
-\end{bmatrix}
-+
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}.
-\]
-
-Now we simplify:
-
-\[
-\begin{bmatrix}
-2 & 2 \\
-1 & 3
-\end{bmatrix}
-\begin{bmatrix}
-a \\
-b
-\end{bmatrix}
-=
-\begin{bmatrix}
-2a + 2b \\
-a + 3b
-\end{bmatrix}.
-\]
-
-So the equation becomes
-\[
-\begin{bmatrix}
-0 \\
-0
-\end{bmatrix}
-=
-\begin{bmatrix}
-2a + 2b \\
-a + 3b
-\end{bmatrix}
-+
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}
-=
-\begin{bmatrix}
-2a + 2b - 8 \\
-a + 3b + 3
-\end{bmatrix}.
-\]
-
-To find \(a\) and \(b\), we solve the system
-
-\[
-2a + 2b - 8 = 0 \quad \Rightarrow \quad 2a + 2b = 8
-\]
-\[
-a + 3b + 3 = 0 \quad \Rightarrow \quad a + 3b = -3
-\]
-
-Simplify first equation:
-\[
-a + b = 4
-\]
-
-Now subtract:
-\[
-(a + 3b) - (a + b) = -3 - 4
-\]
-\[
-2b = -7 \Rightarrow b = -\frac{7}{2}
-\]
-
-Substitute into \(a + b = 4\):
-\[
-a - \frac{7}{2} = 4 \Rightarrow a = \frac{15}{2}.
-\]
-
-Particular solution
-
-\[
-X_p =
-\begin{bmatrix}
-\frac{15}{2} \\
--\frac{7}{2}
-\end{bmatrix}.
-\]
-
-General solution
-
-\[
-X =
-c_1 e^t
-\begin{bmatrix}
--2 \\
-1
-\end{bmatrix}
-+
-c_2 e^{4t}
-\begin{bmatrix}
-1 \\
-1
-\end{bmatrix}
-+
-\begin{bmatrix}
-\frac{15}{2} \\
--\frac{7}{2}
-\end{bmatrix}.
-\]
-
-</div>
-
-
-
-If we have a sum or product of functions, then we use the sum or product of the guesses.
-
-
-
-<div class="example">
-<b>Example.</b> Solve the system
-\[
-X' =
-\begin{bmatrix}
-6 & 1 \\
-4 & 3
-\end{bmatrix}
-X
-+
-\begin{bmatrix}
-6t \\
--10t + 4
-\end{bmatrix}.
-\]
-
-Step 1: Homogeneous solution
-
-\[
-X_c =
-c_1 e^{7t}
-\begin{bmatrix}
-1 \\
-1
-\end{bmatrix}
-+
-c_2 e^{2t}
-\begin{bmatrix}
-1 \\
--4
-\end{bmatrix}.
-\]
-
-Step 2: Form of particular solution
-
-Since \(F\) is polynomial, try
-\[
-X_p =
-\begin{bmatrix}
-at + b \\
-ct + d
-\end{bmatrix}.
-\]
-
-Compute \(X_p'\)
-
-\[
-X_p' =
-\begin{bmatrix}
-a \\
-c
-\end{bmatrix}.
-\]
-
-Compute \(AX_p\)
-
-\[
-AX_p =
-\begin{bmatrix}
-6 & 1 \\
-4 & 3
-\end{bmatrix}
-\begin{bmatrix}
-at + b \\
-ct + d
-\end{bmatrix}
-=
-\begin{bmatrix}
-6(at+b) + (ct+d) \\
-4(at+b) + 3(ct+d)
-\end{bmatrix}
-\]
-
-\[
-=
-\begin{bmatrix}
-(6a+c)t + (6b+d) \\
-(4a+3c)t + (4b+3d)
-\end{bmatrix}.
-\]
-
-Plug into DE
-
-\[
-X_p' = AX_p + F
-\]
-
-\[
-\begin{bmatrix}
-a \\
-c
-\end{bmatrix}
-=
-\begin{bmatrix}
-(6a+c)t + (6b+d) \\
-(4a+3c)t + (4b+3d)
-\end{bmatrix}
-+
-\begin{bmatrix}
-6t \\
--10t + 4
-\end{bmatrix}.
-\]
-
-
-Match coefficients
-
-\[
-0 = 6a + c + 6
-\]
-\[
-a = 6b + d
-\]
-
-From bottom:
-\[
-0 = 4a + 3c - 10
-\]
-\[
-c = 4b + 3d + 4
-\]
-
-Solve system
-\[
-6a + c + 6 = 0 \Rightarrow c = -6a - 6
-\]
-
-Substitute into
-\[
-4a + 3c - 10 = 0
-\]
-\[
-4a + 3(-6a - 6) - 10 = 0
-\]
-\[
-4a - 18a - 18 - 10 = 0
-\]
-\[
--14a - 28 = 0 \Rightarrow a = -2
-\]
-
-Then
-\[
-c = -6(-2) - 6 = 12 - 6 = 6
-\]
-
-Now solve for \(b,d\):
-
-\[
-a = 6b + d \Rightarrow -2 = 6b + d
-\]
-\[
-c = 4b + 3d + 4 \Rightarrow 6 = 4b + 3d + 4
-\]
-
-\[
-2 = 4b + 3d
-\]
-
-Solve system:
-\[
--2 = 6b + d
-\Rightarrow d = -2 - 6b
-\]
-
-Substitute:
-\[
-2 = 4b + 3(-2 - 6b)
-\]
-\[
-2 = 4b - 6 - 18b
-\]
-\[
-2 = -14b - 6
-\Rightarrow 8 = -14b
-\Rightarrow b = -\frac{4}{7}
-\]
-
-Then
-\[
-d = -2 - 6\left(-\frac{4}{7}\right)
-= -2 + \frac{24}{7}
-= \frac{10}{7}
-\]
-
-Step 3: Particular solution
-
-\[
-X_p =
-\begin{bmatrix}
--2t - \frac{4}{7} \\
-6t + \frac{10}{7}
-\end{bmatrix}.
-\]
-
-Step 4: General solution
-
-\[
-X =
-c_1 e^{7t}
-\begin{bmatrix}
-1 \\
-1
-\end{bmatrix}
-+
-c_2 e^{2t}
-\begin{bmatrix}
-1 \\
--4
-\end{bmatrix}
-+
-\begin{bmatrix}
--2t - \frac{4}{7} \\
-6t + \frac{10}{7}
-\end{bmatrix}.
-\]
-
-</div>
-
-
-
-
-
-
-
-<h2>Variation of Parameters</h2>
-
-
-Here is the idea behind variation of parameters. Once again, this is to find the particular solution \(X_p\). Let \(\{X_1, \cdots, X_n\}\) be a fundamental set 
-of solutions to the system \(X' = AX\). Then the general solution can be written as
-\[
-X = c_1X_1 + \cdots + c_nX_n = \begin{pmatrix}
-x_{11} & x_{12} & \cdots & x_{1n} \\
-x_{21} & x_{22} & \cdots & x_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-x_{n1} & x_{n2} & \cdots & x_{nn}
-\end{pmatrix} \begin{pmatrix} c_1\\ c_2 \\ \vdots\\ c_n \end{pmatrix}
-\]
-
-Let \(\Phi(t) = \begin{pmatrix}
-x_{11} & x_{12} & \cdots & x_{1n} \\
-x_{21} & x_{22} & \cdots & x_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-x_{n1} & x_{n2} & \cdots & x_{nn}
-\end{pmatrix}\) and suppose \(\det(\Phi(t)) \ne 0\). Then
-\[
-X_p = \Phi(t)\int \Phi^{-1}(t)F(t) ~dt.
-\]
-
-<div class="remark">
-<b>Remark.</b> 
-Since we are assuming \(\det(\Phi(t)) \ne 0\) then linear algebra tells us the inverse matrix \(\Phi^{-1}(t)\) exists. In the \(2 \times 2\) case, there is a formula for the inverse we saw from the previous 
-lectures.
-$$
-A =
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-$$
-
-$$
-A^{-1} = \frac{1}{ad - bc}
-\begin{pmatrix}
-d & -b \\
--c & a
-\end{pmatrix}
-$$
-
-
-
-</div>
-
-<div class="example">
-<b>Example.</b> Use <i>variation of parameters</i> to find a particular solution \(X_p\) to
-\[
-X' =
-\begin{bmatrix}
-2 & 2 \\
-1 & 3
-\end{bmatrix}
-X
-+
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}.
-\]
-
-Step 1: Fundamental matrix
-
-From the homogeneous system (given previously), we have two solutions:
-\[
-X_1 = e^{4t}
-\begin{bmatrix}
-1 \\
-1
-\end{bmatrix}, \quad
-X_2 = e^{t}
-\begin{bmatrix}
-2 \\
--1
-\end{bmatrix}.
-\]
-
-Thus the fundamental matrix is
-\[
-\Phi(t) =
-\begin{bmatrix}
-e^{4t} & 2e^{t} \\
-e^{4t} & -e^{t}
-\end{bmatrix}.
-\]
-
-Step 2: Compute \(\Phi^{-1}(t)\)
-
-
-\[
-\det(\Phi) =
-e^{4t}(-e^{t}) - 2e^{t}(e^{4t})
-= -e^{5t} - 2e^{5t}
-= -3e^{5t}.
-\]
-
-So,
-\[
-\Phi^{-1}(t)
-= \frac{1}{-3e^{5t}}
-\begin{bmatrix}
-- e^{t} & -2e^{t} \\
-- e^{4t} & e^{4t}
-\end{bmatrix}.
-\]
-
-Step 3: Compute \(\Phi^{-1}(t)F(t)\)
-
-\[
-F(t) =
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}.
-\]
-
-\[
-\Phi^{-1}(t)F(t)
-=
-\frac{1}{-3e^{5t}}
-\begin{bmatrix}
-- e^{t} & -2e^{t} \\
-- e^{4t} & e^{4t}
-\end{bmatrix}
-\begin{bmatrix}
--8 \\
-3
-\end{bmatrix}.
-\]
-
-
-\[
-\Phi^{-1}(t)F(t)
-=
-\frac{1}{-3e^{5t}}
-\begin{bmatrix}
-2e^{t} \\
-11e^{4t}
-\end{bmatrix}
-=
-\begin{bmatrix}
--\frac{2}{3}e^{-4t} \\
--\frac{11}{3}e^{-t}
-\end{bmatrix}.
-\]
-
-Step 4: Integrate
-
-\[
-\int \Phi^{-1}(t)F(t)\,dt
-=
-\begin{bmatrix}
-\int -\frac{2}{3}e^{-4t} dt \\
-\int -\frac{11}{3}e^{-t} dt
-\end{bmatrix}.
-\]
-
-\[
-=
-\begin{bmatrix}
-\frac{1}{6}e^{-4t} \\
-\frac{11}{3}e^{-t}
-\end{bmatrix}.
-\]
-
-Step 5: Multiply by \(\Phi(t)\)
-
-\[
-X_p = \Phi(t)
-\begin{bmatrix}
-\frac{1}{6}e^{-4t} \\
-\frac{11}{3}e^{-t}
-\end{bmatrix}.
-\]
-
-\[
-=
-\begin{bmatrix}
-e^{4t} & 2e^{t} \\
-e^{4t} & -e^{t}
-\end{bmatrix}
-\begin{bmatrix}
-\frac{1}{6}e^{-4t} \\
-\frac{11}{3}e^{-t}
-\end{bmatrix}.
-\]
-
-Compute:
-
-Top:
-\[
-e^{4t}\cdot \frac{1}{6}e^{-4t} + 2e^{t}\cdot \frac{11}{3}e^{-t}
-= \frac{1}{6} + \frac{22}{3}
-= \frac{45}{6} = \frac{15}{2}.
-\]
-
-Bottom:
-\[
-e^{4t}\cdot \frac{1}{6}e^{-4t} - e^{t}\cdot \frac{11}{3}e^{-t}
-= \frac{1}{6} - \frac{11}{3}
-= -\frac{21}{6} = -\frac{7}{2}.
-\]
-
-Step 6: Particular solution
-
-\[
-X_p =
-\begin{bmatrix}
-\frac{15}{2} \\
--\frac{7}{2}
-\end{bmatrix}.
-\]
-
-</div>
-
-   
+    A+B = (a_{ij}+b_{ij})_{m\times n}, \qquad A-B = A+(-1)B.
+    \]
+    </p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{pmatrix}0&1\\2&3\end{pmatrix}
+      +\begin{pmatrix}5&4\\-2&1\end{pmatrix}
+      = \begin{pmatrix}5&5\\0&4\end{pmatrix}, \qquad
+      \begin{pmatrix}t^2&t\\0&2\end{pmatrix}
+      +\begin{pmatrix}t^3&2t\\4t&3\end{pmatrix}
+      = \begin{pmatrix}t^3+t^2 & t+2t\\4t&5\end{pmatrix}.
+      \]
+    </div>
+
+    <h2 class="tex-section">Matrix Multiplication</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      If \(A=(a_{ij})\) is \(m\times n\) and \(B=(b_{ij})\) is \(n\times p\) (the number of <em>columns</em> of \(A\) must equal the number of <em>rows</em> of \(B\)), then \(AB\) is the \(m\times p\) matrix whose \((i,k)\) entry is
+      \[
+      \sum_{j=1}^n a_{ij}b_{jk},
+      \]
+      i.e. the \(i\)th row of \(A\) "dotted" with the \(k\)th column of \(B\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      If \(A\) is \(m\times n\) and \(B\) is \(n\times p\), then \(AB\) is \(m\times p\). Unlike multiplication of numbers, matrix multiplication is <strong>not commutative</strong> in general: \(AB\ne BA\), and often one of the two products isn't even defined.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{pmatrix}3&0\\-1&2\end{pmatrix}
+      \begin{pmatrix}1&0\\2&-1\end{pmatrix}
+      = \begin{pmatrix}3(1)+0(2) & 3(0)+0(-1)\\-1(1)+2(2) & -1(0)+2(-1)\end{pmatrix}
+      = \begin{pmatrix}3&0\\3&-2\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{pmatrix}1&2&3\\3&1&0\\1&1&2\end{pmatrix}
+      \begin{pmatrix}-1&0&3\\0&1&0\\2&1&1\end{pmatrix}
+      = \begin{pmatrix}5&5&3\\-3&1&9\\3&3&5\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Since a \(3\times2\) matrix times a \(2\times3\) matrix produces a \(3\times3\) matrix,
+      \[
+      \begin{pmatrix}1&4\\5&10\\8&12\end{pmatrix}
+      \begin{pmatrix}-4&6&-3\\1&3&2\end{pmatrix}
+      = \begin{pmatrix}0&18&5\\-10&60&5\\-20&84&0\end{pmatrix}.
+      \]
+      Multiplying the same two matrices in the <em>opposite</em> order gives a \(2\times2\) result instead — a different size entirely:
+      \[
+      \begin{pmatrix}-4&6&-3\\1&3&2\end{pmatrix}
+      \begin{pmatrix}1&4\\5&10\\8&12\end{pmatrix}
+      = \begin{pmatrix}2&8\\32&58\end{pmatrix}.
+      \]
+      This illustrates why matrix multiplication is not commutative: here the two orders don't even produce matrices of the same size.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Even when both orders are defined and produce the same size, \(AB\) and \(BA\) need not be equal. Let \(A=\begin{pmatrix}1&2\\3&4\end{pmatrix}\) and \(B=\begin{pmatrix}0&1\\1&0\end{pmatrix}\). Then
+      \[
+      AB = \begin{pmatrix}2&1\\4&3\end{pmatrix}, \qquad
+      BA = \begin{pmatrix}3&4\\1&2\end{pmatrix},
+      \]
+      so \(AB\ne BA\).
+    </div>
+
+    <h2 class="tex-section">Determinants</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>determinant</strong> of a \(2\times2\) matrix is
+      \[
+      \det\begin{pmatrix}a&b\\c&d\end{pmatrix}
+        = \begin{vmatrix}a&b\\c&d\end{vmatrix} = ad-bc.
+      \]
+      The determinant of a larger square matrix can be computed by <strong>cofactor expansion</strong> along any row or column; expanding along the first row of a \(3\times3\) matrix,
+      \[
+      \begin{vmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\
+        a_{31}&a_{32}&a_{33}\end{vmatrix}
+      = a_{11}\begin{vmatrix}a_{22}&a_{23}\\a_{32}&a_{33}\end{vmatrix}
+        - a_{12}\begin{vmatrix}a_{21}&a_{23}\\a_{31}&a_{33}\end{vmatrix}
+        + a_{13}\begin{vmatrix}a_{21}&a_{22}\\a_{31}&a_{32}\end{vmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{vmatrix}1&2&3\\0&1&2\\1&3&3\end{vmatrix}
+        = 1\begin{vmatrix}1&2\\3&3\end{vmatrix}
+          - 2\begin{vmatrix}0&2\\1&3\end{vmatrix}
+          + 3\begin{vmatrix}0&1\\1&3\end{vmatrix}.
+      \]
+      Each \(2\times2\) minor is
+      \[
+      \begin{vmatrix}1&2\\3&3\end{vmatrix} = 3-6=-3, \qquad
+      \begin{vmatrix}0&2\\1&3\end{vmatrix} = 0-2=-2, \qquad
+      \begin{vmatrix}0&1\\1&3\end{vmatrix} = 0-1=-1.
+      \]
+      So
+      \[
+      \boxed{\begin{vmatrix}1&2&3\\0&1&2\\1&3&3\end{vmatrix}
+        = 1(-3)-2(-2)+3(-1) = -3+4-3 = -2.}
+      \]
+    </div>
+
+    <!-- ================= APPENDIX B.2 ================= -->
+    <div class="unit-divider" id="secB-2">
+      <div class="part-label">Appendix B.2</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Gaussian Elimination</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Solving Systems of Equations by Gaussian Elimination</h2>
+
+    <p>To solve a system of linear equations, we represent it as an <strong>augmented matrix</strong> (the coefficients of the system, together with a final column of constants), and simplify it using three types of <strong>row operations</strong>:</p>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Row Operations</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Multiply a row by a nonzero constant.</li>
+          <li>Interchange any two rows.</li>
+          <li>Add a constant multiple of one row to another row.</li>
+        </ol>
+      </div>
+    </div>
+
+    <p>The goal of <strong>Gaussian elimination</strong> is to use these operations to reduce the augmented matrix to a form where each row has a leading \(1\), and every other entry in that leading \(1\)'s column is \(0\) — at which point the solution can be read directly from the matrix.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system
+      \[
+      \begin{aligned}
+      2x+6y+z &= 7\\
+      x+2y-z &= -1\\
+      5x+7y-4z &= 9.
+      \end{aligned}
+      \]
+
+      <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Form the augmented matrix).</span></p>
+      \[
+      \left(\begin{array}{ccc|c}
+        2&6&1&7\\1&2&-1&-1\\5&7&-4&9
+      \end{array}\right).
+      \]
+
+      <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Swap \(R_1\) and \(R_2\) so the top-left entry is \(1\)).</span></p>
+      \[
+      \left(\begin{array}{ccc|c}
+        1&2&-1&-1\\2&6&1&7\\5&7&-4&9
+      \end{array}\right).
+      \]
+
+      <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Eliminate the rest of column 1 using \(R_2-2R_1\), \(R_3-5R_1\), then scale \(R_2\) by \(\tfrac12\)).</span></p>
+      \[
+      \left(\begin{array}{ccc|c}
+        1&2&-1&-1\\0&1&3/2&9/2\\0&-3&1&14
+      \end{array}\right).
+      \]
+
+      <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Eliminate the rest of column 2 using \(R_1-2R_2\), \(R_3+3R_2\), then scale \(R_3\) by \(\tfrac{2}{11}\)).</span></p>
+      \[
+      \left(\begin{array}{ccc|c}
+        1&0&-4&-10\\0&1&3/2&9/2\\0&0&1&5
+      \end{array}\right).
+      \]
+
+      <p class="step-line"><span class="step-label">Step 5</span> <span class="step-desc">(Read off the system).</span></p>
+      \(x-4z=-10\), \(y+\tfrac32z=\tfrac92\), \(z=5\). Back-substituting,
+      \[
+      y = \frac{9-3(5)}{2} = -3, \qquad x = -10+4(5) = 10.
+      \]
+      This system has exactly one solution:
+      \[
+      \boxed{x=10,\quad y=-3,\quad z=5.}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Not every system has a unique solution. If row reduction produces a row of all zeros (including in the constant column), the system has <strong>infinitely many solutions</strong>, with one or more variables free to take any value. If instead a row reduces to all zeros <em>except</em> the constant column (e.g. \(0=1\)), the system has <strong>no solution</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system
+      \[
+      \begin{aligned}
+      y+z &= -5\\
+      5x+4y-16z &= -10\\
+      x-y-5z &= 7.
+      \end{aligned}
+      \]
+      Forming the augmented matrix and swapping \(R_1\) and \(R_3\) so the top-left entry is \(1\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&-1&-5&7\\5&4&-16&-10\\0&1&1&-5
+      \end{array}\right).
+      \]
+      Eliminate column 1 using \(R_2-5R_1\), then scale by \(\tfrac19\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&-1&-5&7\\0&1&1&-5\\0&1&1&-5
+      \end{array}\right).
+      \]
+      Now \(R_3-R_2\) gives a row of all zeros:
+      \[
+      \left(\begin{array}{ccc|c}
+        1&-1&-5&7\\0&1&1&-5\\0&0&0&0
+      \end{array}\right).
+      \]
+      The system reduces to just two equations in three unknowns:
+      \[
+      x-y-5z=7, \qquad y+z=-5,
+      \]
+      so \(z\) is a <strong>free variable</strong>. Let \(z=t\). Then \(y=-5-t\), and
+      \[
+      x = 7+y+5z = 7+(-5-t)+5t = 2+4t.
+      \]
+      This system has <strong>infinitely many solutions</strong>:
+      \[
+      \boxed{x=2+4t,\quad y=-5-t,\quad z=t, \qquad t\in\mathbb{R}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system
+      \[
+      \begin{aligned}
+      3x+y+z &= 4\\
+      4x+2y-z &= 7\\
+      x+y-3z &= 6.
+      \end{aligned}
+      \]
+      Forming the augmented matrix and swapping \(R_1\) and \(R_3\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&1&-3&6\\4&2&-1&7\\3&1&1&4
+      \end{array}\right).
+      \]
+      Eliminate column 1 with \(R_2-4R_1\), \(R_3-3R_1\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&1&-3&6\\0&-2&11&-17\\0&-2&10&-14
+      \end{array}\right).
+      \]
+      Scale \(R_2\) by \(-\tfrac12\), then eliminate column 2 with \(R_1-R_2\), \(R_3+2R_2\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&0&5/2&-5/2\\0&1&-11/2&17/2\\0&0&-1&3
+      \end{array}\right).
+      \]
+      Scale \(R_3\) by \(-1\), then eliminate column 3 with \(R_1-\tfrac52R_3\), \(R_2+\tfrac{11}{2}R_3\):
+      \[
+      \left(\begin{array}{ccc|c}
+        1&0&0&5\\0&1&0&-8\\0&0&1&-3
+      \end{array}\right).
+      \]
+      This system has exactly one solution:
+      \[
+      \boxed{x=5,\quad y=-8,\quad z=-3.}
+      \]
+    </div>
+
+    <!-- ================= APPENDIX B.3 ================= -->
+    <div class="unit-divider" id="secB-3">
+      <div class="part-label">Appendix B.3</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Eigenvalues and Eigenvectors</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Eigenvalues and Eigenvectors</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      Let \(A\) be an \(n\times n\) square matrix. A number \(\lambda\) is called an <strong>eigenvalue</strong> of \(A\) if there exists a <em>nonzero</em> vector \(K\) such that
+      \[
+      AK = \lambda K.
+      \]
+      The vector \(K\) is called an <strong>eigenvector</strong> of \(A\) corresponding to \(\lambda\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Verify that \(K=\begin{pmatrix}1\\0\\2\end{pmatrix}\) is an eigenvector of \(A=\begin{pmatrix}3&0&1\\0&1&0\\6&7&2\end{pmatrix}\).
+      <p>Computing \(AK\),</p>
+      \[
+      AK = \begin{pmatrix}3&0&1\\0&1&0\\6&7&2\end{pmatrix}
+        \begin{pmatrix}1\\0\\2\end{pmatrix}
+        = \begin{pmatrix}3(1)+0(0)+1(2)\\0(1)+1(0)+0(2)\\6(1)+7(0)+2(2)\end{pmatrix}
+        = \begin{pmatrix}5\\0\\10\end{pmatrix}
+        = 5\begin{pmatrix}1\\0\\2\end{pmatrix} = 5K.
+      \]
+      So \(K\) is indeed an eigenvector of \(A\), with corresponding eigenvalue \(\boxed{\lambda=5}\).
+    </div>
+
+    <h2 class="tex-section">Finding Eigenvalues: The Characteristic Equation</h2>
+
+    <p>How do we find eigenvalues without being handed a candidate eigenvector? Starting from the definition,
+    \[
+    AK = \lambda K
+    \;\Longleftrightarrow\;
+    AK - \lambda K = 0
+    \;\Longleftrightarrow\;
+    (A-\lambda I)K = 0.
+    \]
+    This is a linear system in \(K\) with coefficient matrix \(A-\lambda I\). Since we want a <em>nonzero</em> solution \(K\), this system must have more than the trivial solution — which happens exactly when \(\det(A-\lambda I)=0\).</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The equation \(\det(A-\lambda I)=0\) is called the <strong>characteristic equation</strong> of \(A\). Its roots are exactly the eigenvalues of \(A\).
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Finding Eigenvalues and Eigenvectors</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Form \(A-\lambda I\).</li>
+          <li>Solve the characteristic equation \(\det(A-\lambda I)=0\) for \(\lambda\); these are the eigenvalues.</li>
+          <li>For each eigenvalue \(\lambda\), solve \((A-\lambda I)K=0\) (via Gaussian elimination) to find the corresponding eigenvector(s) \(K\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find all eigenvalues and eigenvectors of \(A=\begin{pmatrix}-1&2\\-7&8\end{pmatrix}\).
+      <p><strong>Eigenvalues.</strong></p>
+      \[
+      A-\lambda I = \begin{pmatrix}-1-\lambda&2\\-7&8-\lambda\end{pmatrix}.
+      \]
+      \[
+      \det(A-\lambda I) = (-1-\lambda)(8-\lambda)-(2)(-7)
+        = (\lambda^2-7\lambda-8)+14 = \lambda^2-7\lambda+6 = (\lambda-1)(\lambda-6).
+      \]
+      So the eigenvalues are \(\lambda_1=1\) and \(\lambda_2=6\).
+      <p><strong>Eigenvector for \(\lambda_1=1\).</strong> Solve \((A-I)K=0\):</p>
+      \[
+      \begin{pmatrix}-2&2\\-7&7\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+        = \begin{pmatrix}0\\0\end{pmatrix}
+      \;\Longrightarrow\; -2x+2y=0 \;\Longrightarrow\; x=y.
+      \]
+      Choosing \(x=1\) gives \(y=1\), so \(K_1=\begin{pmatrix}1\\1\end{pmatrix}\). (Check: \(AK_1 = \begin{pmatrix}-1+2\\-7+8\end{pmatrix}
+      =\begin{pmatrix}1\\1\end{pmatrix}=1\cdot K_1. \checkmark\))
+      <p><strong>Eigenvector for \(\lambda_2=6\).</strong> Solve \((A-6I)K=0\):</p>
+      \[
+      \begin{pmatrix}-7&2\\-7&2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+        = \begin{pmatrix}0\\0\end{pmatrix}
+      \;\Longrightarrow\; -7x+2y=0 \;\Longrightarrow\; x=\frac27y.
+      \]
+      Choosing \(y=7\) gives \(x=2\), so \(K_2=\begin{pmatrix}2\\7\end{pmatrix}\). (Check: \(AK_2 = \begin{pmatrix}-2+14\\-14+56\end{pmatrix}
+      =\begin{pmatrix}12\\42\end{pmatrix}=6\begin{pmatrix}2\\7\end{pmatrix}
+      =6K_2. \checkmark\))
+      \[
+      \boxed{\lambda_1=1,\ K_1=\begin{pmatrix}1\\1\end{pmatrix}; \qquad
+      \lambda_2=6,\ K_2=\begin{pmatrix}2\\7\end{pmatrix}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find all eigenvalues and eigenvectors of \(A=\begin{pmatrix}3&0&0\\0&2&0\\4&0&1\end{pmatrix}\).
+      <p><strong>Eigenvalues.</strong></p>
+      \[
+      A-\lambda I = \begin{pmatrix}3-\lambda&0&0\\0&2-\lambda&0\\4&0&1-\lambda\end{pmatrix}.
+      \]
+      Expanding along the first row,
+      \[
+      \det(A-\lambda I) = (3-\lambda)\begin{vmatrix}2-\lambda&0\\0&1-\lambda\end{vmatrix}
+        = (3-\lambda)(2-\lambda)(1-\lambda).
+      \]
+      So the eigenvalues are \(\lambda_1=1\), \(\lambda_2=2\), \(\lambda_3=3\).
+      <p><strong>Eigenvector for \(\lambda_1=1\).</strong> Solve \((A-I)K=0\):</p>
+      \[
+      \begin{pmatrix}2&0&0\\0&1&0\\4&0&0\end{pmatrix}
+        \begin{pmatrix}x\\y\\z\end{pmatrix} = 0
+      \;\Longrightarrow\; x=0,\ y=0,\ z \text{ free}.
+      \]
+      Choosing \(z=1\): \(K_1=\begin{pmatrix}0\\0\\1\end{pmatrix}\).
+      <p><strong>Eigenvector for \(\lambda_2=2\).</strong> Solve \((A-2I)K=0\):</p>
+      \[
+      \begin{pmatrix}1&0&0\\0&0&0\\4&0&-1\end{pmatrix}
+        \begin{pmatrix}x\\y\\z\end{pmatrix} = 0
+      \;\Longrightarrow\; x=0,\ z=4x=0,\ y \text{ free}.
+      \]
+      Choosing \(y=1\): \(K_2=\begin{pmatrix}0\\1\\0\end{pmatrix}\).
+      <p><strong>Eigenvector for \(\lambda_3=3\).</strong> Solve \((A-3I)K=0\):</p>
+      \[
+      \begin{pmatrix}0&0&0\\0&-1&0\\4&0&-2\end{pmatrix}
+        \begin{pmatrix}x\\y\\z\end{pmatrix} = 0
+      \;\Longrightarrow\; y=0,\ z=2x,\ x \text{ free}.
+      \]
+      Choosing \(x=1\): \(K_3=\begin{pmatrix}1\\0\\2\end{pmatrix}\).
+      \[
+      \boxed{\lambda_1=1,\ K_1=\begin{pmatrix}0\\0\\1\end{pmatrix}; \quad
+      \lambda_2=2,\ K_2=\begin{pmatrix}0\\1\\0\end{pmatrix}; \quad
+      \lambda_3=3,\ K_3=\begin{pmatrix}1\\0\\2\end{pmatrix}.}
+      \]
+    </div>
+
+    <!-- ================= SECTION 8.1 ================= -->
+    <div class="unit-divider" id="sec8-1">
+      <div class="part-label">Section 8.1</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Systems of Linear Differential Equations</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Systems of Linear Differential Equations in Matrix Form</h2>
+
+    <p>Our goal is to restate systems of linear differential equations in matrix form. A general (linear) first-order system of \(n\) equations has the form
+    \[
+    \begin{aligned}
+    \frac{dx_1}{dt} &= a_{11}(t)x_1+a_{12}(t)x_2+\cdots+a_{1n}(t)x_n+f_1(t)\\
+    \frac{dx_2}{dt} &= a_{21}(t)x_1+a_{22}(t)x_2+\cdots+a_{2n}(t)x_n+f_2(t)\\
+    &\ \,\vdots\\
+    \frac{dx_n}{dt} &= a_{n1}(t)x_1+a_{n2}(t)x_2+\cdots+a_{nn}(t)x_n+f_n(t).
+    \end{aligned}
+    \]
+    Setting \(X=(x_1,\dots,x_n)^T\), so that \(X'=(x_1',\dots,x_n')^T\), this system can be written compactly as
+    \[
+    \boxed{X' = AX+F,}
+    \]
+    where \(A=(a_{ij}(t))\) is the \(n\times n\) coefficient matrix and \(F=(f_1(t),\dots,f_n(t))^T\).</p>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      If \(F=0\) (the zero vector), the system \(X'=AX\) is called <strong>homogeneous</strong>; otherwise it is <strong>nonhomogeneous</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The system \(\dfrac{dx}{dt}=3x-5y\), \(\dfrac{dy}{dt}=4x+8y\) is already linear with constant coefficients, so with \(X=(x,y)^T\),
+      \[
+      X' = \begin{pmatrix}3&-5\\4&8\end{pmatrix}X.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      For the system \(2\dfrac{dx}{dt}=5x-14y+9t\), \(4\dfrac{dy}{dt}=-x+6y-2\), first divide each equation by the coefficient of its derivative:
+      \[
+      \frac{dx}{dt} = \frac52x-7y+\frac92t, \qquad
+      \frac{dy}{dt} = -\frac14x+\frac32y-\frac12.
+      \]
+      So
+      \[
+      X' = \begin{pmatrix}5/2&-7\\-1/4&3/2\end{pmatrix}X
+        + \begin{pmatrix}9t/2\\-1/2\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Conversely, the matrix equation \(X' = \begin{pmatrix}4&2\\-1&3\end{pmatrix}X+\begin{pmatrix}1\\-1\end{pmatrix}e^t\) corresponds to the scalar system
+      \[
+      \frac{dx}{dt}=4x+2y+e^t, \qquad \frac{dy}{dt}=-x+3y-e^t.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Converting a Higher-Order DE to a System</h3>
+
+    <p>A single \(n\)th-order linear DE \(y^{(n)} = f(t,y,y',\dots,y^{(n-1)})\) can always be rewritten as a system of \(n\) first-order equations. Let \(x_1=y\), \(x_2=y'\), \(\dots\), \(x_n=y^{(n-1)}\). Then \(x_1'=x_2\), \(x_2'=x_3\), \(\dots\), \(x_{n-1}'=x_n\), and \(x_n'=y^{(n)}=f(t,x_1,\dots,x_n)\).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Convert \(y'''-3y''+5y'-y=2e^{-2t}\) to a system in matrix form.
+      <p>Let \(x_1=y\), \(x_2=y'\), \(x_3=y''\). Then \(x_1'=x_2\), \(x_2'=x_3\), and solving the DE for \(y'''\),</p>
+      \[
+      x_3' = y''' = 2e^{-2t}+y-5y'+3y'' = x_1-5x_2+3x_3+2e^{-2t}.
+      \]
+      So \(X=(x_1,x_2,x_3)^T\) satisfies
+      \[
+      X' = \begin{pmatrix}0&1&0\\0&0&1\\1&-5&3\end{pmatrix}X
+        + \begin{pmatrix}0\\0\\2e^{-2t}\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Convert \(y''+4y=t\cos t\) to a system in matrix form.
+      <p>Let \(x_1=y\), \(x_2=y'\). Then \(x_1'=x_2\), and \(x_2'=y''=t\cos t-4y=t\cos t-4x_1\). So</p>
+      \[
+      X' = \begin{pmatrix}0&1\\-4&0\end{pmatrix}X
+        + \begin{pmatrix}0\\t\cos t\end{pmatrix}.
+      \]
+    </div>
+
+    <h2 class="tex-section">Solution Vectors and Fundamental Sets</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>solution vector</strong> \(X\) on an interval \(I\) is a column matrix \(X=(x_1,\dots,x_n)^T\) whose entries satisfy the system \(X'=AX+F\) for all \(t\) in \(I\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Verify that \(X_1=\begin{pmatrix}e^{-2t}\\-e^{-2t}\end{pmatrix}\) and \(X_2=\begin{pmatrix}3e^{6t}\\5e^{6t}\end{pmatrix}\) are both solution vectors of \(X'=\begin{pmatrix}1&3\\5&3\end{pmatrix}X\).
+      <p>For \(X_1\):</p>
+      \[
+      \begin{pmatrix}1&3\\5&3\end{pmatrix}
+      \begin{pmatrix}e^{-2t}\\-e^{-2t}\end{pmatrix}
+        = \begin{pmatrix}e^{-2t}-3e^{-2t}\\5e^{-2t}-3e^{-2t}\end{pmatrix}
+        = \begin{pmatrix}-2e^{-2t}\\2e^{-2t}\end{pmatrix}
+        = \frac{d}{dt}\begin{pmatrix}e^{-2t}\\-e^{-2t}\end{pmatrix}. \checkmark
+      \]
+      <p>For \(X_2\):</p>
+      \[
+      \begin{pmatrix}1&3\\5&3\end{pmatrix}
+      \begin{pmatrix}3e^{6t}\\5e^{6t}\end{pmatrix}
+        = \begin{pmatrix}3e^{6t}+15e^{6t}\\15e^{6t}+15e^{6t}\end{pmatrix}
+        = \begin{pmatrix}18e^{6t}\\30e^{6t}\end{pmatrix}
+        = \frac{d}{dt}\begin{pmatrix}3e^{6t}\\5e^{6t}\end{pmatrix}. \checkmark
+      \]
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A set of \(n\) linearly independent solution vectors \(X_1,\dots,X_n\) of an \(n\)th-order system on an interval \(I\) is called a <strong>fundamental set of solutions</strong> on \(I\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      To test linear independence of \(X_1,\dots,X_n\), either:
+      <ol type="1">
+        <li>show that \(c_1X_1+\cdots+c_nX_n=0\) forces \(c_1=\cdots=c_n=0\), or</li>
+        <li>compute the Wronskian \(W(X_1,\dots,X_n)=\det(X_1\ \cdots\ X_n)\) (the matrix whose columns are \(X_1,\dots,X_n\)) and show it is nonzero.</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Show that \(\begin{pmatrix}1\\1\end{pmatrix}\) and \(\begin{pmatrix}1\\0\end{pmatrix}\) are linearly independent.
+      <p><strong>Method 1.</strong> If \(c_1\begin{pmatrix}1\\1\end{pmatrix}
+      +c_2\begin{pmatrix}1\\0\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}\), then \(c_1+c_2=0\) and \(c_1=0\), forcing \(c_1=c_2=0\).</p>
+      <p><strong>Method 2.</strong></p>
+      \[
+      W = \det\begin{pmatrix}1&1\\1&0\end{pmatrix} = -1 \ne 0.
+      \]
+      Either way, the two vectors are linearly independent.
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      For \(X'=\begin{pmatrix}1&3\\5&3\end{pmatrix}X\), one can check that \(\{(1,-1)^Te^{-2t},\,(3,5)^Te^{6t}\}\) is a fundamental set of solutions, giving general solution \(X=c_1(1,-1)^Te^{-2t}+c_2(3,5)^Te^{6t}\). Notice that \(X_1=(1,-1)^Te^{-2t}\) satisfies
+      \[
+      X_1' = (1,-1)^T(-2e^{-2t}) = \begin{pmatrix}1&3\\5&3\end{pmatrix}
+        (1,-1)^Te^{-2t} = AX_1,
+      \]
+      so \(-2(1,-1)^T = \begin{pmatrix}1&3\\5&3\end{pmatrix}(1,-1)^T\): that is, \(\lambda=-2\) is an <strong>eigenvalue</strong> of \(A\) with corresponding <strong>eigenvector</strong> \((1,-1)^T\). This is exactly the pattern we will exploit in the next lecture: solutions of \(X'=AX\) can be found by computing the eigenvalues and eigenvectors of \(A\).
+    </div>
+
+    <!-- ================= SECTION 8.2 ================= -->
+    <div class="unit-divider" id="sec8-2">
+      <div class="part-label">Section 8.2</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Homogeneous Linear Systems</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Solving \(X'=AX\) via Eigenvalues</h2>
+
+    <p>As we saw at the end of the last lecture, a solution vector of the form \(X=Ke^{\lambda t}\) (with \(K\) a constant, nonzero column vector) satisfies \(X'=AX\) exactly when
+    \[
+    \lambda Ke^{\lambda t} = AKe^{\lambda t}
+    \;\Longleftrightarrow\; AK=\lambda K,
+    \]
+    i.e. exactly when \(\lambda\) is an eigenvalue of \(A\) with corresponding eigenvector \(K\).</p>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      Let \(\lambda_1,\dots,\lambda_n\) be \(n\) <em>distinct</em> eigenvalues of the \(n\times n\) matrix \(A\), with corresponding eigenvectors \(K_1,\dots,K_n\). Then the general solution of \(X'=AX\) on \((-\infty,\infty)\) is
+      \[
+      X = c_1K_1e^{\lambda_1t}+c_2K_2e^{\lambda_2t}+\cdots+c_nK_ne^{\lambda_nt}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(\dfrac{dx}{dt}=2x+3y\), \(\dfrac{dy}{dt}=2x+y\).
+      <p>In matrix form, \(X'=\begin{pmatrix}2&3\\2&1\end{pmatrix}X=AX\).</p>
+      \[
+      \det(A-\lambda I) = \det\begin{pmatrix}2-\lambda&3\\2&1-\lambda\end{pmatrix}
+        = \lambda^2-3\lambda-4 = (\lambda-4)(\lambda+1).
+      \]
+      So \(\lambda_1=4\), \(\lambda_2=-1\).
+      <p><strong>For \(\lambda_1=4\):</strong> \((A-4I\mid0) = \begin{pmatrix}-2&3\\2&-3\end{pmatrix}\) row-reduces to \(2x-3y=0\), so \(y=\tfrac23x\); choosing \(x=3\) gives eigenvector \(\begin{pmatrix}3\\2\end{pmatrix}\).</p>
+      <p><strong>For \(\lambda_2=-1\):</strong> \((A+I\mid0) = \begin{pmatrix}3&3\\2&2\end{pmatrix}\) row-reduces to \(x+y=0\), so \(y=-x\); choosing \(x=1\) gives eigenvector \(\begin{pmatrix}1\\-1\end{pmatrix}\).</p>
+      <p>Thus</p>
+      \[
+      \boxed{X = c_1\begin{pmatrix}1\\-1\end{pmatrix}e^{-t}
+        + c_2\begin{pmatrix}3\\2\end{pmatrix}e^{4t}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(\dfrac{dx}{dt}=x+y-z\), \(\dfrac{dy}{dt}=2y\), \(\dfrac{dz}{dt}=y-z\).
+      <p>In matrix form, \(X'=\begin{pmatrix}1&1&-1\\0&2&0\\0&1&-1\end{pmatrix}X=AX\). Expanding \(\det(A-\lambda I)\) along the first column,</p>
+      \[
+      \det(A-\lambda I) = (2-\lambda)(1-\lambda)(-1-\lambda).
+      \]
+      So \(\lambda_1=2\), \(\lambda_2=1\), \(\lambda_3=-1\).
+      <p><strong>For \(\lambda_1=2\):</strong> \((A-2I\mid0)\) reduces to \(-x+y-z=0\), \(y=3z\); choosing \(z=1\) gives \(y=3\), \(x=y-z=2\), so \(K_1=\begin{pmatrix}2\\3\\1\end{pmatrix}\).</p>
+      <p><strong>For \(\lambda_2=1\):</strong> \((A-I\mid0)\) reduces to \(y-z=0\), \(y=0\), so \(y=z=0\); choosing \(x=1\) gives \(K_2=\begin{pmatrix}1\\0\\0\end{pmatrix}\).</p>
+      <p><strong>For \(\lambda_3=-1\):</strong> \((A+I\mid0)\) reduces to \(2x+y-z=0\), \(y=0\); choosing \(x=1\) gives \(z=2x=2\), so \(K_3=\begin{pmatrix}1\\0\\2\end{pmatrix}\).</p>
+      <p>Thus</p>
+      \[
+      \boxed{X = c_1\begin{pmatrix}2\\3\\1\end{pmatrix}e^{2t}
+        + c_2\begin{pmatrix}1\\0\\0\end{pmatrix}e^{t}
+        + c_3\begin{pmatrix}1\\0\\2\end{pmatrix}e^{-t}.}
+      \]
+    </div>
+
+    <h2 class="tex-section">Repeated Eigenvalues</h2>
+
+    <p>What if the characteristic equation has a repeated root? If a repeated eigenvalue \(\lambda\) (of multiplicity \(2\)) has only <em>one</em> corresponding eigenvector \(K\), we still need a second, linearly independent solution. It always has the form
+    \[
+    X_2 = Kte^{\lambda t} + Pe^{\lambda t},
+    \]
+    where \(P\) is found by solving \((A-\lambda I)P = K\).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(X' = \begin{pmatrix}3&-18\\2&-9\end{pmatrix}X\).
+      \[
+      \det(A-\lambda I) = \det\begin{pmatrix}3-\lambda&-18\\2&-9-\lambda\end{pmatrix}
+        = \lambda^2+6\lambda+9 = (\lambda+3)^2.
+      \]
+      So \(\lambda=-3\) is the <em>only</em> eigenvalue, but we need two linearly independent solution vectors.
+      <p><strong>Eigenvector.</strong> \((A+3I\mid0) = \begin{pmatrix}6&-18\\2&-6\end{pmatrix}\) row-reduces to \(x-3y=0\), so \(x=3y\); choosing \(y=1\) gives \(K=\begin{pmatrix}3\\1\end{pmatrix}\). This gives one solution, \(X_1 = \begin{pmatrix}3\\1\end{pmatrix}e^{-3t}\).</p>
+      <p><strong>Second solution vector.</strong> Solve \((A+3I)P=K\):</p>
+      \[
+      \begin{pmatrix}6&-18\\2&-6\end{pmatrix}\begin{pmatrix}p_1\\p_2\end{pmatrix}
+        = \begin{pmatrix}3\\1\end{pmatrix}.
+      \]
+      Both rows reduce to the single equation \(2p_1-6p_2=1\); choosing \(p_2=0\) gives \(p_1=\tfrac12\), so \(P=\begin{pmatrix}1/2\\0\end{pmatrix}\). Thus
+      \[
+      X_2 = \begin{pmatrix}3\\1\end{pmatrix}te^{-3t}
+        + \begin{pmatrix}1/2\\0\end{pmatrix}e^{-3t}.
+      \]
+      <p>The general solution is</p>
+      \[
+      \boxed{X = c_1\begin{pmatrix}3\\1\end{pmatrix}e^{-3t}
+        + c_2\left[\begin{pmatrix}3\\1\end{pmatrix}te^{-3t}
+        + \begin{pmatrix}1/2\\0\end{pmatrix}e^{-3t}\right].}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Just as with scalar constant-coefficient equations (Section 4.3), a matrix \(A\) can also have <strong>complex conjugate eigenvalues</strong>. In that case, the two corresponding (complex) solution vectors can be combined — via Euler's formula, exactly as in the scalar case — to produce two real-valued, linearly independent solutions involving \(\cos\) and \(\sin\).
+    </div>
+
+    <!-- ================= SECTION 8.3 ================= -->
+    <div class="unit-divider" id="sec8-3">
+      <div class="part-label">Section 8.3</div>
+      <hr class="part-rule">
+      <div class="part-subtitle">Nonhomogeneous Linear Systems</div>
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Nonhomogeneous Systems</h2>
+
+    <p>When we have a nonhomogeneous system \(X'=AX+F(t)\), the general solution has the form
+    \[
+    X = X_c+X_p,
+    \]
+    where \(X_c=c_1X_1+\cdots+c_nX_n\) is the <strong>complementary function</strong> (the general solution of the associated homogeneous system \(X'=AX\)) and \(X_p\) is any single <strong>particular solution</strong> of \(X'=AX+F(t)\). As with scalar equations, we have two methods for finding \(X_p\): the method of undetermined coefficients, and variation of parameters.</p>
+
+    <h2 class="tex-section">Undetermined Coefficients</h2>
+
+    <p>This method can be used when (1) \(A\) has constant entries, and (2) the entries of \(F(t)\) are constants, polynomials, exponentials, or sine/cosine functions.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(X'=\begin{pmatrix}2&2\\1&3\end{pmatrix}X
+        +\begin{pmatrix}-8\\3\end{pmatrix}\) on \((-\infty,\infty)\).
+      <p><strong>Homogeneous part.</strong></p>
+      \[
+      \det(A-\lambda I) = \det\begin{pmatrix}2-\lambda&2\\1&3-\lambda\end{pmatrix}
+        = \lambda^2-5\lambda+4 = (\lambda-1)(\lambda-4).
+      \]
+      For \(\lambda=1\): \((A-I\mid0)\) gives \(x+2y=0\), eigenvector \(\begin{pmatrix}-2\\1\end{pmatrix}\). For \(\lambda=4\): \((A-4I\mid0)\) gives \(x-y=0\), eigenvector \(\begin{pmatrix}1\\1\end{pmatrix}\). So
+      \[
+      X_c = c_1\begin{pmatrix}-2\\1\end{pmatrix}e^{t}
+        + c_2\begin{pmatrix}1\\1\end{pmatrix}e^{4t}.
+      \]
+      <p><strong>Particular solution.</strong> Since \(F=\begin{pmatrix}-8\\3\end{pmatrix}\) has constant entries, guess \(X_p=\begin{pmatrix}a\\b\end{pmatrix}\), a constant vector, so \(X_p'=0\). Substituting into the DE,</p>
+      \[
+      0 = AX_p+F
+      \;\Longrightarrow\;
+      \begin{pmatrix}2&2\\1&3\end{pmatrix}\begin{pmatrix}a\\b\end{pmatrix}
+        = \begin{pmatrix}8\\-3\end{pmatrix}.
+      \]
+      This gives \(2a+2b=8\) and \(a+3b=-3\). From the first equation, \(a+b=4\), so \(a=4-b\). Substituting,
+      \[
+      (4-b)+3b = -3 \;\Longrightarrow\; 2b=-7 \;\Longrightarrow\; b=-\frac72,
+      \qquad a = 4-\left(-\frac72\right)=\frac{15}{2}.
+      \]
+      So \(X_p = \begin{pmatrix}15/2\\-7/2\end{pmatrix}\), and
+      \[
+      \boxed{X = c_1\begin{pmatrix}-2\\1\end{pmatrix}e^{t}
+        + c_2\begin{pmatrix}1\\1\end{pmatrix}e^{4t}
+        + \begin{pmatrix}15/2\\-7/2\end{pmatrix}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(X'=\begin{pmatrix}6&1\\4&3\end{pmatrix}X
+        +\begin{pmatrix}6t\\-10t+4\end{pmatrix}\).
+      <p><strong>Homogeneous part.</strong></p>
+      \[
+      \det(A-\lambda I) = \det\begin{pmatrix}6-\lambda&1\\4&3-\lambda\end{pmatrix}
+        = \lambda^2-9\lambda+14 = (\lambda-2)(\lambda-7).
+      \]
+      For \(\lambda=2\): eigenvector \(\begin{pmatrix}1\\-4\end{pmatrix}\). For \(\lambda=7\): eigenvector \(\begin{pmatrix}1\\1\end{pmatrix}\). So
+      \[
+      X_c = c_1\begin{pmatrix}1\\-4\end{pmatrix}e^{2t}
+        + c_2\begin{pmatrix}1\\1\end{pmatrix}e^{7t}.
+      \]
+      <p><strong>Particular solution.</strong> Since \(F\) is linear in \(t\), guess \(X_p = \begin{pmatrix}a_1t+a_2\\b_1t+b_2\end{pmatrix}\), so \(X_p' = \begin{pmatrix}a_1\\b_1\end{pmatrix}\). Substituting into \(X_p'=AX_p+F\) and matching coefficients of \(t\) and the constant term in each row gives the system</p>
+      \[
+      \begin{aligned}
+      6a_1+b_1+6&=0, &4a_1+3b_1-10&=0,\\
+      6a_2+b_2-a_1&=0, &4a_2+3b_2+4-b_1&=0.
+      \end{aligned}
+      \]
+      Solving the first pair for \(a_1,b_1\) and then the second pair for \(a_2,b_2\),
+      \[
+      a_1=-2, \qquad b_1=6, \qquad a_2=-\frac47, \qquad b_2=\frac{10}{7}.
+      \]
+      So \(X_p = \begin{pmatrix}-2t-4/7\\6t+10/7\end{pmatrix}\), and
+      \[
+      \boxed{X = c_1\begin{pmatrix}1\\-4\end{pmatrix}e^{2t}
+        + c_2\begin{pmatrix}1\\1\end{pmatrix}e^{7t}
+        + \begin{pmatrix}-2t-4/7\\6t+10/7\end{pmatrix}.}
+      \]
+    </div>
+
+    <h2 class="tex-section">Variation of Parameters</h2>
+
+    <p>Let \(X_1,\dots,X_n\) be a fundamental set of solutions of \(X'=AX\), so the general solution is \(X=c_1X_1+\cdots+c_nX_n\). Writing this as
+    \[
+    X = \Phi(t)\,C, \qquad
+    \Phi(t) = \big(X_1\ X_2\ \cdots\ X_n\big), \qquad
+    C = \begin{pmatrix}c_1\\\vdots\\c_n\end{pmatrix},
+    \]
+    the matrix \(\Phi(t)\) (whose columns are the \(X_i\)) is called a <strong>fundamental matrix</strong>. Since \(\{X_i\}\) are linearly independent, \(\det(\Phi(t))\ne0\), so \(\Phi(t)\) is invertible, and one can check \(\Phi'(t)=A\Phi(t)\).</p>
+
+    <div class="theorem">
+      <span class="label">Theorem</span>
+      For the nonhomogeneous system \(X'=AX+F(t)\) with fundamental matrix \(\Phi(t)\), a particular solution is given by
+      \[
+      X_p = \Phi(t)\int \Phi(t)^{-1}F(t)\,dt.
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Since \(\det(\Phi(t))\ne0\), \(\Phi(t)^{-1}\) always exists; for a \(2\times2\) matrix \(\Phi(t)=\begin{pmatrix}a&b\\c&d\end{pmatrix}\),
+      \[
+      \Phi(t)^{-1} = \frac{1}{\det(\Phi(t))}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(X' = \begin{pmatrix}-3&1\\2&-4\end{pmatrix}X
+        + \begin{pmatrix}3t\\e^{-t}\end{pmatrix}\).
+      <p><strong>Homogeneous part.</strong> \(\det(A-\lambda I) = \lambda^2+7\lambda+10=(\lambda+2)(\lambda+5)\), so \(\lambda=-2\) (eigenvector \((1,1)^T\)) and \(\lambda=-5\) (eigenvector \((1,-2)^T\)). So</p>
+      \[
+      \Phi(t) = \begin{pmatrix}e^{-2t}&e^{-5t}\\e^{-2t}&-2e^{-5t}\end{pmatrix}.
+      \]
+      <p><strong>Fundamental matrix inverse.</strong> \(\det(\Phi(t)) =
+      -2e^{-7t}-e^{-7t}=-3e^{-7t}\), so</p>
+      \[
+      \Phi(t)^{-1} = \begin{pmatrix}\frac23e^{2t}&\frac13e^{2t}\\
+        \frac13e^{5t}&-\frac13e^{5t}\end{pmatrix}.
+      \]
+      <p><strong>Particular solution.</strong></p>
+      \[
+      \Phi(t)^{-1}F(t) = \begin{pmatrix}2te^{2t}+\frac13e^{t}\\
+        te^{5t}-\frac13e^{4t}\end{pmatrix}.
+      \]
+      Integrating each entry (using \(\int te^{at}dt =
+      \tfrac{t}{a}e^{at}-\tfrac{1}{a^2}e^{at}\)),
+      \[
+      \int\Phi(t)^{-1}F(t)\,dt
+        = \begin{pmatrix}te^{2t}-\frac12e^{2t}+\frac13e^{t}\\
+        \frac15te^{5t}-\frac1{25}e^{5t}-\frac1{12}e^{4t}\end{pmatrix}.
+      \]
+      Multiplying by \(\Phi(t)\) and simplifying each component,
+      \[
+      X_p = \Phi(t)\int\Phi(t)^{-1}F(t)\,dt
+        = \begin{pmatrix}\frac65t-\frac{27}{50}+\frac14e^{-t}\\
+        \frac35t-\frac{21}{50}+\frac12e^{-t}\end{pmatrix}.
+      \]
+      Thus
+      \[
+      \boxed{X = c_1\begin{pmatrix}1\\1\end{pmatrix}e^{-2t}
+        + c_2\begin{pmatrix}1\\-2\end{pmatrix}e^{-5t}
+        + \begin{pmatrix}\frac65t-\frac{27}{50}+\frac14e^{-t}\\
+        \frac35t-\frac{21}{50}+\frac12e^{-t}\end{pmatrix}.}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve the system \(\dfrac{dx}{dt}=3x-3y+4\), \(\dfrac{dy}{dt}=2x-2y-1\).
+      <p>In matrix form, \(X'=\begin{pmatrix}3&-3\\2&-2\end{pmatrix}X
+      +\begin{pmatrix}4\\-1\end{pmatrix}\).</p>
+      <p><strong>Homogeneous part.</strong> \(\det(A-\lambda I) = \lambda^2-\lambda
+      = \lambda(\lambda-1)\), so \(\lambda=0\) (eigenvector \((1,1)^T\)) and \(\lambda=1\) (eigenvector \((3,2)^T\)). So</p>
+      \[
+      \Phi(t) = \begin{pmatrix}1&3e^{t}\\1&2e^{t}\end{pmatrix}.
+      \]
+      <p><strong>Fundamental matrix inverse.</strong> \(\det(\Phi(t)) = 2e^t-3e^t=-e^t\), so</p>
+      \[
+      \Phi(t)^{-1} = \begin{pmatrix}-2&3\\e^{-t}&-e^{-t}\end{pmatrix}.
+      \]
+      <p><strong>Particular solution.</strong></p>
+      \[
+      \Phi(t)^{-1}F(t)
+        = \begin{pmatrix}-2&3\\e^{-t}&-e^{-t}\end{pmatrix}
+          \begin{pmatrix}4\\-1\end{pmatrix}
+        = \begin{pmatrix}-11\\5e^{-t}\end{pmatrix}.
+      \]
+      Integrating,
+      \[
+      \int\Phi(t)^{-1}F(t)\,dt = \begin{pmatrix}-11t\\-5e^{-t}\end{pmatrix}.
+      \]
+      Multiplying by \(\Phi(t)\),
+      \[
+      X_p = \begin{pmatrix}1&3e^t\\1&2e^t\end{pmatrix}
+        \begin{pmatrix}-11t\\-5e^{-t}\end{pmatrix}
+        = \begin{pmatrix}-11t-15\\-11t-10\end{pmatrix}.
+      \]
+      Thus
+      \[
+      \boxed{X = c_1\begin{pmatrix}1\\1\end{pmatrix}
+        + c_2\begin{pmatrix}3\\2\end{pmatrix}e^{t}
+        + \begin{pmatrix}-11t-15\\-11t-10\end{pmatrix}.}
+      \]
+    </div>
+
   </main>
 </body>
 </html>

@@ -1,0 +1,197 @@
+/* Shared styling for the MATH 2410 unit note pages, matching the colors/box
+   environments used in the LaTeX lecture notes (navy / teal / charcoal). */
+
+:root {
+  --navy: #002d62;
+  --teal: #006455;
+  --charcoal: #464646;
+  --maroon: #8c1414;
+}
+
+/* Big divider marking each course "Section X.Y" — replaces the old "Lecture N" header */
+.unit-divider {
+  text-align: center;
+  margin: 3.5rem 0 2rem;
+}
+.unit-divider .part-label {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: var(--navy);
+}
+.unit-divider .part-rule {
+  width: 55%;
+  height: 2px;
+  background: var(--navy);
+  margin: 0.75rem auto;
+  border: none;
+}
+.unit-divider .part-subtitle {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+.unit-divider .back-to-top {
+  display: block;
+  font-size: 0.65em;
+  font-style: normal;
+  margin-top: 0.6rem;
+}
+
+/* tex \section-style headings: bold navy with a rule underneath */
+h2.tex-section {
+  color: var(--navy);
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--navy);
+  padding-bottom: 0.3rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* tex \subsection-style headings: bold teal, no rule */
+h3.tex-subsection {
+  color: var(--teal);
+  font-weight: bold;
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Phase-portrait / sub-figure captions inside example boxes */
+h4.tex-figure {
+  color: var(--teal);
+  margin-top: 1rem;
+}
+
+/* Box environments — each theorem-style environment gets its own color,
+   instead of all three sharing one blue box. */
+.definition, .theorem, .example, .remark {
+  padding: 0.6rem 1.1rem;
+  margin: 1.2rem 0;
+  border-radius: 3px;
+}
+
+.definition {
+  background: rgba(0,45,98,0.05);
+  border-left: 3px solid var(--navy);
+}
+.definition > .label { color: var(--navy); }
+
+.theorem {
+  background: rgba(0,45,98,0.05);
+  border: 1px solid var(--navy);
+  font-style: italic;
+}
+.theorem > .label { color: var(--navy); font-style: normal; }
+
+.example {
+  background: rgba(0,100,85,0.05);
+  border-left: 3px solid var(--teal);
+}
+.example > .label { color: var(--teal); }
+
+.remark {
+  background: rgba(70,70,70,0.06);
+  border-left: 3px solid var(--charcoal);
+  font-style: italic;
+  color: var(--charcoal);
+}
+.remark > .label { font-style: normal; color: var(--charcoal); }
+
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* Method box, mirroring the tcolorbox with a title bar */
+.methodbox {
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+.methodbox .methodbox-title {
+  background: var(--navy);
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1.1rem;
+}
+.methodbox .methodbox-body {
+  padding: 0.75rem 1.1rem;
+}
+.methodbox ol { margin: 0; padding-left: 1.3rem; }
+.methodbox li { margin-bottom: 0.4rem; }
+
+/* Step helper, mirroring \step{n}{description} */
+.step-line { margin-top: 1rem; margin-bottom: 0.4rem; }
+.step-line .step-label { font-weight: bold; color: var(--navy); }
+.step-line .step-desc { font-style: italic; }
+
+table.tex-table {
+  border-collapse: collapse;
+  margin: 1rem auto;
+}
+table.tex-table th, table.tex-table td {
+  border: 1px solid #888;
+  padding: 8px 16px;
+  text-align: center;
+}
+table.tex-table th {
+  background: #fff;
+  color: var(--navy);
+  font-weight: bold;
+  border-bottom: 2px solid var(--navy);
+}
+
+/* Practice-problem cards */
+.problem {
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+  padding: 0.9rem 1.2rem;
+  margin: 1.6rem 0;
+  background: rgba(0,45,98,0.02);
+}
+.problem h3 {
+  color: var(--navy);
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.diff-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+.diff-easy { background: rgba(0,100,85,0.12); color: var(--teal); }
+.diff-medium { background: rgba(0,45,98,0.12); color: var(--navy); }
+.diff-hard { background: rgba(140,20,20,0.12); color: var(--maroon); }
+.diff-conceptual { background: rgba(70,70,70,0.12); color: var(--charcoal); font-style: italic; }
+
+.problem button {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.45rem 1rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.problem button:hover { background: #001f45; }
+
+.solution {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed #b8c2cf;
+}
+.solution .step-line { margin-top: 0.9rem; margin-bottom: 0.3rem; }

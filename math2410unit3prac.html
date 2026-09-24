@@ -1,9 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Unit 1 Practice / Review Problems — MATH 2410</title>
+  <title>Unit 3 Practice / Review Problems — MATH 2410</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
 
   <!-- MathJax for LaTeX -->
   <script>
@@ -35,7 +36,7 @@
 
   <!-- Top Navigation -->
   <div class="topnav">
-    <a href="index.html">Home</a>	
+    <a href="index.html">Home</a>
     <a href="notes.html">Notes</a>
     <div class="dropdown">
       <button class="dropbtn">Teaching</button>
@@ -52,941 +53,804 @@
   <main class="notes">
     <p>← <a href="courseresources.html">Back to Course Resources</a></p>
 
-    <h1>Unit 3 Practice / Review Problems — MATH 2410</h1>
+    <h1>Practice / Review Problems — MATH 2410</h1>
+    <p class="subtitle">Each problem is tagged by difficulty —
+      <span class="diff-tag diff-easy">Easy</span>
+      <span class="diff-tag diff-medium">Medium</span>
+      <span class="diff-tag diff-hard">Hard</span>
+      <span class="diff-tag diff-conceptual">Conceptual</span>
+      — and within each section the problems are ordered from easiest to hardest, ending with a
+      conceptual question, so you can warm up, push yourself, and then test your understanding of
+      the ideas rather than just the mechanics.
+    </p>
     <hr>
 
     <!-- Table of Contents by Section -->
     <nav class="toc" id="toc">
       <strong>Jump to Section:</strong>
       <a href="#sec7.1">Section 7.1</a> |
-	  <a href="#sec7.2">Section 7.2</a> |
-	  <a href="#sec7.3">Section 7.3</a> |
-	  <a href="#sec7.4">Section 7.4</a> |
+      <a href="#sec7.2">Section 7.2</a> |
+      <a href="#sec7.3">Section 7.3</a> |
+      <a href="#sec7.4">Section 7.4</a>
     </nav>
     <hr>
-<h2 id="sec7.1">Section 7.1
-  <span style="font-size: 0.7em; margin-left: 10px;">
-    <a href="#toc">↑ Back to top</a>
-  </span>
-</h2>
 
-<!-- Problem 1 -->
-<div class="problem">
-  <h3 id="prob1">Problem 1</h3>
-  <p>
-  Prove using the definition that
-  \[
-  \mathcal{L}\{2t\} = \frac{2}{s^2}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol1', this)">Show Solution</button>
-
-  <div id="sol1" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Start from the definition:
-    \[
-    \mathcal{L}\{2t\} = \int_0^\infty 2t e^{-st} dt = 2\int_0^\infty t e^{-st} dt.
-    \]
-
-    Use integration by parts:
-
-    \[
-    u = t \Rightarrow du = dt
-    \]
-    \[
-    dv = e^{-st}dt \Rightarrow v = -\frac{1}{s}e^{-st}
-    \]
-
-    Apply formula:
-    \[
-    \int u\,dv = uv - \int v\,du
-    \]
-
-    \[
-    \int t e^{-st}dt = -\frac{t}{s}e^{-st} + \frac{1}{s}\int e^{-st}dt
-    \]
-
-    Compute remaining integral:
-    \[
-    \int e^{-st}dt = -\frac{1}{s}e^{-st}
-    \]
-
-    Substitute:
-    \[
-    = -\frac{t}{s}e^{-st} - \frac{1}{s^2}e^{-st}
-    \]
-
-    Evaluate from \(0\) to \(\infty\):
-
-    As \(t \to \infty\): \(e^{-st} \to 0\)
-
-    At \(t=0\):
-    \[
-    -\frac{1}{s^2}
-    \]
-
-    Thus:
-    \[
-    \int_0^\infty t e^{-st}dt = \frac{1}{s^2}
-    \]
-
-    Multiply by 2:
-    \[
-    \boxed{\mathcal{L}\{2t\} = \frac{2}{s^2}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 2 -->
-<div class="problem">
-  <h3 id="prob2">Problem 2</h3>
-  <p>
-  Prove
-  \[
-  \mathcal{L}\{e^{2t}\} = \frac{1}{s-2}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol2', this)">Show Solution</button>
-
-  <div id="sol2" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    \[
-    \mathcal{L}\{e^{2t}\} = \int_0^\infty e^{2t}e^{-st}dt
-    \]
-
-    Combine exponents:
-    \[
-    = \int_0^\infty e^{-(s-2)t}dt
-    \]
-
-    Integrate:
-    \[
-    = \left[\frac{-1}{s-2}e^{-(s-2)t}\right]_0^\infty
-    \]
-
-    As \(t \to \infty\): exponential → 0
-
-    At \(t=0\):
-    \[
-    -\frac{1}{s-2}
-    \]
-
-    Thus:
-    \[
-    \boxed{\mathcal{L}\{e^{2t}\} = \frac{1}{s-2}}
-    \]
-  </div>
-</div>
-
-
-
-
-<h2 id="sec7.2">Section 7.2
-  <span style="font-size: 0.7em; margin-left: 10px;">
-    <a href="#toc">↑ Back to top</a>
-  </span>
-</h2>
-<!-- Problem 3 -->
-<div class="problem">
-  <h3 id="prob3">Problem 3</h3>
-  <p>
-  Compute
-  \[
-  \mathcal{L}^{-1}\left\{\frac{7s+12}{s^2+16}\right\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol3', this)">Show Solution</button>
-
-  <div id="sol3" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Split:
-    \[
-    \frac{7s+12}{s^2+16}
-    = 7\frac{s}{s^2+16} + 12\frac{1}{s^2+16}
-    \]
-
-    Use formulas:
-    \[
-    \mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\}=\cos(at)
-    \]
-    \[
-    \mathcal{L}^{-1}\left\{\frac{1}{s^2+a^2}\right\}=\frac{1}{a}\sin(at)
-    \]
-
-    Here \(a=4\):
-
-    \[
-    \boxed{7\cos(4t) + 3\sin(4t)}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 4 -->
-<div class="problem">
-  <h3 id="prob4">Problem 4</h3>
-  <p>
-  \[
-  \mathcal{L}^{-1}\left\{\frac{s-2}{s^2+3s+2}\right\}
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol4', this)">Show Solution</button>
-
-  <div id="sol4" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Factor:
-    \[
-    (s+1)(s+2)
-    \]
-
-    Partial fractions:
-    \[
-    \frac{s-2}{(s+1)(s+2)} = \frac{A}{s+1} + \frac{B}{s+2}
-    \]
-
-    \[
-    s-2 = A(s+2) + B(s+1)
-    \]
-
-    \[
-    = (A+B)s + (2A+B)
-    \]
-
-    Match:
-    \[
-    A+B=1,\quad 2A+B=-2
-    \]
-
-    Solve:
-    \[
-    A=-3,\quad B=4
-    \]
-
-    \[
-    \boxed{-3e^{-t} + 4e^{-2t}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 5 -->
-<div class="problem">
-  <h3 id="prob5">Problem 5</h3>
-  <p>
-  \[
-  \mathcal{L}^{-1}\left\{\frac{s}{s^3+4s}\right\}
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol5', this)">Show Solution</button>
-
-  <div id="sol5" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Factor:
-    \[
-    s(s^2+4)
-    \]
-
-    Simplify:
-    \[
-    \frac{s}{s(s^2+4)} = \frac{1}{s^2+4}
-    \]
-
-    \[
-    \boxed{\frac{1}{2}\sin(2t)}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 6 -->
-<div class="problem">
-  <h3 id="prob6">Problem 6</h3>
-  <p>
-  \[
-  \mathcal{L}^{-1}\left\{\frac{4s+1}{s^2-7s+12}\right\}
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol6', this)">Show Solution</button>
-
-  <div id="sol6" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Factor:
-    \[
-    (s-3)(s-4)
-    \]
-
-    Partial fractions:
-    \[
-    \frac{4s+1}{(s-3)(s-4)}
-    \]
-
-    Solve:
-    \[
-    A=-13,\quad B=17
-    \]
-
-    \[
-    \boxed{-13e^{3t} + 17e^{4t}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 7 -->
-<div class="problem">
-  <h3 id="prob7">Problem 7</h3>
-  <p>
-  Solve:
-  \[
-  y''-5y'+6y = e^t\cos t,\quad y(0)=1,\; y'(0)=0.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol7', this)">Show Solution</button>
-
-  <div id="sol7" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-
-    \[
-    F(s)=\frac{7/2}{s-2} - \frac{5/2}{s-3}
-    + \frac{1}{2}\frac{s-1}{(s-1)^2+1}
-    \]
-
-    \[
-    \boxed{
-    y(t)=\frac{7}{2}e^{2t} - \frac{5}{2}e^{3t} + \frac{1}{2}e^t\cos t
-    }
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 8 -->
-<div class="problem">
-  <h3 id="prob8">Problem 8</h3>
-  <p>
-  Solve:
-  \[
-  y''+9y = 10t+7,\quad y(0)=0,\; y'(0)=0.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol8', this)">Show Solution</button>
-
-  <div id="sol8" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Final decomposition:
-    \[
-    F(s)=\frac{10}{9s^2} + \frac{7}{9s}
-    - \frac{10}{9(s^2+9)} - \frac{7s}{9(s^2+9)}
-    \]
-
-    \[
-    \boxed{
-    y(t)=\frac{10}{9}t + \frac{7}{9}
-    - \frac{10}{27}\sin(3t) - \frac{7}{9}\cos(3t)
-    }
-    \]
-  </div>
-</div>
-
-<h2 id="sec7.3">Section 7.3
-  <span style="font-size: 0.7em; margin-left: 10px;">
-    <a href="#toc">↑ Back to top</a>
-  </span>
-</h2>
-
-<!-- Problem 9 -->
-<div class="problem">
-  <h3 id="prob9">Problem 9</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{t e^{3t}\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol9', this)">Show Solution</button>
-
-  <div id="sol9" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Use the shifting property:
-    \[
-    \mathcal{L}\{e^{at}f(t)\} = F(s-a)
-    \]
-
-    First recall:
-    \[
-    \mathcal{L}\{t\} = \frac{1}{s^2}
-    \]
-
-    Apply the shift \(a=3\):
-    \[
-    \mathcal{L}\{t e^{3t}\} = \frac{1}{(s-3)^2}
-    \]
-
-    \[
-    \boxed{\frac{1}{(s-3)^2}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 10 -->
-<div class="problem">
-  <h3 id="prob10">Problem 10</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{(t^2+2t)e^{t}\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol10', this)">Show Solution</button>
-
-  <div id="sol10" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    First split:
-    \[
-    (t^2+2t)e^t = t^2 e^t + 2t e^t
-    \]
-
-    Use:
-    \[
-    \mathcal{L}\{t^2\} = \frac{2}{s^3}, \quad \mathcal{L}\{t\} = \frac{1}{s^2}
-    \]
-
-    Apply shifting \(a=1\):
-
-    \[
-    \mathcal{L}\{t^2 e^t\} = \frac{2}{(s-1)^3}
-    \]
-    \[
-    \mathcal{L}\{2t e^t\} = 2\cdot\frac{1}{(s-1)^2}
-    \]
-
-    Combine:
-    \[
-    \boxed{\frac{2}{(s-1)^3} + \frac{2}{(s-1)^2}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 11 -->
-<div class="problem">
-  <h3 id="prob11">Problem 11</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{t e^{-2t}\cos(5t)\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol11', this)">Show Solution</button>
-
-  <div id="sol11" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Start with the known transform:
-    \[
-    \mathcal{L}\{\cos(5t)\} = \frac{s}{s^2+25}
-    \]
-
-    Use shifting with \(a=-2\):
-    \[
-    \mathcal{L}\{e^{-2t}\cos(5t)\} = \frac{s+2}{(s+2)^2+25}
-    \]
-
-    Now use the property:
-    \[
-    \mathcal{L}\{t f(t)\} = -\frac{d}{ds}F(s)
-    \]
-
-    Let:
-    \[
-    F(s) = \frac{s+2}{(s+2)^2+25}
-    \]
-
-    Differentiate using quotient rule:
-    \[
-    F'(s) =
-    \frac{ - (s+2)\cdot 2(s+2)}{((s+2)^2+25)^2}
-    \]
-
-    Simplify numerator:
-    \[
-    = \frac{(s+2)^2+25 - 2(s+2)^2}{((s+2)^2+25)^2}
-    = \frac{25 - (s+2)^2}{((s+2)^2+25)^2}
-    \]
-
-    Apply the negative:
-    \[
-    \mathcal{L}\{t e^{-2t}\cos(5t)\}
-    = -F'(s)
-    = \frac{(s+2)^2 - 25}{((s+2)^2+25)^2}
-    \]
-
-    \[
-    \boxed{\frac{(s+2)^2 - 25}{\left((s+2)^2+25\right)^2}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 12 -->
-<div class="problem">
-  <h3 id="prob12">Problem 12</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{(t-1)U(t-2)\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol12', this)">Show Solution</button>
-
-  <div id="sol12" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    We want to rewrite the function in terms of \((t-2)\).
-
-    Let:
-    \[
-    t-1 = (t-2)+1
-    \]
-
-    So:
-    \[
-    (t-1)U(t-2) = [(t-2)+1]U(t-2)
-    \]
-
-    Use the shifting property:
-    \[
-    \mathcal{L}\{f(t-a)U(t-a)\} = e^{-as}F(s)
-    \]
-
-    Break into parts:
-    \[
-    = (t-2)U(t-2) + U(t-2)
-    \]
-
-    Now:
-    \[
-    \mathcal{L}\{(t-2)U(t-2)\} = e^{-2s}\mathcal{L}\{t\} = e^{-2s}\frac{1}{s^2}
-    \]
-
-    \[
-    \mathcal{L}\{U(t-2)\} = \frac{e^{-2s}}{s}
-    \]
-
-    Combine:
-    \[
-    \boxed{e^{-2s}\left(\frac{1}{s^2} + \frac{1}{s}\right)}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 13 -->
-<div class="problem">
-  <h3 id="prob13">Problem 13</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{f(t)\}, \quad
-  f(t)=
-  \begin{cases}
-  t^2, & 0 \le t \le 3 \\
-  t^2+1, & t>3
-  \end{cases}
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol13', this)">Show Solution</button>
-
-  <div id="sol13" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Rewrite using a step function:
-
-    \[
-    f(t) = t^2 + U(t-3)\cdot(1)
-    \]
-
-    (At \(t=3\), the function increases by 1.)
-
-    Take Laplace transform:
-
-    \[
-    \mathcal{L}\{t^2\} = \frac{2}{s^3}
-    \]
-
-    For the step term:
-    \[
-    \mathcal{L}\{U(t-3)\} = \frac{e^{-3s}}{s}
-    \]
-
-    Combine:
-    \[
-    \boxed{\frac{2}{s^3} + \frac{e^{-3s}}{s}}
-    \]
-  </div>
-</div>
-    
-<h2 id="sec7.4">Section 7.4
-  <span style="font-size: 0.7em; margin-left: 10px;">
-    <a href="#toc">↑ Back to top</a>
-  </span>
-</h2>
-
-<!-- Problem 14 -->
-<div class="problem">
-  <h3 id="prob14">Problem 14</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{t^2\cos(2t)\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol14', this)">Show Solution</button>
-
-  <div id="sol14" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Use:
-    \[
-    \mathcal{L}\{t^n f(t)\} = (-1)^n \frac{d^n}{ds^n}F(s)
-    \]
-
-    First:
-    \[
-    \mathcal{L}\{\cos(2t)\} = \frac{s}{s^2+4}
-    \]
-
-    Let:
-    \[
-    F(s)=\frac{s}{s^2+4}
-    \]
-
-    Compute derivatives.
-
-    First derivative:
-    \[
-    F'(s)=\frac{(s^2+4)(1) - s(2s)}{(s^2+4)^2}
-    = \frac{s^2+4-2s^2}{(s^2+4)^2}
-    = \frac{4-s^2}{(s^2+4)^2}
-    \]
-
-    Second derivative:
-    \[
-    F''(s)=\frac{d}{ds}\left(\frac{4-s^2}{(s^2+4)^2}\right)
-    \]
-
-    Using quotient rule:
-    \[
-    = \frac{(-2s)(s^2+4)^2 - (4-s^2)\cdot 2(s^2+4)(2s)}{(s^2+4)^4}
-    \]
-
-    Factor:
-    \[
-    = \frac{-2s(s^2+4) - 4s(4-s^2)}{(s^2+4)^3}
-    \]
-
-    Simplify numerator:
-    \[
-    = -2s^3 -8s -16s +4s^3
-    = 2s^3 -24s
-    \]
-
-    Thus:
-    \[
-    F''(s)=\frac{2s^3 -24s}{(s^2+4)^3}
-    \]
-
-    Since \( (-1)^2 = 1 \):
-    \[
-    \boxed{\frac{2s^3 - 24s}{(s^2+4)^3}}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 15 -->
-<div class="problem">
-  <h3 id="prob15">Problem 15</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}\{t^2 e^{2t}\sin(3t)\}.
-  \]
-  </p>
-
-  <button onclick="toggleSolution('sol15', this)">Show Solution</button>
-
-  <div id="sol15" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    First use:
-    \[
-    \mathcal{L}\{\sin(3t)\} = \frac{3}{s^2+9}
-    \]
-
-    Apply shift \(a=2\):
-    \[
-    F(s)=\frac{3}{(s-2)^2+9}
-    \]
-
-    Now use:
-    \[
-    \mathcal{L}\{t^2 f(t)\} = \frac{d^2}{ds^2}F(s)
-    \]
-
-    Let \(u=s-2\), so:
-    \[
-    F(s)=\frac{3}{u^2+9}
-    \]
-
-    First derivative:
-    \[
-    F'(s)=\frac{-6u}{(u^2+9)^2}
-    \]
-
-    Second derivative:
-    \[
-    F''(s)=\frac{-6(u^2+9)^2 + 24u^2(u^2+9)}{(u^2+9)^4}
-    \]
-
-    Simplify:
-    \[
-    = \frac{-6(u^2+9) + 24u^2}{(u^2+9)^3}
-    = \frac{18u^2 -54}{(u^2+9)^3}
-    \]
-
-    Substitute back \(u=s-2\):
-
-    \[
-    \boxed{\frac{18(s-2)^2 - 54}{\left((s-2)^2+9\right)^3}}
-    \]
-  </div>
-</div>
-
-<!-- Problem 16 -->
-<div class="problem">
-  <h3 id="prob16">Problem 16</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}^{-1}\left\{\frac{1}{s(s-1)}\right\}
-  \]
-  using convolution.
-  </p>
-
-  <button onclick="toggleSolution('sol16', this)">Show Solution</button>
-
-  <div id="sol16" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Write as a product:
-    \[
-    \frac{1}{s(s-1)} = \frac{1}{s}\cdot \frac{1}{s-1}
-    \]
-
-    Identify:
-    \[
-    \mathcal{L}^{-1}\left\{\frac{1}{s}\right\} = 1,
-    \quad
-    \mathcal{L}^{-1}\left\{\frac{1}{s-1}\right\} = e^t
-    \]
-
-    Use convolution:
-    \[
-    (f*g)(t) = \int_0^t f(\tau)g(t-\tau)\,d\tau
-    \]
-
-    So:
-    \[
-    y(t) = \int_0^t 1 \cdot e^{t-\tau} d\tau
-    = e^t \int_0^t e^{-\tau} d\tau
-    \]
-
-    Compute the integral:
-    \[
-    \int_0^t e^{-\tau} d\tau = 1 - e^{-t}
-    \]
-
-    Thus:
-    \[
-    y(t)= e^t(1 - e^{-t}) = e^t - 1
-    \]
-
-    \[
-    \boxed{e^t - 1}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 17 -->
-<div class="problem">
-  <h3 id="prob17">Problem 17</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}^{-1}\left\{\frac{1}{s^2(s-1)}\right\}
-  \]
-  using convolution.
-  </p>
-
-  <button onclick="toggleSolution('sol17', this)">Show Solution</button>
-
-  <div id="sol17" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Write:
-    \[
-    \frac{1}{s^2(s-1)} = \frac{1}{s^2}\cdot \frac{1}{s-1}
-    \]
-
-    Identify:
-    \[
-    \mathcal{L}^{-1}\left\{\frac{1}{s^2}\right\} = t,
-    \quad
-    \mathcal{L}^{-1}\left\{\frac{1}{s-1}\right\} = e^t
-    \]
-
-    Convolution:
-    \[
-    y(t) = \int_0^t \tau \cdot e^{t-\tau} d\tau
-    = e^t \int_0^t \tau e^{-\tau} d\tau
-    \]
-
-    Use integration by parts:
-
-    Let:
-    \[
-    u=\tau,\quad dv=e^{-\tau}d\tau
-    \]
-    \[
-    du=d\tau,\quad v=-e^{-\tau}
-    \]
-
-    Then:
-    \[
-    \int \tau e^{-\tau} d\tau = -\tau e^{-\tau} + \int e^{-\tau} d\tau
-    = -\tau e^{-\tau} - e^{-\tau}
-    \]
-
-    Evaluate from \(0\) to \(t\):
-    \[
-    = [-t e^{-t} - e^{-t}] - [0 -1]
-    = -t e^{-t} - e^{-t} +1
-    \]
-
-    Multiply by \(e^t\):
-    \[
-    y(t)= e^t(1 - e^{-t}(t+1))
-    = e^t - (t+1)
-    \]
-
-    \[
-    \boxed{e^t - t - 1}
-    \]
-  </div>
-</div>
-
-
-<!-- Problem 18 -->
-<div class="problem">
-  <h3 id="prob18">Problem 18</h3>
-  <p>
-  Find
-  \[
-  \mathcal{L}^{-1}\left\{\frac{2}{s^2(s^2+1)}\right\}
-  \]
-  using convolution.
-  </p>
-
-  <button onclick="toggleSolution('sol18', this)">Show Solution</button>
-
-  <div id="sol18" class="solution" style="display:none;">
-    <p><strong>Solution:</strong></p>
-
-    Write:
-    \[
-    \frac{2}{s^2(s^2+1)} = 2\cdot \frac{1}{s^2}\cdot \frac{1}{s^2+1}
-    \]
-
-    Identify:
-    \[
-    \mathcal{L}^{-1}\left\{\frac{1}{s^2}\right\}=t,
-    \quad
-    \mathcal{L}^{-1}\left\{\frac{1}{s^2+1}\right\}=\sin t
-    \]
-
-    Convolution:
-    \[
-    y(t)=2\int_0^t \tau \sin(t-\tau)\,d\tau
-    \]
-
-    Use identity:
-    \[
-    \sin(t-\tau)=\sin t \cos \tau - \cos t \sin \tau
-    \]
-
-    So:
-    \[
-    y(t)=2\left[
-    \sin t \int_0^t \tau \cos\tau d\tau
-    - \cos t \int_0^t \tau \sin\tau d\tau
-    \right]
-    \]
-
-    Compute integrals:
-
-    \[
-    \int_0^t \tau \cos\tau d\tau = t\sin t + \cos t -1
-    \]
-
-    \[
-    \int_0^t \tau \sin\tau d\tau = -t\cos t + \sin t
-    \]
-
-    Substitute:
-    \[
-    y(t)=2\left[\sin t(t\sin t + \cos t -1) - \cos t(-t\cos t + \sin t)\right]
-    \]
-
-    Simplify:
-    \[
-    =2\left[t(\sin^2 t + \cos^2 t) - \sin t\right]
-    =2(t - \sin t)
-    \]
-
-    \[
-    \boxed{2t - 2\sin t}
-    \]
-  </div>
-</div>
-
+    <!-- Section 7.1 -->
+    <h2 id="sec7.1" class="tex-section">Section 7.1
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 1 (new) -->
+    <div class="problem">
+      <h3 id="prob1">Problem 1 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Using the transform table and linearity, find
+      \[
+      \mathcal{L}\{6 - 4t^3 + 2e^{5t}\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol1', this)">Show Solution</button>
+      <div id="sol1" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>By linearity, we can transform each term separately and add the results, so there is no need to touch the definition at all here — we just need three entries from the transform table.</p>
+        <p>For the constant term, \(\mathcal{L}\{k\}=\dfrac{k}{s}\), so \(\mathcal{L}\{6\}=\dfrac{6}{s}\). For the power of \(t\), \(\mathcal{L}\{t^n\}=\dfrac{n!}{s^{n+1}}\) with \(n=3\), so \(\mathcal{L}\{t^3\}=\dfrac{3!}{s^4}=\dfrac{6}{s^4}\), and hence \(\mathcal{L}\{4t^3\}=\dfrac{24}{s^4}\). For the exponential term, \(\mathcal{L}\{e^{at}\}=\dfrac{1}{s-a}\) with \(a=5\), so \(\mathcal{L}\{2e^{5t}\}=\dfrac{2}{s-5}\).</p>
+        <p>Adding these three pieces together (with the correct signs) gives</p>
+        \[
+        \boxed{\mathcal{L}\{6-4t^3+2e^{5t}\} = \frac{6}{s}-\frac{24}{s^4}+\frac{2}{s-5}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 2 (was 2) -->
+    <div class="problem">
+      <h3 id="prob2">Problem 2 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Prove directly from the definition that
+      \[
+      \mathcal{L}\{e^{2t}\} = \frac{1}{s-2}, \qquad s>2.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol2', this)">Show Solution</button>
+      <div id="sol2" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>"Directly from the definition" means we go back to the defining improper integral rather than quoting the table entry. Starting from the definition,</p>
+        \[
+        \mathcal{L}\{e^{2t}\} = \int_0^\infty e^{-st}e^{2t}\,dt.
+        \]
+        <p>Since the two exponentials share the same base, we can combine them into a single exponential before integrating:</p>
+        \[
+        \mathcal{L}\{e^{2t}\} = \int_0^\infty e^{-(s-2)t}\,dt.
+        \]
+        <p>This is now the same basic exponential integral that appears throughout Section 7.1, so we antidifferentiate and evaluate the (improper) limits of integration:</p>
+        \[
+        \int_0^\infty e^{-(s-2)t}\,dt = \lim_{b\to\infty}\left[-\frac{1}{s-2}e^{-(s-2)t}\right]_0^b
+        = \lim_{b\to\infty}\left(-\frac{e^{-(s-2)b}}{s-2}+\frac{1}{s-2}\right).
+        \]
+        <p>Provided \(s-2>0\), i.e. \(s>2\), the term \(e^{-(s-2)b}\to0\) as \(b\to\infty\), and the limit reduces to just the second term. So</p>
+        \[
+        \boxed{\mathcal{L}\{e^{2t}\} = \frac{1}{s-2}, \qquad s>2.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 3 (was 1) -->
+    <div class="problem">
+      <h3 id="prob3">Problem 3 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Prove directly from the definition that
+      \[
+      \mathcal{L}\{2t\} = \frac{2}{s^2}, \qquad s>0.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol3', this)">Show Solution</button>
+      <div id="sol3" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>By linearity, \(\mathcal{L}\{2t\}=2\,\mathcal{L}\{t\}\), so it suffices to evaluate \(\mathcal{L}\{t\}\) from the definition — this mirrors the \(\mathcal{L}\{t\}\) example already worked out in the Section 7.1 notes.</p>
+        \[
+        \mathcal{L}\{t\} = \int_0^\infty te^{-st}\,dt.
+        \]
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Integrate by parts).</span></p>
+        <p>Since the integrand is a product of \(t\) and \(e^{-st}\), we use integration by parts with \(u=t\), \(dv=e^{-st}\,dt\), so \(du=dt\), \(v=-\frac{1}{s}e^{-st}\):</p>
+        \[
+        \int te^{-st}\,dt = -\frac{t}{s}e^{-st} + \frac{1}{s}\int e^{-st}\,dt = -\frac{t}{s}e^{-st} - \frac{1}{s^2}e^{-st}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Evaluate the improper integral).</span></p>
+        \[
+        \int_0^\infty te^{-st}\,dt = \lim_{b\to\infty}\left(-\frac{b}{s}e^{-sb}-\frac{1}{s^2}e^{-sb}\right) - \left(0-\frac{1}{s^2}\right).
+        \]
+        <p>For \(s>0\), both \(be^{-sb}\) and \(e^{-sb}\) vanish as \(b\to\infty\) (the exponential decay beats the linear growth of \(b\)), so the limit is simply \(\dfrac{1}{s^2}\). Thus \(\mathcal{L}\{t\}=\dfrac{1}{s^2}\), and multiplying by \(2\) gives</p>
+        \[
+        \boxed{\mathcal{L}\{2t\} = \frac{2}{s^2}, \qquad s>0.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 4 (new) -->
+    <div class="problem">
+      <h3 id="prob4">Problem 4 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Prove directly from the definition (using integration by parts twice, the same technique used
+      for \(\mathcal{L}\{\sin t\}\) in the notes) that
+      \[
+      \mathcal{L}\{\cos(kt)\} = \frac{s}{s^2+k^2}, \qquad s>0,
+      \]
+      for any constant \(k\neq 0\).
+      </p>
+      <button onclick="toggleSolution('sol4', this)">Show Solution</button>
+      <div id="sol4" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Let \(I=\displaystyle\int_0^\infty e^{-st}\cos(kt)\,dt\). Because differentiating \(\cos\) or \(\sin\) never eliminates the trig function, a single integration by parts won't finish the job — instead, applying it twice will produce the original integral again, and we can then solve algebraically for it (exactly as in the \(\sin t\) example in the notes).</p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(First integration by parts).</span></p>
+        <p>Let \(u=e^{-st}\), \(dv=\cos(kt)\,dt\), so \(du=-se^{-st}\,dt\), \(v=\frac{1}{k}\sin(kt)\):</p>
+        \[
+        I = \left[\frac{1}{k}e^{-st}\sin(kt)\right]_0^\infty + \frac{s}{k}\int_0^\infty e^{-st}\sin(kt)\,dt.
+        \]
+        <p>The boundary term vanishes at both ends: at \(t=0\), \(\sin(0)=0\); as \(t\to\infty\), \(e^{-st}\to0\) (for \(s>0\)) while \(\sin(kt)\) stays bounded. So \(I=\dfrac{s}{k}J\), where \(J=\displaystyle\int_0^\infty e^{-st}\sin(kt)\,dt\).</p>
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Second integration by parts).</span></p>
+        <p>Now apply the same idea to \(J\), with \(u=e^{-st}\), \(dv=\sin(kt)\,dt\), so \(du=-se^{-st}\,dt\), \(v=-\frac{1}{k}\cos(kt)\):</p>
+        \[
+        J = \left[-\frac{1}{k}e^{-st}\cos(kt)\right]_0^\infty - \frac{s}{k}\int_0^\infty e^{-st}\cos(kt)\,dt.
+        \]
+        <p>At \(t\to\infty\) this boundary term again vanishes for \(s>0\); at \(t=0\) it equals \(-\frac{1}{k}(1)(1)=-\frac{1}{k}\). So the bracket contributes \(0-\left(-\frac1k\right)=\frac1k\), and</p>
+        \[
+        J = \frac{1}{k} - \frac{s}{k}I.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Substitute back and solve for \(I\)).</span></p>
+        <p>Substituting this expression for \(J\) into \(I=\frac{s}{k}J\) brings back the original unknown \(I\):</p>
+        \[
+        I = \frac{s}{k}\left(\frac{1}{k}-\frac{s}{k}I\right) = \frac{s}{k^2}-\frac{s^2}{k^2}I.
+        \]
+        <p>Moving the \(I\)-term on the right to the left side and factoring,</p>
+        \[
+        I\left(1+\frac{s^2}{k^2}\right) = \frac{s}{k^2} \quad\Longrightarrow\quad I\cdot\frac{k^2+s^2}{k^2}=\frac{s}{k^2} \quad\Longrightarrow\quad I = \frac{s}{s^2+k^2}.
+        \]
+        <p>So</p>
+        \[
+        \boxed{\mathcal{L}\{\cos(kt)\} = \frac{s}{s^2+k^2}, \qquad s>0.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 5 (new, conceptual) -->
+    <div class="problem">
+      <h3 id="prob5">Problem 5 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      Every transform computed in this section comes with a restriction like "\(s>0\)" or "\(s>a\)."
+      Using the definition of the Laplace transform as an improper integral, explain why
+      \(\mathcal{L}\{e^{at}\}\) requires \(s>a\) to exist, and what specifically goes wrong if
+      \(s\le a\).
+      </p>
+      <button onclick="toggleSolution('sol5', this)">Show Solution</button>
+      <div id="sol5" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        By definition, \(\mathcal{L}\{e^{at}\}=\displaystyle\int_0^\infty e^{-st}e^{at}\,dt
+        =\int_0^\infty e^{-(s-a)t}\,dt\), which is exactly the same convergence question as the
+        \(\mathcal{L}\{1\}\) computation in the notes, just with \(s\) replaced by \(s-a\).
+        </p>
+        <p>
+        Evaluating the antiderivative and taking the limit as the upper bound \(b\to\infty\) gives a
+        term \(e^{-(s-a)b}\). This term tends to \(0\) exactly when the exponent \(-(s-a)b\) tends to
+        \(-\infty\), which happens precisely when \(s-a>0\), i.e. \(s>a\). In that case the improper
+        integral converges to the finite value \(\dfrac{1}{s-a}\).
+        </p>
+        <p>
+        If instead \(s\le a\), then \(s-a\le0\), so \(-(s-a)\ge0\) and \(e^{-(s-a)t}\) either grows
+        without bound as \(t\to\infty\) (if \(s\lt a\)) or stays constantly equal to \(1\) forever (if
+        \(s=a\)); either way, \(\int_0^b e^{-(s-a)t}\,dt\) does not settle down to a finite number as
+        \(b\to\infty\) — the improper integral diverges, and \(\mathcal{L}\{e^{at}\}\) simply does
+        not exist there. This is why every Laplace transform formula must be quoted together with the
+        range of \(s\) for which it is actually valid: the formula itself may look fine algebraically
+        for any \(s\), but the integral that defines it only converges on part of that range.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 7.2 -->
+    <h2 id="sec7.2" class="tex-section">Section 7.2
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 6 (was 3) -->
+    <div class="problem">
+      <h3 id="prob6">Problem 6 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Compute
+      \[
+      \mathcal{L}^{-1}\left\{\frac{7s+12}{s^2+16}\right\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol6', this)">Show Solution</button>
+      <div id="sol6" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>The denominator \(s^2+16\) already matches the form \(s^2+k^2\) with \(k=4\), so once we split the numerator into two pieces, both terms will match table entries directly — no partial fractions needed here. Splitting,</p>
+        \[
+        \frac{7s+12}{s^2+16} = 7\cdot\frac{s}{s^2+16} + 12\cdot\frac{1}{s^2+16}.
+        \]
+        <p>Using \(\mathcal{L}^{-1}\left\{\dfrac{s}{s^2+k^2}\right\}=\cos(kt)\) and \(\mathcal{L}^{-1}\left\{\dfrac{1}{s^2+k^2}\right\}=\dfrac{1}{k}\sin(kt)\) with \(k=4\), the first term gives \(7\cos(4t)\), and the second gives \(12\cdot\frac14\sin(4t)=3\sin(4t)\). So</p>
+        \[
+        \boxed{\mathcal{L}^{-1}\left\{\frac{7s+12}{s^2+16}\right\} = 7\cos(4t)+3\sin(4t).}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 7 (was 5) -->
+    <div class="problem">
+      <h3 id="prob7">Problem 7 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Compute
+      \[
+      \mathcal{L}^{-1}\left\{\frac{s}{s^3+4s}\right\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol7', this)">Show Solution</button>
+      <div id="sol7" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Before reaching for partial fractions, it is always worth checking whether the expression simplifies first. Factoring an \(s\) out of the denominator,</p>
+        \[
+        s^3+4s = s(s^2+4),
+        \]
+        <p>so the whole expression collapses by cancelling the common factor of \(s\):</p>
+        \[
+        \frac{s}{s^3+4s} = \frac{s}{s(s^2+4)} = \frac{1}{s^2+4}.
+        \]
+        <p>This is now a direct table match, \(\mathcal{L}^{-1}\left\{\dfrac{1}{s^2+k^2}\right\}=\dfrac1k\sin(kt)\) with \(k=2\), so</p>
+        \[
+        \boxed{\mathcal{L}^{-1}\left\{\frac{s}{s^3+4s}\right\} = \frac{1}{2}\sin(2t).}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 8 (was 4) -->
+    <div class="problem">
+      <h3 id="prob8">Problem 8 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Compute
+      \[
+      \mathcal{L}^{-1}\left\{\frac{s-2}{s^2+3s+2}\right\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol8', this)">Show Solution</button>
+      <div id="sol8" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Factor the denominator).</span></p>
+        \[
+        s^2+3s+2=(s+1)(s+2).
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Set up and solve the partial fraction decomposition).</span></p>
+        <p>Since the two roots are distinct and real, we decompose into two simple fractions:</p>
+        \[
+        \frac{s-2}{(s+1)(s+2)} = \frac{A}{s+1}+\frac{B}{s+2} \quad\Longrightarrow\quad s-2=A(s+2)+B(s+1).
+        \]
+        <p>Setting \(s=-1\): \(-3=A(1)\Rightarrow A=-3\). Setting \(s=-2\): \(-4=B(-1)\Rightarrow B=4\).</p>
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Take the inverse transform term by term).</span></p>
+        <p>Now that the quotient is rewritten as a sum, linearity of \(\mathcal{L}^{-1}\) lets us transform each piece separately using \(\mathcal{L}^{-1}\left\{\dfrac1{s-a}\right\}=e^{at}\):</p>
+        \[
+        \boxed{\mathcal{L}^{-1}\left\{\frac{s-2}{s^2+3s+2}\right\} = -3e^{-t}+4e^{-2t}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 9 (new) -->
+    <div class="problem">
+      <h3 id="prob9">Problem 9 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Compute
+      \[
+      \mathcal{L}^{-1}\left\{\frac{4s^2+9s-4}{s(s-1)(s+2)}\right\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol9', this)">Show Solution</button>
+      <div id="sol9" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This is the same partial-fraction technique as before, just with a third distinct linear factor — the extra factor means an extra unknown constant to pin down, but the "plug in each root" trick still works one root at a time.</p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Set up the decomposition).</span></p>
+        \[
+        \frac{4s^2+9s-4}{s(s-1)(s+2)} = \frac{A}{s}+\frac{B}{s-1}+\frac{C}{s+2}
+        \quad\Longrightarrow\quad
+        4s^2+9s-4 = A(s-1)(s+2)+Bs(s+2)+Cs(s-1).
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Solve for each constant by plugging in the roots).</span></p>
+        <p>Each choice of \(s\) equal to one of the roots makes two of the three terms on the right vanish, isolating a single constant:</p>
+        \[
+        s=0:\ -4=A(-1)(2)=-2A \Rightarrow A=2.
+        \]
+        \[
+        s=1:\ 4+9-4=9=B(1)(3)=3B \Rightarrow B=3.
+        \]
+        \[
+        s=-2:\ 16-18-4=-6=C(-2)(-3)=6C \Rightarrow C=-1.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Take the inverse transform term by term).</span></p>
+        <p>With the decomposition \(\dfrac{2}{s}+\dfrac{3}{s-1}-\dfrac{1}{s+2}\) in hand, each piece is a direct table entry:</p>
+        \[
+        \boxed{\mathcal{L}^{-1}\left\{\frac{4s^2+9s-4}{s(s-1)(s+2)}\right\} = 2+3e^{t}-e^{-2t}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 10 (was 8) -->
+    <div class="problem">
+      <h3 id="prob10">Problem 10 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Solve the initial value problem
+      \[
+      y''+9y = 10t+7, \qquad y(0)=0,\ y'(0)=0.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol10', this)">Show Solution</button>
+      <div id="sol10" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Transform both sides).</span></p>
+        <p>Writing \(F(s)=\mathcal{L}\{y(t)\}\) and using the derivative formula with the given (zero) initial conditions, \(\mathcal{L}\{y''\}=s^2F(s)-sy(0)-y'(0)=s^2F(s)\). On the right, \(\mathcal{L}\{10t+7\}=\dfrac{10}{s^2}+\dfrac{7}{s}\). So</p>
+        \[
+        s^2F(s)+9F(s) = \frac{10}{s^2}+\frac{7}{s}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Solve for \(F(s)\)).</span></p>
+        \[
+        (s^2+9)F(s) = \frac{10+7s}{s^2}
+        \quad\Longrightarrow\quad
+        F(s) = \frac{7s+10}{s^2(s^2+9)}.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Partial fractions).</span></p>
+        <p>Since \(s^2\) is a repeated factor and \(s^2+9\) is irreducible over the reals, the decomposition needs four constants:</p>
+        \[
+        \frac{7s+10}{s^2(s^2+9)} = \frac{A}{s}+\frac{B}{s^2}+\frac{Cs+D}{s^2+9}
+        \quad\Longrightarrow\quad
+        7s+10 = As(s^2+9)+B(s^2+9)+(Cs+D)s^2.
+        \]
+        <p>Expanding and collecting powers of \(s\) on the right gives \((A+C)s^3+(B+D)s^2+9As+9B\). Matching this to \(0\cdot s^3+0\cdot s^2+7s+10\) term by term: \(9A=7\Rightarrow A=\frac79\); \(9B=10\Rightarrow B=\frac{10}{9}\); \(A+C=0\Rightarrow C=-\frac79\); \(B+D=0\Rightarrow D=-\frac{10}{9}\). So</p>
+        \[
+        F(s) = \frac{7}{9}\cdot\frac1s + \frac{10}{9}\cdot\frac{1}{s^2} - \frac{7}{9}\cdot\frac{s}{s^2+9} - \frac{10}{9}\cdot\frac{1}{s^2+9}.
+        \]
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Take the inverse transform).</span></p>
+        <p>Using \(\mathcal{L}^{-1}\{1/s\}=1\), \(\mathcal{L}^{-1}\{1/s^2\}=t\), \(\mathcal{L}^{-1}\{s/(s^2+9)\}=\cos(3t)\), and \(\mathcal{L}^{-1}\{1/(s^2+9)\}=\frac13\sin(3t)\) (so the last term contributes \(\frac{10}{9}\cdot\frac13=\frac{10}{27}\)),</p>
+        \[
+        \boxed{y(t) = \frac{10}{9}t+\frac{7}{9}-\frac{7}{9}\cos(3t)-\frac{10}{27}\sin(3t).}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 11 (new, conceptual) -->
+    <div class="problem">
+      <h3 id="prob11">Problem 11 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      The Laplace transform (and its inverse) are linear operators. Explain why this linearity is
+      not, by itself, enough to justify taking \(\mathcal{L}^{-1}\left\{\dfrac{6s+2}{s^2-1}\right\}\)
+      by inverse-transforming the numerator and denominator separately. What job does partial
+      fraction decomposition actually do here?
+      </p>
+      <button onclick="toggleSolution('sol11', this)">Show Solution</button>
+      <div id="sol11" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Linearity of \(\mathcal{L}^{-1}\) says that \(\mathcal{L}^{-1}\{c_1F(s)+c_2G(s)\}
+        =c_1\mathcal{L}^{-1}\{F(s)\}+c_2\mathcal{L}^{-1}\{G(s)\}\) — it distributes over
+        <em>sums and scalar multiples</em>, and only over sums and scalar multiples. There is no
+        corresponding rule for products or quotients: in general
+        \(\mathcal{L}^{-1}\{F(s)/G(s)\}\neq \mathcal{L}^{-1}\{F(s)\}/\mathcal{L}^{-1}\{G(s)\}\)
+        (transforming a numerator and denominator independently and then dividing the resulting
+        functions of \(t\) has no mathematical justification at all).
+        </p>
+        <p>
+        So a single quotient like \(\dfrac{6s+2}{s^2-1}\) cannot be inverse-transformed directly
+        unless it happens to already match a table entry. Partial fraction decomposition rewrites
+        this one quotient as a genuine <em>sum</em> of simpler quotients,
+        \(\dfrac{4}{s-1}+\dfrac{2}{s+1}\), each of which matches a table entry on its own. Only once
+        the expression is in this additive form does linearity legally apply, letting us transform
+        each piece separately and add the results. In short: partial fractions doesn't make the
+        inverse transform "linear" — it restates the problem in the one form (a sum) where linearity
+        was already applicable.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 7.3 -->
+    <h2 id="sec7.3" class="tex-section">Section 7.3
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 12 (was 9) -->
+    <div class="problem">
+      <h3 id="prob12">Problem 12 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{te^{3t}\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol12', this)">Show Solution</button>
+      <div id="sol12" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>The function \(te^{3t}\) is exactly \(e^{at}f(t)\) with \(a=3\) and \(f(t)=t\), so this is a direct application of the First Translation Theorem, \(\mathcal{L}\{e^{at}f(t)\}=F(s-a)\), where \(F(s)=\mathcal{L}\{f(t)\}\).</p>
+        <p>Here \(F(s)=\mathcal{L}\{t\}=\dfrac{1}{s^2}\). Replacing every \(s\) in \(F(s)\) with \(s-3\) (the "shift" the theorem describes) gives</p>
+        \[
+        \boxed{\mathcal{L}\{te^{3t}\} = \frac{1}{(s-3)^2}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 13 (was 13) -->
+    <div class="problem">
+      <h3 id="prob13">Problem 13 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find \(\mathcal{L}\{f(t)\}\), where
+      \[
+      f(t)=
+      \begin{cases}
+      t^2, & 0 \le t \le 3 \\
+      t^2+1, & t>3.
+      \end{cases}
+      \]
+      </p>
+      <button onclick="toggleSolution('sol13', this)">Show Solution</button>
+      <div id="sol13" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Whenever a piecewise function is really "one base formula, plus an extra piece that switches on at some point," the unit step function lets us combine it into a single expression instead of splitting the transform integral in two. Here the base formula \(t^2\) runs the whole time, and an extra constant \(1\) switches on at \(t=3\):</p>
+        \[
+        f(t) = t^2 + \mathscr{U}(t-3).
+        \]
+        <p>(Check: for \(t<3\), \(\mathscr U(t-3)=0\) and \(f(t)=t^2\); for \(t\ge3\), \(\mathscr U(t-3)=1\) and \(f(t)=t^2+1\) — matching the given definition.)</p>
+        <p>Now transform each piece: \(\mathcal{L}\{t^2\}=\dfrac{2}{s^3}\) from the table, and \(\mathcal{L}\{\mathscr U(t-3)\}=\dfrac{e^{-3s}}{s}\) (the special case of the Second Translation Theorem where the "delayed function" is just the constant \(1\)). Adding these,</p>
+        \[
+        \boxed{\mathcal{L}\{f(t)\} = \frac{2}{s^3}+\frac{e^{-3s}}{s}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 14 (was 10) -->
+    <div class="problem">
+      <h3 id="prob14">Problem 14 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{(t^2+2t)e^{t}\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol14', this)">Show Solution</button>
+      <div id="sol14" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>First split the function using linearity, so that the First Translation Theorem can be applied to each piece separately:</p>
+        \[
+        (t^2+2t)e^t = t^2e^t + 2te^t.
+        \]
+        <p>From the table, \(\mathcal{L}\{t^2\}=\dfrac{2}{s^3}\) and \(\mathcal{L}\{t\}=\dfrac{1}{s^2}\). Applying the shift \(s\to s-1\) (since \(a=1\) here) to each:</p>
+        \[
+        \mathcal{L}\{t^2e^t\} = \frac{2}{(s-1)^3}, \qquad \mathcal{L}\{2te^t\} = \frac{2}{(s-1)^2}.
+        \]
+        <p>Adding the two pieces together,</p>
+        \[
+        \boxed{\mathcal{L}\{(t^2+2t)e^{t}\} = \frac{2}{(s-1)^3}+\frac{2}{(s-1)^2}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 15 (was 12) -->
+    <div class="problem">
+      <h3 id="prob15">Problem 15 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{(t-1)\mathscr{U}(t-2)\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol15', this)">Show Solution</button>
+      <div id="sol15" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>The Second Translation Theorem, \(\mathcal{L}\{f(t-a)\mathscr U(t-a)\}=e^{-as}F(s)\), applies to a function of \(t-a\) multiplying \(\mathscr U(t-a)\) — but here the factor multiplying \(\mathscr U(t-2)\) is \(t-1\), not \(t-2\). So the first step is purely algebraic: rewrite \(t-1\) in terms of \((t-2)\).</p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Rewrite in terms of \(t-2\)).</span></p>
+        \[
+        t-1 = (t-2)+1 \quad\Longrightarrow\quad (t-1)\mathscr U(t-2) = (t-2)\mathscr U(t-2) + \mathscr U(t-2).
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Apply the Second Translation Theorem to each piece).</span></p>
+        <p>The first piece has \(f(t)=t\) shifted by \(a=2\), so \(\mathcal{L}\{(t-2)\mathscr U(t-2)\}=e^{-2s}\mathcal{L}\{t\}=e^{-2s}\cdot\dfrac1{s^2}\). The second piece is the constant \(1\) shifted by \(a=2\), so \(\mathcal{L}\{\mathscr U(t-2)\}=e^{-2s}\cdot\dfrac1s\).</p>
+        <p>Adding the two pieces,</p>
+        \[
+        \boxed{\mathcal{L}\{(t-1)\mathscr{U}(t-2)\} = e^{-2s}\left(\frac{1}{s^2}+\frac{1}{s}\right).}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 16 (was 7 in Sec 7.2; relocated + math error fixed) -->
+    <div class="problem">
+      <h3 id="prob16">Problem 16 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Solve the initial value problem
+      \[
+      y''-5y'+6y = e^t\cos t, \qquad y(0)=1,\ y'(0)=0.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol16', this)">Show Solution</button>
+      <div id="sol16" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Transform both sides).</span></p>
+        <p>With \(F(s)=\mathcal{L}\{y(t)\}\) and the given initial conditions, \(\mathcal{L}\{y''\}=s^2F(s)-s\) and \(\mathcal{L}\{y'\}=sF(s)-1\). On the right, the forcing term needs the First Translation Theorem: since \(\mathcal{L}\{\cos t\}=\dfrac{s}{s^2+1}\), shifting by \(a=1\) gives \(\mathcal{L}\{e^t\cos t\}=\dfrac{s-1}{(s-1)^2+1}\). So</p>
+        \[
+        \big(s^2F(s)-s\big) - 5\big(sF(s)-1\big)+6F(s) = \frac{s-1}{(s-1)^2+1}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Solve for \(F(s)\)).</span></p>
+        \[
+        (s^2-5s+6)F(s) = \frac{s-1}{(s-1)^2+1}+s-5
+        \quad\Longrightarrow\quad
+        F(s) = \underbrace{\frac{s-1}{(s-2)(s-3)\big[(s-1)^2+1\big]}}_{\text{piece 1}} + \underbrace{\frac{s-5}{(s-2)(s-3)}}_{\text{piece 2}}.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Partial fractions on piece 2).</span></p>
+        \[
+        \frac{s-5}{(s-2)(s-3)} = \frac{A}{s-2}+\frac{B}{s-3}
+        \quad\Longrightarrow\quad
+        s-5=A(s-3)+B(s-2).
+        \]
+        <p>Setting \(s=2\): \(-3=-A\Rightarrow A=3\). Setting \(s=3\): \(-2=B\Rightarrow B=-2\). So piece 2 is \(\dfrac{3}{s-2}-\dfrac{2}{s-3}\).</p>
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Partial fractions on piece 1).</span></p>
+        <p>Since \((s-1)^2+1\) is an irreducible quadratic, piece 1 needs the form</p>
+        \[
+        \frac{s-1}{(s-2)(s-3)\big[(s-1)^2+1\big]} = \frac{A'}{s-2}+\frac{B'}{s-3}+\frac{Cs+D}{(s-1)^2+1}.
+        \]
+        <p>Plugging in \(s=2\) and \(s=3\) isolates \(A'\) and \(B'\) just as before (the quadratic factor doesn't vanish at either root, so it just comes along for the ride):</p>
+        \[
+        s=2:\ 1 = A'(-1)\big[(1)^2+1\big] = -2A' \Rightarrow A'=-\tfrac12.
+        \]
+        \[
+        s=3:\ 2 = B'(1)\big[(2)^2+1\big] = 5B' \Rightarrow B'=\tfrac25.
+        \]
+        <p>Matching the remaining coefficients (comparing the \(s^3\), \(s^2\), and constant terms after clearing denominators) gives \(C=\tfrac{1}{10}\), \(D=-\tfrac25\) — so piece 1 is \(\dfrac{-1/2}{s-2}+\dfrac{2/5}{s-3}+\dfrac{(1/10)s-2/5}{(s-1)^2+1}\).</p>
+        <p class="step-line"><span class="step-label">Step 5</span> <span class="step-desc">(Combine both pieces).</span></p>
+        <p>Adding piece 1 and piece 2 term by term: the \(1/(s-2)\) coefficients give \(3-\tfrac12=\tfrac52\); the \(1/(s-3)\) coefficients give \(-2+\tfrac25=-\tfrac85\). So</p>
+        \[
+        F(s) = \frac{5/2}{s-2} - \frac{8/5}{s-3} + \frac{(1/10)s-2/5}{(s-1)^2+1}.
+        \]
+        <p class="step-line"><span class="step-label">Step 6</span> <span class="step-desc">(Take the inverse transform).</span></p>
+        <p>For the last term, write the numerator in terms of \((s-1)\) so it matches the shifted table entries: \(\frac{1}{10}s-\frac25 = \frac{1}{10}(s-1)-\frac{3}{10}\). Then, using \(\mathcal{L}^{-1}\left\{\dfrac{s-1}{(s-1)^2+1}\right\}=e^t\cos t\) and \(\mathcal{L}^{-1}\left\{\dfrac{1}{(s-1)^2+1}\right\}=e^t\sin t\) (both from the First Translation Theorem in reverse),</p>
+        \[
+        \boxed{y(t) = \frac{5}{2}e^{2t} - \frac{8}{5}e^{3t} + \frac{1}{10}e^{t}\cos t - \frac{3}{10}e^{t}\sin t.}
+        \]
+        <p>(As a check, \(y(0)=\frac52-\frac85+\frac1{10}=\frac{25-16+1}{10}=1\), matching the initial condition.)</p>
+      </div>
+    </div>
+
+    <!-- Problem 17 (new) -->
+    <div class="problem">
+      <h3 id="prob17">Problem 17 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Solve the initial value problem \(y'+3y=f(t)\), \(y(0)=0\), where
+      \[
+      f(t) = \begin{cases} 0 & 0\le t<2 \\ 6 & t\ge2 \end{cases} = 6\,\mathscr{U}(t-2).
+      \]
+      </p>
+      <button onclick="toggleSolution('sol17', this)">Show Solution</button>
+      <div id="sol17" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Transform both sides).</span></p>
+        <p>With \(y(0)=0\), \(\mathcal{L}\{y'\}=sF(s)\). On the right, \(\mathcal{L}\{\mathscr U(t-2)\}=\dfrac{e^{-2s}}{s}\), so</p>
+        \[
+        sF(s)+3F(s) = 6\cdot\frac{e^{-2s}}{s}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Solve for \(F(s)\)).</span></p>
+        \[
+        F(s) = \frac{6e^{-2s}}{s(s+3)}.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Partial fractions on the non-shifted part).</span></p>
+        <p>Setting aside the \(e^{-2s}\) factor for a moment, decompose \(\dfrac{6}{s(s+3)}=\dfrac As+\dfrac{B}{s+3}\): \(6=A(s+3)+Bs\). At \(s=0\): \(A=2\). At \(s=-3\): \(-3B=6\Rightarrow B=-2\). So</p>
+        \[
+        F(s) = e^{-2s}\left(\frac{2}{s}-\frac{2}{s+3}\right).
+        \]
+        <p class="step-line"><span class="step-label">Step 4</span> <span class="step-desc">(Apply the Second Translation Theorem).</span></p>
+        <p>Let \(G(s)=\dfrac2s-\dfrac2{s+3}\), so \(g(t)=\mathcal{L}^{-1}\{G(s)\}=2-2e^{-3t}\). By the Second Translation Theorem, \(\mathcal{L}^{-1}\{e^{-2s}G(s)\}=g(t-2)\mathscr U(t-2)\), i.e. we substitute \(t-2\) in place of \(t\) everywhere in \(g\) and multiply by \(\mathscr U(t-2)\):</p>
+        \[
+        \boxed{y(t) = \Big(2-2e^{-3(t-2)}\Big)\mathscr{U}(t-2).}
+        \]
+        <p>This says the tank/system stays at rest (\(y=0\)) until \(t=2\), exactly matching \(y(0)=0\) and the fact that the forcing term is off until then, and only afterward rises toward the value \(2\).</p>
+      </div>
+    </div>
+
+    <!-- Problem 18 (new, conceptual) -->
+    <div class="problem">
+      <h3 id="prob18">Problem 18 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      The First Translation Theorem says that multiplying \(f(t)\) by \(e^{at}\) <em>before</em>
+      transforming produces the shift \(\mathcal{L}\{e^{at}f(t)\}=F(s-a)\). The Second Translation
+      Theorem says that delaying \(f(t)\) by \(a\) units and switching it on at \(t=a\) produces
+      \(\mathcal{L}\{f(t-a)\mathscr{U}(t-a)\}=e^{-as}F(s)\). In what sense are these two theorems
+      "mirror images" of each other?
+      </p>
+      <button onclick="toggleSolution('sol18', this)">Show Solution</button>
+      <div id="sol18" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        Each theorem takes an operation performed in one domain (\(t\) or \(s\)) and shows that it
+        corresponds to the <em>other</em> kind of operation in the opposite domain — and the two
+        theorems swap which operation goes with which domain.
+        </p>
+        <p>
+        In the First Translation Theorem, we <strong>multiply</strong> by an exponential
+        \(e^{at}\) in the \(t\)-domain (before ever transforming), and the effect on the transform
+        side is a <strong>shift</strong>: every \(s\) in \(F(s)\) gets replaced by \(s-a\). In the
+        Second Translation Theorem, it is exactly the other way around: we <strong>shift</strong>
+        \(f\) in the \(t\)-domain (delaying it by \(a\) and switching it on with \(\mathscr U(t-a)\)),
+        and the effect on the transform side is to <strong>multiply</strong> \(F(s)\) by the
+        exponential \(e^{-as}\).
+        </p>
+        <p>
+        So multiplication-by-an-exponential in one domain always pairs with a shift in the other
+        domain, and which domain plays which role simply flips between the two theorems: "exponential
+        in \(t\) \(\Rightarrow\) shift in \(s\)" versus "shift in \(t\) \(\Rightarrow\) exponential in
+        \(s\)." Recognizing this duality is often the fastest way to tell, at a glance, which
+        theorem a given problem calls for.
+        </p>
+      </div>
+    </div>
+
+    <!-- Section 7.4 -->
+    <h2 id="sec7.4" class="tex-section">Section 7.4
+      <span style="font-size: 0.7em; margin-left: 10px;">
+        <a href="#toc">↑ Back to top</a>
+      </span>
+    </h2>
+
+    <!-- Problem 19 (new) -->
+    <div class="problem">
+      <h3 id="prob19">Problem 19 <span class="diff-tag diff-easy">Easy</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{t\sin(2t)\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol19', this)">Show Solution</button>
+      <div id="sol19" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This is a direct application of the derivative-of-transform theorem with \(n=1\): \(\mathcal{L}\{tf(t)\}=-F'(s)\), where \(F(s)=\mathcal{L}\{f(t)\}\).</p>
+        <p>Here \(f(t)=\sin(2t)\), so \(F(s)=\dfrac{2}{s^2+4}\). Differentiating with the chain rule,</p>
+        \[
+        F'(s) = 2\cdot\frac{-2s}{(s^2+4)^2} = \frac{-4s}{(s^2+4)^2}.
+        \]
+        <p>Multiplying by \(-1\) as the theorem requires,</p>
+        \[
+        \boxed{\mathcal{L}\{t\sin(2t)\} = \frac{4s}{(s^2+4)^2}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 20 (was 11, relocated from Sec 7.3) -->
+    <div class="problem">
+      <h3 id="prob20">Problem 20 <span class="diff-tag diff-medium">Medium</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{te^{-2t}\cos(5t)\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol20', this)">Show Solution</button>
+      <div id="sol20" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This problem stacks two tools from this unit: the First Translation Theorem handles the \(e^{-2t}\) factor, and then the derivative-of-transform theorem handles the extra \(t\).</p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Apply the First Translation Theorem).</span></p>
+        <p>Start from \(\mathcal{L}\{\cos(5t)\}=\dfrac{s}{s^2+25}\). Shifting by \(a=-2\) (i.e. replacing \(s\) with \(s-(-2)=s+2\)) gives the transform of \(e^{-2t}\cos(5t)\) itself:</p>
+        \[
+        F(s) = \mathcal{L}\{e^{-2t}\cos(5t)\} = \frac{s+2}{(s+2)^2+25}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Apply the derivative-of-transform theorem).</span></p>
+        <p>Now \(\mathcal{L}\{t\cdot[e^{-2t}\cos(5t)]\}=-F'(s)\). Writing \(u=s+2\) so \(F=\dfrac{u}{u^2+25}\) and \(\frac{d}{ds}=\frac{d}{du}\) (since \(du/ds=1\)), the quotient rule gives</p>
+        \[
+        F'(s) = \frac{(u^2+25)-u(2u)}{(u^2+25)^2} = \frac{25-u^2}{(u^2+25)^2} = \frac{25-(s+2)^2}{\big((s+2)^2+25\big)^2}.
+        \]
+        <p>Multiplying by \(-1\),</p>
+        \[
+        \boxed{\mathcal{L}\{te^{-2t}\cos(5t)\} = \frac{(s+2)^2-25}{\big((s+2)^2+25\big)^2}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 21 (new) -->
+    <div class="problem">
+      <h3 id="prob21">Problem 21 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{t^2\sin(2t)\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol21', this)">Show Solution</button>
+      <div id="sol21" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>Here \(n=2\) in the derivative-of-transform theorem, \(\mathcal{L}\{t^2f(t)\}=F''(s)\) (recall \((-1)^2=1\)), so this problem takes the differentiation from Problem 19 one step further.</p>
+        <p>Starting from \(F(s)=\mathcal{L}\{\sin(2t)\}=\dfrac{2}{s^2+4}\), the first derivative (computed the same way as in Problem 19) is</p>
+        \[
+        F'(s) = \frac{-4s}{(s^2+4)^2}.
+        \]
+        <p>Differentiate once more, using the quotient rule with numerator \(-4s\) and denominator \((s^2+4)^2\) (whose derivative is \(2(s^2+4)(2s)=4s(s^2+4)\)):</p>
+        \[
+        F''(s) = \frac{-4(s^2+4)^2 - (-4s)\cdot 4s(s^2+4)}{(s^2+4)^4}
+        = \frac{(s^2+4)\big[-4(s^2+4)+16s^2\big]}{(s^2+4)^4}
+        = \frac{12s^2-16}{(s^2+4)^3}.
+        \]
+        <p>Since the theorem calls for \((-1)^2F''(s)=F''(s)\) with no sign change,</p>
+        \[
+        \boxed{\mathcal{L}\{t^2\sin(2t)\} = \frac{12s^2-16}{(s^2+4)^3}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 22 (was 15) -->
+    <div class="problem">
+      <h3 id="prob22">Problem 22 <span class="diff-tag diff-hard">Hard</span></h3>
+      <p>
+      Find
+      \[
+      \mathcal{L}\{t^2 e^{2t}\sin(3t)\}.
+      \]
+      </p>
+      <button onclick="toggleSolution('sol22', this)">Show Solution</button>
+      <div id="sol22" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>This combines all three tools at once: the First Translation Theorem for the \(e^{2t}\) factor, followed by <em>two</em> derivatives of the resulting transform for the \(t^2\) factor.</p>
+        <p class="step-line"><span class="step-label">Step 1</span> <span class="step-desc">(Apply the First Translation Theorem).</span></p>
+        <p>From \(\mathcal{L}\{\sin(3t)\}=\dfrac{3}{s^2+9}\), shifting by \(a=2\) gives the transform of \(e^{2t}\sin(3t)\):</p>
+        \[
+        F(s) = \frac{3}{(s-2)^2+9}.
+        \]
+        <p class="step-line"><span class="step-label">Step 2</span> <span class="step-desc">(Differentiate twice).</span></p>
+        <p>Let \(u=s-2\), so \(F=\dfrac{3}{u^2+9}\) and derivatives in \(s\) equal derivatives in \(u\). First,</p>
+        \[
+        F'(s) = 3\cdot\frac{-2u}{(u^2+9)^2} = \frac{-6u}{(u^2+9)^2}.
+        \]
+        <p>Differentiating again with the quotient rule (numerator \(-6u\), denominator \((u^2+9)^2\), whose derivative is \(4u(u^2+9)\)):</p>
+        \[
+        F''(s) = \frac{-6(u^2+9)^2 - (-6u)(4u)(u^2+9)}{(u^2+9)^4}
+        = \frac{(u^2+9)\big[-6(u^2+9)+24u^2\big]}{(u^2+9)^4}
+        = \frac{18u^2-54}{(u^2+9)^3}.
+        \]
+        <p class="step-line"><span class="step-label">Step 3</span> <span class="step-desc">(Substitute back and apply the sign).</span></p>
+        <p>Since \((-1)^2=1\), \(\mathcal{L}\{t^2e^{2t}\sin(3t)\}=F''(s)\); substituting \(u=s-2\) back in,</p>
+        \[
+        \boxed{\mathcal{L}\{t^2 e^{2t}\sin(3t)\} = \frac{18(s-2)^2-54}{\big((s-2)^2+9\big)^3}.}
+        \]
+      </div>
+    </div>
+
+    <!-- Problem 23 (new, conceptual) -->
+    <div class="problem">
+      <h3 id="prob23">Problem 23 <span class="diff-tag diff-conceptual">Conceptual</span></h3>
+      <p>
+      The theorem in this section states
+      \(\mathcal{L}\{t^nf(t)\} = (-1)^n\dfrac{d^n}{ds^n}F(s)\). Without computing any specific
+      transform, explain where the alternating sign \((-1)^n\) comes from, and why it is
+      \((-1)^n\) rather than the transform simply equaling \(F^{(n)}(s)\) outright.
+      </p>
+      <button onclick="toggleSolution('sol23', this)">Show Solution</button>
+      <div id="sol23" class="solution" style="display:none;">
+        <p><strong>Solution:</strong></p>
+        <p>
+        The sign traces back to a single derivative: since \(F(s)=\displaystyle\int_0^\infty
+        e^{-st}f(t)\,dt\), differentiating under the integral sign with respect to \(s\) brings down
+        one factor of \(\dfrac{\partial}{\partial s}(e^{-st})=-te^{-st}\) — that is, each
+        \(s\)-derivative multiplies the integrand by an extra factor of \(-t\), not \(t\).
+        </p>
+        <p>
+        Differentiating once gives \(F'(s)=\displaystyle\int_0^\infty(-t)e^{-st}f(t)\,dt
+        =-\mathcal{L}\{tf(t)\}\), so \(\mathcal{L}\{tf(t)\}=-F'(s)\), matching \(n=1\) in the
+        theorem (\((-1)^1=-1\)). Differentiating a second time brings down another factor of
+        \(-t\), so the integrand now carries \((-t)^2=t^2\) — the two minus signs cancel — giving
+        \(F''(s)=\mathcal{L}\{t^2f(t)\}\), matching \(n=2\) (\((-1)^2=1\)).
+        </p>
+        <p>
+        In general, differentiating \(n\) times brings down \(n\) factors of \(-t\), i.e. a factor
+        of \((-t)^n=(-1)^nt^n\), so \(F^{(n)}(s)=\mathcal{L}\{(-1)^nt^nf(t)\}
+        =(-1)^n\mathcal{L}\{t^nf(t)\}\). Multiplying both sides by \((-1)^n\) and using
+        \(\big((-1)^n\big)^2=1\) gives \(\mathcal{L}\{t^nf(t)\}=(-1)^nF^{(n)}(s)\) — exactly the
+        theorem. The sign is not a separate fact to memorize; it is forced by the chain rule applied
+        to \(e^{-st}\), and it alternates because each differentiation contributes its own factor of
+        \(-1\) that either matches or cancels the ones already there depending on whether \(n\) is
+        odd or even.
+        </p>
+      </div>
+    </div>
 
   </main>
 
