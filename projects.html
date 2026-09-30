@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+		<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<h1>Projects</h1>
+	<p class="subtitle">A few personal software projects outside of my math research.</p>
+
+	<div class="project-card">
+	<div class="eyebrow">Web App &middot; Cryptography</div>
+	<h2>Secure Messenger</h2>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://secure-messenger-pied.vercel.app/" target="_blank">Try it live</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/secure-messenger" target="_blank">View on GitHub</a>
+	</div>
+	<p>This is the final deployment of the Secure Messenger app, an end-to-end encrypted messaging web app I built during my Spring 2026 independent study in applied cryptography and encryption methods.</p>
+	<p>Messages are encrypted client-side, in the browser, before they ever reach the server, so the server only ever handles ciphertext &mdash; never plaintext messages or the keys needed to read them. The app has a Python backend and a JavaScript frontend, with a dedicated cryptography test suite (Vitest) plus backend and end-to-end tests (pytest, Cypress) that run automatically in CI before every deploy. The frontend is deployed on Vercel and the backend on Render.</p>
+	<p>To try it, sign up for a free account on the live site above and send yourself (or a friend) a message.</p>
+	</div>
+
+	<div class="project-card">
+	<div class="eyebrow">Data Pipeline &middot; Forecasting</div>
+	<h2>WNBA Analytics</h2>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://dylan-costa.github.io/wnba-analytics/" target="_blank">View live forecast</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/wnba-analytics" target="_blank">View on GitHub</a>
+	</div>
+	<p>A WNBA game-prediction pipeline and forecasting site. It pulls every game since the league's first season (1997) from the official stats API, rates every team with an Elo system adapted from FiveThirtyEight's NBA methodology, and uses those ratings to predict upcoming games and run 20,000-simulation Monte Carlo forecasts of the rest of the season and the playoffs.</p>
+	<p>The live site shows each team's title odds, semifinal and finals odds, and a full playoff-bracket table, alongside how well the model is actually doing: percentage of correct picks, log loss, and a live record of picks made before tip-off. Everything regenerates automatically every morning as new games come in. The full methodology &mdash; the Elo formula, the simulation design, and backtested accuracy on held-out seasons (2019&ndash;2026, never used for tuning) &mdash; is written up with proofs in the repository.</p>
+	</div>
+
+  </body>
+</html>

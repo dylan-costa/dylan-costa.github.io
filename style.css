@@ -1,105 +1,369 @@
-/* Font: Baskervville */
-@import url('https://fonts.googleapis.com/css2?family=Baskervville&display=swap');
+/* ==========================================================================
+   Dylan Costa — site redesign (preview)
+   Dark, editorial academic look: serif display type for big moments,
+   clean sans for everything structural, single teal accent.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0b0f14;
+  --bg-alt: #121822;
+  --bg-raised: #161d29;
+  --border: #232b38;
+  --text: #e9e7e1;
+  --text-dim: #99a3b0;
+  --accent: #5eead4;
+  --accent-soft: rgba(94, 234, 212, 0.12);
+  --accent-ink: #0f766e; /* accent color when used on light "paper" backgrounds */
+
+  --paper-bg: #fdfcf8;
+  --paper-text: #22262b;
+  --paper-text-dim: #5b6269;
+  --paper-border: #e4e0d6;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   max-width: 1100px;
   margin: 0 auto;
-  background-color: #e9eef3; /* soft blue-gray background */
-  font-family: 'Baskervville', serif;
-  line-height: 1.6;
-  padding: 1rem;
-  color: #222;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.65;
+  padding: 0 1.5rem 4rem;
 }
 
-/* Headings */
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
 h1 {
-  font-family: 'Baskervville', serif;
-  font-size: 36px;
-  color: #111;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-top: 2.5rem;
 }
 
 h2 {
-  font-family: 'Baskervville', serif;
-  color: #0645AD;
-  font-size: 28px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
 }
 
 h3 {
-  font-family: 'Baskervville', serif;
-  color: #0645AD;
-  font-size: 22px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--accent);
 }
 
-/* Text */
 p, li, td, th {
-  font-family: 'Baskervville', serif;
-  font-size: 18px;
-  color: #222;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
 }
 
-/* Body links */
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.subtitle {
+  color: var(--text-dim);
+}
+
 a {
-  font-family: 'Baskervville', serif;
-  font-size: 18px;
-  color: #0645AD;
-}
-
-a:visited {
-  color: #0645AD;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
 }
 
 a:hover {
-  color: #0b61d8;
+  border-bottom-color: currentColor;
 }
 
-a:active {
-  color: #0645AD;
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
 }
 
-/* Notes container */
-.notes {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+/* ==========================================================================
+   Top navigation
+   ========================================================================== */
+
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
-/* Definition / Example / Remark boxes */
-.definition, .example, .remark {
-  border-left: 4px solid #0645AD;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
-  background-color: #f5f7fa;
-  border-radius: 5px;
+.topnav::before {
+  content: "Dylan Costa";
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-right: auto;
 }
 
-.label {
-  font-weight: bold;
+.topnav a,
+.dropbtn {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 0.5rem 0.9rem;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 0.3rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.topnav a:hover,
+.dropdown:hover .dropbtn {
+  color: var(--accent);
+  border-bottom-color: transparent;
+  background: none;
+}
+
+.topnav a.active {
+  color: var(--accent);
+}
+
+.dropdown { position: relative; }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-width: 190px;
+  padding: 0.4rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  z-index: 10;
+}
+
+.dropdown-content a {
+  color: var(--text-dim);
+  padding: 0.6rem 0.7rem;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border-radius: 5px;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.dropdown:hover .dropdown-content { display: block; }
+
+/* ==========================================================================
+   Hero (homepage)
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 4.5rem 0 2.5rem;
+  min-height: 78vh;
+}
+
+.hero-text { flex: 1 1 58%; min-width: 280px; }
+
+.hero-photo {
+  flex: 0 0 380px;
+}
+.hero-photo img {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--border);
   display: block;
 }
 
-/* Table of contents */
-.toc {
-  margin: 1rem 0;
-  padding: 0.5rem 1rem;
-  background-color: #dce6f0;
-  border-radius: 6px;
+.hero .eyebrow { font-size: 0.9rem; }
+
+.hero h1 {
+  margin-top: 0.9rem;
+  margin-bottom: 1.6rem;
+  font-size: 4rem;
+}
+
+.hero p {
+  color: var(--text-dim);
+  max-width: 60ch;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+
+.hero p strong, .hero p b { color: var(--text); font-weight: 600; }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2.25rem 0 0.5rem;
+}
+
+.btn-row .btn-pill {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.95rem;
+}
+
+.btn-pill {
   display: inline-block;
-}
-
-.toc a {
-  margin: 0 0.5rem;
+  padding: 0.55rem 1.3rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  color: #0645AD;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.toc a:hover {
-  text-decoration: underline;
+.btn-pill:hover {
+  background: var(--accent);
+  color: #0b0f14;
+  border-bottom: 1px solid var(--accent);
 }
 
-/* Tables */
+@media (max-width: 680px) {
+  .hero { flex-direction: column-reverse; gap: 1.5rem; }
+  .hero-photo { flex-basis: auto; width: 65%; }
+}
+
+/* ==========================================================================
+   "Paper" content card — used by course notes, syllabus, practice pages
+   ========================================================================== */
+
+.notes {
+  background-color: var(--paper-bg);
+  color: var(--paper-text);
+  padding: 2.5rem;
+  border-radius: 14px;
+  border: 1px solid var(--paper-border);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+  margin: 1.5rem 0 3rem;
+}
+
+.notes h1 { color: var(--paper-text); }
+.notes h2 { color: var(--paper-text); border-bottom-color: var(--paper-border); }
+.notes h3 { color: var(--accent-ink); }
+.notes p, .notes li, .notes td, .notes th { color: var(--paper-text); }
+.notes .subtitle { color: var(--paper-text-dim); }
+
+.notes a { color: var(--accent-ink); }
+
+/* CV-style entry rows (also used for the Mentoring list on Teaching).
+   Default colors assume a dark page background; the .notes override
+   below switches them to paper-appropriate colors when nested in a
+   light "paper" card. */
+.cv-section { margin-top: 2.25rem; }
+
+.cv-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.7rem 0;
+}
+
+.cv-entry .cv-title { font-weight: 600; color: var(--text); }
+
+.cv-entry .cv-sub {
+  display: block;
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+.cv-entry .cv-date {
+  color: var(--text-dim);
+  white-space: nowrap;
+  font-size: 0.92rem;
+}
+
+.notes .cv-entry .cv-title { color: var(--paper-text); }
+.notes .cv-entry .cv-sub,
+.notes .cv-entry .cv-date {
+  color: var(--paper-text-dim);
+}
+
+.notes .btn-pill {
+  border-color: var(--accent-ink);
+  color: var(--accent-ink);
+}
+.notes .btn-pill:hover {
+  background: var(--accent-ink);
+  color: var(--paper-bg);
+}
+
+/* Project cards */
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  margin: 2rem 0;
+  background: var(--bg-alt);
+}
+
+.project-card h2 {
+  margin-top: 0;
+  border-bottom: none;
+  font-size: 1.5rem;
+}
+
+.project-card .btn-row {
+  margin: 1rem 0 1.5rem;
+}
+
+.project-card p {
+  color: var(--text-dim);
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -107,86 +371,74 @@ table {
 }
 
 th, td {
-  border: 1px solid #888;
-  padding: 8px;
+  border: 1px solid var(--paper-border);
+  padding: 8px 12px;
   text-align: left;
 }
 
 th {
-  background-color: #0645AD;
-  color: white;
+  background-color: var(--paper-text);
+  color: var(--paper-bg);
+  font-weight: 600;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+tr:nth-child(even) { background-color: rgba(0,0,0,0.03); }
+
+/* ==========================================================================
+   Table of contents box (used within .notes pages)
+   ========================================================================== */
+
+.toc {
+  margin: 1rem 0;
+  padding: 0.75rem 1.1rem;
+  background-color: rgba(15, 118, 110, 0.07);
+  border: 1px solid var(--paper-border);
+  border-radius: 8px;
+  display: inline-block;
 }
 
-/* =========================
-   Top Navigation Bar
-   ========================= */
-
-.topnav {
-  background-color: black;
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-/* Nav links and dropdown button */
-.topnav a,
-.dropbtn {
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+.toc a {
+  margin: 0 0.4rem;
   text-decoration: none;
-  font-size: 17px;
-  background: none;
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  color: var(--accent-ink);
 }
 
-/* Hover effects */
-.topnav a:hover,
-.dropdown:hover .dropbtn {
-  background-color: gray;
-  color: white;
+.toc a:hover { border-bottom: 1px solid currentColor; }
+
+/* ==========================================================================
+   Resource lists (course resources page)
+   ========================================================================== */
+
+ul.resource-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.75rem 0 1.5rem;
 }
 
-.topnav a.active {
-  background-color: #ddd;
-  color: black;
+ul.resource-list ul.resource-list {
+  margin: 0.5rem 0 0.75rem 1.25rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--border);
 }
 
-/* Dropdown container */
-.dropdown {
-  position: relative;
+ul.resource-list li { margin: 0.35rem 0; }
+
+/* ==========================================================================
+   Misc content niceties
+   ========================================================================== */
+
+main iframe {
+  border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
-/* Dropdown content */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  z-index: 1;
+.notes iframe {
+  border-color: var(--paper-border);
 }
 
-/* Dropdown links */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+.contact-block {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
 }
