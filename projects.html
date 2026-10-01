@@ -26,6 +26,17 @@
 	<p class="subtitle">A few personal software projects outside of my math research.</p>
 
 	<div class="project-card">
+	<div class="eyebrow">Interactive &middot; Elliptic Curves</div>
+	<h2>Rank Increase Simulator</h2>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://dylan-costa.github.io/rank-increase-simulator/">Try it live</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/rank-increase-simulator" target="_blank">View on GitHub</a>
+	</div>
+	<p>An interactive tool for watching the rank of an elliptic curve change under quadratic twists. Enter a curve over the rationals by filling in its Weierstrass equation, and the simulator computes its minimal model, Mordell&ndash;Weil group, and generators. Then choose a target rank (0, 1, 2, 3, or at least 4), and it searches the squarefree integers d in order of |d| for the first twist E<sup>(d)</sup> with that rank, showing that twist's minimal model and generators, and then offers to keep going and find another.</p>
+	<p>Every computation runs live in your browser, using the WebAssembly build of PARI/GP spread across several parallel workers. Each rank comes from a 2-descent and is labelled with how it was certified: proven by descent, proven via Gross&ndash;Zagier&ndash;Kolyvagin, or conditional on BSD. A running tally of the ranks of all twists checked lets you watch Goldfeld's conjecture (half rank 0, half rank 1) emerge.</p>
+	</div>
+
+	<div class="project-card">
 	<div class="eyebrow">Web App &middot; Cryptography</div>
 	<h2>Secure Messenger</h2>
 	<div class="btn-row">
