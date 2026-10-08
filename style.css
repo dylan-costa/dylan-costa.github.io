@@ -54,6 +54,7 @@ h1 {
   font-family: 'Newsreader', serif;
   font-weight: 600;
   font-size: 2.4rem;
+  line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--text);
   margin-top: 2.5rem;
@@ -416,17 +417,17 @@ tr:nth-child(even) { background-color: rgba(0,0,0,0.03); }
 .toc a:hover { border-bottom: 1px solid currentColor; }
 
 /* ==========================================================================
-   Unit cards (course resources page)
+   Small card grid (course resources units, research "why care" cards)
    ========================================================================== */
 
-.unit-grid {
+.card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin: 1.5rem 0 1rem;
 }
 
-.unit-card {
+.mini-card {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.15rem 1.3rem;
@@ -435,25 +436,119 @@ tr:nth-child(even) { background-color: rgba(0,0,0,0.03); }
   flex-direction: column;
 }
 
-.unit-card h3 {
+.mini-card h3 {
   color: var(--text);
   margin: 0.4rem 0 0.2rem;
   line-height: 1.35;
 }
 
-.unit-card p {
+.mini-card p {
   color: var(--text-dim);
   font-size: 0.92rem;
   margin: 0 0 1rem;
 }
 
-.unit-links {
+.mini-card .eyebrow + p { margin-top: 0.5rem; }
+.mini-card p:last-child { margin-bottom: 0; }
+
+.card-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1.2rem;
   margin-top: auto;
   font-size: 0.92rem;
   font-weight: 600;
+}
+
+/* ==========================================================================
+   Long-form pages (research)
+   ========================================================================== */
+
+/* keep prose at a readable line length */
+.prose { max-width: 780px; }
+
+.prose h3 { margin-top: 2rem; }
+
+.back-link { margin: 2rem 0 -1rem; font-size: 0.92rem; }
+
+/* Whole-card links (research subpages) */
+.link-cards {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+a.link-card {
+  display: block;
+  position: relative;
+  padding: 1.2rem 3.25rem 1.2rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-alt);
+  transition: border-color 0.15s ease;
+}
+
+a.link-card:hover { border-color: var(--accent); }
+
+a.link-card::after {
+  content: "\2192";
+  position: absolute;
+  right: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: var(--accent);
+  transition: right 0.15s ease;
+}
+
+a.link-card:hover::after { right: 1.1rem; }
+
+a.link-card h3 { color: var(--text); margin: 0 0 0.25rem; }
+a.link-card p { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
+
+.project-card h3 {
+  color: var(--text);
+  font-size: 1.3rem;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.project-card .question {
+  color: var(--text);
+  border-left: 3px solid var(--accent);
+  padding: 0.15rem 0 0.15rem 1rem;
+  margin: 1.1rem 0;
+}
+
+/* Figures (inline SVG diagrams) */
+/* solid panel so the decorative page background doesn't show through the diagram */
+.figure {
+  margin: 2rem 0;
+  padding: 1.5rem 1.25rem 1.25rem;
+  text-align: center;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.figure svg { width: 100%; max-width: 560px; height: auto; }
+.figure figcaption {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  max-width: 60ch;
+  margin: 0.75rem auto 0;
+}
+
+.gl-axis { stroke: var(--border); stroke-width: 1.5; }
+.gl-curve { fill: none; stroke: var(--text); stroke-width: 2.5; stroke-linejoin: round; }
+.gl-line { stroke: var(--accent); stroke-width: 1.75; }
+.gl-reflect { stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 6 6; }
+.gl-pt { fill: var(--accent); }
+.gl-hollow { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+.gl-sum { fill: var(--text); }
+.gl-label {
+  fill: var(--text);
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 22px;
 }
 
 /* ==========================================================================
@@ -501,5 +596,5 @@ mjx-container[display="true"] {
 
   .notes { padding: 1.4rem 1.1rem; border-radius: 10px; }
   .project-card { padding: 1.5rem 1.25rem; }
-  .unit-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
 }
