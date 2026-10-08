@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rank Increase Simulator: Technical Summary</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+			<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<main class="prose">
+
+	<p class="back-link"><a href="projects.html">&larr; Back to Projects</a></p>
+	<h1>Rank Increase Simulator: Technical Summary</h1>
+	<p class="subtitle">The simulator takes an elliptic curve over \(\mathbb{Q}\) and a target rank, then searches the quadratic twists of the curve, in order, for the first one with that rank. This page explains the mathematics it relies on and how it computes everything inside your browser.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://dylan-costa.github.io/rank-increase-simulator/" target="_blank">Try it live</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/rank-increase-simulator" target="_blank">View on GitHub</a>
+	</div>
+
+	<h2>Part 1 &middot; The Mathematics</h2>
+	<p>For background on elliptic curves, rational points, and rank, see my <a href="research.html">Research</a> page. In short: the rational points \(E(\mathbb{Q})\) of an elliptic curve form a finitely generated abelian group \(E(\mathbb{Q}) \cong E(\mathbb{Q})_{\mathrm{tors}} \oplus \mathbb{Z}^{r}\), and the <em>rank</em> \(r\) counts how many independent points of infinite order the curve has.</p>
+
+	<h3>Quadratic twists</h3>
+	<p>If \(E: y^{2} = x^{3} + Ax + B\) and \(d \ne 1\) is a squarefree integer, the <em>quadratic twist</em> of \(E\) by \(d\) is</p>
+	\[E^{(d)}:\ dy^{2} = x^{3} + Ax + B, \qquad \text{or equivalently} \qquad y^{2} = x^{3} + Ad^{2}x + Bd^{3}.\]
+	<p>The curves \(E\) and \(E^{(d)}\) are not isomorphic over \(\mathbb{Q}\), but they become isomorphic over \(\mathbb{Q}(\sqrt{d})\), where \((x, y) \mapsto (x, y/\sqrt{d})\) carries one onto the other. Even so, their groups of rational points can look completely different. For a curve given in general Weierstrass form, the simulator computes the twist as \(y^{2} = x^{3} - 27c_4 d^{2}x - 54c_6 d^{3}\), where \(c_4\) and \(c_6\) are the standard invariants of \(E\), and then reduces it to its minimal model.</p>
+
+	<h3>Why twists measure rank growth</h3>
+	<p>Twists are exactly what controls the rank of \(E\) over a quadratic field. If \(K = \mathbb{Q}(\sqrt{d})\), then</p>
+	\[\operatorname{rank} E(K) = \operatorname{rank} E(\mathbb{Q}) + \operatorname{rank} E^{(d)}(\mathbb{Q}).\]
+	<p>The reason is that the nontrivial automorphism \(\sigma\) of \(K\) acts on \(E(K)\). Up to finite index, \(E(K)\) splits into the points fixed by \(\sigma\), which are the points of \(E(\mathbb{Q})\), and the points that \(\sigma\) negates, which correspond to the points of \(E^{(d)}(\mathbb{Q})\). So asking for a twist of rank \(r\) is the same as asking for a quadratic field over which the rank of \(E\) grows by exactly \(r\). This is the question behind my paper on <a href="research.html">rank growth in quadratic extensions</a>.</p>
+
+	<h3>What to expect: root numbers and Goldfeld's conjecture</h3>
+	<p>Every elliptic curve has a <em>root number</em> \(w = \pm 1\), the sign in the functional equation of its \(L\)-function, and the parity conjecture predicts \(w = (-1)^{\text{rank}}\). As \(d\) varies, the root numbers of the twists of a typical curve split evenly between \(+1\) and \(-1\), so about half of the twists should have even rank and half odd. Goldfeld's conjecture sharpens this:</p>
+	<div class="callout">
+		<p><strong>Goldfeld's conjecture.</strong> Counting twists by \(|d|\), 50% of the twists \(E^{(d)}\) have rank 0, 50% have rank 1, and twists of rank 2 or more make up 0%.</p>
+	</div>
+	<p>&ldquo;0%&rdquo; is not the same as &ldquo;none&rdquo;: higher-rank twists do occur, just with density zero. The simulator keeps a running tally of the ranks of every twist it checks, so you can watch the 50/50 split appear, and see how much rarer the higher ranks are.</p>
+
+	<h3>How each rank is certified</h3>
+	<p>No algorithm is known that always computes the rank, so the simulator combines a computation with theorems, and labels every result with how it was obtained:</p>
+	<ol>
+		<li><strong>2-descent.</strong> PARI/GP's <code>ellrank</code> performs a 2-descent, which yields a lower bound (from points it actually finds) and an upper bound (from a 2-Selmer group). If the bounds differ, it tries again with more effort. If they agree, the rank is <strong>proven</strong>.</li>
+		<li><strong>Analytic rank 0 or 1.</strong> Otherwise the simulator computes the <em>analytic rank</em>, the order of vanishing of the \(L\)-function at \(s = 1\). If it is 0 or 1, the theorems of Gross&ndash;Zagier and Kolyvagin show that the rank equals it, so the rank is again <strong>proven</strong>.</li>
+		<li><strong>Analytic rank 2 or more.</strong> No theorem yet links the two in this range. Rank equals analytic rank here only if the Birch and Swinnerton-Dyer conjecture holds, and the result is labelled <strong>assumes BSD</strong>.</li>
+	</ol>
+
+	<h3>Finding generators</h3>
+	<p>Knowing the rank is not the same as knowing the points. The simulator also produces explicit generators of \(E(\mathbb{Q})\) modulo torsion:</p>
+	<ul>
+		<li>points come from the 2-descent, or, for a rank-one curve where the descent finds none, from a <em>Heegner point</em>, which Gross&ndash;Zagier shows has infinite order when the analytic rank is one;</li>
+		<li>the points are <em>saturated</em> at every prime \(p \le 100\): modulo torsion, the subgroup they generate has index prime to every such \(p\) in \(E(\mathbb{Q})\);</li>
+		<li>they are then LLL-reduced with respect to the canonical height, which gives a basis of small, well-spread points, and the <em>regulator</em> (the determinant of their height pairing matrix) is reported.</li>
+	</ul>
+	<p>Each curve also shows its minimal model, conductor, discriminant, \(j\)-invariant, root number, and torsion subgroup, with a link to look it up in the LMFDB.</p>
+
+	<h2>Part 2 &middot; How It's Built</h2>
+	<p>The simulator is a static website with no server. All of the number theory is done by <a href="https://pari.math.u-bordeaux.fr/" target="_blank">PARI/GP</a>, the standard computer algebra system for number theory, compiled to WebAssembly so that it runs inside the browser at close to native speed. Nothing you enter is sent anywhere.</p>
+
+	<div class="flow">
+		<div class="flow-step">
+			<div class="eyebrow">Interface</div>
+			<p>Reads the curve, shows results, and keeps the tally and log.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">Search engine</div>
+			<p>Orders the twists and hands them out to a pool of workers.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">Workers (up to 4)</div>
+			<p>Each runs its own PARI/GP interpreter in the background.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">GP code</div>
+			<p>Computes models, ranks, and generators and returns them as JSON.</p>
+		</div>
+	</div>
+
+	<h3>PARI/GP in the browser</h3>
+	<p>The site ships the official WebAssembly build of PARI/GP (about 16&nbsp;MB), unmodified. A short GP script (<code>ris.gp</code>) is loaded into each interpreter and defines the two entry points the page calls: one that analyzes a curve, and one that builds and analyzes a single twist. Results come back as JSON, with every integer and fraction sent as a string so that large coefficients survive the trip into JavaScript without losing precision.</p>
+
+	<h3>A pool of parallel workers</h3>
+	<p>Each PARI/GP interpreter runs in its own Web Worker, a background thread, so the page stays responsive while it computes. The pool uses up to four workers, one fewer than the device's processor cores. The first worker starts alone, so the large WebAssembly file is downloaded once and cached before the others request it. A twist that takes longer than a minute is stopped and its worker is replaced, so one unusually hard twist cannot stall the search.</p>
+
+	<h3>An ordered search, run in parallel</h3>
+	<p>The search goes through every squarefree \(d \ne 1\) with \(|d| \le X\) (up to \(X = 10{,}000\)), in the order \(-1, 2, -2, 3, -3, 5, -5, \ldots\); the list itself is built with a sieve. Twists are computed several at a time, up to three per worker in flight, but their results are <em>reported strictly in order</em>, so the first hit really is the twist with the smallest \(|d|\). To keep the search fast, each twist is first checked without generators; only a hit is recomputed in full. Results computed ahead of the hit are kept, so &ldquo;find another&rdquo; picks up exactly where the search stopped, and raising the bound \(X\) extends the list without redoing any work.</p>
+
+	<h3>Safety</h3>
+	<p>The page never builds PARI/GP commands from raw text. Before anything reaches the interpreter, every argument is checked to be an integer or a fraction, so user input cannot become code. Output is wrapped in markers so that stray messages from PARI/GP can never corrupt the JSON.</p>
+
+	<h3>Testing and deployment</h3>
+	<p>A smoke test runs the same WebAssembly build of PARI/GP under Node.js and checks the GP code against known answers from the LMFDB: curves of rank 0 through 5 (11.a2, 37.a1, 389.a1, 5077.a1, 234446.a1, and 19047851.a1), the minimal model of a non-minimal equation, the error for a singular curve, and the ranks of specific twists. The site is hosted on GitHub Pages, and a build number in the worker's address makes browsers fetch updated code instead of a stale cached copy.</p>
+
+	</main>
+</body>
+</html>

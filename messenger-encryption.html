@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Encryption Methods</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+			<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<main class="prose">
+
+	<p class="back-link"><a href="projects.html">&larr; Back to Projects</a></p>
+	<h1>Encryption Methods</h1>
+	<p class="subtitle">The three encryption methods built into <a href="messenger-summary.html">Secure Messenger</a>: RSA, multi-prime RSA, and elliptic curve Diffie&ndash;Hellman, with the mathematics behind each and a small worked example. The numbers in the examples are tiny so they can be checked by hand; the app uses the same formulas with much larger numbers.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="messenger-summary.html">Technical Summary</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/secure-messenger" target="_blank">View on GitHub</a>
+	</div>
+
+	<h2>The Idea of Public-Key Cryptography</h2>
+	<p>A classical cipher uses one secret key to both lock and unlock a message, which raises an awkward question: how do two people agree on that key without meeting? Public-key cryptography splits the key in two. A <em>public key</em> can be shared with anyone, while the matching <em>private key</em> never leaves its owner. Each method below rests on a computation that is easy in one direction and believed to be infeasible in reverse: multiplying primes versus factoring their product, or multiplying a point on an elliptic curve by a number versus recovering that number.</p>
+
+	<h2>RSA</h2>
+	<h3>Key generation</h3>
+	<ol>
+		<li>Choose two large primes \(p\) and \(q\), and set \(n = pq\).</li>
+		<li>Compute \(\varphi(n) = (p-1)(q-1)\), the number of integers between 1 and \(n\) that share no factor with \(n\).</li>
+		<li>Choose a public exponent \(e\) with \(\gcd(e, \varphi(n)) = 1\).</li>
+		<li>Compute the private exponent \(d \equiv e^{-1} \pmod{\varphi(n)}\) with the extended Euclidean algorithm.</li>
+	</ol>
+	<p>The public key is \((e, n)\) and the private key is \((d, n)\).</p>
+
+	<h3>Encryption and decryption</h3>
+	<p>A message is first turned into a number \(M\) with \(0 \le M &lt; n\). Then</p>
+	\[C = M^{e} \bmod n, \qquad M = C^{d} \bmod n.\]
+	<p><strong>Why it works.</strong> Since \(ed = 1 + k\,\varphi(n)\) for some integer \(k\), Euler's theorem \(M^{\varphi(n)} \equiv 1 \pmod{n}\) gives</p>
+	\[C^{d} \equiv M^{ed} = M \cdot \bigl(M^{\varphi(n)}\bigr)^{k} \equiv M \pmod{n}.\]
+	<p>(The Chinese Remainder Theorem extends this to the rare messages that share a factor with \(n\).)</p>
+	<p><strong>Why it is secure.</strong> Anyone can see \(n\) and \(e\), but computing \(d\) requires \(\varphi(n)\), and finding \(\varphi(n)\) is as hard as factoring \(n\), which is believed to be infeasible when \(p\) and \(q\) have hundreds of digits.</p>
+
+	<div class="example-box">
+		<div class="eyebrow">Worked example</div>
+		<p>Take \(p = 59\) and \(q = 71\). Then \(n = 4189\) and \(\varphi(n) = 58 \cdot 70 = 4060\). The exponent \(e = 11\) works because \(\gcd(11, 4060) = 1\), and \(d = 3691\) because \(11 \cdot 3691 = 40601 = 10 \cdot 4060 + 1\).</p>
+		<p>The app turns text into a number by writing each character as a three-digit code, so the letter H becomes \(M = 072 = 72\). Then</p>
+		\[C = 72^{11} \bmod 4189 = 2415, \qquad 2415^{3691} \bmod 4189 = 72 \;\to\; \text{H}.\]
+		<p>The two letters &ldquo;Hi&rdquo; would encode as \(072105 = 72105\), which is larger than \(n\), so this toy key can only hold one character. That is why the app shows a maximum message length; with its 1024-bit keys the limit is about 100 characters.</p>
+	</div>
+
+	<p><strong>In the app:</strong> two random 512-bit primes, found with the Miller&ndash;Rabin primality test, and \(e = 65537\). This is &ldquo;textbook&rdquo; RSA; real systems also apply randomized padding such as OAEP before encrypting.</p>
+
+	<h2>Multi-Prime RSA</h2>
+	<p>Nothing in RSA requires exactly two primes. With \(r\) distinct primes,</p>
+	\[n = p_1 p_2 \cdots p_r, \qquad \varphi(n) = (p_1 - 1)(p_2 - 1)\cdots(p_r - 1),\]
+	<p>and key generation, encryption, and decryption are otherwise unchanged.</p>
+	<p><strong>Why use more primes?</strong> Speed. Whoever holds the private key also knows the primes, so instead of one large exponentiation modulo \(n\) they can compute \(M_i = C^{\,d \bmod (p_i - 1)} \bmod p_i\) for each prime separately and recombine the results with the Chinese Remainder Theorem. The pieces are much smaller, so decryption becomes roughly \(r^2\) times faster than computing \(C^d \bmod n\) directly.</p>
+	<p><strong>The trade-off.</strong> At a fixed modulus size, more primes means smaller primes, and the <em>elliptic curve method</em> of factoring finds small prime factors much faster than large ones, so the number of primes that is safe to use is limited by the key size.</p>
+
+	<div class="example-box">
+		<div class="eyebrow">Worked example</div>
+		<p>Take \(p_1 = 11\), \(p_2 = 13\), \(p_3 = 17\). Then \(n = 2431\) and \(\varphi(n) = 10 \cdot 12 \cdot 16 = 1920\). With \(e = 7\), the private exponent is \(d = 823\), since \(7 \cdot 823 = 5761 = 3 \cdot 1920 + 1\).</p>
+		<p>Encrypting \(M = 72\) gives \(C = 72^{7} \bmod 2431 = 591\). To decrypt with the Chinese Remainder Theorem, work modulo each prime with a reduced exponent:</p>
+		<div class="table-wrap">
+		<table>
+			<tr><th>Prime \(p_i\)</th><th class="num">\(C \bmod p_i\)</th><th class="num">\(d \bmod (p_i - 1)\)</th><th class="num">\(M_i\)</th></tr>
+			<tr><td>11</td><td class="num">8</td><td class="num">3</td><td class="num">\(8^{3} \equiv 6\)</td></tr>
+			<tr><td>13</td><td class="num">6</td><td class="num">7</td><td class="num">\(6^{7} \equiv 7\)</td></tr>
+			<tr><td>17</td><td class="num">13</td><td class="num">7</td><td class="num">\(13^{7} \equiv 4\)</td></tr>
+		</table>
+		</div>
+		<p>The only number below 2431 that leaves remainders 6, 7, and 4 on division by 11, 13, and 17 is \(M = 72\), matching \(591^{823} \bmod 2431 = 72\) computed directly.</p>
+	</div>
+
+	<p><strong>In the app:</strong> three 342-bit primes, so the modulus is about the same 1024-bit size as standard RSA. The app decrypts with the direct formula rather than the Chinese Remainder Theorem shortcut.</p>
+
+	<h2>Elliptic Curve Diffie&ndash;Hellman</h2>
+	<h3>Elliptic curves over a finite field</h3>
+	<p>Fix a prime \(p\). An elliptic curve over the integers mod \(p\) is the set of solutions to</p>
+	\[E:\ y^{2} \equiv x^{3} + ax + b \pmod{p}, \qquad 4a^{3} + 27b^{2} \not\equiv 0 \pmod{p},\]
+	<p>together with a &ldquo;point at infinity&rdquo; \(\mathcal{O}\). These points can be added: the line through \(P\) and \(Q\) meets the curve in a third point, and reflecting that point across the \(x\)-axis gives \(P + Q\). In coordinates, with all division done by multiplying by an inverse mod \(p\),</p>
+	\[\lambda = \begin{cases} \dfrac{y_2 - y_1}{x_2 - x_1} & P \ne Q,\\[2ex] \dfrac{3x_1^{2} + a}{2y_1} & P = Q,\end{cases} \qquad x_3 = \lambda^{2} - x_1 - x_2, \qquad y_3 = \lambda(x_1 - x_3) - y_1.\]
+	<p>Multiplying a point by an integer, \(kP = P + P + \cdots + P\), takes only about \(\log_2 k\) doublings and additions with the double-and-add method.</p>
+
+	<h3>The key exchange</h3>
+	<p>Both people agree on public parameters: the curve and a base point \(G\). Then:</p>
+	<ol>
+		<li>Alice picks a secret integer \(k_A\) and publishes \(A = k_A G\).</li>
+		<li>Bob picks a secret integer \(k_B\) and publishes \(B = k_B G\).</li>
+		<li>Alice computes \(k_A B\) and Bob computes \(k_B A\). Both equal \(S = (k_A k_B)\,G\), the <em>shared secret</em>.</li>
+	</ol>
+	<p>An eavesdropper sees \(G\), \(A\), and \(B\), but to find \(S\) they would need \(k_A\) or \(k_B\), and recovering \(k\) from \(kG\) is the <em>elliptic curve discrete logarithm problem</em>, for which no efficient algorithm is known on well-chosen curves.</p>
+
+	<div class="example-box">
+		<div class="eyebrow">Worked example</div>
+		<p>Use the curve \(y^{2} = x^{3} + 3x + 2\) over the integers mod 97. It has 103 points (counting \(\mathcal{O}\)), a prime number, so every point other than \(\mathcal{O}\) generates the whole group. Take \(G = (2, 4)\), which is on the curve because \(4^{2} = 16 = 2^{3} + 3 \cdot 2 + 2\).</p>
+		<p><strong>One doubling by hand.</strong> For \(2G\), the slope is \(\lambda = \frac{3 \cdot 2^{2} + 3}{2 \cdot 4} = \frac{15}{8}\). Since \(8 \cdot 85 = 680 = 7 \cdot 97 + 1\), the inverse of 8 is 85, so \(\lambda \equiv 15 \cdot 85 \equiv 14\). Then \(x_3 = 14^{2} - 2 - 2 \equiv 95\) and \(y_3 = 14(2 - 95) - 4 \equiv 52\), so \(2G = (95, 52)\).</p>
+		<p><strong>The exchange.</strong> Alice picks \(k_A = 13\) and publishes \(A = 13G = (89, 40)\). Bob picks \(k_B = 29\) and publishes \(B = 29G = (86, 44)\). Alice computes \(13B = (24, 30)\) and Bob computes \(29A = (24, 30)\): the same point, \(S = 377G\).</p>
+		<p><strong>Encrypting with it.</strong> The app uses the \(x\)-coordinate of \(S\) mod 256 as a one-byte key, here 24, and XORs it with each byte of the message. The letter H is the byte \(72 = 01001000_2\); XOR with \(24 = 00011000_2\) gives \(01010000_2 = 80\), the letter P. XORing 80 with 24 again recovers 72.</p>
+	</div>
+
+	<p><strong>In the app:</strong> for each conversation the server generates public parameters: a random prime \(p\) between 1,000 and 10,000, random coefficients \(a\) and \(b\) with nonzero discriminant, and a random point \(G\). Each participant picks a secret in the browser and uploads only \(k G\). Real systems use standardized curves over primes of about 256 bits, and turn the shared secret into a key for a cipher such as AES-GCM instead of a one-byte XOR.</p>
+
+	<h2>Side by Side</h2>
+	<div class="table-wrap">
+	<table>
+		<tr><th></th><th>RSA</th><th>Multi-prime RSA</th><th>Elliptic curve Diffie&ndash;Hellman</th></tr>
+		<tr><td>Hard problem</td><td>Factoring \(n = pq\)</td><td>Factoring \(n = p_1 \cdots p_r\)</td><td>Elliptic curve discrete logarithm</td></tr>
+		<tr><td>Keys</td><td>One key pair per user</td><td>One key pair per user</td><td>A fresh secret per conversation</td></tr>
+		<tr><td>Your sent messages</td><td>Encrypted a second time under your own key</td><td>Encrypted a second time under your own key</td><td>Readable with the shared secret</td></tr>
+		<tr><td>In the app</td><td>Two 512-bit primes, \(e = 65537\)</td><td>Three 342-bit primes</td><td>Toy curves with \(p &lt; 10{,}000\); one-byte XOR key</td></tr>
+	</table>
+	</div>
+
+	<div class="callout">
+		<p>All three methods are implemented in their textbook forms so the mathematics stays visible. The <a href="messenger-summary.html#design-notes">design notes</a> on the technical summary describe what a production system would do differently.</p>
+	</div>
+
+	</main>
+</body>
+</html>

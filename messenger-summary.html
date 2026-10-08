@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Secure Messenger: Technical Summary</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+			<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<main class="prose">
+
+	<p class="back-link"><a href="projects.html">&larr; Back to Projects</a></p>
+	<h1>Secure Messenger: Technical Summary</h1>
+	<p class="subtitle">How the end-to-end encrypted messenger from my Spring 2026 independent study in applied cryptography is put together: the frontend, the backend, the encryption, and how it is tested and deployed.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://secure-messenger-pied.vercel.app/" target="_blank">Try it live</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/secure-messenger" target="_blank">View on GitHub</a>
+		<a class="btn-pill" href="messenger-encryption.html">Encryption Methods</a>
+	</div>
+
+	<h2>At a Glance</h2>
+	<div class="table-wrap">
+	<table>
+		<tr><th>Layer</th><th>Technology</th><th>Role</th></tr>
+		<tr><td>Frontend</td><td>React 19, Vite, JavaScript</td><td>The chat interface, plus every key generation, encryption, and decryption step. Hosted on Vercel.</td></tr>
+		<tr><td>Cryptography</td><td>Written from scratch with JavaScript <code>BigInt</code></td><td>RSA, 3-prime RSA, and elliptic curve Diffie&ndash;Hellman, built on hand-written modular arithmetic and Miller&ndash;Rabin primality testing.</td></tr>
+		<tr><td>Backend</td><td>Python, FastAPI, SQLAlchemy, Alembic</td><td>A REST API that stores accounts, public keys, and ciphertext. Hosted on Render.</td></tr>
+		<tr><td>Database</td><td>PostgreSQL (SQLite for local development)</td><td>Users, public keys, conversations, and encrypted messages.</td></tr>
+		<tr><td>Passwords</td><td>bcrypt (via passlib)</td><td>Passwords are stored only as salted bcrypt hashes.</td></tr>
+		<tr><td>Testing</td><td>Vitest, pytest, Cypress, ESLint</td><td>20 cryptography unit tests, 27 backend API tests, and a browser-level end-to-end test.</td></tr>
+		<tr><td>CI</td><td>GitHub Actions</td><td>Runs the backend tests, linting, the frontend tests, and a production build on every push and pull request.</td></tr>
+	</table>
+	</div>
+
+	<h2>How a Message Travels</h2>
+	<p>The guiding rule is that <strong>plaintext and private keys never leave the browser</strong>. The server only ever stores and relays public keys and ciphertext.</p>
+
+	<div class="flow">
+		<div class="flow-step">
+			<div class="eyebrow">Sender's browser</div>
+			<p>Writes the message, encrypts it with the recipient's public key (or the shared secret), and sends only the ciphertext.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">Server</div>
+			<p>Stores the ciphertext and the users' public keys. It never sees plaintext or private keys.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">Recipient's browser</div>
+			<p>Fetches the ciphertext and decrypts it with a private key that only it holds.</p>
+		</div>
+	</div>
+
+	<p>In more detail:</p>
+	<ol>
+		<li><strong>Sign up and log in.</strong> The server stores a bcrypt hash of the password, never the password itself.</li>
+		<li><strong>Start a conversation and choose a method:</strong> RSA, 3-prime RSA, or elliptic curve Diffie&ndash;Hellman (ECDH). The method is fixed for the life of the conversation.</li>
+		<li><strong>Generate keys in the browser.</strong> For the RSA methods, each user has one key pair per method; the public half is uploaded and the private half stays in the browser. For ECDH, the server creates fresh public curve parameters for the conversation, each participant picks a secret number in the browser, and only the resulting public point is uploaded.</li>
+		<li><strong>Wait for the other person's key.</strong> Until both public keys exist, the conversation shows a waiting state and checks the server every three seconds.</li>
+		<li><strong>Encrypt and send.</strong> With RSA, only the recipient's private key can open a message, so the sender's browser also encrypts a second copy under the sender's own public key; that is what lets you read your own sent history. With ECDH, both sides derive the same shared secret, so a single ciphertext works for both.</li>
+		<li><strong>Decrypt on arrival.</strong> When a conversation loads, each message is decrypted locally as it is displayed.</li>
+	</ol>
+	<p>The mathematics of each method, with small worked examples, is on the <a href="messenger-encryption.html">Encryption Methods</a> page.</p>
+
+	<h2>Frontend</h2>
+	<p>The client is a single-page React app built with Vite, with components for logging in, registering, choosing who to talk to, the conversation view, and the message box. All of the cryptography lives in <code>client/src/crypto/</code>:</p>
+	<ul>
+		<li><strong>A pluggable method registry</strong> (<code>methods.js</code>). Each encryption method is one entry that knows how to generate keys, encrypt, decrypt, and serialize its keys. The interface never branches on a method's name, so adding a new method means writing one module and adding one entry.</li>
+		<li><strong>RSA and multi-prime RSA</strong> (<code>rsaFamily.js</code>). One implementation parameterized by the number of primes: two 512-bit primes for standard RSA, three 342-bit primes for 3-prime RSA, both giving a modulus of about 1024 bits.</li>
+		<li><strong>Elliptic curve arithmetic</strong> (<code>ecc.js</code>). Point addition, point doubling, and double-and-add scalar multiplication, written directly from the group law.</li>
+		<li><strong>Big-integer number theory</strong> (<code>bigint-utils.js</code>). JavaScript has no built-in modular exponentiation, modular inverse, or primality test, so these are implemented by hand: square-and-multiply exponentiation, the extended Euclidean algorithm, and a 20-round Miller&ndash;Rabin test, with randomness from the browser's cryptographic random number generator.</li>
+		<li><strong>Key storage</strong> (<code>keyStorage.js</code>). Private keys are kept in the browser's local storage, in one place, so every component reads and writes them the same way.</li>
+	</ul>
+	<p>Because RSA can only encrypt numbers smaller than its modulus, the message box shows a running character count against the maximum length the current keys allow.</p>
+
+	<h2>Backend</h2>
+	<p>The server is a FastAPI application with a thin route layer over service modules, using SQLAlchemy for the database and Alembic for schema migrations. Its main endpoints are:</p>
+	<div class="table-wrap">
+	<table>
+		<tr><th>Endpoint</th><th>Purpose</th></tr>
+		<tr><td><code>POST /users</code>, <code>POST /login</code></td><td>Create an account; log in and receive your stored public keys.</td></tr>
+		<tr><td><code>GET /users</code>, <code>GET /users/{username}</code></td><td>Find people to message.</td></tr>
+		<tr><td><code>POST /users/{id}/keys</code></td><td>Upload a public key for an RSA-family method.</td></tr>
+		<tr><td><code>POST /conversations</code></td><td>Start a conversation with a chosen method; for ECDH the server also generates the curve parameters.</td></tr>
+		<tr><td><code>POST /conversations/{id}/keys</code></td><td>Submit your public point for an ECDH conversation.</td></tr>
+		<tr><td><code>POST /messages</code></td><td>Store an encrypted message (plus the sender's own copy, for RSA).</td></tr>
+		<tr><td><code>GET /conversations/{a}/{b}</code></td><td>Paginated message history between two users, still encrypted.</td></tr>
+	</table>
+	</div>
+	<p>The data model has five tables: users, per-method public keys, conversations (with the chosen method and any curve parameters), per-conversation public keys, and messages, which hold only ciphertext. In production the API runs on Render with a managed PostgreSQL database; every deploy applies any pending migrations before the server starts, and cross-origin requests are limited to an allow-list of frontend addresses.</p>
+
+	<h2>Testing and Deployment</h2>
+	<ul>
+		<li><strong>Cryptography unit tests (Vitest, 20 tests)</strong> check the modular arithmetic, prime generation, elliptic curve point arithmetic, RSA and 3-prime RSA round trips, and that both sides of an ECDH exchange arrive at the same shared secret.</li>
+		<li><strong>Backend tests (pytest, 27 tests)</strong> exercise authentication, password hashing, users, conversations, key submission, and messages against a test database.</li>
+		<li><strong>End-to-end test (Cypress)</strong> drives a real browser: two new users sign up, set up an RSA conversation, and one sends a message the other decrypts. It runs locally against the development servers.</li>
+		<li><strong>Continuous integration (GitHub Actions)</strong> runs on every push and pull request, with one job for the backend tests and one that lints, tests, and builds the frontend.</li>
+		<li><strong>Hosting.</strong> The frontend is deployed on Vercel and the backend on Render.</li>
+	</ul>
+
+	<h2 id="design-notes">Design Notes</h2>
+	<div class="callout">
+		<p>This is a learning project. Every algorithm is implemented from scratch so that the mathematics is visible, which also means it is not hardened the way production messengers are:</p>
+		<ul>
+			<li>RSA is used in its &ldquo;textbook&rdquo; form, without the randomized padding (such as OAEP) that real systems require, and with 1024-bit moduli where current guidance calls for at least 2048 bits.</li>
+			<li>The elliptic curves are deliberately tiny (the field prime is below 10,000), and the shared secret becomes a single-byte key for an XOR cipher. They demonstrate the Diffie&ndash;Hellman idea rather than provide real security.</li>
+			<li>Private keys live in the browser's local storage, so clearing site data or switching devices loses access to old messages.</li>
+		</ul>
+		<p>A production version would use audited libraries, for example X25519 key agreement with AES-GCM encryption.</p>
+	</div>
+
+	</main>
+</body>
+</html>

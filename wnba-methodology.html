@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WNBA Analytics: Methodology</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+			<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<main class="prose">
+
+	<p class="back-link"><a href="projects.html">&larr; Back to Projects</a></p>
+	<h1>WNBA Analytics: Methodology</h1>
+	<p class="subtitle">The mathematics behind the forecast: how teams are rated, how ratings become predictions, how the season is simulated, and how well it all works. This is a condensed web version; the full write-up has every proof and derivation.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://github.com/dylan-costa/wnba-analytics/blob/main/methodology/methodology.pdf" target="_blank">Full methodology (PDF)</a>
+		<a class="btn-pill" href="https://dylan-costa.github.io/wnba-analytics/" target="_blank">View live forecast</a>
+		<a class="btn-pill" href="wnba-summary.html">Technical Summary</a>
+	</div>
+
+	<h2>Overview</h2>
+	<p>The forecast is produced in four stages:</p>
+	<ol>
+		<li><strong>Data.</strong> Every regular-season and playoff game since 1997 is collected and validated.</li>
+		<li><strong>Ratings.</strong> Each team carries a single number, its Elo rating, updated after every game.</li>
+		<li><strong>Prediction.</strong> Ratings become a win probability and a point spread for any matchup.</li>
+		<li><strong>Simulation.</strong> The rest of the season and the playoffs are simulated 20,000 times to estimate each team's odds.</li>
+	</ol>
+
+	<h2>Elo Ratings</h2>
+	<h3>The probability model</h3>
+	<p>Each team \(i\) has a rating \(r_i\). For a game between home team \(h\) and away team \(a\) in season \(s\), with home-court advantage \(H_s\) (in rating points), define the <em>edge</em> \(\Delta = r_h - r_a + H_s\). The home team's win probability is</p>
+	\[p = \frac{1}{1 + 10^{-\Delta/400}}.\]
+	<p>Writing \(\pi_i = 10^{r_i/400}\), this is the Bradley&ndash;Terry model \(p = \kappa_s\pi_h / (\kappa_s\pi_h + \pi_a)\) with \(\kappa_s = 10^{H_s/400}\): ratings are log-strengths, and home court multiplies the home team's strength. An edge of 100 points means about a 64% win probability, and an edge of 400 means 10-to-1 odds. Only rating differences matter, so the league average is fixed at 1500.</p>
+
+	<h3>Updating after a game</h3>
+	<p>After a game with home margin \(m\) (home points minus away points) and outcome \(y = 1\) if the home team won and \(0\) otherwise,</p>
+	\[r_h \leftarrow r_h + \delta, \qquad r_a \leftarrow r_a - \delta, \qquad \delta = K \, M(m, \Delta)\,(y - p),\]
+	<p>with \(K = 30\) and a margin-of-victory multiplier \(M\). Whatever one team gains the other loses, so the total of all ratings is constant within a season.</p>
+	<p>This rule is not arbitrary: the derivative of the game's log-likelihood \(y\log p + (1-y)\log(1-p)\) with respect to \(r_h\) is \(\frac{\ln 10}{400}(y - p)\). So with \(M = 1\), an Elo update is exactly one step of stochastic gradient ascent on the Bradley&ndash;Terry likelihood.</p>
+
+	<h3>Margin of victory</h3>
+	<p>Following FiveThirtyEight's NBA model, bigger wins move ratings more, with diminishing returns:</p>
+	\[M(m, \Delta) = \frac{(|m| + 3)^{0.8}}{7.5 + 0.006\,\Delta_w},\]
+	<p>where \(\Delta_w\) is the <em>winner's</em> pre-game edge. The denominator corrects a subtle bias. Favorites tend to win by more than they lose by, so without it a correctly rated favorite would drift upward over time: the expected update works out to \(K\,p(1-p)(M_1 - M_0)\), where \(M_1\) and \(M_0\) are the average multipliers in wins and losses. Shrinking \(M\) when the favorite wins and enlarging it when the favorite loses pushes that drift toward zero. The constants are the published NBA values and have not been re-estimated for the WNBA.</p>
+
+	<h3>Between seasons</h3>
+	<p>At its first game of a new season, a returning team's rating is pulled halfway back to the league mean, \(r_i \leftarrow 1500 + 0.5\,(r_i - 1500)\), reflecting offseason roster changes. Expansion teams, and teams returning after an absence, start at 1300. The factor 0.5 has a natural reading as Gaussian shrinkage: roughly half of a team's distance from average persists from one season to the next.</p>
+
+	<h3>Home-court advantage</h3>
+	<p>Home court in the WNBA has weakened. Home teams won 60.4% of regular-season games from 1997 to 2007 and 59.8% from 2008 to 2018 (average margins of +3.3 and +3.0 points), but only 54.7% from 2019 to 2026, excluding 2020 (+1.75). A single fixed value would overstate today's advantage, so each season's \(H_s\) comes from the average home margin \(\bar m_s\) of the five previous seasons, converted into rating points with the margin model below:</p>
+	\[H_s = 400\log_{10}\frac{\Phi(\bar m_s/\sigma)}{1 - \Phi(\bar m_s/\sigma)},\]
+	<p>where \(\Phi\) is the standard normal distribution function and \(\sigma = 11\). It never uses games from the season being predicted. The 2020 season, played at a single neutral site, has \(H = 0\). The advantage has fallen from about 78 rating points in 2015 to 43 in 2026; since one point of margin is worth about 25 rating points near an even matchup, that is about 1.7 points on the court.</p>
+
+	<h2>Fitting and Evaluation</h2>
+	<p>The parameters (the K-factor, the between-season carryover, the new-team rating, and the length of the home-court window) were chosen by an exhaustive grid search that minimized the mean log loss</p>
+	\[L = -\frac{1}{n}\sum_{g=1}^{n}\bigl[y_g \log p_g + (1 - y_g)\log(1 - p_g)\bigr]\]
+	<p>over the 1997&ndash;2018 seasons. Log loss is a strictly proper scoring rule: in expectation it is minimized by reporting the true probability, which makes it the right target for probability forecasts. The chosen parameters were then evaluated, unchanged, on the 2019&ndash;2026 seasons. The baseline is the constant forecast that always predicts the overall home win rate.</p>
+
+	<div class="table-wrap">
+	<table>
+		<tr><th>Seasons</th><th class="num">Games</th><th class="num">Log loss</th><th class="num">Baseline</th><th class="num">Brier</th><th class="num">Accuracy</th><th class="num">Spread RMSE</th></tr>
+		<tr><td>1997&ndash;2018 (tuning)</td><td class="num">5,023</td><td class="num">0.621</td><td class="num">0.672</td><td class="num">0.216</td><td class="num">65.8%</td><td class="num">11.7</td></tr>
+		<tr><td>2019&ndash;2026 (held out)</td><td class="num">1,977</td><td class="num">0.608</td><td class="num">0.688</td><td class="num">0.210</td><td class="num">67.5%</td><td class="num">12.7</td></tr>
+	</table>
+	</div>
+
+	<p>A forecast is <em>calibrated</em> if events it calls 70% likely happen about 70% of the time. Binning the held-out games by predicted home win probability:</p>
+	<div class="table-wrap">
+	<table>
+		<tr><th class="num">Mean predicted</th><th class="num">Observed</th><th class="num">Games</th></tr>
+		<tr><td class="num">16.8%</td><td class="num">12.5%</td><td class="num">40</td></tr>
+		<tr><td class="num">25.5%</td><td class="num">22.3%</td><td class="num">139</td></tr>
+		<tr><td class="num">35.5%</td><td class="num">30.6%</td><td class="num">232</td></tr>
+		<tr><td class="num">45.2%</td><td class="num">41.6%</td><td class="num">305</td></tr>
+		<tr><td class="num">55.2%</td><td class="num">56.1%</td><td class="num">351</td></tr>
+		<tr><td class="num">65.1%</td><td class="num">63.4%</td><td class="num">383</td></tr>
+		<tr><td class="num">74.8%</td><td class="num">73.5%</td><td class="num">309</td></tr>
+		<tr><td class="num">83.8%</td><td class="num">85.1%</td><td class="num">202</td></tr>
+		<tr><td class="num">91.6%</td><td class="num">87.5%</td><td class="num">16</td></tr>
+	</table>
+	</div>
+	<p>Home favorites are calibrated to within about two percentage points. Home underdogs win somewhat less often than predicted, consistent with the home-advantage estimate lagging its recent decline.</p>
+
+	<h2>Point Spreads</h2>
+	<p>The simulation needs a margin as well as a winner, since margins feed the rating updates. Given a win probability \(p\), the home margin is modeled as</p>
+	\[X \sim \mathcal{N}(\mu, \sigma^{2}), \qquad \mu = \sigma\,\Phi^{-1}(p), \qquad \sigma = 11,\]
+	<p>and \(\mu\) is reported as the point spread. The mean is chosen so that \(\Pr(X &gt; 0) = \Phi(\mu/\sigma) = p\) exactly: the margin model never changes a win probability, it only translates probabilities into points. A least-squares fit of margins against \(\Phi^{-1}(p)\) gives \(\hat\sigma = 10.9\). The spread of actual margins around the prediction is a bit wider (12.0 points), a sign of heavier tails than a normal distribution has.</p>
+
+	<h2>Monte Carlo Simulation</h2>
+	<h3>One simulated game</h3>
+	<ol>
+		<li>Compute the edge \(\Delta = r_h - r_a + H_s\) and the win probability \(p\).</li>
+		<li>Draw a margin \(X \sim \mathcal{N}\bigl(\sigma\Phi^{-1}(p), \sigma^{2}\bigr)\); the home team wins if \(X &gt; 0\).</li>
+		<li>Round to a whole-number margin, never zero.</li>
+		<li>Update both teams' simulated ratings with the usual Elo rule.</li>
+	</ol>
+
+	<h3>Why ratings move inside a simulation</h3>
+	<p>Step 4 is deliberate. A team's current rating is only an estimate of its true strength, and letting ratings evolve within each simulated season carries that uncertainty into the results: a team that wins its next game becomes more likely to win the one after. One can prove that consecutive simulated results for a team are positively correlated, so the variance of its total wins is larger than it would be with frozen ratings. In practice, long shots get somewhat better championship odds, and favorites somewhat worse, than a frozen-rating simulation would give them.</p>
+
+	<h3>Standings and playoffs</h3>
+	<p>Remaining regular-season games come from the league schedule; games already played count as they happened. Until the league sets the seeds, each run ranks teams by record, breaks ties by record among the tied teams and then at random, and sends the top eight to the playoffs. The playoffs use the current format: a best-of-three first round, best-of-five semifinals, and best-of-seven finals, with a fixed bracket in which the 1&ndash;8 and 4&ndash;5 winners meet. Series already under way resume from their actual score.</p>
+	<p>As a check, with frozen ratings the chance that the higher seed wins a best-of-three in home&ndash;away&ndash;home order is</p>
+	\[V = p_H\,p_L + p_H(1 - p_L)\,p_H + (1 - p_H)\,p_L\,p_H,\]
+	<p>where \(p_H\) and \(p_L\) are its win probabilities at home and on the road.</p>
+
+	<h3>Monte Carlo error</h3>
+	<p>With \(N\) runs, an estimated probability \(\hat p\) has standard error \(\sqrt{p(1-p)/N}\). At \(N = 20{,}000\) and \(p = 0.27\) this is 0.0031, a 95% margin of about &plusmn;0.6 percentage points, so day-to-day changes smaller than about one point should not be read into.</p>
+
+	<h2>Forecast Updating and Live Scoring</h2>
+	<p>Each morning the pipeline pulls in new results. If any games were played, it re-simulates the whole league, since one result changes every team's possible playoff opponents, and saves a snapshot. Each snapshot records the win probability and spread for every scheduled game <em>before</em> it is played, and those predictions are later scored against the results. Unlike the backtest, this evaluation is out of sample by construction: neither the parameters nor the ratings could have been influenced by the games being predicted.</p>
+
+	<h2>A Worked Example</h2>
+	<div class="example-box">
+		<div class="eyebrow">2026 first round, Game 1</div>
+		<p>Minnesota (seed 1, rating 1626) hosts New York (seed 8, rating 1539), with \(H_{2026} = 43\).</p>
+		<p><strong>Prediction.</strong> The edge is \(\Delta = 1626 - 1539 + 43 = 130\), so</p>
+		\[p = \bigl(1 + 10^{-130/400}\bigr)^{-1} = 0.679,\]
+		<p>and the spread is \(11 \times \Phi^{-1}(0.679) = 11 \times 0.464 = 5.1\) points in Minnesota's favor.</p>
+		<p><strong>Updates.</strong> If Minnesota wins by 10, then \(M = 13^{0.8}/(7.5 + 0.78) = 0.94\) and \(\delta = 30 \times 0.94 \times (1 - 0.679) = +9.0\). If New York wins by 10, then \(M = 13^{0.8}/(7.5 - 0.78) = 1.16\) and \(\delta = 30 \times 1.16 \times (0 - 0.679) = -23.6\). The upset moves the ratings about 2.6 times as much as the expected result with the same margin, which is exactly what the multiplier's denominator is for.</p>
+		<p><strong>Series.</strong> In New York the edge is \(1539 - 1626 + 43 = -44\), giving Minnesota \(p_L = 0.563\) on the road. With \(p_H = 0.679\), the best-of-three formula gives \(V = 0.382 + 0.201 + 0.123 = 0.706\). The full simulation, where ratings move between games, estimates about 0.70: agreement within Monte Carlo error.</p>
+	</div>
+
+	<h2>Limitations and Extensions</h2>
+	<ul>
+		<li><strong>Results only.</strong> Ratings can't anticipate injuries, trades, or rest, and they adjust to sudden changes with a lag. The player data already in the database could be used to adjust for who is available.</li>
+		<li><strong>Borrowed constants.</strong> The margin-of-victory constants come from an NBA model and could be re-estimated for the WNBA.</li>
+		<li><strong>Normal margins.</strong> Real margins have heavier tails than the normal model; a Student-\(t\) margin model would capture that.</li>
+		<li><strong>Heuristic uncertainty.</strong> Updating ratings inside simulations is a heuristic. A dynamic Bradley&ndash;Terry (state-space) model, or Glicko's per-team rating variance, would represent rating uncertainty more rigorously.</li>
+		<li><strong>A single split.</strong> The parameters come from one train/test split; rolling-origin validation would give a better estimate of out-of-sample performance.</li>
+	</ul>
+
+	<h2>References</h2>
+	<ul>
+		<li>R. A. Bradley and M. E. Terry. Rank analysis of incomplete block designs: I. The method of paired comparisons. <em>Biometrika</em>, 39(3/4):324&ndash;345, 1952.</li>
+		<li>A. E. Elo. <em>The Rating of Chessplayers, Past and Present</em>. Arco, New York, 1978.</li>
+		<li>M. E. Glickman. Parameter estimation in large dynamic paired comparison experiments. <em>Journal of the Royal Statistical Society: Series C</em>, 48(3):377&ndash;394, 1999.</li>
+		<li>T. Gneiting and A. E. Raftery. Strictly proper scoring rules, prediction, and estimation. <em>Journal of the American Statistical Association</em>, 102(477):359&ndash;378, 2007.</li>
+		<li>N. Silver. How we calculate NBA Elo ratings. <em>FiveThirtyEight</em>, May 2015.</li>
+	</ul>
+
+	</main>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WNBA Analytics: Technical Summary</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a href="notes.html">Notes</a>
+		<div class="dropdown">
+			<button class="dropbtn">Teaching</button>
+			<div class="dropdown-content">
+				<a href="teaching.html">Courses Taught</a>
+				<a href="courseresources.html">Course Resources</a>
+			</div>
+		</div>
+		<a href="research.html">Research</a>
+		<a href="cv.html">CV</a>
+		<a class="active" href="projects.html">Projects</a>
+		<a href="outsidemath.html">Outside of Math</a>
+	</div>
+
+	<main class="prose">
+
+	<p class="back-link"><a href="projects.html">&larr; Back to Projects</a></p>
+	<h1>WNBA Analytics: Technical Summary</h1>
+	<p class="subtitle">How the WNBA forecast is built: collecting and validating every game since 1997, storing it, rating and simulating it, publishing the results as a website, and keeping all of it up to date automatically.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://dylan-costa.github.io/wnba-analytics/" target="_blank">View live forecast</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/wnba-analytics" target="_blank">View on GitHub</a>
+		<a class="btn-pill" href="wnba-methodology.html">Methodology</a>
+	</div>
+
+	<h2>At a Glance</h2>
+	<div class="table-wrap">
+	<table>
+		<tr><th>Piece</th><th>Details</th></tr>
+		<tr><td>Language</td><td>Python 3.11+, using only the standard library: the pipeline has no third-party dependencies.</td></tr>
+		<tr><td>Data</td><td>Every regular-season and playoff game since 1997 from the league's stats API, with team and player box scores, saved as CSV files in the repository.</td></tr>
+		<tr><td>Storage</td><td>A SQLite database of 9 tables and 4 views, rebuilt from the raw files and validated on every build.</td></tr>
+		<tr><td>Models</td><td>Elo ratings, a margin model for point spreads, and a 20,000-run Monte Carlo simulation of the season and playoffs.</td></tr>
+		<tr><td>Website</td><td>A single static page with inline SVG charts, generated in Python and served by GitHub Pages.</td></tr>
+		<tr><td>Automation</td><td>A scheduled task runs the full update every morning and commits and pushes any new data.</td></tr>
+		<tr><td>Interface</td><td>A <code>wnba</code> command-line tool for every stage.</td></tr>
+		<tr><td>Testing</td><td>67 pytest tests covering fetching, the database build, the models, the website, and the git automation.</td></tr>
+	</table>
+	</div>
+
+	<h2>The Pipeline</h2>
+	<div class="flow">
+		<div class="flow-step">
+			<div class="eyebrow">1 &middot; Fetch</div>
+			<p>Download new games and the schedule from the league's stats API.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">2 &middot; Build</div>
+			<p>Validate the raw data and load it into SQLite.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">3 &middot; Model</div>
+			<p>Update Elo ratings, predict upcoming games, and simulate the rest of the season.</p>
+		</div>
+		<div class="flow-arrow" aria-hidden="true">&rarr;</div>
+		<div class="flow-step">
+			<div class="eyebrow">4 &middot; Publish</div>
+			<p>Save a forecast snapshot, regenerate the website, and push to GitHub.</p>
+		</div>
+	</div>
+
+	<h2>Collecting the Data</h2>
+	<p>A small HTTP client for the league's stats API (<code>fetch.py</code>) downloads team and player game logs one season at a time, with retries and a polite delay between requests. Raw responses are saved as CSV files and committed, so the database can be rebuilt offline. Already-downloaded seasons are skipped, and the current season is always refreshed.</p>
+	<p>The API is mostly clean, but the pipeline handles its quirks:</p>
+	<ul>
+		<li><strong>Missing games.</strong> The game log silently omits two regular-season games. Because regular-season game IDs are sequential, the fetcher detects the gaps and fills them from the box score endpoints.</li>
+		<li><strong>Bad box scores.</strong> In a handful of 1997&ndash;2000 games the player box scores don't add up to the official final score. Those games are flagged, or dropped from player data when unusable.</li>
+		<li><strong>Odd records.</strong> A 2018 forfeit recorded as 0&ndash;0 counts in the standings but not in scoring averages, and team minutes that weren't recorded before 2005 are stored as missing rather than guessed.</li>
+	</ul>
+
+	<h2>Storing and Validating It</h2>
+	<p>The raw files are loaded into a SQLite database: franchises (tracked through relocations, so the Utah Starzz, San Antonio, and the Las Vegas Aces are one franchise), seasons, games, team and player box scores, the schedule, playoff seeds, and every game's Elo ratings, plus views for season standings, team and player stats, and head-to-head records.</p>
+	<p>The build refuses to load data that fails any of these checks:</p>
+	<ul>
+		<li>every game has exactly one home and one away record, and the two agree;</li>
+		<li>each team's win or loss matches the score;</li>
+		<li>each team's player points add up to its team score (apart from the flagged games above).</li>
+	</ul>
+	<p>The database is built in a temporary file and only swapped in at the end, so a failed build never replaces a good one.</p>
+
+	<h2>Models</h2>
+	<p>Every team is rated with an Elo system adapted from FiveThirtyEight's NBA model, including a margin-of-victory adjustment, regression toward the mean between seasons, and a home-court advantage estimated from the previous five seasons. Ratings turn into a win probability and a point spread for any matchup. The Monte Carlo simulation then plays out every remaining game 20,000 times, updating ratings inside each simulated season, and seeds and plays the playoffs in the league's current format.</p>
+	<p>The parameters were tuned on 1997&ndash;2018 and then tested, untouched, on 2019&ndash;2026: the model picks 67.5% of held-out games correctly with a log loss of 0.608. The full details are on the <a href="wnba-methodology.html">Methodology</a> page.</p>
+
+	<h2>Forecasts and Live Scoring</h2>
+	<p>Each update checks whether any games were played since the last forecast. If so, it re-simulates the whole league (one result can change every team's playoff path) and appends a snapshot to the forecast history: each team's record, rating, and playoff, semifinal, finals, and title odds. Every snapshot also records the predicted win probability and spread for each upcoming game <em>before</em> it is played, so the model is later scored on games it truly had not seen.</p>
+
+	<h2>The Website</h2>
+	<p><code>website.py</code> turns the database and forecast history into a single static HTML page served by GitHub Pages: title odds with their movement over time, upcoming games with spreads, the model's live record, its accuracy and calibration, and the decline in home-court advantage. Charts are drawn as inline SVG, so there is no JavaScript framework or build step, and the page has no timestamps, so it only changes when the data does.</p>
+
+	<h2>Daily Automation</h2>
+	<p>A scheduled task on my computer runs <code>wnba update --push</code> every morning. It fetches the new games, rebuilds the database, saves a forecast if anything changed, regenerates the website, and commits and pushes the result. Because it pushes to the repository on its own, it is deliberately cautious:</p>
+	<ul>
+		<li>it only commits the data, forecast, and website folders, so unrelated work in progress is never swept in;</li>
+		<li>it only commits on the main branch, and never pushes if there are unpushed commits of my own;</li>
+		<li>if a push fails (when offline, for example), the commit waits locally and goes out on the next run;</li>
+		<li>nothing is committed if the build fails validation.</li>
+	</ul>
+
+	<h2>Command-Line Interface</h2>
+	<p>Every stage is available through the <code>wnba</code> command:</p>
+<pre><code>wnba fetch          # download new games and the schedule
+wnba build          # validate and load the database
+wnba ratings        # current Elo ratings
+wnba predict        # upcoming games: win probability and spread
+wnba simulate       # Monte Carlo playoff and title odds
+wnba backtest       # score past predictions (--tune repeats the grid search)
+wnba update --push  # the full daily update</code></pre>
+
+	<h2>Limits and Next Steps</h2>
+	<p>Elo only knows results. It can't see injuries, trades, or who is playing tonight, and it lags sudden changes in a team's strength. The natural next steps are adjusting ratings for player availability using the player data already in the database, a richer game model that includes rest and travel, and benchmarking against betting lines.</p>
+
+	</main>
+</body>
+</html>
