@@ -195,3 +195,20 @@ table.tex-table th {
   border-top: 1px dashed #b8c2cf;
 }
 .solution .step-line { margin-top: 0.9rem; margin-bottom: 0.3rem; }
+
+/* Phones: long inline equations and wide tables scroll sideways inside their
+   own block instead of pushing the whole page wider than the screen. */
+@media (max-width: 680px) {
+  .notes p, .notes li,
+  .definition, .theorem, .example, .remark {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  table.tex-table {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .unit-divider .part-label { font-size: 1.9rem; }
+}

@@ -1,15 +1,17 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Notes</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="topnav"> <!-- https://www.w3schools.com/howto/howto_js_topnav.asp -->
-		<a href="index.html">Home</a>	
-		<a class = "active" href="notes.html">Notes</a>
+	<div class="topnav">
+		<a href="index.html">Home</a>
+		<a class="active" href="notes.html">Notes</a>
 		<div class="dropdown">
-		<button class="dropbtn">Teaching</button>
+			<button class="dropbtn">Teaching</button>
 			<div class="dropdown-content">
 				<a href="teaching.html">Courses Taught</a>
 				<a href="courseresources.html">Course Resources</a>
@@ -20,19 +22,21 @@
 		<a href="projects.html">Projects</a>
 		<a href="outsidemath.html">Outside of Math</a>
 	</div>
-	
-	<h1>Notes </h1>
-	<h2>The following are notes on various topics in mathematics. Corrections and comments welcome.</h2>
-	<h1>Completed Notes</h1>
-	<li><a href="x0(2).pdf"> Example of Construction and Analysis of Modular Curve</a>
-	<li><a href="MDRR.pdf">Notes on Meromorphic Differentials and Riemann-Roch.</a> 
-	Notes from a 2023 presentation for the UConn Number Theory Reading Group. Reference: Diamond and Shurman "A First Course in Modular Forms"
-	</li>
-	
-	<h1>Notes In Progress</h1>	
-	<li><a href="CFTBasics.pdf">Class Field Theory - The Basics.</a> 
-	Notes on the Basics of Class Field Theory.
-	
 
+	<h1>Notes</h1>
+	<p class="subtitle">Notes on various topics in mathematics. Corrections and comments welcome.</p>
+
+	<h2>Completed Notes</h2>
+	<div class="cv-entry">
+		<div><span class="cv-title"><a href="x0(2).pdf" target="_blank">Construction and Analysis of the Modular Curve X<sub>0</sub>(2)</a></span><span class="cv-sub">Constructs X<sub>0</sub>(2) as a compact Riemann surface, shows it has genus 0, and writes down an explicit model over &Qopf; describing the elliptic curves with a rational 2-isogeny.</span></div>
+	</div>
+	<div class="cv-entry">
+		<div><span class="cv-title"><a href="MDRR.pdf" target="_blank">Notes on Meromorphic Differentials and Riemann&ndash;Roch</a></span><span class="cv-sub">Notes from a 2023 presentation for the UConn Number Theory Reading Group. Reference: Diamond and Shurman, &ldquo;A First Course in Modular Forms.&rdquo;</span></div>
+	</div>
+
+	<h2>Notes in Progress</h2>
+	<div class="cv-entry">
+		<div><span class="cv-title"><a href="CFTBasics.pdf" target="_blank">Class Field Theory: The Basics</a></span><span class="cv-sub">Notes on the basics of class field theory.</span></div>
+	</div>
 </body>
 </html>

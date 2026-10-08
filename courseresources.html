@@ -1,24 +1,17 @@
-﻿<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      tags: 'ams'
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Course Resources</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="topnav"> <!-- https://www.w3schools.com/howto/howto_js_topnav.asp -->
-		<a href="index.html">Home</a>	
+	<div class="topnav">
+		<a href="index.html">Home</a>
 		<a href="notes.html">Notes</a>
 		<div class="dropdown">
-		<button class="dropbtn" >Teaching</button>
+			<button class="dropbtn active">Teaching</button>
 			<div class="dropdown-content">
 				<a href="teaching.html">Courses Taught</a>
 				<a href="courseresources.html">Course Resources</a>
@@ -29,42 +22,46 @@
 		<a href="projects.html">Projects</a>
 		<a href="outsidemath.html">Outside of Math</a>
 	</div>
-	
-	<h1>Course Resources </h1>
-	
-	
-	<p>Here are some class resources for the courses I have taught/am currently teaching</p>
-	<h1>MATH 2410 - Elementary Differential Equations</h1>
 
-	<ul class="resource-list">
-	  <li><a href="syllabus2410.html"><b>Course Syllabus</b></a></li>
-	  <li><b>Lecture Notes</b>
-	  <ul class="resource-list">
-	  <li><a href="math2410unit1.html">Unit 1</a></li>
-	  <li><a href="math2410unit2.html">Unit 2</a></li>
-	  <li><a href="math2410unit3.html">Unit 3</a></li>
-	  <li><a href="math2410unit4.html">Unit 4</a></li>
-		</ul>
-	</li>
-	  <li><b>Practice / Review Problems</b>
-	  <ul class="resource-list">
-	  <li><a href="math2410unit1prac.html">Unit 1</a></li>
-	  <li><a href="math2410unit2prac.html">Unit 2</a></li>
-	  <li><a href="math2410unit3prac.html">Unit 3</a></li>
-	  <li><a href="math2410unit4prac.html">Unit 4</a></li>
-		</ul>
-		</li>
-	</ul>
-	
-	
-	<h1>Proctoring Resources</h1>
+	<h1>Course Resources</h1>
+	<p class="subtitle">Class resources for the courses I have taught or am currently teaching.</p>
 
-	<p>Resources available for exams, quizzes, and classroom activities.</p>
+	<h2>MATH 2410 &mdash; Elementary Differential Equations</h2>
+	<div class="btn-row">
+		<a class="btn-pill" href="syllabus2410.html">Course Syllabus</a>
+	</div>
 
-	<ul class="resource-list">
-		<li><a href="dylanclock.html">Clock</a></li>
-	</ul>
+	<div class="unit-grid">
+		<div class="unit-card">
+			<div class="eyebrow">Unit 1</div>
+			<h3>First-Order Equations</h3>
+			<p>Chapters 1&ndash;2</p>
+			<div class="unit-links"><a href="math2410unit1.html">Lecture notes</a><a href="math2410unit1prac.html">Practice problems</a></div>
+		</div>
+		<div class="unit-card">
+			<div class="eyebrow">Unit 2</div>
+			<h3>Modeling &amp; Higher-Order Linear Equations</h3>
+			<p>Chapters 3&ndash;4</p>
+			<div class="unit-links"><a href="math2410unit2.html">Lecture notes</a><a href="math2410unit2prac.html">Practice problems</a></div>
+		</div>
+		<div class="unit-card">
+			<div class="eyebrow">Unit 3</div>
+			<h3>The Laplace Transform</h3>
+			<p>Chapter 7</p>
+			<div class="unit-links"><a href="math2410unit3.html">Lecture notes</a><a href="math2410unit3prac.html">Practice problems</a></div>
+		</div>
+		<div class="unit-card">
+			<div class="eyebrow">Unit 4</div>
+			<h3>Matrices &amp; Linear Systems</h3>
+			<p>Appendix B and Chapter 8</p>
+			<div class="unit-links"><a href="math2410unit4.html">Lecture notes</a><a href="math2410unit4prac.html">Practice problems</a></div>
+		</div>
+	</div>
 
-	
+	<h2>Proctoring Resources</h2>
+	<p class="subtitle">Resources available for exams, quizzes, and classroom activities.</p>
+	<div class="btn-row">
+		<a class="btn-pill" href="dylanclock.html">Exam Clock</a>
+	</div>
 </body>
 </html>
