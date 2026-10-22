@@ -5,6 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Background &amp; Introduction</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<div class="topnav">
@@ -27,7 +37,180 @@
 
 	<p class="back-link"><a href="research.html">&larr; Back to Research</a></p>
 	<h1>Background &amp; Introduction to Elliptic Curves</h1>
-	<p class="subtitle">Coming soon.</p>
+	<p class="subtitle">A bird's-eye view of elliptic curves: where they come from, how their points can be added, and what the Mordell&ndash;Weil theorem says about the structure of their rational points.</p>
+	<p class="subtitle">Jump to: <a href="#diophantine">Diophantine equations</a> &middot; <a href="#weierstrass">Weierstrass models</a> &middot; <a href="#group-law">The group law</a> &middot; <a href="#mordell-weil">Mordell&ndash;Weil</a> &middot; <a href="#examples">Examples</a></p>
+
+	<!-- ================= DIOPHANTINE EQUATIONS ================= -->
+	<h2 id="diophantine">Diophantine Equations</h2>
+	<p>A <em>Diophantine equation</em> is a polynomial equation \(f(x_1, \ldots, x_n) = 0\) with integer coefficients, named after Diophantus of Alexandria, whose <em>Arithmetica</em> studied them. Given one, we can ask:</p>
+	<ul>
+		<li>Are there integer or rational solutions?</li>
+		<li>Are there finitely many or infinitely many?</li>
+		<li>Can we find all of them, or describe their structure?</li>
+	</ul>
+	<p>Familiar examples include lines such as \(3x + 2y = 1\), Pythagorean triples \(a^2 + b^2 = c^2\), and sums of cubes \(x^3 + y^3 + z^3 = c\). These questions get hard quickly as the number of variables and the degree grow. In two variables, here is roughly what we know:</p>
+	<div class="table-wrap">
+	<table>
+		<tr><th>Equation</th><th>What we know</th></tr>
+		<tr><td>One variable: \(a_nx^n + \cdots + a_0 = 0\)</td><td>The Rational Root Theorem: a rational root \(p/q\) in lowest terms has \(p \mid a_0\) and \(q \mid a_n\), so there are finitely many candidates to check.</td></tr>
+		<tr><td>Lines: \(ax + by = c\)</td><td>There is an integer solution exactly when \(\gcd(a, b)\) divides \(c\), and the Euclidean algorithm finds them all.</td></tr>
+		<tr><td>Conics: degree 2</td><td>The Hasse&ndash;Minkowski theorem decides whether there is a rational point, and if there is one, drawing lines through it finds all of them.</td></tr>
+		<tr><td>Cubics: degree 3</td><td>No complete method is known. This is where elliptic curves live.</td></tr>
+	</table>
+	</div>
+
+	<!-- ================= WEIERSTRASS MODELS ================= -->
+	<h2 id="weierstrass">Elliptic Curves and Weierstrass Models</h2>
+	<p>An <em>elliptic curve</em> over a field \(K\) is a smooth curve of genus 1 with at least one point \(\mathcal{O}\) defined over \(K\). Concretely, every elliptic curve can be written in <em>(long) Weierstrass form</em></p>
+	\[E:\ y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6, \qquad a_i \in K,\]
+	<p>with nonzero discriminant. When \(K\) has characteristic other than 2 or 3 (for example \(K = \mathbb{Q}\)), a change of variables simplifies this to a <em>short Weierstrass form</em></p>
+	\[E:\ y^2 = x^3 + Ax + B, \qquad 4A^3 + 27B^2 \neq 0.\]
+	<p>The condition on \(A\) and \(B\) means the cubic has no repeated roots, so the curve has no cusps or self-intersections. The point \(\mathcal{O}\) is a &ldquo;point at infinity&rdquo; that sits at the top (and bottom) of every vertical line.</p>
+	<p>The same curve can look very different in different coordinates. Curves related by an invertible change of variables defined over \(\mathbb{Q}\) are treated as the same curve:</p>
+	<div class="example-box">
+		<div class="eyebrow">Example: two models of one curve</div>
+		<p>The curve with LMFDB label 11.a2 can be written in long Weierstrass form as</p>
+		\[E:\ y^2 + y = x^3 - x^2 - 10x - 20,\]
+		<p>or in short Weierstrass form as</p>
+		\[E':\ y^2 = x^3 - 13392x - 1080432.\]
+		<p>The change of variables carrying one to the other is</p>
+		\[\phi(x, y) = (36x - 12,\ 216y + 108).\]
+		<p>For example, \((5, 5)\) is on \(E\), and \(\phi(5, 5) = (168, 1188)\) is on \(E'\).</p>
+		<hr class="example-divider">
+		<p>Even the cubic</p>
+		\[C:\ x^3 + y^3 = 1\]
+		<p>is an elliptic curve in disguise. The map</p>
+		\[\phi(x, y) = \left(\frac{12}{x + y},\ \frac{36(x - y)}{x + y}\right)\]
+		<p>carries it to the short Weierstrass model</p>
+		\[E:\ y^2 = x^3 - 432.\]
+	</div>
+
+	<!-- ================= GROUP LAW ================= -->
+	<h2 id="group-law">Points and the Group Law</h2>
+	<p>We write \(E(\mathbb{Q})\) for the set of rational points on \(E\): the rational solutions of its equation, together with \(\mathcal{O}\). The remarkable fact is that these points can be <em>added</em>, using lines.</p>
+	<ul>
+		<li><strong>Adding two points.</strong> The line through \(P\) and \(Q\) meets the curve in exactly one more point \(R\). Reflecting \(R\) across the \(x\)-axis gives \(P + Q\).</li>
+		<li><strong>Doubling a point.</strong> To add \(P\) to itself, use the tangent line at \(P\) instead; reflecting its third intersection point gives \(2P\).</li>
+		<li><strong>Identity and negatives.</strong> \(\mathcal{O}\) acts as zero, the negative of \((x, y)\) is \((x, -y)\), and a vertical line through \(P\) and \(-P\) &ldquo;meets&rdquo; the curve at \(\mathcal{O}\), so \(P + (-P) = \mathcal{O}\).</li>
+	</ul>
+	<p>Since the lines have rational slopes, the new points are rational too, and this addition makes \(E(\mathbb{Q})\) an abelian group. In coordinates, if \(P = (x_1, y_1)\) and \(Q = (x_2, y_2)\), then</p>
+	\[\lambda = \begin{cases} \dfrac{y_2 - y_1}{x_2 - x_1} & P \neq Q,\\[2ex] \dfrac{3x_1^2 + A}{2y_1} & P = Q,\end{cases} \qquad P + Q = \bigl(\lambda^2 - x_1 - x_2,\ \lambda(x_1 - x_3) - y_1\bigr),\]
+	<p>where \(x_3 = \lambda^2 - x_1 - x_2\) is the new \(x\)-coordinate.</p>
+
+	<div class="figure-pair">
+		<figure class="figure">
+			<svg viewBox="0 0 300 360" role="img" aria-labelledby="secant-title">
+				<title id="secant-title">Adding P and Q: the line through them meets the curve at R, and reflecting R gives P + Q</title>
+				<line class="gl-axis" x1="0" y1="180" x2="300" y2="180" />
+				<line class="gl-axis" x1="145.5" y1="0" x2="145.5" y2="360" />
+				<path class="gl-curve" d="M 296.0,-0.0 L 289.5,13.4 L 283.2,26.4 L 276.9,38.9 L 270.7,50.9 L 264.6,62.5 L 258.6,73.5 L 252.6,84.1 L 246.8,94.1 L 241.0,103.5 L 235.3,112.4 L 229.7,120.6 L 224.1,127.9 L 218.7,134.4 L 213.3,139.7 L 208.0,143.7 L 202.8,146.1 L 197.6,146.8 L 192.6,146.0 L 187.6,143.9 L 182.7,141.0 L 177.9,137.5 L 173.2,133.7 L 168.5,129.8 L 164.0,125.9 L 159.5,122.1 L 155.1,118.4 L 150.7,114.9 L 146.5,111.6 L 142.3,108.4 L 138.2,105.5 L 134.2,102.8 L 130.3,100.3 L 126.5,98.1 L 122.7,96.1 L 119.0,94.3 L 115.4,92.7 L 111.9,91.4 L 108.5,90.3 L 105.1,89.4 L 101.8,88.7 L 98.6,88.2 L 95.5,88.0 L 92.5,87.9 L 89.5,88.0 L 86.7,88.3 L 83.9,88.9 L 81.2,89.5 L 78.5,90.4 L 76.0,91.4 L 73.5,92.6 L 71.1,94.0 L 68.8,95.5 L 66.6,97.2 L 64.5,99.0 L 62.4,101.0 L 60.4,103.1 L 58.5,105.3 L 56.7,107.7 L 55.0,110.1 L 53.3,112.7 L 51.7,115.4 L 50.2,118.2 L 48.8,121.1 L 47.5,124.1 L 46.2,127.2 L 45.1,130.3 L 44.0,133.5 L 43.0,136.8 L 42.0,140.2 L 41.2,143.6 L 40.4,147.1 L 39.7,150.6 L 39.1,154.2 L 38.6,157.8 L 38.1,161.5 L 37.8,165.1 L 37.5,168.8 L 37.3,172.6 L 37.2,176.3 L 37.1,180.0 L 37.2,183.7 L 37.3,187.4 L 37.5,191.2 L 37.8,194.9 L 38.1,198.5 L 38.6,202.2 L 39.1,205.8 L 39.7,209.4 L 40.4,212.9 L 41.2,216.4 L 42.0,219.8 L 43.0,223.2 L 44.0,226.5 L 45.1,229.7 L 46.2,232.8 L 47.5,235.9 L 48.8,238.9 L 50.2,241.8 L 51.7,244.6 L 53.3,247.3 L 55.0,249.9 L 56.7,252.3 L 58.5,254.7 L 60.4,256.9 L 62.4,259.0 L 64.5,261.0 L 66.6,262.8 L 68.8,264.5 L 71.1,266.0 L 73.5,267.4 L 76.0,268.6 L 78.5,269.6 L 81.2,270.5 L 83.9,271.1 L 86.7,271.7 L 89.5,272.0 L 92.5,272.1 L 95.5,272.0 L 98.6,271.8 L 101.8,271.3 L 105.1,270.6 L 108.5,269.7 L 111.9,268.6 L 115.4,267.3 L 119.0,265.7 L 122.7,263.9 L 126.5,261.9 L 130.3,259.7 L 134.2,257.2 L 138.2,254.5 L 142.3,251.6 L 146.5,248.4 L 150.7,245.1 L 155.1,241.6 L 159.5,237.9 L 164.0,234.1 L 168.5,230.2 L 173.2,226.3 L 177.9,222.5 L 182.7,219.0 L 187.6,216.1 L 192.6,214.0 L 197.6,213.2 L 202.8,213.9 L 208.0,216.3 L 213.3,220.3 L 218.7,225.6 L 224.1,232.1 L 229.7,239.4 L 235.3,247.6 L 241.0,256.5 L 246.8,265.9 L 252.6,275.9 L 258.6,286.5 L 264.6,297.5 L 270.7,309.1 L 276.9,321.1 L 283.2,333.6 L 289.5,346.6 L 296.0,360.0" />
+				<line class="gl-line" x1="4.5" y1="110.8" x2="295.5" y2="110.8" />
+				<line class="gl-reflect" x1="54.5" y1="110.8" x2="54.5" y2="249.2" />
+				<circle class="gl-pt" cx="236.4" cy="110.8" r="5" />
+				<circle class="gl-pt" cx="145.5" cy="110.8" r="5" />
+				<circle class="gl-hollow" cx="54.5" cy="110.8" r="5" />
+				<circle class="gl-sum" cx="54.5" cy="249.2" r="6" />
+				<text class="gl-label" x="228" y="100" text-anchor="end">P</text>
+				<text class="gl-label" x="156" y="100">Q</text>
+				<text class="gl-label" x="44" y="102" text-anchor="end">R</text>
+				<text class="gl-label" x="46" y="270" text-anchor="end">P + Q</text>
+			</svg>
+			<figcaption>Adding: the line through \(P\) and \(Q\) meets the curve at \(R\); reflecting gives \(P + Q\).</figcaption>
+		</figure>
+		<figure class="figure">
+			<svg viewBox="0 0 300 360" role="img" aria-labelledby="tangent-title">
+				<title id="tangent-title">Doubling P: the tangent line at P meets the curve at R, and reflecting R gives 2P</title>
+				<line class="gl-axis" x1="0" y1="180" x2="300" y2="180" />
+				<line class="gl-axis" x1="145.5" y1="0" x2="145.5" y2="360" />
+				<path class="gl-curve" d="M 296.0,-0.0 L 289.5,13.4 L 283.2,26.4 L 276.9,38.9 L 270.7,50.9 L 264.6,62.5 L 258.6,73.5 L 252.6,84.1 L 246.8,94.1 L 241.0,103.5 L 235.3,112.4 L 229.7,120.6 L 224.1,127.9 L 218.7,134.4 L 213.3,139.7 L 208.0,143.7 L 202.8,146.1 L 197.6,146.8 L 192.6,146.0 L 187.6,143.9 L 182.7,141.0 L 177.9,137.5 L 173.2,133.7 L 168.5,129.8 L 164.0,125.9 L 159.5,122.1 L 155.1,118.4 L 150.7,114.9 L 146.5,111.6 L 142.3,108.4 L 138.2,105.5 L 134.2,102.8 L 130.3,100.3 L 126.5,98.1 L 122.7,96.1 L 119.0,94.3 L 115.4,92.7 L 111.9,91.4 L 108.5,90.3 L 105.1,89.4 L 101.8,88.7 L 98.6,88.2 L 95.5,88.0 L 92.5,87.9 L 89.5,88.0 L 86.7,88.3 L 83.9,88.9 L 81.2,89.5 L 78.5,90.4 L 76.0,91.4 L 73.5,92.6 L 71.1,94.0 L 68.8,95.5 L 66.6,97.2 L 64.5,99.0 L 62.4,101.0 L 60.4,103.1 L 58.5,105.3 L 56.7,107.7 L 55.0,110.1 L 53.3,112.7 L 51.7,115.4 L 50.2,118.2 L 48.8,121.1 L 47.5,124.1 L 46.2,127.2 L 45.1,130.3 L 44.0,133.5 L 43.0,136.8 L 42.0,140.2 L 41.2,143.6 L 40.4,147.1 L 39.7,150.6 L 39.1,154.2 L 38.6,157.8 L 38.1,161.5 L 37.8,165.1 L 37.5,168.8 L 37.3,172.6 L 37.2,176.3 L 37.1,180.0 L 37.2,183.7 L 37.3,187.4 L 37.5,191.2 L 37.8,194.9 L 38.1,198.5 L 38.6,202.2 L 39.1,205.8 L 39.7,209.4 L 40.4,212.9 L 41.2,216.4 L 42.0,219.8 L 43.0,223.2 L 44.0,226.5 L 45.1,229.7 L 46.2,232.8 L 47.5,235.9 L 48.8,238.9 L 50.2,241.8 L 51.7,244.6 L 53.3,247.3 L 55.0,249.9 L 56.7,252.3 L 58.5,254.7 L 60.4,256.9 L 62.4,259.0 L 64.5,261.0 L 66.6,262.8 L 68.8,264.5 L 71.1,266.0 L 73.5,267.4 L 76.0,268.6 L 78.5,269.6 L 81.2,270.5 L 83.9,271.1 L 86.7,271.7 L 89.5,272.0 L 92.5,272.1 L 95.5,272.0 L 98.6,271.8 L 101.8,271.3 L 105.1,270.6 L 108.5,269.7 L 111.9,268.6 L 115.4,267.3 L 119.0,265.7 L 122.7,263.9 L 126.5,261.9 L 130.3,259.7 L 134.2,257.2 L 138.2,254.5 L 142.3,251.6 L 146.5,248.4 L 150.7,245.1 L 155.1,241.6 L 159.5,237.9 L 164.0,234.1 L 168.5,230.2 L 173.2,226.3 L 177.9,222.5 L 182.7,219.0 L 187.6,216.1 L 192.6,214.0 L 197.6,213.2 L 202.8,213.9 L 208.0,216.3 L 213.3,220.3 L 218.7,225.6 L 224.1,232.1 L 229.7,239.4 L 235.3,247.6 L 241.0,256.5 L 246.8,265.9 L 252.6,275.9 L 258.6,286.5 L 264.6,297.5 L 270.7,309.1 L 276.9,321.1 L 283.2,333.6 L 289.5,346.6 L 296.0,360.0" />
+				<line class="gl-line" x1="104.5" y1="311.5" x2="290.9" y2="27.7" />
+				<line class="gl-reflect" x1="145.5" y1="249.2" x2="145.5" y2="110.8" />
+				<circle class="gl-pt" cx="236.4" cy="110.8" r="5" />
+				<circle class="gl-hollow" cx="145.5" cy="249.2" r="5" />
+				<circle class="gl-sum" cx="145.5" cy="110.8" r="6" />
+				<text class="gl-label" x="228" y="100" text-anchor="end">P</text>
+				<text class="gl-label" x="134" y="242" text-anchor="end">R</text>
+				<text class="gl-label" x="156" y="100">2P</text>
+			</svg>
+			<figcaption>Doubling: the tangent line at \(P\) meets the curve at \(R\); reflecting gives \(2P\).</figcaption>
+		</figure>
+	</div>
+
+	<div class="example-box">
+		<div class="eyebrow">Example: adding and doubling</div>
+		<p>Work on the curve</p>
+		\[E:\ y^2 = x^3 - 4x + 4.\]
+		<h4 class="example-step">Adding \(P = (2, 2)\) and \(Q = (0, 2)\)</h4>
+		<ol>
+			<li>The line through \(P\) and \(Q\) is horizontal:
+			\[y = 2.\]</li>
+			<li>Substituting \(y = 2\) into the curve finds every intersection:
+			\[\begin{gathered} 4 = x^3 - 4x + 4 \\ \Longrightarrow\quad x(x - 2)(x + 2) = 0. \end{gathered}\]</li>
+			<li>The roots \(x = 2\) and \(x = 0\) are \(P\) and \(Q\), so the third point is
+			\[R = (-2, 2).\]</li>
+			<li>Reflecting across the \(x\)-axis gives
+			\[P + Q = (-2, -2).\]</li>
+		</ol>
+		<hr class="example-divider">
+		<h4 class="example-step">Doubling \(P = (2, 2)\)</h4>
+		<ol>
+			<li>The slope of the tangent line at \(P\) is
+			\[\lambda = \frac{3x_1^2 + A}{2y_1} = \frac{3 \cdot 2^2 - 4}{2 \cdot 2} = 2.\]</li>
+			<li>The coordinates of \(2P\) are
+			\[\begin{aligned} x_3 &= \lambda^2 - 2x_1 \\ &= 4 - 4 = 0, \\[1ex] y_3 &= \lambda(x_1 - x_3) - y_1 \\ &= 2(2 - 0) - 2 = 2. \end{aligned}\]</li>
+			<li>So
+			\[2P = (0, 2).\]</li>
+		</ol>
+		<p>In other words, \(Q\) was \(2P\) all along, and \(P + Q = 3P\).</p>
+	</div>
+
+	<h3>Multiples of a point</h3>
+	<p>Repeating the group law gives the multiples \(nP = P + P + \cdots + P\). For large \(n\), the <em>double-and-add</em> method computes \(nP\) in about \(\log_2 n\) steps by repeatedly doubling, the same idea as fast exponentiation. Continuing the example above:</p>
+	<div class="table-wrap">
+	<table>
+		<tr><th class="num">\(n\)</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th></tr>
+		<tr><td class="num">\(nP\)</td><td class="num">\((2, 2)\)</td><td class="num">\((0, 2)\)</td><td class="num">\((-2, -2)\)</td><td class="num">\((1, -1)\)</td><td class="num">\((6, -14)\)</td><td class="num">\((8, 22)\)</td></tr>
+	</table>
+	</div>
+	<p>Does this list ever return to \(\mathcal{O}\)? The Nagell&ndash;Lutz theorem says that a point of finite order on \(y^2 = x^3 + Ax + B\) (with integer \(A, B\)) has integer coordinates with \(y = 0\) or \(y^2\) dividing \(4A^3 + 27B^2\). Here \(4A^3 + 27B^2 = 176\), and \(5P = (6, -14)\) has \(14^2 = 196\), which does not divide 176. So \(5P\), and therefore \(P\), has infinite order: the multiples of \(P\) give infinitely many rational points.</p>
+
+	<!-- ================= MORDELL-WEIL ================= -->
+	<h2 id="mordell-weil">The Mordell&ndash;Weil Theorem</h2>
+	<p>Everything above works over any <em>number field</em>, a finite extension of \(\mathbb{Q}\) such as \(\mathbb{Q}(\sqrt{d}) = \{a + b\sqrt{d} : a, b \in \mathbb{Q}\}\). The central structural result is:</p>
+	<div class="callout">
+		<p><strong>Mordell&ndash;Weil theorem.</strong> If \(E\) is an elliptic curve over a number field \(K\), then \(E(K)\) is a finitely generated abelian group:</p>
+		\[E(K) \cong E(K)_{\mathrm{tors}} \oplus \mathbb{Z}^{R_{E/K}}.\]
+	</div>
+	<p>So every rational point can be built from finitely many of them using the group law. The group has two pieces:</p>
+	<ul>
+		<li><strong>Torsion</strong> \(E(K)_{\mathrm{tors}}\): the finitely many points of finite order. Torsion is well understood. Mazur proved that over \(\mathbb{Q}\) it is one of exactly fifteen groups, \(\mathbb{Z}/M\mathbb{Z}\) for \(1 \le M \le 10\) or \(M = 12\), or \(\mathbb{Z}/2\mathbb{Z} \oplus \mathbb{Z}/2N\mathbb{Z}\) for \(1 \le N \le 4\). The complete lists are also known over quadratic fields (Kamienny, Kenku, and Momose) and cubic fields (Derickx, Etropolski, van Hoeij, Morrow, and Zureick-Brown).</li>
+		<li><strong>Rank</strong> \(R_{E/K}\): the number of independent points of infinite order. Rank is far more mysterious. No algorithm is known that always computes it, and it is unknown whether ranks over \(\mathbb{Q}\) can be arbitrarily large; the largest known rank is at least 32 (Elkies, Klagsbrun, and Li).</li>
+	</ul>
+
+	<!-- ================= EXAMPLES ================= -->
+	<h2 id="examples">Examples: Rank 0, 1, and 2</h2>
+
+	<div class="example-box">
+		<div class="eyebrow">Rank 0: three consecutive integers</div>
+		<p>Which three consecutive integers multiply to a perfect square? Writing them as \(x - 1, x, x + 1\) gives the elliptic curve</p>
+		\[y^2 = (x - 1)x(x + 1) = x^3 - x.\]
+		<p>This curve has rank 0, and its only rational points are four torsion points:</p>
+		\[\begin{aligned} E(\mathbb{Q}) &= \{\mathcal{O}, (0, 0), (1, 0), (-1, 0)\} \\ &\cong \mathbb{Z}/2\mathbb{Z} \oplus \mathbb{Z}/2\mathbb{Z}. \end{aligned}\]
+		<p>So the only answers are \(\{-1, 0, 1\}\), \(\{0, 1, 2\}\), and \(\{-2, -1, 0\}\).</p>
+	</div>
+
+	<div class="example-box">
+		<div class="eyebrow">Rank 1: the congruent number problem</div>
+		<p>Which whole numbers \(n\) are the area of a right triangle with rational sides? Right triangles with area \(n\) correspond exactly to points \((x, y)\) with \(y \neq 0\) on \(y^2 = x^3 - n^2x\): the point gives the triangle with sides</p>
+		\[\begin{gathered} a = \frac{x^2 - n^2}{y}, \qquad b = \frac{2nx}{y}, \\[1ex] c = \frac{x^2 + n^2}{y}. \end{gathered}\]
+		<p>For \(n = 6\), the point \((12, 36)\) gives the familiar \(3\)-\(4\)-\(5\) triangle. The point has infinite order, so the curve has positive rank (in fact rank 1), and its multiples give infinitely many triangles of area 6. For example, \(2 \cdot (12, 36) = \left(\frac{25}{4}, -\frac{35}{8}\right)\), and its negative \(\left(\frac{25}{4}, \frac{35}{8}\right)\) gives the triangle with sides \(\frac{7}{10}\), \(\frac{120}{7}\), and \(\frac{1201}{70}\).</p>
+	</div>
+
+	<div class="example-box">
+		<div class="eyebrow">Rank 2</div>
+		<p>The curve \(y^2 = x^3 + 2x + 13\) has \(E(\mathbb{Q}) \cong \mathbb{Z}^2\), generated by \(P = (-2, 1)\) and \(Q = (2, 5)\): every rational point is \(mP + nQ\) for unique integers \(m\) and \(n\).</p>
+		<p>Over larger fields the rank can grow. Over \(\mathbb{Q}(\sqrt{46})\) this curve gains a third independent point, and over \(\mathbb{Q}(\sqrt{241})\) it has rank 4. Understanding when and how much the rank grows is one of my <a href="research-questions.html#ranks">research questions</a>.</p>
+	</div>
 
 	</main>
 </body>

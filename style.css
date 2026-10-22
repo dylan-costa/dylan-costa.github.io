@@ -512,6 +512,7 @@ a.link-card p { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
   margin: 0.4rem 0 0.6rem;
 }
 
+.prose .question,
 .project-card .question {
   color: var(--text);
   border-left: 3px solid var(--accent);
@@ -587,6 +588,19 @@ pre code { background: none; border: 0; padding: 0; font-size: 1em; }
 .callout > :first-child, .example-box > :first-child { margin-top: 0; }
 .callout > :last-child, .example-box > :last-child { margin-bottom: 0; }
 .example-box .eyebrow { margin-bottom: 0.6rem; }
+.example-box p { line-height: 1.75; }
+.example-box mjx-container[display="true"] { margin: 0.9em 0 !important; }
+.example-box ol { padding-left: 1.4rem; }
+.example-box ol li { margin: 0.6rem 0 1rem; line-height: 1.75; }
+.example-step {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.2rem 0 0.4rem;
+}
+.example-box .eyebrow + .example-step { margin-top: 0.4rem; }
+.example-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 
 /* Figures (inline SVG diagrams) */
 /* solid panel so the decorative page background doesn't show through the diagram */
@@ -599,6 +613,11 @@ pre code { background: none; border: 0; padding: 0; font-size: 1em; }
   border-radius: 12px;
 }
 .figure svg { width: 100%; max-width: 560px; height: auto; }
+
+/* two figures side by side (stacks on phones) */
+.figure-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
+.figure-pair .figure { margin: 0; }
+.figure-pair svg { max-width: 300px; }
 .figure figcaption {
   color: var(--text-dim);
   font-size: 0.92rem;
@@ -665,7 +684,9 @@ mjx-container[display="true"] {
 
   .notes { padding: 1.4rem 1.1rem; border-radius: 10px; }
   .project-card { padding: 1.5rem 1.25rem; }
-  .card-grid { grid-template-columns: 1fr; }
+  .card-grid, .figure-pair { grid-template-columns: 1fr; }
+  .example-box { padding: 1rem 0.85rem; }
+  .example-box ol { padding-left: 1.1rem; }
   .flow { flex-direction: column; }
   .flow-arrow { flex-basis: 1.75rem; transform: rotate(90deg); }
 }

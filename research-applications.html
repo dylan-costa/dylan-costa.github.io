@@ -5,6 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Applications of Research</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
+
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<div class="topnav">
@@ -27,7 +38,72 @@
 
 	<p class="back-link"><a href="research.html">&larr; Back to Research</a></p>
 	<h1>Applications of Research</h1>
-	<p class="subtitle">Coming soon.</p>
+	<p class="subtitle">Elliptic curves started as a question about solving cubic equations, and they now protect most of the internet's traffic, sit at the heart of the proof of Fermat's Last Theorem, and even appear in string theory. This page is a tour of where they show up. For the basics, see <a href="research-background.html">Background &amp; Introduction</a>.</p>
+	<p class="subtitle">Jump to: <a href="#cryptography">Cryptography</a> &middot; <a href="#isogenies">Isogeny-based cryptography</a> &middot; <a href="#beyond">Beyond cryptography</a></p>
+
+	<!-- ================= CRYPTOGRAPHY ================= -->
+	<h2 id="cryptography">Cryptography</h2>
+	<p>Over a finite field, the group law makes an elliptic curve a group in which one direction is easy and the other is hard: given a point \(G\) and an integer \(k\), computing \(kG\) takes only about \(\log_2 k\) steps, but given \(G\) and \(kG\), recovering \(k\) (the <em>elliptic curve discrete logarithm problem</em>) is believed to be infeasible on well-chosen curves. Because of this, a 256-bit elliptic curve key gives about the same security as a 3072-bit RSA key, which is why elliptic curves are now the default in most of the cryptography people use every day. The methods themselves, with worked examples, are on my <a href="messenger-encryption.html">Encryption Methods</a> page from the Secure Messenger project; here are three stories of elliptic curve cryptography in the real world.</p>
+
+	<h3>End-to-end encryption in WhatsApp</h3>
+	<p>Since April 2016, WhatsApp messages and calls have been end-to-end encrypted by default, using the Signal Protocol, which means billions of people use elliptic curve cryptography every day. When the app is installed, each phone generates several key pairs on the elliptic curve Curve25519:</p>
+	<ul>
+		<li>a long-term <strong>identity key</strong>;</li>
+		<li>a medium-term <strong>signed prekey</strong>, signed by the identity key and replaced periodically;</li>
+		<li>a batch of <strong>one-time prekeys</strong>, each used for a single conversation.</li>
+	</ul>
+	<p>Only the public halves are uploaded. To start a conversation, the sender's phone downloads the recipient's public keys and combines several elliptic curve Diffie&ndash;Hellman computations into a shared secret, so a secure session can begin even while the recipient is offline. From then on, a new key is derived for every message, so stealing one key does not expose past messages. WhatsApp's servers relay the ciphertext but never hold the keys needed to read it.</p>
+
+	<h3>When the implementation goes wrong: the PlayStation 3</h3>
+	<p>Sony used the Elliptic Curve Digital Signature Algorithm (ECDSA) to sign PlayStation 3 software, so that consoles would only run code Sony had approved. An ECDSA signature on a message with hash \(z\) is a pair \((r, s)\) with</p>
+	\[s = k^{-1}(z + r\,d) \bmod n,\]
+	<p>where \(d\) is the private key and \(k\) must be a fresh random number for every signature. Sony used the same \(k\) every time. Two signatures \(s_1, s_2\) on different messages \(z_1, z_2\) with the same \(k\) give two linear equations in the two unknowns, which anyone can solve:</p>
+	\[\begin{aligned} k &\equiv \frac{z_1 - z_2}{s_1 - s_2} \pmod{n}, \\[1ex] d &\equiv \frac{s_1 k - z_1}{r} \pmod{n}. \end{aligned}\]
+	<p>The hacking group fail0verflow announced this at the Chaos Communication Congress in December 2010. The private signing key could be recovered, and because the matching public key was built into the console's bootloader, the flaw could never be patched. The mathematics of elliptic curves was never broken; one missing random number was enough.</p>
+
+	<h3>A backdoor in a standard: Dual_EC_DRBG</h3>
+	<p>Cryptography depends on unpredictable random numbers. Dual_EC_DRBG was a random number generator built from two fixed points \(P\) and \(Q\) on a standard elliptic curve, published by NIST in 2006. Roughly, it keeps a secret state \(s\), outputs most of the bits of the \(x\)-coordinate of \(sQ\), and updates its state from the \(x\)-coordinate of \(sP\).</p>
+	<p>In 2007, Dan Shumow and Niels Ferguson pointed out that if anyone knew a secret number \(e\) with \(P = eQ\), then from about 32 bytes of output they could reconstruct \(sQ\), compute \(e \cdot sQ = sP\), learn the generator's next state, and predict everything it would ever produce. Nobody outside knew how \(P\) and \(Q\) had been chosen, and the generator had been championed by the NSA. It is widely believed to contain an NSA backdoor, though that has never been officially confirmed, and NIST withdrew it in 2014. It is a lesson in why the constants in a cryptographic standard should be chosen in a way everyone can verify.</p>
+
+	<!-- ================= ISOGENY-BASED ================= -->
+	<h2 id="isogenies">Isogeny-Based Cryptography</h2>
+	<p>A large enough quantum computer would break elliptic curve cryptography: Shor's algorithm solves the discrete logarithm problem efficiently, and it breaks RSA as well. That has driven the search for <em>post-quantum</em> cryptography, and one of the most mathematically striking candidates is built from isogenies, the maps between elliptic curves that my own <a href="research-questions.html#isogenies">research on isogeny graphs</a> studies.</p>
+
+	<h3>The hard problem: finding a path in a graph</h3>
+	<p>Fix a large prime \(p\) and a small prime \(\ell\), such as \(\ell = 2\). The <em>supersingular isogeny graph</em> has:</p>
+	<ul>
+		<li><strong>vertices:</strong> the supersingular elliptic curves over \(\mathbb{F}_{p^2}\), up to isomorphism, of which there are about \(p/12\);</li>
+		<li><strong>edges:</strong> the isogenies of degree \(\ell\) between them, so every vertex has exactly \(\ell + 1\) neighbors.</li>
+	</ul>
+	<p>This graph is an excellent <em>expander</em> (in fact a Ramanujan graph): a short random walk from any vertex lands almost anywhere. Taking a walk is easy, but given two curves, finding a path of isogenies between them appears to be hard, even for a quantum computer. That path-finding problem is the foundation of isogeny-based cryptography.</p>
+
+	<h3>A short history</h3>
+	<ul>
+		<li><strong>Hash functions (2009).</strong> Charles, Goren, and Lauter turned walks in the isogeny graph into a hash function: the bits of the input choose which edge to follow.</li>
+		<li><strong>SIDH and SIKE (2011&ndash;2022).</strong> Jao and De Feo designed a Diffie&ndash;Hellman-style key exchange in which Alice and Bob each take a secret walk. Its standardized version, SIKE, reached the fourth round of the U.S. National Institute of Standards and Technology's post-quantum competition.</li>
+		<li><strong>The break (2022).</strong> Castryck and Decru found an attack that recovers SIKE's secret key in about an hour on a single computer core. It exploited extra torsion-point information that the protocol published, analyzed through higher-dimensional abelian varieties: a vivid example of deep theory about elliptic curves and their torsion having immediate real-world consequences.</li>
+		<li><strong>What survives.</strong> Schemes that do not publish that extra information were not affected, including CSIDH, which uses a group action on supersingular curves over \(\mathbb{F}_p\), and SQIsign, a signature scheme with some of the smallest keys and signatures of any post-quantum proposal. Isogeny-based cryptography remains an active area of research.</li>
+	</ul>
+
+	<!-- ================= BEYOND CRYPTOGRAPHY ================= -->
+	<h2 id="beyond">Beyond Cryptography</h2>
+
+	<div class="example-box">
+		<div class="eyebrow">Fermat's Last Theorem</div>
+		<p>Fermat claimed that \(a^n + b^n = c^n\) has no solutions in positive integers for \(n \ge 3\). The proof came through elliptic curves. Frey observed that a solution \(a^p + b^p = c^p\) would produce the curve</p>
+		\[y^2 = x(x - a^p)(x + b^p),\]
+		<p>which would be so unusual that it could not be <em>modular</em>; Ribet proved this in 1986. Wiles, with Taylor, then proved in 1995 that semistable elliptic curves over \(\mathbb{Q}\), including any Frey curve, are modular, so no solution can exist.</p>
+	</div>
+
+	<div class="example-box">
+		<div class="eyebrow">String theory</div>
+		<p>Elliptic curves even appear in physics. In F-theory, a framework within string theory, a field of type IIB string theory called the axio-dilaton is interpreted as the shape parameter of an elliptic curve, and the extra dimensions of spacetime are modeled by Calabi&ndash;Yau spaces built from families of elliptic curves (<em>elliptic fibrations</em>). The way these curves degenerate, classified by Kodaira, determines the physics of the resulting model.</p>
+	</div>
+
+	<div class="example-box">
+		<div class="eyebrow">A million-dollar problem</div>
+		<p>The <strong>Birch and Swinnerton-Dyer conjecture</strong>, one of the Clay Mathematics Institute's seven Millennium Prize Problems, predicts that the rank of an elliptic curve can be read off from its \(L\)-function: the rank should equal the order of vanishing of \(L(E, s)\) at \(s = 1\). It is proven only when that order is 0 or 1, and its most basic consequence, the Parity Conjecture, is a key tool in my <a href="research-questions.html#ranks">work on ranks</a>.</p>
+	</div>
 
 	</main>
 </body>

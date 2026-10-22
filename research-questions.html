@@ -5,6 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Motivating Questions</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
+
+	<!-- MathJax: only \( \) and \[ \] delimiters, so dollar signs in text stay literal -->
+	<script>
+		window.MathJax = {
+			tex: {
+				inlineMath: [['\\(', '\\)']],
+				displayMath: [['\\[', '\\]']]
+			}
+		};
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 	<div class="topnav">
@@ -27,7 +38,49 @@
 
 	<p class="back-link"><a href="research.html">&larr; Back to Research</a></p>
 	<h1>Motivating Questions</h1>
-	<p class="subtitle">Coming soon.</p>
+	<p class="subtitle">The questions behind my current research, organized into three themes: ranks, torsion, and isogenies.</p>
+
+	<p>Elliptic curves sit at the center of modern number theory. Their arithmetic governs classical Diophantine problems such as the congruent number problem, and they are the basis of elliptic curve cryptography. If \(E\) is an elliptic curve over a number field \(K\), the Mordell&ndash;Weil theorem says its rational points form a finitely generated abelian group,</p>
+	\[E(K) \cong E(K)_{\mathrm{tors}} \times \mathbb{Z}^{R_{E/K}},\]
+	<p>where \(R_{E/K} \ge 0\) is the <em>rank</em> and \(E(K)_{\mathrm{tors}}\) is the finite group of points of finite order. My research asks a structural question about this group:</p>
+	<div class="callout">
+		<p><strong>How do the basic invariants of an elliptic curve, such as the rank and torsion of its group of rational points, change as the base field grows?</strong></p>
+	</div>
+	<p class="subtitle">Jump to: <a href="#ranks">Ranks</a> &middot; <a href="#torsion">Torsion</a> &middot; <a href="#isogenies">Isogenies</a></p>
+
+	<!-- ================= RANKS ================= -->
+	<h2 id="ranks">Ranks</h2>
+	<p class="subtitle">Joint with &Aacute;lvaro Lozano-Robledo (UConn).</p>
+	<p>For a fixed number field \(K\), it is not known whether the ranks \(R_{E/K}\) are bounded as \(E\) varies, or whether they can grow without bound. This is open even for \(K = \mathbb{Q}\). A natural way in is to fix a curve and enlarge the field instead.</p>
+	<p>If \(E: y^2 = x^3 + Ax + B\) is defined over \(\mathbb{Q}\) and \(d\) is a squarefree integer, the <em>quadratic twist</em> \(E^d: y^2 = x^3 + d^2Ax + d^3B\) controls how the rank grows over \(\mathbb{Q}(\sqrt{d})\):</p>
+	\[R_{E/\mathbb{Q}(\sqrt{d})} = R_{E/\mathbb{Q}} + R_{E^d/\mathbb{Q}}.\]
+	<p>More generally, over a multiquadratic field \(L_n = \mathbb{Q}(\sqrt{d_1}, \ldots, \sqrt{d_n})\) of degree \(2^n\), the rank is the sum of the ranks of the \(2^n\) twists \(E^{d_S}\), where \(d_S\) runs over the products of subsets of the \(d_k\). The key tool for controlling those twists is the <em>global root number</em> \(W(E/\mathbb{Q}) = \pm 1\), which the Parity Conjecture predicts determines the parity of the rank: \(W(E/\mathbb{Q}) = (-1)^{R_{E/\mathbb{Q}}}\).</p>
+
+	<p class="question">Given an elliptic curve \(E/\mathbb{Q}\) and \(n \ge 1\), can we explicitly construct number fields \(L_n\) of degree \(2^n\) over which the rank grows by at least \(n\), and by at least \(2n\) if we assume the Parity Conjecture?</p>
+	<p class="question">Fix one of the fifteen torsion structures \(T\) that occur over \(\mathbb{Q}\). How does the largest known rank of a curve with torsion \(T\) over \(\mathbb{Q}\) compare with the largest rank achievable over fields of degree \(2^n\)?</p>
+	<p class="question">How large can a single quadratic extension make the rank of a specific high-rank curve?</p>
+
+	<p><strong>Related work:</strong> <a href="https://hexagonmath.org/2610.00280v1" target="_blank"><em>An Elliptic Curve of Rank &ge; 34 and Root Number &minus;1 over a Quadratic Field</em></a> (with &Aacute;lvaro Lozano-Robledo, preprint, October 2026). Starting from the curve of rank at least 32 found by Elkies, Klagsbrun, and Li, we construct an explicit quadratic field over which its rank is at least 34 unconditionally, and at least 35 assuming the Parity Conjecture. You can also explore rank growth in quadratic twists with my <a href="rank-simulator-summary.html">Rank Increase Simulator</a>.</p>
+
+	<!-- ================= TORSION ================= -->
+	<h2 id="torsion">Torsion</h2>
+	<p class="subtitle">Joint with &Aacute;lvaro Lozano-Robledo (UConn) and Enrique Gonz&aacute;lez-Jim&eacute;nez (Universidad Aut&oacute;noma de Madrid).</p>
+	<p>Torsion is far better understood than rank: Mazur proved that the torsion subgroup of an elliptic curve over \(\mathbb{Q}\) is one of exactly fifteen groups. The question becomes which torsion a curve over \(\mathbb{Q}\) can acquire over larger fields, and that is governed by Galois representations.</p>
+	<p>The absolute Galois group \(G_{\mathbb{Q}} = \mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})\) acts on the \(\ell^n\)-torsion points \(E[\ell^n] \cong (\mathbb{Z}/\ell^n\mathbb{Z})^2\). Letting \(n\) grow gives the \(\ell\)-adic representation</p>
+	\[\rho_{E,\ell^\infty}\colon G_{\mathbb{Q}} \longrightarrow \mathrm{GL}_2(\mathbb{Z}_\ell),\]
+	<p>whose image determines the fields generated by \(\ell\)-power torsion points. For curves without complex multiplication, Rouse, Sutherland, and Zureick-Brown made a major step toward classifying every possible \(\ell\)-adic image, determining the complete list for some primes and a list expected to be complete for the rest.</p>
+
+	<p class="question">For a non-CM curve \(E/\mathbb{Q}\) and a subgroup \(T \subseteq E[\ell^N]\) of exponent \(\ell^N\), what are the best possible divisibility conditions on the degree \([\mathbb{Q}(T):\mathbb{Q}]\) of the field generated by its points, and which curves are the exceptions?</p>
+	<p class="question">For a CM elliptic curve over its minimal field of definition \(F\), what are the degrees \([F(T):F]\), and do analogous best-possible divisibility conditions hold? (This is part of my Ph.D. thesis.)</p>
+	<p>Knowing which degrees \([\mathbb{Q}(T):\mathbb{Q}]\) can occur is key to determining which torsion structures appear on curves over \(\mathbb{Q}\) after base change to fields of a given degree, and more broadly to the uniform boundedness of torsion over number fields.</p>
+
+	<!-- ================= ISOGENIES ================= -->
+	<h2 id="isogenies">Isogenies</h2>
+	<p class="subtitle">Joint with Rakvi (University of Maine).</p>
+	<p>An <em>isogeny</em> \(\phi\colon E \to E'\) over \(K\) is a non-constant map of elliptic curves, defined over \(K\), that sends the identity of \(E\) to the identity of \(E'\). The curves isogenous to \(E\) over \(K\) form its <em>isogeny graph</em>, with an edge for each isogeny of prime degree. Labeling every vertex \(E'\) with its torsion subgroup \(E'(K)_{\mathrm{tors}}\) gives the <em>isogeny-torsion graph</em>. Over \(\mathbb{Q}\), every possible isogeny-torsion graph is known, by work of Chiloyan and Lozano-Robledo.</p>
+
+	<p class="question">Which isogeny degrees, isogeny graph shapes, and isogeny-torsion graphs occur over infinitely many quadratic fields \(\mathbb{Q}(\sqrt{d})\)?</p>
+	<p class="question">Which shapes appear over quadratic fields that never appear over \(\mathbb{Q}\)? These correspond to quadratic points on high-genus modular curves.</p>
 
 	</main>
 </body>
