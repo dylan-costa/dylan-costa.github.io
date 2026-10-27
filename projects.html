@@ -55,6 +55,23 @@
 	<p>To try it, sign up for a free account on the live site above and send yourself (or a friend) a message.</p>
 	</div>
 
+	<h2>Teaching &amp; Machine Learning</h2>
+	<p class="subtitle">Projects that grew out of teaching calculus.</p>
+
+	<div class="project-card">
+	<div class="eyebrow">Machine Learning &middot; Calculus</div>
+	<h2>Calculus Adaptive Assessment</h2>
+	<div class="btn-row">
+		<a class="btn-pill" href="https://calc-adaptive-assessment-yhewzbw8npxanwpe8o4zqy.streamlit.app/" target="_blank">Play the guessing game</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/calc-adaptive-assessment" target="_blank">View on GitHub</a>
+		<a class="btn-pill" href="calc-assessment-summary.html">Technical Summary</a>
+		<a class="btn-pill" href="https://github.com/dylan-costa/calc-adaptive-assessment/blob/main/notes/lectures.pdf" target="_blank">Lecture Notes (PDF)</a>
+	</div>
+	<p>A machine-learning model of how hard a calculus derivative problem is, learned from an instructor's pairwise &ldquo;which of these two is harder?&rdquo; judgments. It is the foundation for an adaptive placement exam, which needs a difficulty score for every problem it might ask, including ones nobody has ever labeled.</p>
+	<p>A probabilistic grammar generates derivative problems, a step-tracing differentiator works out each one, and a Bradley&ndash;Terry model on 17 structural features learns difficulty from a few hundred of my own judgments, collected in a Streamlit labeling app. From there the project compares gradient boosting, active learning, and a recursive neural network that reads the expression tree, and explains individual predictions with Shapley values. Every step is paired with a section of lecture notes on the mathematics behind it.</p>
+	<p>In the live guessing game, you judge pairs of problems yourself, then see which one the model thinks is harder and why. Your answers (saved anonymously) help study how instructors, TAs, and students see difficulty differently.</p>
+	</div>
+
 	<h2>Outside of My Research</h2>
 	<p class="subtitle">Projects I've built for fun, away from my research.</p>
 
