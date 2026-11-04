@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATH 1071 — Unit 1 Lecture Notes</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        // No $ delimiters: this page uses $ for dollar amounts (money problems).
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Toggle self-check answers -->
+  <script>
+    function toggleSolution(id, btn) {
+      const solution = document.getElementById(id);
+      if (solution.style.display === "none") {
+        solution.style.display = "block";
+        btn.textContent = "Hide Answer";
+      } else {
+        solution.style.display = "none";
+        btn.textContent = "Show Answer";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn active">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="projects.html">Projects</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>MATH 1071 — Calculus for Business &amp; Economics</h1>
+    <p class="subtitle">Lecture Notes. This is NOT meant to be a substitute for coming to lecture or consulting the textbook directly, but rather a helpful resource to review for exams/ review what was discussed in lecture. Each section ends with a <strong>Self-Check</strong> taken from the in-class activity &mdash; try the problem first, then click the button to see the answer.</p>
+
+    <!-- Table of Contents -->
+    <nav class="toc toc-vertical" id="top">
+      <strong>Unit 1</strong> (Chapter 1 of the textbook)
+      <ol>
+        <li><a href="#sec1-1">Rules of Exponents</a></li>
+        <li><a href="#sec1-2">Review of Functions, Part A</a></li>
+        <li><a href="#sec1-3">Review of Functions, Part B</a></li>
+        <li><a href="#sec1-4">Lines</a></li>
+        <li><a href="#sec1-5">Polynomials, Rational &amp; Piecewise Functions</a></li>
+        <li><a href="#sec1-6">Mathematical Modeling</a></li>
+        <li><a href="#sec1-7">Exponential Functions</a></li>
+        <li><a href="#sec1-8">Logarithms</a></li>
+      </ol>
+    </nav>
+
+    <!-- ================= SECTION 1.1 ================= -->
+    <div class="unit-divider" id="sec1-1">
+      <div class="part-label">Rules of Exponents</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <h2 class="tex-section">Positive Exponents</h2>
+
+    <p>Exponents are shorthand for <strong>repeated multiplication</strong>. Instead of writing \(2\cdot2\cdot2\cdot2\cdot2\), we write \(2^5\).</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      For a positive integer \(n\),
+      \[
+      x^n = \underbrace{x\cdot x\cdots x}_{n \text{ times}}.
+      \]
+      The number \(x\) being multiplied is called the <strong>base</strong>, and \(n\), the number of times it is multiplied, is called the <strong>exponent</strong> (or <strong>power</strong>). We read \(x^n\) as "\(x\) to the \(n\)th power." Special cases: \(x^2\) is "\(x\) squared" and \(x^3\) is "\(x\) cubed."
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      2^3 = 2\cdot2\cdot2 = 8, \qquad 5^2 = 5\cdot 5 = 25, \qquad 10^4 = 10\cdot10\cdot10\cdot10 = 10{,}000, \qquad 7^1 = 7,
+      \]
+      \[
+      \left(\tfrac12\right)^3 = \tfrac12\cdot\tfrac12\cdot\tfrac12 = \tfrac18, \qquad x^4 = x\cdot x\cdot x\cdot x.
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (Watch the Parentheses)</span>
+      The exponent only applies to what it is directly attached to.
+      \[
+      (-3)^2 = (-3)(-3) = 9, \qquad\text{but}\qquad -3^2 = -(3\cdot 3) = -9.
+      \]
+      Similarly, \(2x^3 = 2\cdot x\cdot x\cdot x\), while \((2x)^3 = (2x)(2x)(2x) = 8x^3\).
+    </div>
+
+    <h3 class="tex-subsection">Where the Rules Come From</h3>
+
+    <p>Writing exponents out as repeated multiplication explains every rule below. You don't need to memorize them if you can rebuild them this way.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      x^2\cdot x^3 = (x\cdot x)(x\cdot x\cdot x) = x^5 \qquad\text{(count the } x\text{'s: } 2+3 = 5\text{)}
+      \]
+      \[
+      \frac{x^5}{x^2} = \frac{\cancel{x}\cdot\cancel{x}\cdot x\cdot x\cdot x}{\cancel{x}\cdot\cancel{x}} = x^3 \qquad\text{(two } x\text{'s cancel: } 5-2 = 3\text{)}
+      \]
+      \[
+      (x^2)^3 = x^2\cdot x^2\cdot x^2 = x^6 \qquad\text{(three groups of two: } 2\cdot 3 = 6\text{)}
+      \]
+      \[
+      (xy)^2 = (xy)(xy) = x\cdot x\cdot y\cdot y = x^2y^2
+      \]
+    </div>
+
+    <h2 class="tex-section">Zero and Negative Exponents</h2>
+
+    <p>So far an exponent counts how many times we multiply. But what should \(2^0\) or \(2^{-1}\) mean? You can't multiply 2 by itself "zero times" or "negative one times." Look at the pattern of powers of 2. Moving <em>down</em> one row means dividing by 2:</p>
+
+    <table class="tex-table">
+      <tr><th>\(2^5\)</th><th>\(2^4\)</th><th>\(2^3\)</th><th>\(2^2\)</th><th>\(2^1\)</th><th>\(2^0\)</th><th>\(2^{-1}\)</th><th>\(2^{-2}\)</th></tr>
+      <tr><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td><td>\(\tfrac12\)</td><td>\(\tfrac14\)</td></tr>
+    </table>
+
+    <p>Continuing the "divide by 2" pattern past \(2^1\) forces the following rules.</p>
+
+    <div class="theorem">
+      <span class="label">Zero and Negative Exponents</span>
+      \[
+      a^0 = 1 \quad (a \neq 0), \qquad\qquad a^{-b} = \frac{1}{a^b}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      <ol>
+        <li>\(3^{-2} = \dfrac{1}{3^2} = \dfrac19\)</li>
+        <li>\(5^0 = 1\)</li>
+        <li>\(4^2\cdot 2^{-4} = 16\cdot \dfrac1{16} = 1\)</li>
+      </ol>
+    </div>
+
+    <h2 class="tex-section">More Exponent Rules</h2>
+
+    <div class="theorem">
+      <span class="label">Rules of Exponents</span>
+      \[
+      \begin{aligned}
+      x^m\cdot x^n &= x^{m+n} &&\text{(same base: add exponents)}\\
+      \frac{x^m}{x^n} &= x^{m-n} &&\text{(same base, divide: subtract exponents)}\\
+      (x^m)^n &= x^{mn} &&\text{(power to a power: multiply)}\\
+      (xy)^n &= x^n y^n, \qquad \left(\frac{x}{y}\right)^n = \frac{x^n}{y^n}\\
+      \sqrt[n]{x} &= x^{1/n}, \qquad \sqrt[n]{x^m} = x^{m/n} &&\text{(power on top, root on bottom)}
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      A very common mistake: exponents do <strong>not</strong> distribute over addition. In general
+      \((x+y)^n \neq x^n + y^n\). For example, \((1+2)^2 = 9\) but \(1^2+2^2 = 5\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Some quick examples of each rule:
+      \[
+      2^3\cdot 2^2 = 2^{5}, \qquad \frac{2^3}{2^2} = 2^{3-2} = 2, \qquad (2^3)^2 = 2^{6}, \qquad (1\cdot 2)^2 = 1^2\cdot 2^2, \qquad \sqrt{x^3} = x^{3/2}, \qquad \sqrt[4]{x^5} = x^{5/4}.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Simplifying Expressions</h3>
+
+    <p>To simplify a messy expression, split it up so you can focus on one variable at a time, convert every radical to a fractional exponent, and then combine exponents on the same base.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Simplify \(\dfrac{x^3\sqrt z}{y^2z^5}\) so there are no radicals and no division.
+      <p>Split by variable:</p>
+      \[
+      \frac{x^3\sqrt z}{y^2 z^5} = x^3\cdot\frac{1}{y^2}\cdot\frac{\sqrt z}{z^5}.
+      \]
+      <p>Since \(\frac{1}{y^2} = y^{-2}\) and \(\frac{\sqrt z}{z^5} = \frac{z^{1/2}}{z^5} = z^{1/2-5} = z^{-9/2}\), we get</p>
+      \[
+      x^3y^{-2}z^{-9/2}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Simplify \(\dfrac{x^2\sqrt[4]{z^8}}{(xy)^2z^{-4}}\).
+      \[
+      \frac{x^2 z^{8/4}}{x^2y^2z^{-4}} = x^{2}x^{-2}\,y^{-2}\,z^{2}z^{4} = y^{-2}z^{6}.
+      \]
+    </div>
+
+    <!-- Self-check 1.1 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 1: Rules of Exponents</p>
+      <p><strong>(a)</strong> Simplify so that there are only positive exponents and <em>no</em> fractional exponents (use radicals instead):</p>
+      \[
+      \text{(i)}\ \ \frac{(xy)^3 z}{x^{5/2}y^5z^{1/2}} \qquad\qquad \text{(ii)}\ \ \frac{x^3(yz)^{4/5}}{y^{-2}z}
+      \]
+      <p><strong>(b)</strong> Use exponent rules and the fact that \(\sqrt[3]{64} = 4\) to show that \(8^{4/3} = 16\).</p>
+      <button onclick="toggleSolution('sc1-1', this)">Show Answer</button>
+      <div id="sc1-1" class="solution" style="display:none;">
+        <p><strong>(a)(i)</strong> Expand the top, then subtract exponents base by base:</p>
+        \[
+        \frac{x^3y^3z}{x^{5/2}y^5z^{1/2}} = x^{3-5/2}\,y^{3-5}\,z^{1-1/2} = x^{1/2}y^{-2}z^{1/2} = \boxed{\frac{\sqrt{xz}}{y^2}}.
+        \]
+        <p><strong>(a)(ii)</strong> Distribute the \(4/5\) power, then combine:</p>
+        \[
+        \frac{x^3y^{4/5}z^{4/5}}{y^{-2}z} = x^3\,y^{4/5+2}\,z^{4/5-1} = x^3y^{14/5}z^{-1/5} = \frac{x^3y^{14/5}}{z^{1/5}} = \boxed{\frac{x^3\sqrt[5]{y^{14}}}{\sqrt[5]{z}}}
+        \]
+        <p>(Equivalently \(x^3y^2\sqrt[5]{y^4/z}\).)</p>
+        <p><strong>(b)</strong> The trick is to rewrite \(8^{4/3}\) so that a cube root of 64 shows up:</p>
+        \[
+        8^{4/3} = \left(8^2\right)^{2/3} = 64^{2/3} = \left(64^{1/3}\right)^2 \overset{\text{fact}}{=} 4^2 = 16.
+        \]
+        <p>The fact \(\sqrt[3]{64} = 64^{1/3} = 4\) is used in the second-to-last step.</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.2 ================= -->
+    <div class="unit-divider" id="sec1-2">
+      <div class="part-label">Review of Functions, Part A</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Define functions, domain, codomain and range; represent functions with tables, graphs and formulas; evaluate functions using function notation; find the natural domain and write it in interval notation; find zeros and intercepts and use the vertical line test.
+    </div>
+
+    <h2 class="tex-section">What Is a Function?</h2>
+
+    <p>Informally, a function is a rule that gives <strong>exactly one output for every input</strong>.</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>function</strong> is a map that assigns to each element of the input set (called the <strong>domain</strong>) exactly one element of the target/output set (called the <strong>codomain</strong>). The set of outputs that actually get hit is called the <strong>range</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Suppose a function sends \(1\mapsto 8\), \(2\mapsto 9\), \(3\mapsto 10\), and \(4\mapsto 9\), with target set \(\{8,9,10,11\}\). Then
+      \[
+      \text{Domain} = \{1,2,3,4\}, \qquad \text{Codomain} = \{8,9,10,11\}, \qquad \text{Range} = \{8,9,10\}.
+      \]
+      Nothing gets sent to 11, so it is in the codomain but not the range. It is fine that two inputs share the output 9.
+    </div>
+
+    <h3 class="tex-subsection">Representing Functions</h3>
+
+    <p>The same function can be described several ways: as a diagram of arrows, a <strong>table</strong>, a <strong>graph</strong>, or a <strong>formula</strong> (for example \(f(x)=x^2\), or a piecewise rule such as \(f(x) = x^2\) for \(x\ge 0\) and \(5x\) for \(x&lt;0\)).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Does each of the following represent a function? If so, give the domain and range.
+      <ul>
+        <li>\(y = x^3\): yes. Domain \((-\infty,\infty)\), range \((-\infty,\infty)\).</li>
+        <li>\(y = \pm\sqrt{x}\): <strong>not</strong> a function &mdash; the input \(x=4\) gives two outputs, \(2\) and \(-2\).</li>
+        <li>The table \(0\mapsto 3,\ 1\mapsto 3,\ 2\mapsto 3\): yes. Domain \(\{0,1,2\}\), range \(\{3\}\).</li>
+        <li>The table \(0\mapsto 5,\ 1\mapsto 6,\ 2\mapsto 7,\ 1\mapsto 8\): <strong>not</strong> a function &mdash; the input 1 has two outputs.</li>
+      </ul>
+    </div>
+
+    <div class="theorem">
+      <span class="label">Vertical Line Test</span>
+      A graph is the graph of a function if and only if every vertical line crosses it <em>at most once</em>.
+    </div>
+
+    <h2 class="tex-section">Function Notation</h2>
+
+    <p>Think of \(f(x) = x^2+3x\) as \(f(\text{input}) = (\text{input})^2 + 3(\text{input})\). Whatever goes in the parentheses replaces <em>every</em> \(x\).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = x^2 + 3x\). Then
+      \[
+      \begin{aligned}
+      f(1) &= 1^2+3(1) = 4, \qquad f(0) = 0, \qquad f(2) = 4+6 = 10,\\
+      f(x+2) &= (x+2)^2 + 3(x+2) = x^2+4x+4+3x+6 = x^2+7x+10,\\
+      f(a+h) &= (a+h)^2+3(a+h) = a^2+2ah+h^2+3a+3h.
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = \sqrt{4-x}\). Then \(f(1) = \sqrt3\) and \(f(0) = 2\), but \(f(6) = \sqrt{-2}\) is <strong>not allowed</strong> &mdash; we cannot take the square root of a negative number, so \(6\) is not in the domain.
+    </div>
+
+    <h2 class="tex-section">Finding the Natural Domain</h2>
+
+    <p><strong>Idea:</strong> the natural domain is the set of all allowable inputs. So we ask: what <em>can't</em> we do?</p>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Domain Restrictions to Check</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>No square root (or any even root) of a negative number: set the inside \(\ge 0\).</li>
+          <li>No division by zero: set the denominator \(\neq 0\).</li>
+          <li>(Later, with logarithms) No log or ln of zero or a negative number: set the inside \(&gt; 0\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3 class="tex-subsection">Interval Notation</h3>
+
+    <p>We use square brackets \([\ ,\ ]\) when an endpoint is <em>included</em> (\(\le,\ \ge\)) and parentheses \((\ ,\ )\) when it is <em>not</em> (\(&lt;,\ &gt;\), or \(\pm\infty\)). The symbol \(\cup\) ("union") glues intervals together.</p>
+
+    <table class="tex-table">
+      <tr><th>Inequality</th><th>Interval notation</th></tr>
+      <tr><td>\(2 &lt; x &lt; 10\)</td><td>\((2,10)\)</td></tr>
+      <tr><td>\(x \ge 5\)</td><td>\([5,\infty)\)</td></tr>
+      <tr><td>\(x \ne 2\)</td><td>\((-\infty,2)\cup(2,\infty)\)</td></tr>
+      <tr><td>\(|x| &gt; 6\)</td><td>\((-\infty,-6)\cup(6,\infty)\)</td></tr>
+    </table>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the domain of \(f(x) = \dfrac{\sqrt{x-1}}{x^2+2x-24}\).
+      <p>We need two things:</p>
+      \[
+      x - 1 \ge 0 \;\Longrightarrow\; x\ge 1, \qquad\qquad x^2+2x-24 = (x-4)(x+6) \ne 0 \;\Longrightarrow\; x\ne 4,\ x\ne -6.
+      \]
+      <p>The restriction \(x\neq -6\) is already handled by \(x\ge 1\). Putting it together, the domain is \([1,4)\cup(4,\infty)\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      What is the domain of each function?
+      <ol type="a">
+        <li>\(x-1\): \((-\infty,\infty)\), all real numbers.</li>
+        <li>\(\sqrt{2-x}\): need \(2-x\ge 0\), so \(x\le 2\). Domain \((-\infty,2]\).</li>
+        <li>\(\dfrac{1}{x-1}\): need \(x\ne 1\). Domain \((-\infty,1)\cup(1,\infty)\).</li>
+        <li>\(\dfrac{\sqrt{2-x}}{x-1}\): need \(x\le 2\) <em>and</em> \(x\ne 1\). Domain \((-\infty,1)\cup(1,2]\).</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find a function whose domain is \([0,1)\cup(1,\infty)\).
+      <p>We want \(x\ge 0\) (a square root of \(x\)) and \(x\ne 1\) (a factor of \(x-1\) in a denominator). One answer is \(f(x) = \dfrac{\sqrt x}{x-1}\).</p>
+    </div>
+
+    <h2 class="tex-section">Zeros and Intercepts</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>zeros</strong> (or <strong>\(x\)-intercepts</strong>) of \(f\) are the inputs where \(f(x) = 0\). The <strong>\(y\)-intercept</strong> is the value \(f(0)\), if \(0\) is in the domain.
+    </div>
+
+    <p>A function can have many zeros but at most one \(y\)-intercept (otherwise the vertical line \(x=0\) would hit the graph twice).</p>
+
+    <!-- Self-check 1.2 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 2: Introduction to Functions</p>
+      <p><strong>(a)</strong> Determine whether each is a function. If it is, find the domain, \(x\)-intercepts, and \(y\)-intercept. If not, explain why.</p>
+      \[
+      \text{(i)}\ f(x) = \frac{\sqrt x - 3}{x^2+2x-8} \qquad
+      \text{(ii)}\ f(x) = \begin{cases} x+1 & \text{if } x \text{ is even}\\ x & \text{if } x \text{ is odd}\\ 0 & \text{if } x = 0\end{cases} \qquad
+      \text{(iii)}\ f(x) = \frac{e^x(x^2-9)}{(7-x)^{1/2}}
+      \]
+      <p><strong>(b)</strong> The domain of \(x^{1/2} = \sqrt x\) is \([0,\infty)\). What is the domain of \(x^{1/3}\)? What about \(x^{1/n}\) for a positive integer \(n\)?</p>
+      <button onclick="toggleSolution('sc1-2', this)">Show Answer</button>
+      <div id="sc1-2" class="solution" style="display:none;">
+        <p><strong>(i)</strong> This is a function. Domain: we need \(x\ge 0\) and \(x^2+2x-8 = (x+4)(x-2)\ne 0\), so \(x\ne 2\) (and \(x \ne -4\), already excluded).</p>
+        \[
+        \text{Domain} = [0,2)\cup(2,\infty).
+        \]
+        <p>Zeros: the top is zero when \(\sqrt x = 3\), i.e. \(x = 9\). The \(y\)-intercept is \(f(0) = \dfrac{0-3}{-8} = \dfrac38\).</p>
+        <p><strong>(ii)</strong> <strong>Not</strong> a function. The number \(0\) is even, so the first rule says \(f(0) = 1\), but the third rule says \(f(0) = 0\). One input gets two outputs.</p>
+        <p><strong>(iii)</strong> This is a function. The square root is in the denominator, so we need \(7-x &gt; 0\) (strictly), i.e. \(x&lt;7\). Domain \((-\infty,7)\).</p>
+        <p>Zeros: \(e^x\) is never zero, so we need \(x^2-9 = 0\), giving \(x = \pm 3\) (both are in the domain). The \(y\)-intercept is \(f(0) = \dfrac{1\cdot(-9)}{\sqrt7} = -\dfrac{9}{\sqrt7}\).</p>
+        <p><strong>(b)</strong> Cube roots of negative numbers are fine (\(\sqrt[3]{-8} = -2\)), so \(x^{1/3}\) has domain \((-\infty,\infty)\). In general:</p>
+        \[
+        x^{1/n} \text{ has domain } \begin{cases}[0,\infty) & n \text{ even},\\ (-\infty,\infty) & n \text{ odd}.\end{cases}
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.3 ================= -->
+    <div class="unit-divider" id="sec1-3">
+      <div class="part-label">Review of Functions, Part B</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Create new functions from old by adding, subtracting, multiplying and dividing; define the composition of functions; identify where functions are increasing, decreasing, concave up and concave down.
+    </div>
+
+    <h2 class="tex-section">Combining Functions</h2>
+
+    <p>Given functions \(f\) and \(g\), we can add, subtract, multiply and divide them to get new functions. Things to be careful of:</p>
+    <ul>
+      <li><strong>Subtraction:</strong> distribute the negative, e.g. \(x^2+1 - (3x+2) = x^2 - 3x - 1\).</li>
+      <li><strong>Division:</strong> we can't divide by zero, so check the "bottom" for new domain restrictions.</li>
+      <li><strong>Dividing fractions:</strong> multiply by the reciprocal, e.g. \(\dfrac{x^2+1}{x+1}\div\dfrac{1}{x^3} = \dfrac{x^2+1}{x+1}\cdot x^3\).</li>
+    </ul>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = x^2+4x-12\) and \(g(x) = 4x-8\).
+      \[
+      \begin{aligned}
+      f(x)+g(x) &= x^2+8x-20 = (x-2)(x+10),\\
+      f(x)-g(x) &= x^2+4x-12-(4x-8) = x^2-4 = (x+2)(x-2),\\
+      f(x)g(x) &= (x^2+4x-12)(4x-8) = 4x^3+8x^2-80x+96,\\
+      \frac{f(x)}{g(x)} &= \frac{(x-2)(x+6)}{4(x-2)} = \frac{x+6}{4}, \quad x\neq 2.
+      \end{aligned}
+      \]
+      <p>Even though the \((x-2)\) cancels, \(x = 2\) is still <em>not</em> in the domain of \(f/g\), because the original denominator \(4x-8\) is zero there.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(h(x) = \dfrac{2x}{x-5}\) and \(g(x) = x^2-25\). Then
+      \[
+      h(x)g(x) = \frac{2x(x-5)(x+5)}{x-5} = 2x(x+5) \ (x\ne 5), \qquad
+      \frac{g(x)}{h(x)} = (x^2-25)\cdot\frac{x-5}{2x} = \frac{(x-5)^2(x+5)}{2x}.
+      \]
+    </div>
+
+    <h2 class="tex-section">Composition of Functions</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>composition</strong> \(f\circ g\) (read "\(f\) compose \(g\)") is
+      \[
+      (f\circ g)(x) = f(g(x)),
+      \]
+      and similarly \((g\circ f)(x) = g(f(x))\). To compute \(f(g(x))\), plug the whole function \(g(x)\) in as the input of \(f\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 2x^2+x\) and \(g(x) = x^2-1\). Then
+      \[
+      (f\circ g)(x) = f(x^2-1) = 2(x^2-1)^2 + (x^2-1), \qquad
+      (g\circ f)(x) = g(2x^2+x) = (2x^2+x)^2 - 1.
+      \]
+      <p>These are different! In general \(f\circ g \ne g\circ f\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(h(x) = 3x^2-1\) and \(k(x) = 2x\). Then
+      \[
+      (h\circ k)(x) = 3(2x)^2-1, \qquad (k\circ h)(x) = 2(3x^2-1), \qquad (h\circ h)(x) = 3(3x^2-1)^2-1.
+      \]
+    </div>
+
+    <h2 class="tex-section">Increasing, Decreasing, and Concavity</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A function is <strong>increasing</strong> on an interval if for all points \(x &lt; y\) in the interval, \(f(x)\le f(y)\). It is <strong>decreasing</strong> on an interval if for all \(x&lt;y\) in the interval, \(f(x)\ge f(y)\).
+    </div>
+
+    <p>Another way to say it: reading the graph <em>left to right</em>, a function is increasing where the outputs are getting bigger (the graph goes up) and decreasing where the outputs are getting smaller (the graph goes down).</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A function is <strong>concave up</strong> if it is getting steeper as you move left to right &mdash; it is shaped like a cup and "can hold water," and its secant lines lie <em>above</em> the graph.
+      A function is <strong>concave down</strong> if it is getting less steep as you move left to right &mdash; it is shaped like a frown and "can't hold water," and its secant lines lie <em>below</em> the graph.
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Increasing/decreasing and concavity are separate questions. A graph can be increasing and concave up (getting steeper upward), or increasing and concave down (still rising, but leveling off). Always answer with intervals of \(x\)-values.
+    </div>
+
+    <!-- Self-check 1.3 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 3 and 4: Functions; Function Composition/Characteristics</p>
+      <p><strong>(a)</strong> Find the domain, \(x\)-intercepts, and \(y\)-intercept of \(f(x) = \dfrac{x^2-1}{x\sqrt{3x-6}}\).</p>
+      <p><strong>(b)</strong> Let \(f(x) = x^2+1\) and \(g(x) = 2x\). Find \(f(x)+g(x)\), \(f(x)g(x)\), \((f\circ g)(x)\), and \((g\circ f)(x)\).</p>
+      <p><strong>(c)</strong> Let \(f(x) = x^4-2x^2+1\) and \(g(x) = 7\sqrt x\). Find \((f\circ g)(x)\) and its domain. Then find \((g\circ f)(x)\).</p>
+      <p><strong>(d)</strong> Below is the graph of \(f(x) = \tfrac13x^3-4x\) on \([-3,3]\). Where is it increasing, decreasing, concave up, and concave down?</p>
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Graph of one third x cubed minus 4x on the interval from -3 to 3, with a peak near x = -2 and a valley near x = 2">
+          <line x1="20" y1="120" x2="300" y2="120" stroke="#888" stroke-width="1"/>
+          <line x1="160" y1="15" x2="160" y2="225" stroke="#888" stroke-width="1"/>
+          <g stroke="#888" stroke-width="1">
+            <line x1="40" y1="116" x2="40" y2="124"/><line x1="80" y1="116" x2="80" y2="124"/><line x1="120" y1="116" x2="120" y2="124"/>
+            <line x1="200" y1="116" x2="200" y2="124"/><line x1="240" y1="116" x2="240" y2="124"/><line x1="280" y1="116" x2="280" y2="124"/>
+            <line x1="156" y1="45" x2="164" y2="45"/><line x1="156" y1="195" x2="164" y2="195"/>
+          </g>
+          <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+            <text x="40" y="137">−3</text><text x="80" y="137">−2</text><text x="120" y="137">−1</text>
+            <text x="200" y="137">1</text><text x="240" y="137">2</text><text x="280" y="137">3</text>
+            <text x="172" y="49">5</text><text x="174" y="199">−5</text>
+            <text x="304" y="116">x</text><text x="168" y="14">y</text>
+          </g>
+          <polyline fill="none" stroke="#002d62" stroke-width="2" points="40.0,75.0 44.0,67.9 48.0,61.8 52.0,56.4 56.0,51.9 60.0,48.1 64.0,45.1 68.0,42.8 72.0,41.2 76.0,40.3 80.0,40.0 84.0,40.3 88.0,41.2 92.0,42.6 96.0,44.5 100.0,46.9 104.0,49.7 108.0,53.0 112.0,56.6 116.0,60.7 120.0,65.0 124.0,69.6 128.0,74.6 132.0,79.7 136.0,85.1 140.0,90.6 144.0,96.3 148.0,102.1 152.0,108.0 156.0,114.0 160.0,120.0 164.0,126.0 168.0,132.0 172.0,137.9 176.0,143.7 180.0,149.4 184.0,154.9 188.0,160.3 192.0,165.4 196.0,170.4 200.0,175.0 204.0,179.3 208.0,183.4 212.0,187.0 216.0,190.3 220.0,193.1 224.0,195.5 228.0,197.4 232.0,198.8 236.0,199.7 240.0,200.0 244.0,199.7 248.0,198.8 252.0,197.2 256.0,194.9 260.0,191.9 264.0,188.1 268.0,183.6 272.0,178.2 276.0,172.1 280.0,165.0"/>
+        </svg>
+        <figcaption>\(f(x) = \tfrac13x^3 - 4x\) on \([-3,3]\)</figcaption>
+      </figure>
+      <button onclick="toggleSolution('sc1-3', this)">Show Answer</button>
+      <div id="sc1-3" class="solution" style="display:none;">
+        <p><strong>(a)</strong> The square root is in the denominator, so we need \(3x-6 &gt; 0\) (strictly), i.e. \(x &gt; 2\). We also need \(x\ne0\), which \(x&gt;2\) already guarantees.</p>
+        \[
+        \text{Domain} = (2,\infty).
+        \]
+        <p>Zeros: \(x^2-1 = 0\) gives \(x = \pm1\), but <em>neither</em> is in the domain, so there are <strong>no \(x\)-intercepts</strong>. Since \(0\) is not in the domain, there is <strong>no \(y\)-intercept</strong> either.</p>
+        <p><strong>(b)</strong></p>
+        \[
+        \begin{aligned}
+        f(x)+g(x) &= x^2+2x+1 = (x+1)^2, & f(x)g(x) &= 2x(x^2+1) = 2x^3+2x,\\
+        (f\circ g)(x) &= (2x)^2+1 = 4x^2+1, & (g\circ f)(x) &= 2(x^2+1) = 2x^2+2.
+        \end{aligned}
+        \]
+        <p><strong>(c)</strong> Plug \(7\sqrt x\) into \(f\):</p>
+        \[
+        (f\circ g)(x) = (7\sqrt x)^4 - 2(7\sqrt x)^2 + 1 = 2401x^2 - 98x + 1.
+        \]
+        <p>Even though the simplified answer looks like it accepts every \(x\), the input first has to go through \(g(x) = 7\sqrt x\), so the domain is \([0,\infty)\).</p>
+        \[
+        (g\circ f)(x) = 7\sqrt{x^4-2x^2+1}\;\left(= 7\sqrt{(x^2-1)^2} = 7|x^2-1|\right).
+        \]
+        <p><strong>(d)</strong> Reading the graph left to right: it rises to a peak at \(x=-2\), falls to a valley at \(x = 2\), then rises again. It is shaped like a frown left of \(x=0\) and like a cup right of \(x=0\).</p>
+        <ul>
+          <li>Increasing: \([-3,-2)\cup(2,3]\)</li>
+          <li>Decreasing: \((-2,2)\)</li>
+          <li>Concave down: \([-3,0)\)</li>
+          <li>Concave up: \((0,3]\)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.4 ================= -->
+    <div class="unit-divider" id="sec1-4">
+      <div class="part-label">Lines</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn what makes a function's graph a line; find the equation of a line in point-slope form and slope-intercept form.
+    </div>
+
+    <h2 class="tex-section">Slope</h2>
+
+    <p>The key idea: <strong>lines have constant slope</strong>.</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>slope</strong> of the line through \((x_1,y_1)\) and \((x_2,y_2)\) is
+      \[
+      m = \frac{\text{rise}}{\text{run}} = \frac{\Delta y}{\Delta x} = \frac{y_2-y_1}{x_2-x_1}.
+      \]
+    </div>
+
+    <p>If a line has slope \(m\) and passes through \((a,b)\), then for any other point \((x,y)\) on the line, the slope from \((a,b)\) to \((x,y)\) is still \(m\):</p>
+    \[
+    \frac{y-b}{x-a} = m \quad\Longrightarrow\quad y-b = m(x-a).
+    \]
+
+    <h2 class="tex-section">Forms of a Line</h2>
+
+    <div class="definition">
+      <span class="label">Definition (Point-Slope Form)</span>
+      Given a point \((x_1,y_1)\) and slope \(m\), the line through that point with that slope is
+      \[
+      y - y_1 = m(x-x_1).
+      \]
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition (Slope-Intercept Form)</span>
+      \[
+      y = mx + b,
+      \]
+      where \(m\) is the slope and \(b\) is the \(y\)-intercept (the line passes through \((0,b)\)).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the point-slope form of the line through \((1,2)\) with slope \(5\).
+      \[
+      y - 2 = 5(x-1).
+      \]
+      <p>Solving for \(y\): \(y = 5x - 5 + 2 = 5x - 3\). So the slope is \(5\) and the \(y\)-intercept is \(-3\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      A line passes through \((0,1)\) and \((5,5)\). The \(y\)-intercept is \(b = 1\), and the slope is \(m = \frac{5-1}{5-0} = \frac45\), so
+      \[
+      y = \tfrac45 x + 1.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Recognizing a Line from a Table</h3>
+
+    <p>When the \(x\)-values go up by a constant step, a table comes from a line exactly when the \(y\)-values change by a constant amount.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Does each table represent a line? If so, find its equation.
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <tr><th>\(f(x)\)</th><td>2</td><td>5</td><td>8</td><td>11</td><td>14</td></tr>
+      </table>
+      <p>The outputs go up by \(3\) each time, so this is a line with slope 3. Using \((1,2)\): \(y-2 = 3(x-1)\), so \(y = 3x-1\). (Using \((5,14)\) instead gives \(y-14 = 3(x-5)\), which simplifies to the same line.)</p>
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>2</td><td>4</td><td>6</td><td>8</td></tr>
+        <tr><th>\(f(x)\)</th><td>2</td><td>4</td><td>8</td><td>16</td></tr>
+      </table>
+      <p>The outputs go up by 2, then 4, then 8 &mdash; not constant, so this is <strong>not</strong> a line. (It is the exponential \(f(x) = 2^{x/2}\); see Exponential Functions below.)</p>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Two different lines with the <em>same</em> slope are parallel, so they never intersect.
+    </div>
+
+    <!-- Self-check 1.4 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 5 and 6: Function Characteristics and Lines; Lines and Polynomials</p>
+      <p><strong>(a)</strong> Find the equation of the line through \((1,2)\) and \((-1,4)\) in both point-slope and slope-intercept form. Then find a second line \(g(x)\) that never intersects it.</p>
+      <p><strong>(b)</strong> Find the equation of the line through \((-5,-3)\) and \((1,7)\) in both point-slope and slope-intercept form.</p>
+      <button onclick="toggleSolution('sc1-4', this)">Show Answer</button>
+      <div id="sc1-4" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Slope:</p>
+        \[
+        m = \frac{4-2}{-1-1} = \frac{2}{-2} = -1.
+        \]
+        <p>Point-slope form using \((1,2)\): \(\ y-2 = -(x-1)\). Slope-intercept form: \(\ y = -x+3\).</p>
+        <p>A line that never meets it must be parallel: same slope \(-1\), different \(y\)-intercept. For example \(g(x) = -x+5\).</p>
+        <p><strong>(b)</strong> Slope:</p>
+        \[
+        m = \frac{7-(-3)}{1-(-5)} = \frac{10}{6} = \frac53.
+        \]
+        <p>Point-slope form using \((1,7)\): \(\ y - 7 = \tfrac53(x-1)\). Solving for \(y\):</p>
+        \[
+        y = \tfrac53x - \tfrac53 + 7 = \tfrac53 x + \tfrac{16}{3}.
+        \]
+        <p>Check with the other point: \(\tfrac53(-5)+\tfrac{16}3 = -\tfrac{25}3+\tfrac{16}3 = -3\). ✓</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.5 ================= -->
+    <div class="unit-divider" id="sec1-5">
+      <div class="part-label">Polynomials, Rational &amp; Piecewise Functions</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn what polynomials and power functions are and the basic shapes of their graphs; find zeros of polynomials by factoring and the quadratic formula; learn what rational functions are and find their domains; learn about piecewise functions and their graphs.
+    </div>
+
+    <h2 class="tex-section">Polynomials</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>polynomial</strong> is a function of the form
+      \[
+      a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0,
+      \]
+      where \(a_0, a_1, \dots, a_n\) are real numbers and \(n\) is a non-negative integer. The integer \(n\) (the highest power) is called the <strong>degree</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Which are polynomials?
+      <ul>
+        <li>\(x^2+2x+1\): yes, degree 2. \(\quad 2x+1\): yes, degree 1. \(\quad x^5\): yes, degree 5. \(\quad 8\): yes, degree 0.</li>
+        <li>\(\sqrt x = x^{1/2}\): no &mdash; fractional powers are not allowed.</li>
+        <li>\(x^3 + \frac1x = x^3+x^{-1}\): no &mdash; negative powers are not allowed.</li>
+        <li>\(\dfrac{2x}{x^2+1}\): no &mdash; dividing by a polynomial is not allowed (this is a <em>rational</em> function).</li>
+      </ul>
+    </div>
+
+    <h3 class="tex-subsection">Power Functions</h3>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>power function</strong> is a function of the form \(f(x) = ax^b\), where \(a\) and \(b\) are real numbers.
+    </div>
+
+    <p>Examples: \(x^5\), \(8\), \(\sqrt x = x^{1/2}\), \(\frac5x = 5x^{-1}\), \(4x^3\), \(3x^2\).</p>
+
+    <h3 class="tex-subsection">End Behavior</h3>
+
+    <p><strong>End behavior</strong> describes what \(f(x)\) does as \(x\to\infty\) and as \(x\to-\infty\).</p>
+
+    <table class="tex-table">
+      <tr><th>Function</th><th>As \(x\to -\infty\)</th><th>As \(x\to\infty\)</th></tr>
+      <tr><td>constant \(c\)</td><td>\(f(x)\to c\)</td><td>\(f(x)\to c\)</td></tr>
+      <tr><td>\(x^2, x^4, x^6,\dots\) (even)</td><td>\(f(x)\to\infty\)</td><td>\(f(x)\to\infty\)</td></tr>
+      <tr><td>\(x, x^3, x^5,\dots\) (odd)</td><td>\(f(x)\to-\infty\)</td><td>\(f(x)\to\infty\)</td></tr>
+      <tr><td>\(-x^2, -x^4,\dots\)</td><td>\(f(x)\to-\infty\)</td><td>\(f(x)\to-\infty\)</td></tr>
+      <tr><td>\(-x, -x^3,\dots\)</td><td>\(f(x)\to\infty\)</td><td>\(f(x)\to-\infty\)</td></tr>
+    </table>
+
+    <div class="theorem">
+      <span class="label">End Behavior of Polynomials</span>
+      The graph of a polynomial has the same end behavior as its <strong>highest degree term</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = x^2 - x^3 + 2x\). The highest degree term is \(-x^3\), so as \(x\to\infty\), \(f(x)\to-\infty\), and as \(x\to-\infty\), \(f(x)\to\infty\). (In the middle, other terms matter and different things can happen.)
+    </div>
+
+    <h2 class="tex-section">Finding Zeros</h2>
+
+    <p>To find the zeros (roots) of a polynomial, <strong>factor it, then set each factor equal to 0</strong>.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the zeros of \(x^2-x^3+2x\).
+      \[
+      \begin{aligned}
+      x^2 - x^3 + 2x &= 0\\
+      -x(x^2 - x - 2) &= 0\\
+      -x(x+1)(x-2) &= 0
+      \end{aligned}
+      \]
+      <p>(For \(x^2-x-2\) we want two numbers that multiply to \(-2\) and add to \(-1\): \(1\) and \(-2\).) So the zeros are \(x = 0,\ -1,\ 2\). Combined with the end behavior from before, the graph comes down from the upper left, crosses at \(-1\), \(0\), and \(2\), and heads down to the lower right.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Factor, then solve.
+      <ol type="A">
+        <li>\(x^2+6x+8 = (x+2)(x+4) = 0\), so \(x = -2, -4\).</li>
+        <li>\(x^2+4x-5 = (x-1)(x+5) = 0\), so \(x = 1,-5\).</li>
+        <li>\(x^3-4x^2-21x = x(x^2-4x-21) = x(x+3)(x-7) = 0\), so \(x = 0,-3,7\).</li>
+        <li>\(3x^2+5x-2 = 0\). Split the middle term using \(6x - x\) (since \(3\cdot(-2) = -6 = 6\cdot(-1)\) and \(6 + (-1) = 5\)):
+          \[
+          3x^2+6x-x-2 = 3x(x+2) - (x+2) = (3x-1)(x+2) = 0,
+          \]
+          so \(x = \tfrac13, -2\).</li>
+        <li>\(2x-1 = x^2\). Move everything to one side: \(x^2-2x+1 = (x-1)^2 = 0\), so \(x = 1\).</li>
+        <li>\(x^2+4x = 10\), i.e. \(x^2+4x-10 = 0\). This one doesn't factor nicely &mdash; see below.</li>
+      </ol>
+    </div>
+
+    <div class="theorem">
+      <span class="label">Quadratic Formula</span>
+      If \(ax^2+bx+c = 0\), then
+      \[
+      x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(x^2+4x = 10\). Rewrite as \(x^2+4x-10 = 0\), so \(a=1,\ b=4,\ c=-10\).
+      \[
+      x = \frac{-4\pm\sqrt{16-4(1)(-10)}}{2(1)} = \frac{-4\pm\sqrt{56}}{2} = \frac{-4\pm2\sqrt{14}}{2} = -2\pm\sqrt{14}.
+      \]
+      <p>(We simplified \(\sqrt{56} = \sqrt{4\cdot14} = 2\sqrt{14}\).)</p>
+    </div>
+
+    <h2 class="tex-section">Rational Functions</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>rational function</strong> is a function of the form \(\dfrac{\text{polynomial}}{\text{polynomial}}\).
+    </div>
+
+    <p>Examples: \(\dfrac{4x^2+2x+8}{x^2}\), \(\ \dfrac1x\), \(\ x^2+2x\) (a polynomial over \(1\)), and \(\dfrac{x^2+3x}{x} = x+3\) when \(x\neq 0\).</p>
+
+    <p>When we find the domain of a rational function, each excluded \(x\)-value is a "gap." If the factor causing the gap <strong>cancels</strong> with the numerator, the gap is a <strong>hole</strong>. If it only appears in the denominator, the gap is a <strong>vertical asymptote</strong>.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the domain of \(f(x) = \dfrac{x^2+3x+2}{x^2+5x+4}\).
+      \[
+      f(x) = \frac{(x+2)(x+1)}{(x+4)(x+1)}.
+      \]
+      <p>We need \(x\ne -4\) and \(x\ne-1\). Even though \((x+1)\) cancels, \(x=-1\) is still excluded. The domain is</p>
+      \[
+      (-\infty,-4)\cup(-4,-1)\cup(-1,\infty).
+      \]
+      <p>The graph has a <strong>hole</strong> at \(x=-1\) (the factor cancelled) and a <strong>vertical asymptote</strong> at \(x = -4\).</p>
+    </div>
+
+    <h2 class="tex-section">Piecewise Functions</h2>
+
+    <p>Sometimes a function is made up of different pieces depending on the input.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let
+      \[
+      f(x) = \begin{cases} 3x-1 & x &gt; 4,\\ 2x & x\le 4.\end{cases}
+      \]
+      <p>Check which condition the input satisfies, then use that piece:</p>
+      \[
+      f(3) = 2(3) = 6, \qquad f(5) = 3(5)-1 = 14, \qquad f(4) = 2(4) = 8.
+      \]
+      <p>The graph is the line \(y=2x\) up to and including the point \((4,8)\), then jumps: the line \(y = 3x-1\) starts with an open circle at \((4,11)\) and continues with slope 3. Because of the jump, this function is <strong>not continuous</strong> at \(x=4\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(b\) so that the following function is continuous (no jump):
+      \[
+      f(x) = \begin{cases} x^2+1 & x\ge 2,\\ bx & x &lt; 2.\end{cases}
+      \]
+      <p>At \(x=2\) the top piece gives \(f(2) = 2^2+1 = 5\). For the pieces to meet, we want the bottom piece to also equal \(5\) at \(x = 2\):</p>
+      \[
+      b(2) = 5 \quad\Longrightarrow\quad b = \tfrac52 = 2.5.
+      \]
+    </div>
+
+    <!-- Self-check 1.5 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 6 and 7: Lines and Polynomials; Piecewise and Rational Functions</p>
+      <p><strong>(a)</strong> Find the domain and zeros of
+      \[
+      f(x) = \frac{x^2+8x+15}{x^2+6x-16}.
+      \]
+      Then create a piecewise function \(g(x)\) whose domain is all real numbers and with \(g(x) = f(x)\) for every \(x\) in the domain of \(f\).</p>
+      <p><strong>(b)</strong> Find the domain of the function below and classify each gap as a vertical asymptote or a hole.
+      \[
+      f(x) = \begin{cases} \dfrac{x+3}{x^2-9} & \text{if } x&lt;0,\\[2mm] \dfrac{1}{x-5} & \text{if } 0\le x\le 20,\\[2mm] 2x & \text{if } x&gt;20.\end{cases}
+      \]</p>
+      <button onclick="toggleSolution('sc1-5', this)">Show Answer</button>
+      <div id="sc1-5" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Factor the top and bottom:</p>
+        \[
+        f(x) = \frac{(x+3)(x+5)}{(x+8)(x-2)}.
+        \]
+        <p>The denominator is zero at \(x=-8\) and \(x=2\), so</p>
+        \[
+        \text{Domain} = (-\infty,-8)\cup(-8,2)\cup(2,\infty).
+        \]
+        <p>Zeros: the numerator is zero at \(x = -3\) and \(x=-5\) (both in the domain).</p>
+        <p>For \(g\), keep \(f\) wherever it is defined and choose any values at the two missing points. For example,</p>
+        \[
+        g(x) = \begin{cases} \dfrac{x^2+8x+15}{x^2+6x-16} & x\ne -8,\ x\ne 2,\\[2mm] 0 & x = -8 \text{ or } x = 2.\end{cases}
+        \]
+        <p><strong>(b)</strong> Check each piece only on its own interval.</p>
+        <ul>
+          <li>For \(x&lt;0\): \(\dfrac{x+3}{x^2-9} = \dfrac{x+3}{(x+3)(x-3)}\). This is undefined at \(x = \pm3\), but only \(x = -3\) lies in \(x&lt;0\). The factor \(x+3\) cancels, so \(x=-3\) is a <strong>hole</strong>.</li>
+          <li>For \(0\le x\le 20\): \(\dfrac1{x-5}\) is undefined at \(x=5\), which is in this interval. Nothing cancels, so \(x = 5\) is a <strong>vertical asymptote</strong>.</li>
+          <li>For \(x&gt;20\): \(2x\) is defined everywhere.</li>
+        </ul>
+        \[
+        \text{Domain} = (-\infty,-3)\cup(-3,5)\cup(5,\infty).
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.6 ================= -->
+    <div class="unit-divider" id="sec1-6">
+      <div class="part-label">Mathematical Modeling</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Discuss linear models for cost, revenue and profit, and for supply and demand; find and analyze break-even quantities and equilibrium points; discuss quadratic models and find the vertex of their graphs; optimize cost, revenue and profit functions.
+    </div>
+
+    <h2 class="tex-section">Cost, Revenue, and Profit</h2>
+
+    <p>Throughout, let \(x\) be the number of items.</p>
+
+    <div class="definition">
+      <span class="label">Definition (Linear Cost, Revenue, Profit)</span>
+      <ul>
+        <li><strong>Cost</strong> to produce \(x\) items: \(C(x) = px + b\), where \(b\) is the <strong>fixed cost</strong> (an upfront cost) and \(p\) is the cost per item, also called the <strong>variable</strong> or <strong>marginal cost</strong>.</li>
+        <li><strong>Revenue</strong> from selling \(x\) items: \(R(x) = mx\), where \(m\) is the selling price, also called the <strong>marginal revenue</strong>.</li>
+        <li><strong>Profit</strong> from selling \(x\) items:
+          \[
+          P(x) = R(x) - C(x).
+          \]</li>
+      </ul>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Be careful to distribute the negative when computing profit: \(mx - (px+b) = mx - px - b\).
+    </div>
+
+    <h3 class="tex-subsection">Break-Even Analysis</h3>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>break-even point</strong> is where \(P(x) = 0\), or equivalently \(C(x) = R(x)\). Its \(x\)-coordinate, the <strong>break-even quantity</strong>, tells us how much we need to sell to start making a profit.
+    </div>
+
+    <p>Graphically, the break-even point is where the revenue line crosses the cost line. To the left of it, cost is above revenue (a loss); to the right, revenue is above cost (a gain).</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      A lemonade stand costs $300 to build and $1 per cup in supplies. Lemonade sells for $3 a cup. How much do we need to sell?
+      \[
+      C(x) = x + 300, \qquad R(x) = 3x, \qquad P(x) = 3x - (x+300) = 2x-300.
+      \]
+      <p>Set \(P(x) = 0\): \(2x - 300 = 0\), so \(x = 150\). We break even after selling 150 cups. The break-even point is \((150, 450)\), since \(R(150) = C(150) = 450\).</p>
+    </div>
+
+    <h2 class="tex-section">Supply and Demand</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      <ul>
+        <li>The <strong>demand equation</strong> \(p(x)\) gives the price needed in order to be able to sell \(x\) items. Demand has <strong>negative slope</strong>: as price goes up, demand goes down.</li>
+        <li>The <strong>supply equation</strong> \(p(x)\) gives the price needed in order for the producer to create (and bring to market) \(x\) items. Supply has <strong>positive slope</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      These have \(x\) = number of items as the input and price \(p\) as the output, which might feel backwards. It can help to think of setting a price and then finding \(x\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      A company will produce 200 items if they can sell at $10 and 300 items if they can sell at $15. Find a linear supply equation.
+      <p>The two points are \((200,10)\) and \((300,15)\), so the slope is</p>
+      \[
+      m = \frac{15-10}{300-200} = \frac{5}{100} = \frac1{20} = 0.05.
+      \]
+      <p>Point-slope form: \(p - 10 = \tfrac1{20}(x-200)\), i.e. \(p = \tfrac1{20}x\).</p>
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>equilibrium point</strong> is where supply equals demand. Its \(x\)-coordinate is the <strong>equilibrium quantity</strong>. Above the equilibrium price there is a <strong>surplus</strong> (more supply than demand); below it there is a <strong>shortage</strong> (more demand than supply).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The supply equation is \(p = 2x+1\) and the demand equation is \(p = -x+4\). Find the equilibrium point.
+      <p>Set supply equal to demand:</p>
+      \[
+      2x+1 = -x+4 \;\Longrightarrow\; 3x = 3 \;\Longrightarrow\; x = 1.
+      \]
+      <p>Then \(p = 2(1)+1 = 3\), so the equilibrium point is \((1,3)\).</p>
+    </div>
+
+    <h2 class="tex-section">Quadratic Models</h2>
+
+    <div class="theorem">
+      <span class="label">Vertex of a Parabola</span>
+      The graph of \(ax^2+bx+c\) has its vertex at
+      \[
+      x = -\frac{b}{2a}.
+      \]
+      If \(a&gt;0\) the parabola opens up and the vertex is a <strong>minimum</strong>; if \(a&lt;0\) it opens down and the vertex is a <strong>maximum</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the vertex of \(f(x) = x^2+8x+1\).
+      \[
+      x = -\frac{8}{2(1)} = -4, \qquad f(-4) = 16-32+1 = -15.
+      \]
+      <p>The vertex is \((-4,-15)\), a minimum since \(a = 1 &gt; 0\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example (Maximizing Profit and Minimizing Cost)</span>
+      A clothing store's supply equation for \(x\) dresses is \(p = 140-0.25x\), and the cost of producing \(x\) dresses is \(C(x) = 2000-10x+0.25x^2\).
+      <div class="step-line"><span class="step-label">1.</span> <span class="step-desc">Revenue (assuming demand meets supply).</span></div>
+      \[
+      R(x) = (\text{price per item})(\text{number of items}) = (140-0.25x)x = -0.25x^2+140x.
+      \]
+      <div class="step-line"><span class="step-label">2.</span> <span class="step-desc">Profit.</span></div>
+      \[
+      P(x) = R(x)-C(x) = -0.25x^2+140x - 2000 + 10x - 0.25x^2 = -0.5x^2+150x-2000.
+      \]
+      <div class="step-line"><span class="step-label">3.</span> <span class="step-desc">Number of dresses that maximizes profit.</span></div>
+      <p>\(P\) is a downward parabola, so its vertex is a maximum: \(x = -\dfrac{150}{2(-0.5)} = 150\) dresses.</p>
+      <div class="step-line"><span class="step-label">4.</span> <span class="step-desc">Maximum profit.</span></div>
+      \[
+      P(150) = -0.5(150)^2 + 150(150) - 2000 = 11{,}250 - 2000 = \$9{,}250.
+      \]
+      <div class="step-line"><span class="step-label">5.</span> <span class="step-desc">Number of dresses that minimizes cost.</span></div>
+      <p>\(C(x) = 0.25x^2 - 10x + 2000\) opens up, so its vertex is a minimum: \(x = -\dfrac{-10}{2(0.25)} = \dfrac{10}{0.5} = 20\) dresses.</p>
+    </div>
+
+    <!-- Self-check 1.6 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 7 and 8: Modeling; Mathematical Modeling</p>
+      <p><strong>(a)</strong> The demand function for an item is \(p_D(x) = 15-0.25x\).</p>
+      <ol type="i">
+        <li>What is the revenue function?</li>
+        <li>How many items do we need to sell to maximize revenue?</li>
+        <li>What price per item maximizes revenue?</li>
+        <li>What is the maximum revenue?</li>
+      </ol>
+      <p><strong>(b)</strong> A company has linear demand function \(p(x) = 125-5x\). Find the revenue function and the number of items that maximizes revenue.</p>
+      <p><strong>(c)</strong> It costs $7 per item to produce the first 5 items and $5 per item after that. Write a piecewise cost function \(C(x)\).</p>
+      <button onclick="toggleSolution('sc1-6', this)">Show Answer</button>
+      <div id="sc1-6" class="solution" style="display:none;">
+        <p><strong>(a)</strong></p>
+        <ol type="i">
+          <li>\(R(x) = p_D(x)\cdot x = (15-0.25x)x = -0.25x^2+15x\).</li>
+          <li>\(R\) opens down, so the vertex is the maximum: \(x = -\dfrac{15}{2(-0.25)} = 30\) items.</li>
+          <li>\(p_D(30) = 15 - 0.25(30) = \$7.50\) per item.</li>
+          <li>\(R(30) = 30\cdot 7.50 = \$225\).</li>
+        </ol>
+        <p><strong>(b)</strong> \(R(x) = x(125-5x) = -5x^2+125x\). The vertex is at</p>
+        \[
+        x = -\frac{125}{2(-5)} = 12.5.
+        \]
+        <p>Since we can only sell whole items, check \(x = 12\) and \(x=13\): \(R(12) = R(13) = \$780\). Either one gives the maximum revenue for whole items.</p>
+        <p><strong>(c)</strong> For the first 5 items the cost is \(7x\). After that, the first 5 items cost \(7\cdot5 = 35\), and each additional item costs 5:</p>
+        \[
+        C(x) = \begin{cases} 7x & 0\le x\le 5,\\ 35 + 5(x-5) = 5x+10 & x&gt;5.\end{cases}
+        \]
+        <p>(Both pieces give \(C(5) = 35\), so there is no jump.) If each item sells for a price \(p\), the revenue is \(R(x) = px\).</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.7 ================= -->
+    <div class="unit-divider" id="sec1-7">
+      <div class="part-label">Exponential Functions</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Identify exponential functions and the basic shape of their graphs; derive the formula for interest compounded \(n\) times per year and see how it relates to the formula for continuously compounded interest.
+    </div>
+
+    <h2 class="tex-section">The Exponential Function</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      An <strong>exponential function</strong> is a function of the form \(f(x) = b^x\), where \(b&gt;0\) (and \(b\neq1\)).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Don't confuse \(b^x\) (variable in the exponent: exponential) with \(x^b\) (variable in the base: power function).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Tables of values for \(f(x) = 2^x\) and \(g(x) = \left(\tfrac13\right)^x\):
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>\(-2\)</td><td>\(-1\)</td><td>\(0\)</td><td>\(\tfrac12\)</td><td>\(1\)</td><td>\(2\)</td></tr>
+        <tr><th>\(2^x\)</th><td>\(\tfrac14\)</td><td>\(\tfrac12\)</td><td>\(1\)</td><td>\(\sqrt2\approx1.41\)</td><td>\(2\)</td><td>\(4\)</td></tr>
+        <tr><th>\((1/3)^x\)</th><td>\(9\)</td><td>\(3\)</td><td>\(1\)</td><td>\(\approx0.58\)</td><td>\(\tfrac13\)</td><td>\(\tfrac19\)</td></tr>
+      </table>
+      <p>\(2^x\) increases quickly to the right and flattens toward \(0\) on the left (it gets close to \(0\) but never touches it). \((1/3)^x\) is the mirror image: large on the left, decaying toward \(0\) on the right.</p>
+    </div>
+
+    <div class="theorem">
+      <span class="label">Shape of \(b^x\)</span>
+      <ul>
+        <li>If \(b&gt;1\): <strong>exponential growth</strong> (e.g. \(2^x\), \(4^x\)).</li>
+        <li>If \(0&lt;b&lt;1\): <strong>exponential decay</strong> (e.g. \((1/2)^x\), \((1/4)^x\)).</li>
+        <li>Every \(b^x\) passes through \((0,1)\), since \(b^0 = 1\), and \(b^x &gt; 0\) for every \(x\).</li>
+      </ul>
+    </div>
+
+    <h2 class="tex-section">Compound Interest</h2>
+
+    <p>A key business application of exponential growth is <strong>compound interest</strong>.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      You put $1000 into an account earning 6% interest compounded yearly.
+      \[
+      \text{After 1 year: } 1000(1.06) = 1060, \qquad \text{after 2 years: } 1000(1.06)(1.06) = 1000(1.06)^2 = 1123.60,
+      \]
+      \[
+      \text{after } n \text{ years: } 1000(1.06)^n.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      What if the 6% is compounded <em>monthly</em>? Then each month earns \(\frac{6\%}{12} = 0.5\%\), and there are 12 compoundings per year:
+      \[
+      \text{after 1 year: } 1000\left(1+\frac{0.06}{12}\right)^{12} \approx 1061.68, \qquad \text{after } n \text{ years: } 1000\left(1+\frac{0.06}{12}\right)^{12n}.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">Compound Interest Formulas</span>
+      Let \(F\) = future value, \(P\) = principal (starting amount), \(r\) = interest rate (as a decimal), \(t\) = time in years, and \(n\) = number of times compounded per year.
+      \[
+      \text{Compounded } n \text{ times per year:}\qquad F = P\left(1+\frac rn\right)^{nt}.
+      \]
+      Letting \(n\to\infty\) gives
+      \[
+      \text{Compounded continuously:}\qquad F = Pe^{rt},
+      \]
+      where \(e\approx 2.71828\dots\)
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      You put $500 into an account earning 6% compounded continuously. How much do you have after 15 years?
+      \[
+      P = 500,\quad r = 0.06,\quad t = 15, \qquad F = 500e^{0.06(15)} = 500e^{0.9}\approx \$1229.80.
+      \]
+    </div>
+
+    <h2 class="tex-section">Solving Exponential Equations</h2>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Problem-Solving Strategy</div>
+      <div class="methodbox-body">
+        To solve equations involving exponentials, try to rewrite both sides with the <strong>same base</strong>, then set the exponents equal to each other.
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(9^x = 27^{4x-10}\). Both 9 and 27 are powers of 3:
+      \[
+      (3^2)^x = (3^3)^{4x-10} \;\Longrightarrow\; 3^{2x} = 3^{12x-30} \;\Longrightarrow\; 2x = 12x-30 \;\Longrightarrow\; 30 = 10x \;\Longrightarrow\; x = 3.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(\dfrac{1}{2^{6x}} = 2^{9x-13}\).
+      \[
+      2^{-6x} = 2^{9x-13} \;\Longrightarrow\; -6x = 9x-13 \;\Longrightarrow\; 13 = 15x \;\Longrightarrow\; x = \tfrac{13}{15}.
+      \]
+    </div>
+
+    <!-- Self-check 1.7 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p><strong>(a)</strong> You invest $2000 at 5% annual interest. How much do you have after 10 years if interest is compounded (i) quarterly, (ii) continuously?</p>
+      <p><strong>(b)</strong> Solve \(4^{x+1} = 8^x\).</p>
+      <p><strong>(c)</strong> Is \(f(x) = (0.8)^x\) exponential growth or decay? What is its \(y\)-intercept?</p>
+      <button onclick="toggleSolution('sc1-7', this)">Show Answer</button>
+      <div id="sc1-7" class="solution" style="display:none;">
+        <p><strong>(a)(i)</strong> Quarterly means \(n = 4\):</p>
+        \[
+        F = 2000\left(1+\frac{0.05}{4}\right)^{4\cdot10} = 2000(1.0125)^{40}\approx\$3287.24.
+        \]
+        <p><strong>(a)(ii)</strong> Continuously:</p>
+        \[
+        F = 2000e^{0.05\cdot 10} = 2000e^{0.5}\approx\$3297.44.
+        \]
+        <p>Continuous compounding earns a little more, as expected.</p>
+        <p><strong>(b)</strong> Write both sides as powers of 2:</p>
+        \[
+        (2^2)^{x+1} = (2^3)^x \;\Longrightarrow\; 2^{2x+2} = 2^{3x} \;\Longrightarrow\; 2x+2 = 3x \;\Longrightarrow\; x = 2.
+        \]
+        <p><strong>(c)</strong> The base \(0.8\) is between 0 and 1, so this is <strong>exponential decay</strong>. The \(y\)-intercept is \(f(0) = (0.8)^0 = 1\).</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 1.8 ================= -->
+    <div class="unit-divider" id="sec1-8">
+      <div class="part-label">Logarithms</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn what logarithm functions are and how they relate to exponential functions; use logarithms to solve equations involving exponentials; learn properties of logarithms and use them to solve equations involving logarithms.
+    </div>
+
+    <div class="example">
+      <span class="label">Guiding Example</span>
+      We have $1000 and want $1500 after 12 years. What interest rate do we need if interest is compounded continuously? Using \(F = Pe^{rt}\):
+      \[
+      1500 = 1000e^{12r}.
+      \]
+      <p>The unknown \(r\) is stuck in the exponent, and we can't make the bases match. We need a new tool: logarithms.</p>
+    </div>
+
+    <h2 class="tex-section">What Is a Logarithm?</h2>
+
+    <p><strong>Basic idea:</strong> logarithms <em>undo</em> exponentials. Logarithms and exponentials are <strong>inverse functions</strong>.</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      \[
+      \log_b a = x \quad\text{means}\quad b^x = a.
+      \]
+      In words: \(\log_b a\) is the power we raise \(b\) to in order to get \(a\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      10^2 = 100 \text{ so } \log_{10}100 = 2, \qquad 2^5 = 32 \text{ so } \log_2 32 = 5.
+      \]
+      Evaluate:
+      \[
+      \log_3 9 = 2, \qquad \log_2 8 = 3, \qquad \log_{10}1000 = 3, \qquad \log_7 7^5 = 5, \qquad \log_5 125 = 3.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">Inverse Rules</span>
+      \[
+      a^{\log_a b} = b, \qquad\qquad \log_a(a^x) = x.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Our Three Favorite Bases</h3>
+    <ul>
+      <li><strong>Base 10</strong>: \(\log_{10}x\) is written \(\log x\) and called the <strong>common log</strong>.</li>
+      <li><strong>Base \(e\)</strong>: \(\log_e x\) is written \(\ln x\) and called the <strong>natural log</strong>. This is the one we use most.</li>
+      <li><strong>Base 2</strong>: \(\log_2 x\) has no special name.</li>
+    </ul>
+
+    <div class="example">
+      <span class="label">Example (Guiding Example, solved)</span>
+      Solve \(1500 = 1000e^{12r}\). First isolate the exponential, then take \(\ln\) of both sides to cancel the \(e\):
+      \[
+      1.5 = e^{12r} \;\Longrightarrow\; \ln(1.5) = \ln\!\left(e^{12r}\right) = 12r \;\Longrightarrow\; r = \frac{\ln(1.5)}{12}\approx 0.0338.
+      \]
+      <p>We need an interest rate of about <strong>3.4%</strong>.</p>
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Solving Exponential Equations with Logs</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Isolate the exponential (get \(e^{(\cdots)}\) by itself).</li>
+          <li>Take \(\ln\) of both sides to cancel the \(e\).</li>
+          <li>Solve for the variable.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(5e^x - 1 = 16\).
+      \[
+      5e^x = 17 \;\Longrightarrow\; e^x = \tfrac{17}{5} \;\Longrightarrow\; x = \ln\!\left(\tfrac{17}{5}\right).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(8e^{2x} = 17e^x\). Divide both sides by \(e^x\) (which is never zero):
+      \[
+      8e^{x} = 17 \;\Longrightarrow\; e^x = \tfrac{17}{8} \;\Longrightarrow\; x = \ln\!\left(\tfrac{17}{8}\right).
+      \]
+    </div>
+
+    <h2 class="tex-section">Graphs and Domain of Logarithms</h2>
+
+    <p>Since \(\log_a x\) and \(a^x\) are inverses, the graph of \(y = \log_a x\) is the graph of \(y = a^x\) <strong>flipped over the line \(y = x\)</strong>. The point \((0,1)\) on \(a^x\) becomes the point \((1,0)\) on \(\log_a x\), because \(\log_a 1 = 0\).</p>
+
+    <div class="theorem">
+      <span class="label">Domain of a Logarithm</span>
+      \(\ln(x)\) and \(\log_a(x)\) are only defined for \(x&gt;0\). Their domain is \((0,\infty)\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the domain of \(\dfrac{\ln(2-x)}{\sqrt{x+1}}\).
+      <p>The log needs \(2-x&gt;0\), so \(x&lt;2\). The square root needs \(x+1\ge0\), and since it is in the denominator, \(x+1\neq0\); together, \(x&gt;-1\). The domain is \((-1,2)\).</p>
+    </div>
+
+    <h2 class="tex-section">Log Rules</h2>
+
+    <div class="theorem">
+      <span class="label">Properties of Logarithms</span>
+      \[
+      \begin{aligned}
+      \log_a(xy) &= \log_a x + \log_a y &&\text{(multiplication inside = addition outside)}\\
+      \log_a\!\left(\frac xy\right) &= \log_a x - \log_a y &&\text{(division inside = subtraction outside)}\\
+      \log_a(x^c) &= c\log_a x &&\text{(the power "rolls off" the log, or jumps back inside)}
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Combine into a single logarithm: \(\log x + 2\log y - 4\log z\).
+      \[
+      \log x + \log(y^2) - \log(z^4) = \log\!\left(\frac{xy^2}{z^4}\right).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Combine \(\log x - 3\log(y^2) + 6\log(\sqrt z)\).
+      \[
+      \log x - \log\!\left((y^2)^3\right) + \log\!\left((z^{1/2})^6\right) = \log x - \log(y^6) + \log(z^3) = \log\!\left(\frac{xz^3}{y^6}\right).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Solve \(\ln(x+2) + \ln(x+7) = \ln(18x)\).
+      <div class="step-line"><span class="step-label">Step 1.</span> <span class="step-desc">Get a single \(\ln\) on each side.</span></div>
+      \[
+      \ln\big((x+2)(x+7)\big) = \ln(18x) \;\Longrightarrow\; \ln(x^2+9x+14) = \ln(18x).
+      \]
+      <div class="step-line"><span class="step-label">Step 2.</span> <span class="step-desc">Clear the \(\ln\)'s from both sides.</span></div>
+      \[
+      x^2+9x+14 = 18x.
+      \]
+      <div class="step-line"><span class="step-label">Step 3.</span> <span class="step-desc">Solve the quadratic by setting it equal to 0 and factoring (or using the quadratic formula).</span></div>
+      \[
+      x^2-9x+14 = 0 \;\Longrightarrow\; (x-2)(x-7) = 0 \;\Longrightarrow\; x = 2,\ x = 7.
+      \]
+      <div class="step-line"><span class="step-label">Step 4.</span> <span class="step-desc">Check the answers (every log must have a positive input).</span></div>
+      \[
+      x=2:\ \ln4+\ln9 = \ln36 = \ln(18\cdot2)\ ✓ \qquad x=7:\ \ln9+\ln14 = \ln126 = \ln(18\cdot7)\ ✓
+      \]
+    </div>
+
+    <!-- Self-check 1.8 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From the Chapter 1 Review, plus practice in the style of the lecture examples</p>
+      <p><strong>(a)</strong> We put $1000 into an account compounded continuously at 3%. How long does it take to have $1300 in the account?</p>
+      <p><strong>(b)</strong> Combine into a single logarithm: \(2\ln x - \ln y + 3\ln z\).</p>
+      <p><strong>(c)</strong> Solve \(3e^{2x} + 4 = 19\).</p>
+      <p><strong>(d)</strong> Find the domain of \(f(x) = \ln(x-4)\).</p>
+      <button onclick="toggleSolution('sc1-8', this)">Show Answer</button>
+      <div id="sc1-8" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Use \(F = Pe^{rt}\) with \(F = 1300\), \(P = 1000\), \(r = 0.03\):</p>
+        \[
+        1300 = 1000e^{0.03t} \;\Longrightarrow\; 1.3 = e^{0.03t} \;\Longrightarrow\; \ln(1.3) = 0.03t \;\Longrightarrow\; t = \frac{\ln(1.3)}{0.03}\approx 8.75 \text{ years}.
+        \]
+        <p><strong>(b)</strong> Move the coefficients inside as powers, then combine:</p>
+        \[
+        \ln(x^2) - \ln y + \ln(z^3) = \ln\!\left(\frac{x^2z^3}{y}\right).
+        \]
+        <p><strong>(c)</strong> Isolate the exponential, then take \(\ln\):</p>
+        \[
+        3e^{2x} = 15 \;\Longrightarrow\; e^{2x} = 5 \;\Longrightarrow\; 2x = \ln 5 \;\Longrightarrow\; x = \frac{\ln 5}{2}\approx 0.805.
+        \]
+        <p><strong>(d)</strong> We need \(x - 4 &gt; 0\), so the domain is \((4,\infty)\).</p>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

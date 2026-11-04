@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATH 1071 — Unit 2 Lecture Notes</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        // No $ delimiters: this page uses $ for dollar amounts (money problems).
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Toggle self-check answers -->
+  <script>
+    function toggleSolution(id, btn) {
+      const solution = document.getElementById(id);
+      if (solution.style.display === "none") {
+        solution.style.display = "block";
+        btn.textContent = "Hide Answer";
+      } else {
+        solution.style.display = "none";
+        btn.textContent = "Show Answer";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn active">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="projects.html">Projects</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>MATH 1071 — Calculus for Business &amp; Economics</h1>
+    <p class="subtitle">Lecture Notes. This is NOT meant to be a substitute for coming to lecture or consulting the textbook directly, but rather a helpful resource to review for exams/ review what was discussed in lecture. Each section ends with a <strong>Self-Check</strong> taken from the in-class activity &mdash; try the problem first, then click the button to see the answer.</p>
+
+    <!-- Table of Contents -->
+    <nav class="toc toc-vertical" id="top">
+      <strong>Unit 2</strong> (Chapters 2–3 of the textbook)
+      <ol>
+        <li><a href="#sec2-1">Preview of Calculus</a></li>
+        <li><a href="#sec2-2">Introduction to Limits</a></li>
+        <li><a href="#sec2-3">Computing Limits</a></li>
+        <li><a href="#sec2-4">Continuity</a></li>
+        <li><a href="#sec2-5">Defining the Derivative</a></li>
+        <li><a href="#sec2-6">The Derivative as a Function</a></li>
+        <li><a href="#sec2-7">Derivative Rules</a></li>
+        <li><a href="#sec2-8">The Product and Quotient Rules</a></li>
+        <li><a href="#sec2-9">Derivatives as Rates of Change</a></li>
+        <li><a href="#sec2-10">The Chain Rule</a></li>
+        <li><a href="#sec2-11">Derivatives of Exponential &amp; Logarithmic Functions</a></li>
+      </ol>
+    </nav>
+
+    <!-- ================= SECTION 2.1 ================= -->
+    <div class="unit-divider" id="sec2-1">
+      <div class="part-label">Preview of Calculus</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn about secant lines, tangent lines, and their connection; see the need for limits in finding tangent lines, and the connection with instantaneous velocity; introduce "the area problem," which is covered later in the course.
+    </div>
+
+    <h2 class="tex-section">What Is Calculus?</h2>
+
+    <p>Calculus is the study of how things <strong>change</strong>. It has two halves:</p>
+    <ul>
+      <li><strong>Derivatives</strong> measure the <em>rate of change</em> of a function (for example, velocity is the rate of change of distance). Taking the derivative of a derivative gives the rate of change of the rate of change (for example, acceleration).</li>
+      <li><strong>Integrals</strong> measure accumulated quantities, such as the area under a curve.</li>
+    </ul>
+    <p>Both halves are built on <strong>limits</strong>. In this course, the main business applications include marginal cost, revenue and profit, optimization, and elasticity of demand.</p>
+
+    <h2 class="tex-section">Slopes</h2>
+
+    <p>Recall that to find the slope of a line, we need two points \((x_1,y_1)\) and \((x_2,y_2)\):</p>
+    \[
+    m = \frac{y_2-y_1}{x_2-x_1} = \frac{\Delta y}{\Delta x} = \frac{\text{rise}}{\text{run}}.
+    \]
+    <p>The slope tells us the <strong>rate of change</strong> of the line. If a line has slope 4, then every time \(x\) goes up by 1, \(y\) goes up by 4. A line has the same slope everywhere.</p>
+
+    <p>What if we have a curve instead? A curve such as \(y=x^2\) is flat at the bottom, gets less steep as you approach the bottom from the left, and gets steeper and steeper as you move to the right. So a curve does not have one single slope; its steepness changes from point to point. We measure the steepness at one point using the <strong>tangent line</strong>: the line that just touches the curve at that point and points in the same direction as the curve there.</p>
+
+    <div class="theorem">
+      <span class="label">The Goal</span>
+      Find the slope of the tangent line to a function at a given point. (This will be called the <strong>derivative</strong> of the function at that point.)
+    </div>
+
+    <h2 class="tex-section">Secant Lines to Tangent Lines</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A <strong>secant line</strong> is a line that passes through a function's graph at two points. The secant line to \(f\) between \(x=a\) and \(x=b\) is the line through \((a,f(a))\) and \((b,f(b))\). Its slope is
+      \[
+      m_{\text{sec}} = \frac{\Delta y}{\Delta x} = \frac{f(b)-f(a)}{b-a}.
+      \]
+    </div>
+
+    <p>The slope of the secant line measures how fast the function values are changing between \(a\) and \(b\) <em>on average</em>, so it is also called the <strong>average rate of change</strong> of \(f\) on \([a,b]\). If the function measures distance traveled, then \(\dfrac{\Delta\text{distance}}{\Delta\text{time}}\) is the <strong>average velocity</strong> on the time interval \([a,b]\).</p>
+
+    <p><strong>Idea:</strong> to find the slope of the tangent line at \(x=a\), find the slope of the secant line from \(a\) to \(b\) and let \(b\) get really close to \(a\). We can't just plug in \(b=a\): that gives \(\frac{f(a)-f(a)}{a-a} = \frac00\), and we can't divide by 0. Making "let \(b\) get really close to \(a\)" precise is exactly what <strong>limits</strong> are for.</p>
+
+    <figure class="tex-graph">
+      <svg viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Parabola y = x squared with a dashed secant line through (1,1) and (2,4) and a gray tangent line at (1,1)">
+        <line x1="22.0" y1="196.2" x2="298.0" y2="196.2" stroke="#888" stroke-width="1"/>
+        <line x1="77.2" y1="238.0" x2="77.2" y2="22.0" stroke="#888" stroke-width="1"/>
+        <g stroke="#888" stroke-width="1"><line x1="169.2" y1="192.2" x2="169.2" y2="200.2"/><line x1="261.2" y1="192.2" x2="261.2" y2="200.2"/><line x1="73.2" y1="161.4" x2="81.2" y2="161.4"/><line x1="73.2" y1="126.5" x2="81.2" y2="126.5"/><line x1="73.2" y1="91.7" x2="81.2" y2="91.7"/><line x1="73.2" y1="56.8" x2="81.2" y2="56.8"/></g>
+        <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif"><text x="169.2" y="212.2">1</text><text x="261.2" y="212.2">2</text><text x="65.2" y="165.4">1</text><text x="65.2" y="130.5">2</text><text x="65.2" y="95.7">3</text><text x="65.2" y="60.8">4</text><text x="306.0" y="200.2">x</text><text x="85.2" y="16.0">y</text></g>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="22.0,183.7 25.3,185.1 28.5,186.4 31.8,187.7 35.1,188.9 38.3,190.0 41.6,191.0 44.9,191.9 48.1,192.7 51.4,193.5 54.7,194.1 57.9,194.7 61.2,195.1 64.5,195.5 67.7,195.8 71.0,196.0 74.3,196.2 77.5,196.2 80.8,196.1 84.1,196.0 87.3,195.8 90.6,195.5 93.9,195.1 97.1,194.6 100.4,194.0 103.7,193.3 106.9,192.6 110.2,191.7 113.4,190.8 116.7,189.8 120.0,188.7 123.2,187.5 126.5,186.2 129.8,184.8 133.0,183.4 136.3,181.8 139.6,180.2 142.8,178.5 146.1,176.6 149.4,174.8 152.6,172.8 155.9,170.7 159.2,168.5 162.4,166.3 165.7,164.0 169.0,161.5 172.2,159.0 175.5,156.4 178.8,153.7 182.0,151.0 185.3,148.1 188.6,145.1 191.8,142.1 195.1,139.0 198.4,135.8 201.6,132.5 204.9,129.1 208.2,125.6 211.4,122.0 214.7,118.4 218.0,114.6 221.2,110.8 224.5,106.9 227.8,102.9 231.0,98.8 234.3,94.6 237.6,90.4 240.8,86.0 244.1,81.6 247.4,77.0 250.6,72.4 253.9,67.7 257.2,62.9 260.4,58.0 263.7,53.1 267.0,48.0 270.2,42.8 273.5,37.6 276.7,32.3 280.0,26.9 283.3,21.4"/>
+        <polyline fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 4" points="104.8,234.5 107.1,231.9 109.4,229.3 111.7,226.7 114.0,224.1 116.3,221.5 118.6,218.8 120.9,216.2 123.2,213.6 125.5,211.0 127.8,208.4 130.1,205.8 132.4,203.2 134.7,200.5 137.0,197.9 139.3,195.3 141.6,192.7 143.9,190.1 146.2,187.5 148.5,184.9 150.8,182.3 153.1,179.6 155.4,177.0 157.7,174.4 160.0,171.8 162.3,169.2 164.6,166.6 166.9,164.0 169.2,161.4 171.5,158.7 173.8,156.1 176.1,153.5 178.4,150.9 180.7,148.3 183.0,145.7 185.3,143.1 187.6,140.5 189.9,137.8 192.2,135.2 194.5,132.6 196.8,130.0 199.1,127.4 201.4,124.8 203.7,122.2 206.0,119.5 208.3,116.9 210.6,114.3 212.9,111.7 215.2,109.1 217.5,106.5 219.8,103.9 222.1,101.3 224.4,98.6 226.7,96.0 229.0,93.4 231.3,90.8 233.6,88.2 235.9,85.6 238.2,83.0 240.5,80.4 242.8,77.7 245.1,75.1 247.4,72.5 249.7,69.9 252.0,67.3 254.3,64.7 256.6,62.1 258.9,59.5 261.2,56.8 263.5,54.2 265.8,51.6 268.1,49.0 270.4,46.4 272.7,43.8 275.0,41.2 277.3,38.5 279.6,35.9 281.9,33.3 284.2,30.7 286.5,28.1 288.8,25.5"/>
+        <polyline fill="none" stroke="#888" stroke-width="2" points="86.4,224.1 89.0,222.1 91.7,220.1 94.3,218.1 97.0,216.1 99.6,214.0 102.3,212.0 104.9,210.0 107.6,208.0 110.2,206.0 112.8,204.0 115.5,202.0 118.1,200.0 120.8,198.0 123.4,196.0 126.1,194.0 128.7,192.0 131.4,190.0 134.0,188.0 136.7,186.0 139.3,184.0 141.9,182.0 144.6,180.0 147.2,178.0 149.9,176.0 152.5,174.0 155.2,172.0 157.8,170.0 160.5,168.0 163.1,166.0 165.8,164.0 168.4,162.0 171.0,160.0 173.7,158.0 176.3,156.0 179.0,154.0 181.6,151.9 184.3,149.9 186.9,147.9 189.6,145.9 192.2,143.9 194.8,141.9 197.5,139.9 200.1,137.9 202.8,135.9 205.4,133.9 208.1,131.9 210.7,129.9 213.4,127.9 216.0,125.9 218.6,123.9 221.3,121.9 223.9,119.9 226.6,117.9 229.2,115.9 231.9,113.9 234.5,111.9 237.2,109.9 239.8,107.9 242.5,105.9 245.1,103.9 247.7,101.9 250.4,99.9 253.0,97.9 255.7,95.9 258.3,93.9 261.0,91.9 263.6,89.8 266.3,87.8 268.9,85.8 271.6,83.8 274.2,81.8 276.8,79.8 279.5,77.8 282.1,75.8 284.8,73.8 287.4,71.8 290.1,69.8 292.7,67.8 295.4,65.8 298.0,63.8"/>
+        <circle cx="169.2" cy="161.4" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="261.2" cy="56.8" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        
+        </svg>
+      <figcaption>\(y=x^2\) with the secant line through \((1,1)\) and \((2,4)\) (dashed, slope 3) and the tangent line at \((1,1)\) (solid gray, slope 2)</figcaption>
+    </figure>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The slope of the tangent line at \(x=a\) gives the <strong>instantaneous rate of change</strong> of \(f\) at \(a\). If the function is distance traveled, it gives the <strong>instantaneous velocity</strong>. We will see that this is the same as the <strong>derivative</strong> of the function at that point.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the average rate of change of \(f(x) = x^2\) on each interval below, and use the results to estimate the instantaneous rate of change at \(x = 1\).
+      \[
+      \begin{aligned}
+      [1,2]&: \ \frac{f(2)-f(1)}{2-1} = \frac{4-1}{1} = 3\\
+      [1,1.1]&: \ \frac{f(1.1)-f(1)}{1.1-1} = \frac{1.21-1}{0.1} = 2.1\\
+      [1,1.01]&: \ \frac{f(1.01)-f(1)}{1.01-1} = \frac{1.0201-1}{0.01} = 2.01\\
+      [1,1.001]&: \ \frac{f(1.001)-f(1)}{1.001-1} = \frac{1.002001-1}{0.001} = 2.001
+      \end{aligned}
+      \]
+      <p>As the interval shrinks, the average rates of change get closer and closer to \(2\). So the instantaneous rate of change of \(f(x) = x^2\) at \(x = 1\) (the slope of the tangent line at \(x=1\)) is approximately \(2\). Next we will use limits to show it is <em>exactly</em> 2.</p>
+    </div>
+
+    <h2 class="tex-section">The "Other Half" of Calculus</h2>
+
+    <p>The second big question in calculus is: how do we find the <strong>area under a curve</strong>, and why would we want to? To find area under a curve we use <strong>integrals</strong>. One business reason: integrals let us go from <em>marginal</em> profit back to total profit. We will come back to this later in the course.</p>
+
+    <!-- Self-check 2.1 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From the Exam 2 Review (Problem 1), plus a practice problem in the style of the lecture example</p>
+      <p><strong>(a)</strong> Let \(f(x) = x^3+2x^2+1\). Find the average rate of change of \(f\) from \(x=1\) to \(x=3\).</p>
+      <p><strong>(b)</strong> For the same \(f\), find the average rate of change on \([2,2.1]\), \([2,2.01]\) and \([2,2.001]\). Use your answers to estimate the instantaneous rate of change of \(f\) at \(x=2\).</p>
+      <button onclick="toggleSolution('sc2-1', this)">Show Answer</button>
+      <div id="sc2-1" class="solution" style="display:none;">
+        <p><strong>(a)</strong> The average rate of change is the slope of the secant line. First compute the two function values:</p>
+        \[
+        f(1) = 1+2+1 = 4, \qquad f(3) = 27 + 18 + 1 = 46.
+        \]
+        \[
+        \frac{f(3)-f(1)}{3-1} = \frac{46-4}{2} = \frac{42}{2} = 21.
+        \]
+        <p><strong>(b)</strong> Here \(f(2) = 8+8+1 = 17\).</p>
+        \[
+        \begin{aligned}
+        [2,2.1]&: \ \frac{f(2.1)-17}{0.1} = \frac{19.081-17}{0.1} = 20.81\\
+        [2,2.01]&: \ \frac{f(2.01)-17}{0.01} = \frac{17.200801-17}{0.01} = 20.0801\\
+        [2,2.001]&: \ \frac{f(2.001)-17}{0.001} = \frac{17.020008001-17}{0.001} = 20.008001
+        \end{aligned}
+        \]
+        <p>The average rates of change are approaching \(20\), so the instantaneous rate of change at \(x = 2\) is approximately \(\boxed{20}\). (Once we have derivative rules we can confirm it is exactly \(f'(2) = 3(2)^2 + 4(2) = 20\).)</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 2.2 ================= -->
+    <div class="unit-divider" id="sec2-2">
+      <div class="part-label">Introduction to Limits</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn what a limit is and how to evaluate limits and one-sided limits from tables and graphs.
+    </div>
+
+    <h2 class="tex-section">Exploring with Tables</h2>
+
+    <p>We want to describe the behavior of functions that might be undefined at a point (or defined to be some other value at that point) but whose \(y\)-values are approaching a certain number as \(x\) gets close to some number. Let's look at two examples.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      What happens to \(f(x) = \dfrac{x^2-4}{x-2}\) near \(x = 2\)?
+      <p>Plugging in \(x=2\) gives \(\frac{4-4}{2-2} = \frac00\), which is undefined. So instead we plug in numbers <em>close</em> to 2:</p>
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>1.9</td><td>1.99</td><td>1.999</td><td>2</td><td>2.001</td><td>2.01</td><td>2.1</td></tr>
+        <tr><th>\(f(x)\)</th><td>3.9</td><td>3.99</td><td>3.999</td><td>undefined</td><td>4.001</td><td>4.01</td><td>4.1</td></tr>
+      </table>
+      <p>From both sides, the outputs are getting closer and closer to 4. In fact \(\frac{x^2-4}{x-2} = \frac{(x+2)(x-2)}{x-2} = x+2\) for \(x\neq2\), so the graph is the line \(y = x+2\) with a <strong>hole</strong> at \((2,4)\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      What happens to \(g(x) = \dfrac{x-1}{x-2}\) near \(x = 2\)?
+      <p>Plugging in \(x=2\) gives \(\frac10\), which is undefined. Plugging in numbers close to 2:</p>
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>1.9</td><td>1.99</td><td>1.999999</td><td>2</td><td>2.000001</td><td>2.01</td><td>2.1</td></tr>
+        <tr><th>\(g(x)\)</th><td>\(-9\)</td><td>\(-99\)</td><td>\(-999{,}999\)</td><td>undefined</td><td>\(1{,}000{,}001\)</td><td>\(101\)</td><td>\(11\)</td></tr>
+      </table>
+      <p>This time the outputs do <em>not</em> settle down. As \(x\to2\) from the left (numbers less than 2), \(g(x)\) heads to \(-\infty\); from the right (numbers bigger than 2), \(g(x)\) heads to \(+\infty\). The graph has a <strong>vertical asymptote</strong> at \(x = 2\).</p>
+    </div>
+
+    <h2 class="tex-section">The Definition of a Limit</h2>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      We say
+      \[
+      \lim_{x\to a} f(x) = L
+      \]
+      ("the limit of \(f(x)\) as \(x\) approaches \(a\) is \(L\)") if \(f(x)\) gets really close to \(L\) as \(x\) gets close to, <em>but not equal to</em>, \(a\). If the values do not approach one single number, or they approach \(+\infty\) or \(-\infty\), we say the limit <strong>does not exist (DNE)</strong>.
+    </div>
+
+    <p>Sometimes the function approaches one number from one side and a different number from the other side. We use <strong>one-sided limits</strong> to express this.</p>
+
+    <div class="definition">
+      <span class="label">Definition (One-Sided Limits)</span>
+      <ul>
+        <li>\(\displaystyle\lim_{x\to a^-} f(x) = L\) means \(f(x)\) gets really close to \(L\) as \(x\) gets close to \(a\) using only numbers to the <strong>left</strong> of \(a\) (less than \(a\)). This is the <strong>left-hand limit</strong>.</li>
+        <li>\(\displaystyle\lim_{x\to a^+} f(x) = L\) means \(f(x)\) gets really close to \(L\) as \(x\) gets close to \(a\) using only numbers to the <strong>right</strong> of \(a\) (bigger than \(a\)). This is the <strong>right-hand limit</strong>.</li>
+      </ul>
+      The little \(-\) or \(+\) is <em>not</em> a negative or positive number; it only tells you which side you approach from.
+    </div>
+
+    <div class="theorem">
+      <span class="label">When Does a Limit Exist?</span>
+      \[
+      \lim_{x\to a} f(x) \text{ exists} \quad\Longleftrightarrow\quad \lim_{x\to a^-} f(x) = \lim_{x\to a^+} f(x),
+      \]
+      and in that case \(\lim_{x\to a} f(x)\) equals this common value. If \(\lim_{x\to a^-} f(x) \neq \lim_{x\to a^+} f(x)\), then \(\lim_{x\to a}f(x)\) does not exist.
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      A limit only cares about what happens <em>near</em> \(a\), never <em>at</em> \(a\). The value \(f(a)\) can be different from the limit, or \(f(a)\) might not exist at all. On a graph, the limit is the \(y\)-value the curve is heading toward; \(f(a)\) is the \(y\)-value of the filled-in dot at \(x = a\).
+    </div>
+
+    <h2 class="tex-section">Limits from a Graph</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Use the graph of \(f\) below to evaluate the limits at \(a = 1,\ 2,\ 3\).
+      <figure class="tex-graph">
+        <svg viewBox="0 0 340 260" width="340" height="260" role="img" aria-label="Graph with a jump at x = 1, a peak at x = 2 and a hole at x = 3">
+        <line x1="22.0" y1="216.8" x2="318.0" y2="216.8" stroke="#888" stroke-width="1"/>
+        <line x1="68.0" y1="238.0" x2="68.0" y2="22.0" stroke="#888" stroke-width="1"/>
+        <g stroke="#888" stroke-width="1"><line x1="133.8" y1="212.8" x2="133.8" y2="220.8"/><line x1="199.6" y1="212.8" x2="199.6" y2="220.8"/><line x1="265.4" y1="212.8" x2="265.4" y2="220.8"/><line x1="64.0" y1="174.5" x2="72.0" y2="174.5"/><line x1="64.0" y1="132.1" x2="72.0" y2="132.1"/><line x1="64.0" y1="89.8" x2="72.0" y2="89.8"/><line x1="64.0" y1="47.4" x2="72.0" y2="47.4"/></g>
+        <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif"><text x="133.8" y="232.8">1</text><text x="199.6" y="232.8">2</text><text x="265.4" y="232.8">3</text><text x="56.0" y="178.5">1</text><text x="56.0" y="136.1">2</text><text x="56.0" y="93.8">3</text><text x="56.0" y="51.4">4</text><text x="326.0" y="220.8">x</text><text x="76.0" y="16.0">y</text></g>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="41.7,216.8 42.9,207.4 44.0,203.4 45.2,200.4 46.3,197.9 47.5,195.6 48.6,193.6 49.8,191.8 50.9,190.0 52.1,188.4 53.2,186.9 54.4,185.4 55.5,184.0 56.7,182.7 57.8,181.4 59.0,180.1 60.2,178.9 61.3,177.8 62.5,176.6 63.6,175.5 64.8,174.5 65.9,173.4 67.1,172.4 68.2,171.4 69.4,170.4 70.5,169.5 71.7,168.5 72.8,167.6 74.0,166.7 75.1,165.8 76.3,165.0 77.4,164.1 78.6,163.3 79.7,162.4 80.9,161.6 82.0,160.8 83.2,160.0 84.3,159.2 85.5,158.4 86.6,157.7 87.8,156.9 88.9,156.2 90.1,155.4 91.2,154.7 92.4,154.0 93.5,153.3 94.7,152.6 95.8,151.9 97.0,151.2 98.1,150.5 99.3,149.9 100.4,149.2 101.6,148.5 102.7,147.9 103.9,147.2 105.0,146.6 106.2,146.0 107.3,145.3 108.5,144.7 109.6,144.1 110.8,143.5 112.0,142.9 113.1,142.3 114.3,141.7 115.4,141.1 116.6,140.5 117.7,139.9 118.9,139.3 120.0,138.7 121.2,138.2 122.3,137.6 123.5,137.0 124.6,136.5 125.8,135.9 126.9,135.4 128.1,134.8 129.2,134.3 130.4,133.7 131.5,133.2 132.7,132.6 133.8,132.1"/>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="133.8,132.1 136.1,86.9 138.4,84.0 140.7,81.3 143.0,78.7 145.3,76.2 147.6,73.8 149.9,71.6 152.2,69.4 154.5,67.3 156.8,65.3 159.1,63.4 161.4,61.7 163.8,60.0 166.1,58.4 168.4,57.0 170.7,55.6 173.0,54.4 175.3,53.2 177.6,52.2 179.9,51.2 182.2,50.4 184.5,49.7 186.8,49.0 189.1,48.5 191.4,48.1 193.7,47.8 196.0,47.5 198.3,47.4 200.6,47.5 202.9,48.3 205.2,50.0 207.5,52.5 209.8,55.6 212.1,59.4 214.4,63.8 216.7,68.7 219.0,74.1 221.3,79.8 223.6,85.8 225.9,92.1 228.2,98.6 230.5,105.2 232.8,111.9 235.1,118.5 237.4,125.1 239.7,131.6 242.0,137.8 244.3,143.8 246.6,149.4 248.9,154.6 251.2,159.4 253.5,163.6 255.8,167.2 258.1,170.2 260.4,172.4 262.7,173.9 265.0,174.5 267.4,174.4 269.7,173.9 272.0,173.2 274.3,172.2 276.6,170.8 278.9,169.1 281.2,167.2 283.5,164.9 285.8,162.3 288.1,159.3 290.4,156.1 292.7,152.6 295.0,148.7 297.3,144.6 299.6,140.1 301.9,135.3 304.2,130.2 306.5,124.8 308.8,119.1 311.1,113.1 313.4,106.8 315.7,100.1 318.0,93.2"/>
+        <circle cx="133.8" cy="132.1" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="133.8" cy="89.8" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="265.4" cy="174.5" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        
+        </svg>
+        <figcaption>Open circles at \((1,2)\) and \((3,1)\); a filled dot at \((1,3)\)</figcaption>
+      </figure>
+      <table class="tex-table">
+        <tr><th></th><th>\(a=1\)</th><th>\(a=2\)</th><th>\(a=3\)</th></tr>
+        <tr><th>\(\lim_{x\to a^-}f(x)\)</th><td>2</td><td>4</td><td>1</td></tr>
+        <tr><th>\(\lim_{x\to a^+}f(x)\)</th><td>3</td><td>4</td><td>1</td></tr>
+        <tr><th>\(\lim_{x\to a}f(x)\)</th><td>DNE (\(2\neq3\))</td><td>4</td><td>1</td></tr>
+        <tr><th>\(f(a)\)</th><td>3</td><td>4</td><td>undefined</td></tr>
+      </table>
+      <p>At \(a=1\) the curve coming from the left heads to the open circle at height 2, while the piece on the right starts at the filled dot at height 3. At \(a = 3\) both sides head to height 1, so the limit is 1, even though there is no dot there (the point is not filled in).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Use the graph of \(g\) below to evaluate the limits.
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Piecewise graph of g with a hole at x = 0 and a jump at x = 1">
+        <line x1="22.0" y1="211.0" x2="298.0" y2="211.0" stroke="#888" stroke-width="1"/>
+        <line x1="96.8" y1="238.0" x2="96.8" y2="22.0" stroke="#888" stroke-width="1"/>
+        <g stroke="#888" stroke-width="1"><line x1="39.2" y1="207.0" x2="39.2" y2="215.0"/><line x1="154.2" y1="207.0" x2="154.2" y2="215.0"/><line x1="211.8" y1="207.0" x2="211.8" y2="215.0"/><line x1="269.2" y1="207.0" x2="269.2" y2="215.0"/><line x1="92.8" y1="157.0" x2="100.8" y2="157.0"/><line x1="92.8" y1="103.0" x2="100.8" y2="103.0"/><line x1="92.8" y1="49.0" x2="100.8" y2="49.0"/></g>
+        <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif"><text x="39.2" y="227.0">−1</text><text x="154.2" y="227.0">1</text><text x="211.8" y="227.0">2</text><text x="269.2" y="227.0">3</text><text x="84.8" y="161.0">1</text><text x="84.8" y="107.0">2</text><text x="84.8" y="53.0">3</text><text x="306.0" y="215.0">x</text><text x="104.8" y="16.0">y</text></g>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="22.0,65.7 22.9,68.0 23.9,70.2 24.8,72.5 25.7,74.6 26.7,76.8 27.6,78.9 28.5,81.0 29.5,83.1 30.4,85.1 31.3,87.1 32.3,89.1 33.2,91.1 34.1,93.0 35.1,94.9 36.0,96.8 37.0,98.6 37.9,100.4 38.8,102.2 39.8,103.9 40.7,105.7 41.6,107.4 42.6,109.0 43.5,110.7 44.4,112.3 45.4,113.9 46.3,115.4 47.2,116.9 48.2,118.4 49.1,119.9 50.0,121.4 51.0,122.8 51.9,124.1 52.8,125.5 53.8,126.8 54.7,128.1 55.6,129.4 56.6,130.6 57.5,131.8 58.4,133.0 59.4,134.2 60.3,135.3 61.2,136.4 62.2,137.5 63.1,138.5 64.0,139.5 65.0,140.5 65.9,141.5 66.8,142.4 67.8,143.3 68.7,144.2 69.7,145.0 70.6,145.8 71.5,146.6 72.5,147.4 73.4,148.1 74.3,148.8 75.3,149.5 76.2,150.1 77.1,150.7 78.1,151.3 79.0,151.9 79.9,152.4 80.9,152.9 81.8,153.3 82.7,153.8 83.7,154.2 84.6,154.6 85.5,154.9 86.5,155.3 87.4,155.6 88.3,155.8 89.3,156.1 90.2,156.3 91.1,156.5 92.1,156.6 93.0,156.8 93.9,156.9 94.9,156.9 95.8,157.0 96.8,157.0"/>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="96.8,157.0 97.5,156.3 98.2,155.7 98.9,155.0 99.6,154.3 100.3,153.6 101.1,152.9 101.8,152.3 102.5,151.6 103.2,150.9 103.9,150.2 104.7,149.6 105.4,148.9 106.1,148.2 106.8,147.6 107.5,146.9 108.2,146.2 109.0,145.5 109.7,144.8 110.4,144.2 111.1,143.5 111.8,142.8 112.6,142.2 113.3,141.5 114.0,140.8 114.7,140.1 115.4,139.4 116.2,138.8 116.9,138.1 117.6,137.4 118.3,136.8 119.0,136.1 119.8,135.4 120.5,134.7 121.2,134.1 121.9,133.4 122.6,132.7 123.3,132.0 124.1,131.3 124.8,130.7 125.5,130.0 126.2,129.3 126.9,128.7 127.7,128.0 128.4,127.3 129.1,126.6 129.8,125.9 130.5,125.3 131.2,124.6 132.0,123.9 132.7,123.2 133.4,122.6 134.1,121.9 134.8,121.2 135.6,120.6 136.3,119.9 137.0,119.2 137.7,118.5 138.4,117.8 139.2,117.2 139.9,116.5 140.6,115.8 141.3,115.2 142.0,114.5 142.8,113.8 143.5,113.1 144.2,112.4 144.9,111.8 145.6,111.1 146.3,110.4 147.1,109.8 147.8,109.1 148.5,108.4 149.2,107.7 149.9,107.1 150.7,106.4 151.4,105.7 152.1,105.0 152.8,104.3 153.5,103.7 154.2,103.0"/>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="154.2,211.0 156.0,203.5 157.7,200.4 159.4,198.0 161.2,196.0 162.9,194.3 164.6,192.7 166.3,191.2 168.1,189.8 169.8,188.6 171.5,187.3 173.2,186.2 175.0,185.1 176.7,184.0 178.4,183.0 180.1,182.0 181.9,181.1 183.6,180.1 185.3,179.3 187.0,178.4 188.8,177.5 190.5,176.7 192.2,175.9 193.9,175.1 195.7,174.3 197.4,173.6 199.1,172.8 200.8,172.1 202.6,171.4 204.3,170.7 206.0,170.0 207.7,169.3 209.5,168.7 211.2,168.0 212.9,167.4 214.6,166.7 216.4,166.1 218.1,165.5 219.8,164.9 221.5,164.3 223.3,163.7 225.0,163.1 226.7,162.5 228.4,161.9 230.2,161.4 231.9,160.8 233.6,160.3 235.3,159.7 237.1,159.2 238.8,158.6 240.5,158.1 242.2,157.6 244.0,157.0 245.7,156.5 247.4,156.0 249.1,155.5 250.9,155.0 252.6,154.5 254.3,154.0 256.0,153.5 257.8,153.0 259.5,152.6 261.2,152.1 262.9,151.6 264.6,151.1 266.4,150.7 268.1,150.2 269.8,149.8 271.6,149.3 273.3,148.8 275.0,148.4 276.7,148.0 278.4,147.5 280.2,147.1 281.9,146.6 283.6,146.2 285.4,145.8 287.1,145.3 288.8,144.9 290.5,144.5 292.2,144.1"/>
+        <circle cx="96.8" cy="157.0" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="96.8" cy="103.0" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="154.2" cy="103.0" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="154.2" cy="211.0" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        
+        </svg>
+        <figcaption>\(y=g(x)\): open circles at \((0,1)\) and \((1,0)\); filled dots at \((0,2)\) and \((1,2)\)</figcaption>
+      </figure>
+      \[
+      \lim_{x\to0^-}g(x) = 1, \quad \lim_{x\to0^+}g(x) = 1, \quad \lim_{x\to0}g(x) = 1, \quad g(0) = 2,
+      \]
+      \[
+      \lim_{x\to1^-}g(x) = 2, \quad \lim_{x\to1^+}g(x) = 0, \quad \lim_{x\to1}g(x) \text{ DNE}, \quad g(1) = 2.
+      \]
+      <p>At \(x=0\) both sides head to the open circle at height 1, so the limit is 1, even though the dot (the actual value \(g(0)\)) is at height 2.</p>
+    </div>
+
+    <!-- Self-check 2.2 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 9: Intro to Limits</p>
+      <p><strong>(a)</strong> Let \(f(x) = \dfrac{x^2+x-6}{x-2}\).</p>
+      <ol type="i">
+        <li>Find the domain of \(f(x)\).</li>
+        <li>Fill in a table of values of \(f(x)\) for \(x = 1.9,\ 1.99,\ 1.999,\ 2.001,\ 2.01,\ 2.1\).</li>
+        <li>Based on your table, what is \(\lim_{x\to2}f(x)\)? Use algebra to confirm your answer.</li>
+        <li>Is \(x = 2\) a vertical asymptote or a hole for \(f(x)\)?</li>
+      </ol>
+      <p><strong>(b)</strong> Use the graph of \(y=f(x)\) below (a different function) to evaluate each of the following:</p>
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Piecewise graph of f with jumps at x = 0 and x = 1">
+        <line x1="22.0" y1="211.0" x2="298.0" y2="211.0" stroke="#888" stroke-width="1"/>
+        <line x1="96.8" y1="238.0" x2="96.8" y2="22.0" stroke="#888" stroke-width="1"/>
+        <g stroke="#888" stroke-width="1"><line x1="39.2" y1="207.0" x2="39.2" y2="215.0"/><line x1="154.2" y1="207.0" x2="154.2" y2="215.0"/><line x1="211.8" y1="207.0" x2="211.8" y2="215.0"/><line x1="269.2" y1="207.0" x2="269.2" y2="215.0"/><line x1="92.8" y1="157.0" x2="100.8" y2="157.0"/><line x1="92.8" y1="103.0" x2="100.8" y2="103.0"/><line x1="92.8" y1="49.0" x2="100.8" y2="49.0"/></g>
+        <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif"><text x="39.2" y="227.0">−1</text><text x="154.2" y="227.0">1</text><text x="211.8" y="227.0">2</text><text x="269.2" y="227.0">3</text><text x="84.8" y="161.0">1</text><text x="84.8" y="107.0">2</text><text x="84.8" y="53.0">3</text><text x="306.0" y="215.0">x</text><text x="104.8" y="16.0">y</text></g>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="22.0,32.8 22.9,33.7 23.9,34.6 24.8,35.4 25.7,36.3 26.7,37.2 27.6,38.1 28.5,38.9 29.5,39.8 30.4,40.7 31.3,41.6 32.3,42.5 33.2,43.3 34.1,44.2 35.1,45.1 36.0,46.0 37.0,46.8 37.9,47.7 38.8,48.6 39.8,49.5 40.7,50.3 41.6,51.2 42.6,52.1 43.5,53.0 44.4,53.9 45.4,54.7 46.3,55.6 47.2,56.5 48.2,57.4 49.1,58.2 50.0,59.1 51.0,60.0 51.9,60.9 52.8,61.8 53.8,62.6 54.7,63.5 55.6,64.4 56.6,65.3 57.5,66.1 58.4,67.0 59.4,67.9 60.3,68.8 61.2,69.7 62.2,70.5 63.1,71.4 64.0,72.3 65.0,73.2 65.9,74.0 66.8,74.9 67.8,75.8 68.7,76.7 69.7,77.6 70.6,78.4 71.5,79.3 72.5,80.2 73.4,81.1 74.3,81.9 75.3,82.8 76.2,83.7 77.1,84.6 78.1,85.4 79.0,86.3 79.9,87.2 80.9,88.1 81.8,89.0 82.7,89.8 83.7,90.7 84.6,91.6 85.5,92.5 86.5,93.3 87.4,94.2 88.3,95.1 89.3,96.0 90.2,96.9 91.1,97.7 92.1,98.6 93.0,99.5 93.9,100.4 94.9,101.2 95.8,102.1 96.8,103.0"/>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="96.8,49.0 97.5,49.0 98.2,49.1 98.9,49.2 99.6,49.3 100.3,49.4 101.1,49.6 101.8,49.8 102.5,50.1 103.2,50.4 103.9,50.7 104.7,51.0 105.4,51.4 106.1,51.9 106.8,52.3 107.5,52.8 108.2,53.3 109.0,53.9 109.7,54.5 110.4,55.1 111.1,55.8 111.8,56.4 112.6,57.2 113.3,57.9 114.0,58.7 114.7,59.5 115.4,60.4 116.2,61.3 116.9,62.2 117.6,63.2 118.3,64.2 119.0,65.2 119.8,66.3 120.5,67.4 121.2,68.5 121.9,69.7 122.6,70.9 123.3,72.1 124.1,73.4 124.8,74.7 125.5,76.0 126.2,77.4 126.9,78.8 127.7,80.2 128.4,81.7 129.1,83.2 129.8,84.7 130.5,86.3 131.2,87.9 132.0,89.5 132.7,91.2 133.4,92.9 134.1,94.6 134.8,96.4 135.6,98.2 136.3,100.0 137.0,101.9 137.7,103.8 138.4,105.8 139.2,107.7 139.9,109.8 140.6,111.8 141.3,113.9 142.0,116.0 142.8,118.1 143.5,120.3 144.2,122.5 144.9,124.8 145.6,127.0 146.3,129.3 147.1,131.7 147.8,134.1 148.5,136.5 149.2,138.9 149.9,141.4 150.7,143.9 151.4,146.5 152.1,149.1 152.8,151.7 153.5,154.3 154.2,157.0"/>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="154.2,211.0 156.0,203.5 157.7,200.4 159.4,198.0 161.2,196.0 162.9,194.3 164.6,192.7 166.3,191.2 168.1,189.8 169.8,188.6 171.5,187.3 173.2,186.2 175.0,185.1 176.7,184.0 178.4,183.0 180.1,182.0 181.9,181.1 183.6,180.1 185.3,179.3 187.0,178.4 188.8,177.5 190.5,176.7 192.2,175.9 193.9,175.1 195.7,174.3 197.4,173.6 199.1,172.8 200.8,172.1 202.6,171.4 204.3,170.7 206.0,170.0 207.7,169.3 209.5,168.7 211.2,168.0 212.9,167.4 214.6,166.7 216.4,166.1 218.1,165.5 219.8,164.9 221.5,164.3 223.3,163.7 225.0,163.1 226.7,162.5 228.4,161.9 230.2,161.4 231.9,160.8 233.6,160.3 235.3,159.7 237.1,159.2 238.8,158.6 240.5,158.1 242.2,157.6 244.0,157.0 245.7,156.5 247.4,156.0 249.1,155.5 250.9,155.0 252.6,154.5 254.3,154.0 256.0,153.5 257.8,153.0 259.5,152.6 261.2,152.1 262.9,151.6 264.6,151.1 266.4,150.7 268.1,150.2 269.8,149.8 271.6,149.3 273.3,148.8 275.0,148.4 276.7,148.0 278.4,147.5 280.2,147.1 281.9,146.6 283.6,146.2 285.4,145.8 287.1,145.3 288.8,144.9 290.5,144.5 292.2,144.1"/>
+        <circle cx="96.8" cy="103.0" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="96.8" cy="49.0" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="154.2" cy="157.0" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="154.2" cy="49.0" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="154.2" cy="211.0" r="3.5" fill="#fff" stroke="#002d62" stroke-width="1.5"/>
+        
+        </svg>
+        <figcaption>\(y=f(x)\): filled dots at \((0,2)\) and \((1,3)\); open circles at \((0,3)\), \((1,1)\) and \((1,0)\)</figcaption>
+      </figure>
+      \[
+      \lim_{x\to0^-}f(x), \quad \lim_{x\to0^+}f(x), \quad \lim_{x\to0}f(x), \quad f(0), \quad \lim_{x\to1^-}f(x), \quad \lim_{x\to1^+}f(x), \quad \lim_{x\to1}f(x), \quad f(1).
+      \]
+      <button onclick="toggleSolution('sc2-2', this)">Show Answer</button>
+      <div id="sc2-2" class="solution" style="display:none;">
+        <p><strong>(a)(i)</strong> We can't divide by zero, so \(x - 2\neq0\), i.e. \(x\neq2\). Domain: \((-\infty,2)\cup(2,\infty)\).</p>
+        <p><strong>(a)(ii)</strong></p>
+        <table class="tex-table">
+          <tr><th>\(x\)</th><td>1.9</td><td>1.99</td><td>1.999</td><td>2</td><td>2.001</td><td>2.01</td><td>2.1</td></tr>
+          <tr><th>\(f(x)\)</th><td>4.9</td><td>4.99</td><td>4.999</td><td>undefined</td><td>5.001</td><td>5.01</td><td>5.1</td></tr>
+        </table>
+        <p><strong>(a)(iii)</strong> The values approach 5 from both sides, so we guess \(\lim_{x\to2}f(x) = 5\). To confirm, factor and cancel (allowed because \(x\neq2\) inside a limit):</p>
+        \[
+        \lim_{x\to2}\frac{x^2+x-6}{x-2} = \lim_{x\to2}\frac{(x+3)(x-2)}{x-2} = \lim_{x\to2}(x+3) = 5.
+        \]
+        <p><strong>(a)(iv)</strong> The limit exists (it is the finite number 5) and the factor \(x-2\) cancelled, so \(x=2\) is a <strong>hole</strong> (at the point \((2,5)\)), not a vertical asymptote.</p>
+        <p><strong>(b)</strong> Read the height the curve is heading toward from each side, and the filled dot for the function value:</p>
+        \[
+        \lim_{x\to0^-}f(x) = 2, \quad \lim_{x\to0^+}f(x) = 3, \quad \lim_{x\to0}f(x)\ \text{DNE (since } 2\neq3), \quad f(0) = 2,
+        \]
+        \[
+        \lim_{x\to1^-}f(x) = 1, \quad \lim_{x\to1^+}f(x) = 0, \quad \lim_{x\to1}f(x)\ \text{DNE (since } 1\neq0), \quad f(1) = 3.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 2.3 ================= -->
+    <div class="unit-divider" id="sec2-3">
+      <div class="part-label">Computing Limits</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn algebraic techniques for evaluating limits, such as direct substitution, factoring, multiplying out, common denominators, and multiplying by the conjugate; evaluate one-sided limits of rational functions and determine whether there are vertical asymptotes and whether the limit is \(+\infty\) or \(-\infty\); evaluate one-sided limits of piecewise functions.
+    </div>
+
+    <h2 class="tex-section">Direct Substitution</h2>
+
+    <p>The first thing to try is always to plug the value \(x\) is approaching into the function. As long as the function is defined at the point and near the point, the limit equals the function value.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \lim_{x\to3}\left(3x^2+2x-1\right) = 3(3)^2 + 2(3) - 1 = 27+6-1 = 32, \qquad \lim_{x\to3}\frac{x+2}{x+3} = \frac{5}{6}.
+      \]
+      <p>But \(\displaystyle\lim_{x\to3}\frac{x+2}{x-3}\) gives \(\frac{5}{0}\) on direct substitution, so we need to do more work.</p>
+    </div>
+
+    <p>After direct substitution, there are three possibilities:</p>
+    <ol>
+      <li>You get a number: that's the limit.</li>
+      <li>You get \(\dfrac{\text{non-zero}}{0}\): the function is blowing up to \(\pm\infty\) (see below).</li>
+      <li>You get \(\dfrac00\): this is called an <strong>indeterminate form</strong>. It doesn't tell you the answer &mdash; you have to use algebra to rewrite the function first (see below).</li>
+    </ol>
+
+    <h2 class="tex-section">Infinite Limits and Vertical Asymptotes</h2>
+
+    <div class="theorem">
+      <span class="label">Non-Zero over Zero</span>
+      If direct substitution gives \(\dfrac{\text{non-zero number}}{0}\), then the limit is \(\pm\infty\) (a special case of "does not exist"), and the function has a <strong>vertical asymptote</strong> at \(x=a\). To decide between \(+\infty\) and \(-\infty\), compute the <strong>one-sided limits</strong>: plug in a number a bit smaller than \(a\) (for \(a^-\)) and a bit bigger than \(a\) (for \(a^+\)), and just track the <em>signs</em> of the top and bottom.
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      If \(\lim_{x\to a}f(x) = \pm\infty\), or either one-sided limit is \(\pm\infty\), then \(f\) has a <strong>vertical asymptote</strong> at \(x = a\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\lim_{x\to3^-}\frac{x+2}{x-3}\) and \(\displaystyle\lim_{x\to3^+}\frac{x+2}{x-3}\).
+      <p>Direct substitution gives \(\frac50\), so each one-sided limit is \(+\infty\) or \(-\infty\).</p>
+      <ul>
+        <li>\(x\to3^-\): try \(x = 2.9\). The top is \(4.9\) (positive) and the bottom is \(-0.1\) (negative), so the fraction is \(\frac{+}{-} = -\). Hence \(\displaystyle\lim_{x\to3^-}\frac{x+2}{x-3} = -\infty\).</li>
+        <li>\(x\to3^+\): try \(x = 3.1\). The top is \(5.1\) (positive) and the bottom is \(0.1\) (positive), so the fraction is \(\frac{+}{+} = +\). Hence \(\displaystyle\lim_{x\to3^+}\frac{x+2}{x-3} = +\infty\).</li>
+      </ul>
+      <p>So \(\frac{x+2}{x-3}\) has a vertical asymptote at \(x=3\), and the two-sided limit does not exist.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate the one-sided limits of \(\dfrac{x-3}{x-2}\) at \(x=2\).
+      <p>Direct substitution gives \(\frac{-1}{0}\). Near \(x = 2\) the top is about \(-1\) (negative).</p>
+      \[
+      \lim_{x\to2^-}\frac{x-3}{x-2} = \frac{(-)}{(-)} = +\infty, \qquad \lim_{x\to2^+}\frac{x-3}{x-2} = \frac{(-)}{(+)} = -\infty.
+      \]
+      <p>There is a vertical asymptote at \(x = 2\): the graph shoots up on the left of the asymptote and down on the right.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Where are the vertical asymptotes of \(f(x) = \dfrac{x^2+6x+5}{x^2+4x+3}\)?
+      <p>Possible vertical asymptotes are where the denominator is zero. Factoring, \(x^2+4x+3 = (x+1)(x+3)\), so the candidates are \(x=-1\) and \(x = -3\). Check each one with a limit:</p>
+      \[
+      \lim_{x\to-1}\frac{(x+1)(x+5)}{(x+1)(x+3)} = \lim_{x\to-1}\frac{x+5}{x+3} = \frac{4}{2} = 2.
+      \]
+      <p>The limit is a finite number, so \(x = -1\) is a <strong>hole</strong>, not a vertical asymptote.</p>
+      \[
+      \lim_{x\to-3}\frac{x^2+6x+5}{x^2+4x+3} = \frac{9-18+5}{0} = \frac{-4}{0} = \pm\infty.
+      \]
+      <p>This is non-zero over zero, so \(x = -3\) <strong>is</strong> a vertical asymptote.</p>
+    </div>
+
+    <h2 class="tex-section">The \(\tfrac00\) Case: Use Algebra</h2>
+
+    <p>Often (especially in calculus) direct substitution gives \(\frac00\). Then we use algebra &mdash; <strong>multiplying out</strong>, <strong>factoring</strong>, a <strong>common denominator</strong>, or <strong>multiplying by the conjugate</strong> &mdash; to cancel the factor causing the zero on the bottom, then try direct substitution again.</p>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Keep writing "\(\lim\)" on every line until you actually plug in. Once the problem factor is gone and you substitute, the "\(\lim\)" goes away.
+    </div>
+
+    <h3 class="tex-subsection">Factoring</h3>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\lim_{x\to3}\frac{x^2-2x-3}{x^2-9}\).
+      <p>Direct substitution gives \(\frac{9-6-3}{9-9} = \frac00\). Factor the top and bottom, and cancel:</p>
+      \[
+      \lim_{x\to3}\frac{(x-3)(x+1)}{(x-3)(x+3)} = \lim_{x\to3}\frac{x+1}{x+3} = \frac46 = \frac23.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Common Denominator</h3>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\lim_{x\to3}\frac{\frac13-\frac1x}{3-x}\).
+      <p>Direct substitution gives \(\frac{\frac13-\frac13}{0} = \frac00\). Our goal is to remove the \(3-x\) from the bottom. First combine the small fractions on top using the common denominator \(3x\):</p>
+      \[
+      \frac13-\frac1x = \frac{x}{3x} - \frac{3}{3x} = \frac{x-3}{3x}.
+      \]
+      <p>Dividing by \(3-x\) is the same as multiplying by \(\frac{1}{3-x}\), and \(3-x = -(x-3)\):</p>
+      \[
+      \lim_{x\to3}\frac{x-3}{3x}\cdot\frac{1}{3-x} = \lim_{x\to3}\frac{x-3}{3x\cdot(-(x-3))} = \lim_{x\to3}\frac{1}{-3x} = -\frac19.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\lim_{x\to0}\left(\frac1x + \frac{5}{x(x-5)}\right)\).
+      <p>Each piece blows up as \(x\to0\), giving "\(\pm\infty \pm\infty\)," which is another indeterminate form. Our goal is to cancel the \(x\) on the bottom. Use the common denominator \(x(x-5)\):</p>
+      \[
+      \lim_{x\to0}\left(\frac{x-5}{x(x-5)} + \frac{5}{x(x-5)}\right) = \lim_{x\to0}\frac{x-5+5}{x(x-5)} = \lim_{x\to0}\frac{x}{x(x-5)} = \lim_{x\to0}\frac{1}{x-5} = -\frac15.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Multiplying by the Conjugate</h3>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      The <strong>conjugate</strong> of \(a + b\) is \(a - b\) (change <em>one</em> sign). When one of the terms is a square root, multiplying an expression by its conjugate gets rid of the square root, because \((a+b)(a-b) = a^2-b^2\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The conjugate of \(1+\sqrt3\) is \(1-\sqrt3\), and
+      \[
+      (1+\sqrt3)(1-\sqrt3) = 1 - \sqrt3 + \sqrt3 - \sqrt3\cdot\sqrt3 = 1-3 = -2,
+      \]
+      <p>with no more radicals. To clear the radical from the numerator of \(\frac{5-\sqrt3}{6}\) ("rationalize the numerator"), multiply by the "special 1" \(\frac{5+\sqrt3}{5+\sqrt3}\):</p>
+      \[
+      \frac{5-\sqrt3}{6}\cdot\frac{5+\sqrt3}{5+\sqrt3} = \frac{25-3}{6(5+\sqrt3)} = \frac{22}{6(5+\sqrt3)}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\lim_{x\to5}\frac{\sqrt x-\sqrt5}{x-5}\).
+      <p>Direct substitution gives \(\frac00\), and there are square roots on top, so multiply top and bottom by the conjugate \(\sqrt x+\sqrt5\). Don't multiply out the bottom &mdash; we want to keep the \(x-5\) so it can cancel:</p>
+      \[
+      \lim_{x\to5}\frac{(\sqrt x-\sqrt5)(\sqrt x+\sqrt5)}{(x-5)(\sqrt x+\sqrt5)} = \lim_{x\to5}\frac{x-5}{(x-5)(\sqrt x+\sqrt5)} = \lim_{x\to5}\frac{1}{\sqrt x+\sqrt5} = \frac{1}{\sqrt5+\sqrt5} = \frac{1}{2\sqrt5}.
+      \]
+    </div>
+
+    <h2 class="tex-section">One-Sided Limits of Piecewise Functions</h2>
+
+    <p>For a piecewise function, the left-hand limit at a break point uses the piece for \(x\) values <em>less than</em> the break point, and the right-hand limit uses the piece for \(x\) values <em>greater than</em> it.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let
+      \[
+      f(x) = \begin{cases} 3x-2 & x \ge 2,\\[1mm] \dfrac{x^2-4}{x-2} & x &lt; 2.\end{cases}
+      \]
+      <p>Find \(\lim_{x\to2^+}f(x)\), \(\lim_{x\to2^-}f(x)\), and \(\lim_{x\to2}f(x)\).</p>
+      <p>For \(x\to2^+\) (numbers bigger than 2), use the top piece: \(\lim_{x\to2^+}f(x) = 3(2)-2 = 4\).</p>
+      <p>For \(x\to2^-\) (numbers less than 2), use the bottom piece. Plugging in gives \(\frac00\), so do more work:</p>
+      \[
+      \lim_{x\to2^-}\frac{x^2-4}{x-2} = \lim_{x\to2^-}\frac{(x+2)(x-2)}{x-2} = \lim_{x\to2^-}(x+2) = 4.
+      \]
+      <p>The one-sided limits are equal, so \(\lim_{x\to2}f(x) = 4\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(b\) so that \(\lim_{x\to2}f(x)\) exists, where
+      \[
+      f(x) = \begin{cases} 3x+b & x &lt; 2,\\ x^2+4x & x &gt; 2,\\ 5 & x = 2.\end{cases}
+      \]
+      <p>The limit exists when the two one-sided limits are equal.</p>
+      \[
+      \lim_{x\to2^-}f(x) = 3(2)+b = 6+b, \qquad \lim_{x\to2^+}f(x) = 2^2+4(2) = 12.
+      \]
+      <p>We need \(6 + b = 12\), so \(b = 6\). With this value, \(\lim_{x\to2}f(x) = 12\). Notice that \(f(2) = 5\) has nothing to do with the limit: the graph has two pieces meeting at an open circle at \((2,12)\), and a lone dot at \((2,5)\).</p>
+    </div>
+
+    <!-- Self-check 2.3 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From the Limits In-Class Worksheet (Problems 6 and 7)</p>
+      <p><strong>(a)</strong> Evaluate
+      \[
+      \lim_{x\to2}\frac{x-1}{x-2}, \qquad \lim_{x\to2^-}\frac{x-1}{x-2}, \qquad \lim_{x\to2^+}\frac{x-1}{x-2}.
+      \]
+      Where is the vertical asymptote?</p>
+      <p><strong>(b)</strong> Evaluate \(\displaystyle\lim_{x\to0}\frac{(2+x)^2-4}{x}\).</p>
+      <p><strong>(c)</strong> Evaluate \(\displaystyle\lim_{x\to7}\frac{\sqrt{x+2}-3}{x-7}\).</p>
+      <button onclick="toggleSolution('sc2-3', this)">Show Answer</button>
+      <div id="sc2-3" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Direct substitution gives \(\frac{1}{0}\), so the two-sided limit is "\(\pm\infty\)" and does not exist. Check the signs on each side:</p>
+        <ul>
+          <li>\(x\to2^-\) (e.g. \(x = 1.9\)): top \(0.9 &gt; 0\), bottom \(-0.1 &lt; 0\), so \(\frac{+}{-}\): the limit is \(-\infty\).</li>
+          <li>\(x\to2^+\) (e.g. \(x = 2.1\)): top \(1.1&gt;0\), bottom \(0.1 &gt; 0\), so \(\frac{+}{+}\): the limit is \(+\infty\).</li>
+        </ul>
+        <p>This matches the table for \(\frac{x-1}{x-2}\) in Introduction to Limits. The vertical asymptote is at \(x = 2\).</p>
+        <p><strong>(b)</strong> Direct substitution gives \(\frac{4-4}{0} = \frac00\). Multiply out the top so the \(x\) on the bottom can cancel:</p>
+        \[
+        \lim_{x\to0}\frac{4+4x+x^2-4}{x} = \lim_{x\to0}\frac{4x+x^2}{x} = \lim_{x\to0}\frac{x(4+x)}{x} = \lim_{x\to0}(4+x) = 4.
+        \]
+        <p><strong>(c)</strong> Direct substitution gives \(\frac{\sqrt9-3}{0} = \frac00\). There is a square root on top, so multiply by the conjugate \(\sqrt{x+2}+3\):</p>
+        \[
+        \lim_{x\to7}\frac{(\sqrt{x+2}-3)(\sqrt{x+2}+3)}{(x-7)(\sqrt{x+2}+3)} = \lim_{x\to7}\frac{(x+2)-9}{(x-7)(\sqrt{x+2}+3)} = \lim_{x\to7}\frac{x-7}{(x-7)(\sqrt{x+2}+3)}.
+        \]
+        \[
+        = \lim_{x\to7}\frac{1}{\sqrt{x+2}+3} = \frac{1}{\sqrt9+3} = \frac16.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 2.4 ================= -->
+    <div class="unit-divider" id="sec2-4">
+      <div class="part-label">Continuity</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn what it means for a function to be continuous and how we can define continuity using limits; learn about the three types of discontinuities; learn how to make piecewise functions continuous.
+    </div>
+
+    <h2 class="tex-section">The Definition of Continuity</h2>
+
+    <p>The idea: a function is continuous if you can <strong>draw its graph without lifting your pencil</strong>. A graph can have sharp corners and still be continuous; what is not allowed is a hole, a jump, or a vertical asymptote.</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A function \(f\) is <strong>continuous at \(x = a\)</strong> if all three of the following hold:
+      <ol>
+        <li>\(f(a)\) is defined;</li>
+        <li>\(\lim_{x\to a}f(x)\) exists (that is, \(\lim_{x\to a^-}f(x) = \lim_{x\to a^+}f(x)\));</li>
+        <li>\(\lim_{x\to a}f(x) = f(a)\).</li>
+      </ol>
+      In one line: \(\displaystyle\lim_{x\to a^-}f(x) = \lim_{x\to a^+}f(x) = f(a)\). If any condition fails, \(f\) is <strong>discontinuous</strong> at \(a\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Polynomials are continuous everywhere. Rational functions, roots, exponentials and logarithms are continuous everywhere on their domains. So for a formula with no pieces, the only places to check are where the function is undefined (for example, where a denominator is zero). For a piecewise function, also check the break points.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Is \(f(x) = \dfrac{x^2-4}{x-2}\) continuous at \(x=2\)?
+      <p>(1) \(f(2) = \frac{4-4}{2-2} = \frac00\) is <strong>undefined</strong> (with no limit in front, \(\frac00\) just means we can't evaluate). Condition (1) fails, so \(f\) is <strong>not</strong> continuous at \(x=2\). Its graph is the line \(y = x+2\) with a hole at \((2,4)\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Is \(f(x) = \begin{cases}-x^2+4 & x\le3,\\ 4x-8 & x&gt;3\end{cases}\) continuous at \(x = 3\)?
+      <p>(1) \(f(3) = -3^2+4 = -9+4 = -5\). (Use the top piece, since \(3\le3\).)</p>
+      <p>(2) Does \(\lim_{x\to3}f(x)\) exist?</p>
+      \[
+      \lim_{x\to3^-}f(x) = -3^2+4 = -5, \qquad \lim_{x\to3^+}f(x) = 4(3)-8 = 4.
+      \]
+      <p>Since \(-5\neq4\), the limit does not exist, so \(f\) is <strong>not</strong> continuous at \(x=3\). (The graph is a downward parabola that jumps up at \(x = 3\).)</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Compare
+      \[
+      f(x) = \begin{cases}\dfrac{x^2-4x+3}{x-1} & x\neq1,\\[2mm] 2 & x = 1\end{cases} \qquad\text{and}\qquad g(x) = \begin{cases}\dfrac{x^2-4x+3}{x-1} & x\neq1,\\[2mm] -2 & x = 1.\end{cases}
+      \]
+      <p>Are they continuous at \(x=1\)? Both have the same formula near \(x = 1\), so they have the same limit:</p>
+      \[
+      \lim_{x\to1}\frac{x^2-4x+3}{x-1} = \lim_{x\to1}\frac{(x-1)(x-3)}{x-1} = \lim_{x\to1}(x-3) = -2.
+      \]
+      <ul>
+        <li>For \(f\): \(f(1) = 2\) is defined and the limit exists, but \(\lim_{x\to1}f(x) = -2\neq 2 = f(1)\). Condition (3) fails, so \(f\) is <strong>not continuous</strong>. (Its graph is the line \(y = x - 3\) with a hole at \((1,-2)\) and a stray dot at \((1,2)\).)</li>
+        <li>For \(g\): \(g(1) = -2\) and \(\lim_{x\to1}g(x) = -2\). All three conditions hold, so \(g\) <strong>is continuous</strong> at \(x = 1\). (Defining \(g(1)=-2\) fills in the hole.)</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Is \(f(x) = \begin{cases}\dfrac{1}{x-3} & x\neq3,\\[2mm] 5 & x = 3\end{cases}\) continuous at \(x = 3\)?
+      <p>(1) \(f(3) = 5\) is defined. (2) \(\lim_{x\to3}\frac{1}{x-3}\) gives \(\frac10 = \pm\infty\), so the limit does not exist. Hence \(f\) is <strong>not continuous</strong> at \(x = 3\); it has a vertical asymptote there.</p>
+    </div>
+
+    <h2 class="tex-section">Types of Discontinuities</h2>
+
+    <table class="tex-table">
+      <tr><th>Name</th><th>Situation</th><th>Picture</th></tr>
+      <tr><td><strong>Hole</strong> (removable discontinuity)</td><td>\(\lim_{x\to a}f(x)\) exists, but \(f(a)\) is undefined or \(f(a)\neq\lim_{x\to a}f(x)\)</td><td>an open circle on an otherwise unbroken curve (possibly with the dot somewhere else)</td></tr>
+      <tr><td><strong>Jump</strong> discontinuity</td><td>\(\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)\) (both finite)</td><td>the graph jumps to a different height</td></tr>
+      <tr><td><strong>Infinite</strong> discontinuity (vertical asymptote)</td><td>\(\lim_{x\to a}f(x) = \pm\infty\), or either one-sided limit is \(\pm\infty\)</td><td>the graph shoots up or down along a vertical line</td></tr>
+    </table>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Jump discontinuities only happen with piecewise functions. For a single formula like a rational function, the only possible discontinuities are holes (factor cancels) and vertical asymptotes (non-zero over zero).
+    </div>
+
+    <h2 class="tex-section">Making Piecewise Functions Continuous</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the values of \(a\) and \(b\) that make the function below continuous at \(x = 3\).
+      \[
+      f(x) = \begin{cases} x^2+2a & x&lt;3,\\ b & x = 3,\\ 5-2x & x&gt;3.\end{cases}
+      \]
+      <p>Go through the three conditions.</p>
+      <div class="step-line"><span class="step-label">Step 1.</span> <span class="step-desc">\(f(3)\) exists: \(f(3) = b\).</span></div>
+      <div class="step-line"><span class="step-label">Step 2.</span> <span class="step-desc">The limit exists: the one-sided limits must be equal.</span></div>
+      \[
+      \lim_{x\to3^-}f(x) = 3^2+2a = 9+2a, \qquad \lim_{x\to3^+}f(x) = 5-2(3) = -1.
+      \]
+      \[
+      9+2a = -1 \;\Longrightarrow\; 2a = -10 \;\Longrightarrow\; a = -5.
+      \]
+      <div class="step-line"><span class="step-label">Step 3.</span> <span class="step-desc">The limit equals the function value.</span></div>
+      \[
+      \lim_{x\to3}f(x) = f(3) \;\Longrightarrow\; -1 = b.
+      \]
+      <p>So \(a = -5\) and \(b = -1\). (Check: the left piece is \(x^2-10\), which equals \(-1\) at \(x=3\); the right piece \(5-2x\) also equals \(-1\) at \(x = 3\).)</p>
+    </div>
+
+    <!-- Self-check 2.4 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 11: Limits/Continuity</p>
+      <p><strong>(a)</strong> Given the piecewise function
+      \[
+      f(x) = \begin{cases}\dfrac{x^2+x-2}{x+2} & \text{if } x&lt;-2,\\[2mm] 3x+b & \text{if } x\ge-2,\end{cases}
+      \]
+      where \(b\) is some constant, find the value of \(b\) so that \(f(x)\) is continuous at \(x=-2\). Once computed, what is the domain of \(f(x)\)?</p>
+      <p><strong>(b)</strong> Let
+      \[
+      g(x) = \begin{cases}\dfrac{-x}{x^2+x} & \text{if } x&lt;0,\\[2mm] 2x-1 & \text{if } 0\le x\le4,\\ x-1 & \text{if } x&gt;4.\end{cases}
+      \]
+      Find every \(x\)-value where \(g(x)\) has a discontinuity, and classify each one (hole, vertical asymptote, or jump). Be sure to check the break points \(x = 0\) and \(x=4\).</p>
+      <button onclick="toggleSolution('sc2-4', this)">Show Answer</button>
+      <div id="sc2-4" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Compute the one-sided limits at \(x = -2\). From the left, plugging in gives \(\frac{4-2-2}{0} = \frac00\), so factor first:</p>
+        \[
+        \lim_{x\to-2^-}\frac{x^2+x-2}{x+2} = \lim_{x\to-2^-}\frac{(x+2)(x-1)}{x+2} = \lim_{x\to-2^-}(x-1) = -3.
+        \]
+        \[
+        \lim_{x\to-2^+}(3x+b) = 3(-2)+b = -6+b.
+        \]
+        <p>Set them equal: \(-6+b = -3\), so \(\boxed{b = 3}\). Then \(f(-2) = 3(-2)+3 = -3\) also matches, so \(f\) is continuous at \(-2\).</p>
+        <p>Domain: the fraction is only used for \(x&lt;-2\), where its denominator \(x+2\) is never zero, and \(3x+3\) is defined everywhere. So the domain is all real numbers, \((-\infty,\infty)\).</p>
+        <p><strong>(b)</strong> Go piece by piece, then check the break points.</p>
+        <ul>
+          <li><strong>For \(x&lt;0\):</strong> \(\dfrac{-x}{x^2+x} = \dfrac{-x}{x(x+1)}\), which is undefined at \(x=0\) and \(x=-1\). Only \(x=-1\) is in the region \(x&lt;0\). For \(x\) near \(-1\) the expression equals \(\dfrac{-1}{x+1}\), which gives \(\frac{-1}{0}\) at \(x = -1\). So \(x = -1\) is a <strong>vertical asymptote</strong>.</li>
+          <li><strong>At \(x = 0\):</strong> \(g(0) = 2(0)-1 = -1\). From the left, cancel the \(x\) first (we never actually plug in \(x = 0\)):
+          \[
+          \lim_{x\to0^-}\frac{-x}{x(x+1)} = \lim_{x\to0^-}\frac{-1}{x+1} = -1, \qquad \lim_{x\to0^+}(2x-1) = -1.
+          \]
+          Both one-sided limits equal \(g(0) = -1\), so \(g\) <strong>is continuous at \(x=0\)</strong> &mdash; no discontinuity there, even though the formula \(\frac{-x}{x^2+x}\) on its own would have a hole at 0.</li>
+          <li><strong>At \(x=4\):</strong> \(\lim_{x\to4^-}(2x-1) = 7\) and \(\lim_{x\to4^+}(x-1) = 3\). These are different finite numbers, so \(x = 4\) is a <strong>jump discontinuity</strong>.</li>
+          <li>The pieces \(2x-1\) and \(x-1\) are lines, so there are no other problems.</li>
+        </ul>
+        <p>So \(g\) has a vertical asymptote at \(x=-1\) and a jump at \(x=4\), and it is continuous everywhere else (including \(x=0\)).</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.1 ================= -->
+    <div class="unit-divider" id="sec2-5">
+      <div class="part-label">Defining the Derivative</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Revisit the idea of getting tangent lines from a limit of secant lines; define the derivative at a point as the slope of the tangent line at that point; see applications of derivatives such as marginal cost and velocity.
+    </div>
+
+    <h2 class="tex-section">Tangent Lines as Limits of Secant Lines</h2>
+
+    <p>In Preview of Calculus we found the slope of a secant line and used it to estimate the slope of the tangent line:</p>
+    \[
+    m_{\text{sec}} = \frac{f(b)-f(a)}{b-a}.
+    \]
+    <p>Now we let the second point slide toward the first. Calling the moving point \(x\) and letting \(x\) get close to \(a\):</p>
+
+    <div class="definition">
+      <span class="label">Definition (Slope of the Tangent Line)</span>
+      The slope of the tangent line to \(f(x)\) at \(x = a\) is
+      \[
+      m_{\tan} = \lim_{x\to a}\frac{f(x)-f(a)}{x-a}.
+      \]
+      <p><strong>Alternate form:</strong> write the nearby point as \(x = a+h\), where \(h\) is small. Then \(x - a = h\), and \(x\to a\) is the same as \(h\to0\):</p>
+      \[
+      m_{\tan} = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the equation of the tangent line to the graph of \(f(x) = x^2\) at \(x=3\).
+      <p>To write the equation of a line we need a <strong>point</strong> and a <strong>slope</strong>.</p>
+      <p><strong>Point:</strong> \((3, f(3)) = (3,9)\).</p>
+      <p><strong>Slope:</strong> use the alternate form with \(a = 3\):</p>
+      \[
+      \lim_{h\to0}\frac{f(3+h)-f(3)}{h} = \lim_{h\to0}\frac{(3+h)^2-3^2}{h} = \lim_{h\to0}\frac{9+6h+h^2-9}{h} = \lim_{h\to0}\frac{h(6+h)}{h} = \lim_{h\to0}(6+h) = 6.
+      \]
+      <p>(Recall \((3+h)^2 = (3+h)(3+h) = 9+6h+h^2\), not \(9 + h^2\).) Using point-slope form:</p>
+      \[
+      y - 9 = 6(x-3) \quad\Longrightarrow\quad y = 6x - 18 + 9 = 6x-9.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the slope of the tangent line to the graph of \(f(x) = \dfrac1x\) at \(x=2\).
+      \[
+      \lim_{h\to0}\frac{f(2+h)-f(2)}{h} = \lim_{h\to0}\frac{\frac{1}{2+h}-\frac12}{h}.
+      \]
+      <p>Plugging in \(h = 0\) gives \(\frac00\). Combine the fractions on top with the common denominator \(2(2+h)\):</p>
+      \[
+      \frac{1}{2+h}-\frac12 = \frac{2}{2(2+h)} - \frac{2+h}{2(2+h)} = \frac{2-2-h}{2(2+h)} = \frac{-h}{2(2+h)}.
+      \]
+      <p>Dividing by \(h\) is the same as multiplying by \(\frac1h\):</p>
+      \[
+      \lim_{h\to0}\frac{-h}{2(2+h)}\cdot\frac1h = \lim_{h\to0}\frac{-1}{2(2+h)} = \frac{-1}{2(2)} = -\frac14.
+      \]
+      <p>This makes sense: \(\frac1x\) is decreasing at \(x = 2\), so the slope is negative.</p>
+    </div>
+
+    <h2 class="tex-section">The Derivative at a Point</h2>
+
+    <div class="definition">
+      <span class="label">Definition (Important!)</span>
+      The <strong>derivative</strong> of a function at a point is the slope of the tangent line at that point. We denote the derivative of \(f(x)\) at \(x = a\) by \(f'(a)\) (read "\(f\) prime of \(a\)"). So
+      \[
+      f'(a) = \lim_{x\to a}\frac{f(x)-f(a)}{x-a} \qquad\text{or}\qquad f'(a) = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}.
+      \]
+      This is called the <strong>limit definition of the derivative</strong> at the point \(x=a\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 3x^2+2x\). Find \(f'(1)\).
+      <p>Here \(a = 1\) and \(f(1) = 3+2 = 5\). Using the first form:</p>
+      \[
+      f'(1) = \lim_{x\to1}\frac{f(x)-f(1)}{x-1} = \lim_{x\to1}\frac{3x^2+2x-5}{x-1} = \lim_{x\to1}\frac{(3x+5)(x-1)}{x-1} = \lim_{x\to1}(3x+5) = 8.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = \sqrt{2x}\). Find \(f'(2)\).
+      \[
+      f'(2) = \lim_{h\to0}\frac{f(2+h)-f(2)}{h} = \lim_{h\to0}\frac{\sqrt{2(2+h)}-\sqrt{2\cdot2}}{h} = \lim_{h\to0}\frac{\sqrt{4+2h}-\sqrt4}{h}.
+      \]
+      <p>This is \(\frac00\) with square roots, so multiply by the conjugate:</p>
+      \[
+      \lim_{h\to0}\frac{(\sqrt{4+2h}-\sqrt4)(\sqrt{4+2h}+\sqrt4)}{h(\sqrt{4+2h}+\sqrt4)} = \lim_{h\to0}\frac{(4+2h)-4}{h(\sqrt{4+2h}+\sqrt4)} = \lim_{h\to0}\frac{2h}{h(\sqrt{4+2h}+\sqrt4)}
+      \]
+      \[
+      = \lim_{h\to0}\frac{2}{\sqrt{4+2h}+\sqrt4} = \frac{2}{2+2} = \frac12.
+      \]
+    </div>
+
+    <h2 class="tex-section">What Does the Derivative Tell Us?</h2>
+
+    <h3 class="tex-subsection">Marginal Cost</h3>
+
+    <p>Let \(C(x)\) be the cost (in dollars) to produce \(x\) gallons of paint. What does each quantity tell us?</p>
+    <ul>
+      <li>\(C(20)\): the cost to produce 20 gallons of paint.</li>
+      <li>\(C(20.1)\): the cost to produce 20.1 gallons of paint.</li>
+      <li>\(C(20.1)-C(20)\): the cost to produce an extra 0.1 gallons after already producing 20.</li>
+      <li>\(\dfrac{C(20.1)-C(20)}{0.1}\): the cost of those 0.1 gallons divided by 0.1 gallons, i.e. the cost <em>per gallon</em>; roughly the cost to produce the next gallon. (This is the slope of a secant line.)</li>
+    </ul>
+    <p>Letting the 0.1 shrink to 0 turns this secant slope into the derivative \(C'(20)\).</p>
+
+    <div class="theorem">
+      <span class="label">Interpretation (Marginal Cost)</span>
+      If \(C(x)\) is the cost to produce \(x\) items, then \(C'(20)\) means: after producing 20 items, the cost to produce the next item (the 21st item) is about \(C'(20)\) dollars. We call \(C'(x)\) the <strong>marginal cost</strong>.
+    </div>
+
+    <h3 class="tex-subsection">Velocity</h3>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(d(t)\) be the distance (in meters) a car has traveled \(t\) seconds after the start of a race. What are \(d(60)\) and \(d'(60)\)?
+      <table class="tex-table">
+        <tr><th>\(t\)</th><td>0</td><td>10</td><td>60</td><td>61</td></tr>
+        <tr><th>\(d(t)\)</th><td>0</td><td>50 m</td><td>1500 m</td><td>1503 m</td></tr>
+      </table>
+      <p>\(d(60) = 1500\): the car has traveled 1500 meters after 60 seconds.</p>
+      \[
+      d'(60) \approx \frac{d(61)-d(60)}{61-60} = \frac{1503-1500}{1} = \frac{\text{distance traveled in 1 second}}{1 \text{ second}} = 3 \text{ m/s}.
+      \]
+      <p>\(d'(60)\) is the <strong>velocity</strong> (speed) of the car at 60 seconds, in meters per second; here about 3 m/s.</p>
+    </div>
+
+    <!-- Self-check 3.1 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 12 and 13: Derivatives</p>
+      <p><strong>(a)</strong> Given \(f(x) = x^2-2\), use the limit definition \(f'(a) = \displaystyle\lim_{h\to0}\frac{f(a+h)-f(a)}{h}\) to find \(f'(1)\) and \(f'(2)\).</p>
+      <p><strong>(b)</strong> Suppose a revenue function \(R(x)\) has \(R(20) = 100\), and we have the following data:</p>
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+        <tr><th>\(\dfrac{R(20)-R(x)}{20-x}\)</th><td>18.4</td><td>19.01</td><td>19.8</td><td>19.85</td><td>19.94</td><td>undefined</td></tr>
+      </table>
+      <p>The curve of best fit for \(R(x)\) predicts \(R(20.1) = 102.1\). Use this information to guess the value of \(R'(20)\). What does \(R'(20)\) mean in the context of the problem?</p>
+      <button onclick="toggleSolution('sc2-5', this)">Show Answer</button>
+      <div id="sc2-5" class="solution" style="display:none;">
+        <p><strong>(a)</strong> With \(a = 1\): \(f(1) = 1-2 = -1\) and \(f(1+h) = (1+h)^2-2 = 1+2h+h^2-2 = h^2+2h-1\).</p>
+        \[
+        f'(1) = \lim_{h\to0}\frac{(h^2+2h-1)-(-1)}{h} = \lim_{h\to0}\frac{h^2+2h}{h} = \lim_{h\to0}\frac{h(h+2)}{h} = \lim_{h\to0}(h+2) = 2.
+        \]
+        <p>With \(a = 2\): \(f(2) = 4-2 = 2\) and \(f(2+h) = (2+h)^2-2 = 4+4h+h^2-2 = h^2+4h+2\).</p>
+        \[
+        f'(2) = \lim_{h\to0}\frac{(h^2+4h+2)-2}{h} = \lim_{h\to0}\frac{h(h+4)}{h} = \lim_{h\to0}(h+4) = 4.
+        \]
+        <p><strong>(b)</strong> Each table entry is the slope of a secant line from \(x\) to 20. As \(x\) gets closer to 20 from the left, the slopes \(18.4,\ 19.01,\ 19.8,\ 19.85,\ 19.94\) are approaching about 20. From the right, the secant slope from 20 to 20.1 is</p>
+        \[
+        \frac{R(20.1)-R(20)}{20.1-20} = \frac{102.1-100}{0.1} = \frac{2.1}{0.1} = 21.
+        \]
+        <p>The tangent slope should be between the left-side values and this right-side value, so a good guess is \(R'(20)\approx 20\) (somewhere between about 19.94 and 21).</p>
+        <p><strong>Meaning:</strong> \(R'(20)\) is the marginal revenue at \(x = 20\). After selling 20 items, revenue is increasing at about $20 per item, so selling the 21st item brings in about $20 more revenue.</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.2 ================= -->
+    <div class="unit-divider" id="sec2-6">
+      <div class="part-label">The Derivative as a Function</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Define the derivative function; sketch the graph of a function's derivative from the graph of the function; determine when a function does not have a derivative at a point; explore higher-order derivatives.
+    </div>
+
+    <h2 class="tex-section">From a Point to a Function</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Suppose we want the derivative of \(f(x) = 5x^2\) at \(x=1\), \(2\) and \(3\). Using \(f'(a) = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}\) with \(a = 1\):
+      \[
+      f'(1) = \lim_{h\to0}\frac{5(1+h)^2-5(1)^2}{h} = \lim_{h\to0}\frac{5+10h+5h^2-5}{h} = \lim_{h\to0}\frac{5h(2+h)}{h} = \lim_{h\to0}5(2+h) = 10.
+      \]
+      <p>Repeating the same work with \(a = 2\) and \(a = 3\) gives \(f'(2) = 20\) and \(f'(3) = 30\). That's a lot of repeated work! Instead, do it once with a general \(x\):</p>
+      \[
+      \begin{aligned}
+      f'(x) &= \lim_{h\to0}\frac{f(x+h)-f(x)}{h} = \lim_{h\to0}\frac{5(x+h)^2-5x^2}{h} = \lim_{h\to0}\frac{5(x^2+2xh+h^2)-5x^2}{h}\\
+      &= \lim_{h\to0}\frac{5x^2+10xh+5h^2-5x^2}{h} = \lim_{h\to0}\frac{h(10x+5h)}{h} = \lim_{h\to0}(10x+5h) = 10x.
+      \end{aligned}
+      \]
+      <p>Now plug in: \(f'(1) = 10\), \(f'(2) = 20\), \(f'(3) = 30\), all at once.</p>
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      Let \(f(x)\) be a function. Its <strong>derivative function</strong> \(f'(x)\) is
+      \[
+      f'(x) = \lim_{h\to0}\frac{f(x+h)-f(x)}{h},
+      \]
+      when the limit exists. We say \(f\) is <strong>differentiable</strong> at \(x = a\) when this limit exists at \(a\).
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Using the Limit Definition</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Find \(f(x+h)\) by plugging \(x+h\) in for every \(x\) in the formula, and replace \(f(x)\) with the given formula. Put parentheses around \(f(x)\) so the minus sign distributes.</li>
+          <li>Multiply out (or get a common denominator, or multiply by the conjugate) and simplify. Everything without an \(h\) should cancel.</li>
+          <li>Factor an \(h\) out of the top and cancel it with the \(h\) on the bottom.</li>
+          <li>Now plug in \(h = 0\). (Keep writing "\(\lim_{h\to0}\)" until this step.)</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = \sqrt x\). Find \(f'(x)\).
+      \[
+      f'(x) = \lim_{h\to0}\frac{\sqrt{x+h}-\sqrt x}{h}\cdot\frac{\sqrt{x+h}+\sqrt x}{\sqrt{x+h}+\sqrt x} = \lim_{h\to0}\frac{(x+h)-x}{h(\sqrt{x+h}+\sqrt x)} = \lim_{h\to0}\frac{h}{h(\sqrt{x+h}+\sqrt x)}
+      \]
+      \[
+      = \lim_{h\to0}\frac{1}{\sqrt{x+h}+\sqrt x} = \frac{1}{\sqrt x+\sqrt x} = \frac{1}{2\sqrt x}.
+      \]
+      <p>(Multiplying out the top: \((\sqrt{x+h}-\sqrt x)(\sqrt{x+h}+\sqrt x) = (x+h) + \sqrt{x+h}\sqrt x - \sqrt x\sqrt{x+h} - x = h\); the middle terms cancel.)</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 6\). Find \(f'(x)\). Since \(f(x+h) = 6\) too (there is no \(x\) to replace),
+      \[
+      f'(x) = \lim_{h\to0}\frac{6-6}{h} = \lim_{h\to0}\frac0h = \lim_{h\to0}0 = 0.
+      \]
+      <p>(Inside the limit \(h\neq0\), so \(\frac0h = 0\).) This makes sense: the graph of \(y=6\) is a horizontal line, which has slope 0 everywhere.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 4x+3\). Find \(f'(x)\).
+      \[
+      f'(x) = \lim_{h\to0}\frac{4(x+h)+3-(4x+3)}{h} = \lim_{h\to0}\frac{4x+4h+3-4x-3}{h} = \lim_{h\to0}\frac{4h}{h} = 4.
+      \]
+      <p>Again this makes sense: \(y = 4x+3\) is a line with slope 4 everywhere.</p>
+    </div>
+
+    <h2 class="tex-section">Notation</h2>
+
+    <p>If we write the function as \(f(x)\), we can write the derivative as</p>
+    \[
+    f'(x), \qquad \frac{d}{dx}(f), \qquad \frac{df}{dx}.
+    \]
+    <p>If we write the function as \(y\) (like \(y = x^2\)), we can write the derivative as</p>
+    \[
+    y', \qquad \frac{dy}{dx}.
+    \]
+    <p>The symbol \(\frac{d}{dx}\) means "take the derivative with respect to \(x\)."</p>
+
+    <h2 class="tex-section">Graphing the Derivative</h2>
+
+    <p>The derivative \(f'(x)\) is the slope of \(f\) at each point. So to sketch \(f'\) from the graph of \(f\), estimate the slope at each point and plot that number as the \(y\)-value of \(f'\):</p>
+    <ul>
+      <li>Where \(f\) is going <strong>up</strong> (positive slopes), the graph of \(f'\) is <strong>above</strong> the \(x\)-axis.</li>
+      <li>Where \(f\) is going <strong>down</strong> (negative slopes), the graph of \(f'\) is <strong>below</strong> the \(x\)-axis.</li>
+      <li>Where \(f\) has a <strong>horizontal tangent</strong> (a peak, a valley, or a flat spot), \(f'\) crosses or touches the \(x\)-axis (\(f' = 0\)).</li>
+      <li>Where \(f\) is <strong>steepest</strong>, \(f'\) is farthest from the \(x\)-axis.</li>
+    </ul>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Below, the solid curve is \(f(x) = x^3-3x\) and the dashed curve is its derivative.
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 260" width="320" height="260" role="img" aria-label="Graph of x cubed minus 3x (solid) and its derivative 3x squared minus 3 (dashed)">
+        <line x1="22.0" y1="143.5" x2="298.0" y2="143.5" stroke="#888" stroke-width="1"/>
+        <line x1="160.0" y1="238.0" x2="160.0" y2="22.0" stroke="#888" stroke-width="1"/>
+        <g stroke="#888" stroke-width="1"><line x1="34.5" y1="139.5" x2="34.5" y2="147.5"/><line x1="97.3" y1="139.5" x2="97.3" y2="147.5"/><line x1="222.7" y1="139.5" x2="222.7" y2="147.5"/><line x1="285.5" y1="139.5" x2="285.5" y2="147.5"/><line x1="156.0" y1="197.5" x2="164.0" y2="197.5"/><line x1="156.0" y1="89.5" x2="164.0" y2="89.5"/><line x1="156.0" y1="35.5" x2="164.0" y2="35.5"/></g>
+        <g font-size="11" fill="#464646" text-anchor="middle" font-family="serif"><text x="34.5" y="159.5">−2</text><text x="97.3" y="159.5">−1</text><text x="222.7" y="159.5">1</text><text x="285.5" y="159.5">2</text><text x="148.0" y="201.5">−2</text><text x="148.0" y="93.5">2</text><text x="148.0" y="39.5">4</text><text x="306.0" y="147.5">x</text><text x="168.0" y="16.0">y</text></g>
+        <polyline fill="none" stroke="#002d62" stroke-width="2" points="28.3,223.4 31.6,209.4 34.9,196.3 38.2,184.1 41.4,172.7 44.7,162.2 48.0,152.5 51.3,143.6 54.6,135.4 57.9,128.1 61.2,121.4 64.5,115.5 67.8,110.2 71.1,105.6 74.4,101.6 77.7,98.2 81.0,95.5 84.3,93.2 87.6,91.5 90.8,90.4 94.1,89.7 97.4,89.5 100.7,89.7 104.0,90.4 107.3,91.5 110.6,92.9 113.9,94.7 117.2,96.8 120.5,99.2 123.8,101.9 127.1,104.9 130.4,108.1 133.7,111.5 136.9,115.1 140.2,118.8 143.5,122.7 146.8,126.7 150.1,130.8 153.4,135.0 156.7,139.3 160.0,143.5 163.3,147.7 166.6,152.0 169.9,156.2 173.2,160.3 176.5,164.3 179.8,168.2 183.1,171.9 186.3,175.5 189.6,178.9 192.9,182.1 196.2,185.1 199.5,187.8 202.8,190.2 206.1,192.3 209.4,194.1 212.7,195.5 216.0,196.6 219.3,197.3 222.6,197.5 225.9,197.3 229.2,196.6 232.5,195.5 235.7,193.8 239.0,191.5 242.3,188.8 245.6,185.4 248.9,181.4 252.2,176.8 255.5,171.5 258.8,165.6 262.1,158.9 265.4,151.6 268.7,143.4 272.0,134.5 275.3,124.8 278.6,114.3 281.8,102.9 285.1,90.7 288.4,77.6 291.7,63.6"/>
+        <polyline fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 4" points="62.8,29.9 65.2,39.5 67.6,48.9 70.1,58.0 72.5,66.9 74.9,75.5 77.4,83.9 79.8,92.0 82.2,100.0 84.6,107.6 87.1,115.0 89.5,122.2 91.9,129.1 94.4,135.8 96.8,142.3 99.2,148.5 101.7,154.4 104.1,160.2 106.5,165.6 109.0,170.9 111.4,175.8 113.8,180.6 116.2,185.1 118.7,189.3 121.1,193.4 123.5,197.1 126.0,200.7 128.4,203.9 130.8,207.0 133.3,209.8 135.7,212.3 138.1,214.6 140.6,216.7 143.0,218.5 145.4,220.1 147.8,221.5 150.3,222.6 152.7,223.4 155.1,224.0 157.6,224.4 160.0,224.5 162.4,224.4 164.9,224.0 167.3,223.4 169.7,222.6 172.2,221.5 174.6,220.1 177.0,218.5 179.4,216.7 181.9,214.6 184.3,212.3 186.7,209.8 189.2,207.0 191.6,203.9 194.0,200.7 196.5,197.1 198.9,193.4 201.3,189.3 203.8,185.1 206.2,180.6 208.6,175.8 211.0,170.9 213.5,165.6 215.9,160.2 218.3,154.4 220.8,148.5 223.2,142.3 225.6,135.8 228.1,129.1 230.5,122.2 232.9,115.0 235.4,107.6 237.8,100.0 240.2,92.0 242.6,83.9 245.1,75.5 247.5,66.9 249.9,58.0 252.4,48.9 254.8,39.5 257.2,29.9"/>
+        <circle cx="97.3" cy="89.5" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="222.7" cy="197.5" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="97.3" cy="143.5" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        <circle cx="222.7" cy="143.5" r="3.5" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+        
+        </svg>
+        <figcaption>\(f(x)=x^3-3x\) (solid) and \(f'(x)\) (dashed)</figcaption>
+      </figure>
+      <p>Reading \(f\) left to right: it rises (\(f'&gt;0\)) up to a peak at \(x=-1\) (\(f'(-1) = 0\)), falls (\(f'&lt;0\)) down to a valley at \(x = 1\) (\(f'(1) = 0\)), then rises again (\(f'&gt;0\)). It falls most steeply at \(x = 0\), which is where \(f'\) is lowest. (Once we learn the power rule, we can check that \(f'(x) = 3x^2-3\).)</p>
+    </div>
+
+    <h2 class="tex-section">When Is a Function Not Differentiable?</h2>
+
+    <p>A function fails to have a derivative at \(x = a\) in these situations:</p>
+    <ul>
+      <li><strong>It is not continuous at \(a\)</strong> (a hole, a jump, or a vertical asymptote).</li>
+      <li><strong>Corner</strong>, e.g. \(y = |x|\) at \(x=0\): the slope is \(-1\) on the left and \(+1\) on the right, so there is no single tangent line.</li>
+      <li><strong>Cusp</strong>, e.g. \(y = x^{2/3}\) at \(x = 0\): a very sharp point where both sides become vertical.</li>
+      <li><strong>Vertical tangent</strong>, e.g. \(y = x^{1/3}\) at \(x=0\): the tangent line is vertical, and a vertical line has undefined slope.</li>
+    </ul>
+
+    <div class="theorem">
+      <span class="label">Differentiable Implies Continuous</span>
+      If a function is differentiable at \(x = a\), then it must be continuous at \(x = a\). But <strong>not</strong> the other way around: \(y = |x|\) is continuous at \(0\) but not differentiable there.
+    </div>
+
+    <h2 class="tex-section">Higher-Order Derivatives</h2>
+
+    <p>Since \(f'(x)\) is a function, we can take its derivative too, and then take the derivative again, and again.</p>
+
+    <table class="tex-table">
+      <tr><th>Function</th><th>First derivative</th><th>Second derivative</th><th>Third derivative</th></tr>
+      <tr><td>\(f(x)\)</td><td>\(f'(x)\)</td><td>\(f''(x)\)</td><td>\(f'''(x)\)</td></tr>
+      <tr><td>\(y\)</td><td>\(y'\)</td><td>\(y''\)</td><td>\(y'''\)</td></tr>
+      <tr><td>\(f\)</td><td>\(\dfrac{df}{dx}\)</td><td>\(\dfrac{d^2f}{dx^2}\)</td><td>\(\dfrac{d^3f}{dx^3}\)</td></tr>
+      <tr><td>e.g. \(x^2\)</td><td>\(2x\)</td><td>\(2\)</td><td>\(0\)</td></tr>
+    </table>
+
+    <p>(Every derivative after the third derivative of \(x^2\) is also \(0\).) If \(f\) is distance, \(f'\) is velocity and \(f''\) is acceleration (the rate of change of the rate of change).</p>
+
+    <!-- Self-check 3.2 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 12 and 13: Derivatives</p>
+      <p><strong>(a)</strong> Let \(f(x) = x^2-2\). Determine where the function is continuous. Then use the limit definition \(f'(x) = \displaystyle\lim_{h\to0}\frac{f(x+h)-f(x)}{h}\) to compute \(f'(x)\).</p>
+      <p><strong>(b)</strong> Let \(f(x) = \dfrac{1}{4x}\). Use the limit definition to find \(f'(x)\), and use it to find the equation of the tangent line to \(f(x)\) at \(x=2\).</p>
+      <button onclick="toggleSolution('sc2-6', this)">Show Answer</button>
+      <div id="sc2-6" class="solution" style="display:none;">
+        <p><strong>(a)</strong> \(f\) is a polynomial, so it is continuous everywhere: \((-\infty,\infty)\). Now \(f(x+h) = (x+h)^2-2 = x^2+2xh+h^2-2\), so</p>
+        \[
+        f'(x) = \lim_{h\to0}\frac{(x^2+2xh+h^2-2)-(x^2-2)}{h} = \lim_{h\to0}\frac{2xh+h^2}{h} = \lim_{h\to0}\frac{h(2x+h)}{h} = \lim_{h\to0}(2x+h) = 2x.
+        \]
+        <p>(Check against the previous Self-Check: \(f'(1) = 2\) and \(f'(2) = 4\). ✓)</p>
+        <p><strong>(b)</strong> Step 1: \(f(x+h) = \dfrac{1}{4(x+h)}\). Step 2: plug into the definition.</p>
+        \[
+        f'(x) = \lim_{h\to0}\frac{\frac{1}{4(x+h)}-\frac{1}{4x}}{h}.
+        \]
+        <p>Step 3: combine the top over the common denominator \(4x(x+h)\):</p>
+        \[
+        \frac{1}{4(x+h)}-\frac{1}{4x} = \frac{x}{4x(x+h)} - \frac{x+h}{4x(x+h)} = \frac{x-x-h}{4x(x+h)} = \frac{-h}{4x(x+h)}.
+        \]
+        \[
+        f'(x) = \lim_{h\to0}\frac{-h}{4x(x+h)}\cdot\frac1h = \lim_{h\to0}\frac{-1}{4x(x+h)} = \frac{-1}{4x\cdot x} = -\frac{1}{4x^2}.
+        \]
+        <p>Tangent line at \(x=2\). <strong>Point:</strong> \(f(2) = \frac{1}{8}\), so \((2,\tfrac18)\). <strong>Slope:</strong> \(f'(2) = -\frac{1}{4(4)} = -\frac{1}{16}\).</p>
+        \[
+        y - \frac18 = -\frac{1}{16}(x-2) \quad\Longrightarrow\quad y = -\frac{1}{16}x + \frac18+\frac18 = -\frac{1}{16}x+\frac14.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.3 ================= -->
+    <div class="unit-divider" id="sec2-7">
+      <div class="part-label">Derivative Rules</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn the constant, power, sum/difference, and constant multiple rules for derivatives; use them to find tangent lines.
+    </div>
+
+    <p>We've seen that (1) the derivative of a function tells us the slope of the tangent line at each point, and (2) we can find the derivative using \(f'(x) = \lim_{h\to0}\frac{f(x+h)-f(x)}{h}\). Now we learn some "short-cut" rules to find derivatives <em>without</em> having to use limits.</p>
+
+    <h2 class="tex-section">The Constant Rule</h2>
+
+    <div class="theorem">
+      <span class="label">Constant Rule</span>
+      For any constant \(c\),
+      \[
+      \frac{d}{dx}(c) = 0.
+      \]
+    </div>
+    <p>The graph of \(y = c\) is a horizontal line, which has slope 0. For example, if \(f(x) = 3\) then \(f'(x) = 0\); if \(y = 5\) then \(y' = 0\); if \(g(x) = 153e\) then \(g'(x) = 0\) (\(153e\) is just a number).</p>
+
+    <h2 class="tex-section">The Power Rule</h2>
+
+    <p>We saw (using limits) that \(\frac{d}{dx}(x^2) = 2x\) and \(\frac{d}{dx}(\sqrt x) = \frac{1}{2\sqrt x}\). These are both cases of one rule.</p>
+
+    <div class="theorem">
+      <span class="label">Power Rule</span>
+      For any constant \(n\),
+      \[
+      \frac{d}{dx}\left(x^n\right) = n\,x^{n-1}.
+      \]
+      "Bring the power down in front, then lower the power by one." This works when \(x\) is in the base and a constant is in the exponent.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      <ol type="a">
+        <li>\(\dfrac{d}{dx}(x^3) = 3x^2\).</li>
+        <li>If \(f(x) = x^5\), then \(f'(x) = 5x^4\).</li>
+        <li>\(\dfrac{d}{dx}\left(\sqrt[3]x\right) = \dfrac{d}{dx}\left(x^{1/3}\right) = \dfrac13x^{1/3-1} = \dfrac13x^{-2/3} = \dfrac{1}{3x^{2/3}} = \dfrac{1}{3\sqrt[3]{x^2}}\).</li>
+        <li>If \(g(x) = \sqrt[3]{x^5} = x^{5/3}\) (power on top, root on bottom), then \(g'(x) = \dfrac53x^{2/3}\), since \(\frac53-1 = \frac53-\frac33 = \frac23\).</li>
+        <li>\(\dfrac{d}{dx}(x) = \dfrac{d}{dx}(x^1) = 1\cdot x^0 = 1\). This matches the slope of the line \(y = x\).</li>
+      </ol>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Before using the power rule, rewrite roots and fractions as powers of \(x\) (using the exponent rules from Unit 1): \(\sqrt[n]{x^m} = x^{m/n}\) and \(\frac{1}{x^n} = x^{-n}\). For a negative power, subtracting 1 makes it <em>more</em> negative: \(\frac{d}{dx}(x^{-2}) = -2x^{-3}\).
+    </div>
+
+    <h2 class="tex-section">Sum, Difference, and Constant Multiple Rules</h2>
+
+    <div class="theorem">
+      <span class="label">Sum and Difference Rules</span>
+      \[
+      \frac{d}{dx}(f+g) = \frac{df}{dx}+\frac{dg}{dx}, \qquad \frac{d}{dx}(f-g) = \frac{df}{dx}-\frac{dg}{dx}.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">Constant Multiple Rule</span>
+      For any constant \(c\),
+      \[
+      \frac{d}{dx}\big[c\,f(x)\big] = c\,\frac{d}{dx}f(x).
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Constants <strong>added</strong> or subtracted go away (their derivative is 0). Constants <strong>multiplied</strong> come along for the ride.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{d}{dx}\left[x^2+x-1\right] = \frac{d}{dx}(x^2) + \frac{d}{dx}(x) - \frac{d}{dx}(1) = 2x+1-0 = 2x+1.
+      \]
+      \[
+      \frac{d}{dx}\left[3x^2\right] = 3\cdot\frac{d}{dx}(x^2) = 3\cdot2x = 6x, \qquad \frac{d}{dx}\left[5x^3\right] = 15x^2, \qquad \frac{d}{dx}\left[3x^2+5x-1\right] = 6x+5.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left[\dfrac{2}{x^2}-2+\dfrac x2\right]\).
+      <p>Rewrite first: \(\frac{2}{x^2} = 2x^{-2}\) and \(\frac x2 = \frac12x\).</p>
+      \[
+      \frac{d}{dx}\left[2x^{-2}-2+\tfrac12x\right] = 2(-2x^{-3}) - 0 + \tfrac12(1) = -4x^{-3}+\frac12 = -\frac{4}{x^3}+\frac12.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the derivative of each function.
+      <table class="tex-table">
+        <tr><th>\(f(x)\)</th><th>Rewrite</th><th>\(f'(x)\)</th></tr>
+        <tr><td>\(x^{15}\)</td><td>&mdash;</td><td>\(15x^{14}\)</td></tr>
+        <tr><td>\(3x^2+4x\)</td><td>&mdash;</td><td>\(6x+4\)</td></tr>
+        <tr><td>\(2+\dfrac{5}{x^3}\)</td><td>\(2+5x^{-3}\)</td><td>\(-15x^{-4}\)</td></tr>
+        <tr><td>\(\dfrac{x^3}{8}-16\sqrt x\)</td><td>\(\tfrac18x^3-16x^{1/2}\)</td><td>\(\tfrac38x^2-8x^{-1/2}\)</td></tr>
+      </table>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = \dfrac{x^3+4x-3}{x^2}\). Find \(f'(x)\).
+      <p>Split the fraction into separate terms (or multiply by \(x^{-2}\)) first:</p>
+      \[
+      f(x) = \frac{x^3}{x^2}+\frac{4x}{x^2}-\frac{3}{x^2} = x+4x^{-1}-3x^{-2}, \qquad f'(x) = 1-4x^{-2}+6x^{-3}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = (x+3)^2\). Find \(f'(x)\).
+      <p>Multiply out first: \(f(x) = (x+3)(x+3) = x^2+6x+9\), so \(f'(x) = 2x+6\).</p>
+      <p><strong>Warning:</strong> the power rule needs just \(x\) in the base, so don't apply it directly to \((x+3)^2\). For now, multiply out first. (The shortcut for powers of an expression like \((x+3)^2\) is the <em>chain rule</em>, covered later.)</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = (x^2+2x)(x+1)\). Find \(f'(x)\).
+      <p>We don't have a product rule yet, so multiply out first:</p>
+      \[
+      f(x) = x^3+x^2+2x^2+2x = x^3+3x^2+2x, \qquad f'(x) = 3x^2+6x+2.
+      \]
+    </div>
+
+    <h2 class="tex-section">Tangent Lines with the Rules</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 3x^2+2x+1\).
+      <p><strong>(a) Find the equation of the tangent line at \(x=2\).</strong></p>
+      <p>Point: \(f(2) = 3(4)+2(2)+1 = 17\), so \((2,17)\). Slope: \(f'(x) = 6x+2\), so \(f'(2) = 14\).</p>
+      \[
+      y-17 = 14(x-2) \quad\Longrightarrow\quad y = 14x-11.
+      \]
+      <p><strong>(b) Find where the tangent line is horizontal.</strong></p>
+      <p>A horizontal line has slope 0, so we need the derivative to be 0:</p>
+      \[
+      f'(x) = 6x+2 = 0 \;\Longrightarrow\; 6x = -2 \;\Longrightarrow\; x = -\frac13.
+      \]
+      <p>This is the vertex of the parabola (matching the vertex formula \(x = -\frac{b}{2a} = -\frac{2}{2(3)}\) from Unit 1).</p>
+    </div>
+
+    <!-- Self-check 3.3 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 14 and 15: Derivatives; Derivative Interpretation and Chain Rule</p>
+      <p>Compute the derivative of each function.</p>
+      \[
+      \text{(a)}\ f(x) = 5x^3+7x-4 \qquad \text{(b)}\ f(x) = 4\sqrt x+14x^2 \qquad \text{(c)}\ f(x) = \frac{x^2-7x}{x^3} \qquad \text{(d)}\ f(x) = 15x^4-\frac{4}{5x^3}+\sqrt[4]{x^3}
+      \]
+      <button onclick="toggleSolution('sc2-7', this)">Show Answer</button>
+      <div id="sc2-7" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Power rule term by term; the constant \(-4\) goes away:</p>
+        \[
+        f'(x) = 5\cdot3x^2+7\cdot1-0 = 15x^2+7.
+        \]
+        <p><strong>(b)</strong> Rewrite \(4\sqrt x = 4x^{1/2}\):</p>
+        \[
+        f'(x) = 4\cdot\tfrac12x^{-1/2}+14\cdot2x = 2x^{-1/2}+28x = \frac{2}{\sqrt x}+28x.
+        \]
+        <p><strong>(c)</strong> Split the fraction first so we only need the power rule:</p>
+        \[
+        f(x) = \frac{x^2}{x^3}-\frac{7x}{x^3} = x^{-1}-7x^{-2}, \qquad f'(x) = -x^{-2}+14x^{-3} = -\frac{1}{x^2}+\frac{14}{x^3}.
+        \]
+        <p><strong>(d)</strong> Rewrite: \(\frac{4}{5x^3} = \frac45x^{-3}\) and \(\sqrt[4]{x^3} = x^{3/4}\), so \(f(x) = 15x^4-\frac45x^{-3}+x^{3/4}\).</p>
+        \[
+        f'(x) = 60x^3-\tfrac45(-3)x^{-4}+\tfrac34x^{-1/4} = 60x^3+\frac{12}{5}x^{-4}+\frac34x^{-1/4} = 60x^3+\frac{12}{5x^4}+\frac{3}{4\sqrt[4]x}.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.3 (cont) ================= -->
+    <div class="unit-divider" id="sec2-8">
+      <div class="part-label">The Product and Quotient Rules</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Learn the product and quotient rules; learn to combine various derivative rules.
+    </div>
+
+    <h2 class="tex-section">The Product Rule</h2>
+
+    <p>Let \(f(x) = x(x^2+1)\). It is tempting to take the derivative of each factor and multiply: \(1\cdot2x = 2x\). <strong>This is wrong!</strong> How do we know? Multiply out first: \(f(x) = x^3+x\), so \(f'(x) = 3x^2+1\), which is not \(2x\). The derivative of a product is <em>not</em> the product of the derivatives.</p>
+
+    <div class="theorem">
+      <span class="label">Product Rule</span>
+      \[
+      \frac{d}{dx}\big[g(x)\cdot h(x)\big] = g(x)\cdot h'(x) + g'(x)\cdot h(x).
+      \]
+      "First times derivative of the second, plus derivative of the first times the second."
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Use the product rule on \(f(x) = x(x^2+1)\). Here \(g(x) = x\), \(g'(x) = 1\), \(h(x) = x^2+1\), \(h'(x) = 2x\).
+      \[
+      f'(x) = x\cdot\frac{d}{dx}(x^2+1)+\frac{d}{dx}(x)\cdot(x^2+1) = x(2x)+1(x^2+1) = 2x^2+x^2+1 = 3x^2+1. \ ✓
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      f(x) = (x^3+6x+1)(x^2+2x) \;\Longrightarrow\; f'(x) = (x^3+6x+1)(2x+2)+(3x^2+6)(x^2+2x).
+      \]
+      \[
+      f(x) = x^5(x^2+4x-5) \;\Longrightarrow\; f'(x) = x^5(2x+4)+5x^4(x^2+4x-5).
+      \]
+      <p>It is fine to leave answers like these unsimplified unless you are asked to simplify.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = g(x)\cdot h(x)\). What is \(f'(2)\), given the table below?
+      <table class="tex-table">
+        <tr><th>\(x\)</th><th>\(g(x)\)</th><th>\(g'(x)\)</th><th>\(h(x)\)</th><th>\(h'(x)\)</th></tr>
+        <tr><td>2</td><td>3</td><td>1</td><td>4</td><td>5</td></tr>
+      </table>
+      \[
+      f'(2) = g(2)h'(2)+g'(2)h(2) = 3\cdot5+1\cdot4 = 15+4 = 19.
+      \]
+    </div>
+
+    <h2 class="tex-section">The Quotient Rule</h2>
+
+    <div class="theorem">
+      <span class="label">Quotient Rule</span>
+      \[
+      \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)f'(x)-f(x)g'(x)}{\big(g(x)\big)^2}.
+      \]
+      A way to remember it, calling the top "Hi" and the bottom "Lo": <strong>"Lo D-Hi minus Hi D-Lo, all over Lo squared."</strong> (D-Hi means the derivative of the top; D-Lo means the derivative of the bottom.)
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      Order matters in the quotient rule because of the minus sign: always start with "Lo D-Hi." (In the product rule, order doesn't matter since we add.)
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left(\dfrac{x^2+1}{3x+2}\right)\).
+      <p>Hi: \(x^2+1\); D-Hi: \(2x\); Lo: \(3x+2\); D-Lo: \(3\).</p>
+      \[
+      \frac{d}{dx}\left(\frac{x^2+1}{3x+2}\right) = \frac{(3x+2)(2x)-(x^2+1)(3)}{(3x+2)^2} = \frac{6x^2+4x-3x^2-3}{(3x+2)^2} = \frac{3x^2+4x-3}{(3x+2)^2}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{d}{dx}\left(\frac{x+1}{2x-5}\right) = \frac{(2x-5)(1)-(x+1)(2)}{(2x-5)^2} = \frac{2x-5-2x-2}{(2x-5)^2} = \frac{-7}{(2x-5)^2}.
+      \]
+    </div>
+
+    <h2 class="tex-section">Combining Rules</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 2x+x^2(3x+1)+\dfrac{5}{x+1}\). Find \(f'(x)\).
+      <p>Take each term separately: \(2x\) uses the power rule, \(x^2(3x+1)\) is a product, and \(\frac{5}{x+1}\) is a quotient.</p>
+      \[
+      f'(x) = 2+\Big[x^2(3)+(2x)(3x+1)\Big]+\frac{(x+1)(0)-5(1)}{(x+1)^2} = 2+3x^2+2x(3x+1)-\frac{5}{(x+1)^2}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left(\dfrac{(x+1)(x^2+3x)}{x^2+2x+1}\right)\).
+      <p>This is a quotient, and the top is itself a product.</p>
+      <ul>
+        <li>Hi: \((x+1)(x^2+3x)\); D-Hi (product rule): \((x+1)(2x+3)+(1)(x^2+3x)\).</li>
+        <li>Lo: \(x^2+2x+1\); D-Lo: \(2x+2\).</li>
+      </ul>
+      \[
+      \frac{d}{dx}(f) = \frac{(x^2+2x+1)\big[(x+1)(2x+3)+(x^2+3x)\big]-(x+1)(x^2+3x)(2x+2)}{(x^2+2x+1)^2}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Take the derivative of each function.
+      <ol type="a">
+        <li>\(f(x) = x^2(3x-1)+2x\): \(\ f'(x) = (x^2)(3)+(2x)(3x-1)+2 = 9x^2-2x+2\).</li>
+        <li>\(g(x) = \dfrac{3}{x+6}\): \(\ g'(x) = \dfrac{(x+6)(0)-3(1)}{(x+6)^2} = \dfrac{-3}{(x+6)^2}\).</li>
+        <li>\(h(x) = \dfrac{17x^2+4}{2x+1}\): \(\ h'(x) = \dfrac{(2x+1)(34x)-(17x^2+4)(2)}{(2x+1)^2}\).</li>
+        <li>\(y = \dfrac{x^2+4x+1}{(x^2+3)(x-2)}\): the bottom is a product, so D-Lo \(= (x^2+3)(1)+(2x)(x-2)\), and
+        \[
+        y' = \frac{(x^2+3)(x-2)(2x+4)-(x^2+4x+1)\big[(x^2+3)(1)+(2x)(x-2)\big]}{\big((x^2+3)(x-2)\big)^2}.
+        \]</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = \dfrac{g(x)}{h(x)}\). Find \(f'(3)\), given the table below.
+      <table class="tex-table">
+        <tr><th>\(x\)</th><th>\(g(x)\)</th><th>\(g'(x)\)</th><th>\(h(x)\)</th><th>\(h'(x)\)</th></tr>
+        <tr><td>3</td><td>2</td><td>1</td><td>4</td><td>5</td></tr>
+      </table>
+      \[
+      f'(3) = \frac{h(3)g'(3)-g(3)h'(3)}{\big(h(3)\big)^2} = \frac{4(1)-2(5)}{4^2} = \frac{4-10}{16} = -\frac{6}{16} = -\frac38.
+      \]
+    </div>
+
+    <!-- Self-check 3.3b -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice problems in the style of the lecture examples (no in-class activity for this lecture)</p>
+      <p><strong>(a)</strong> Use the product rule to find the derivative of \(f(x) = (2x^3-x)(x^2+4)\). Check your answer by multiplying out first.</p>
+      <p><strong>(b)</strong> Find the derivative of \(g(x) = \dfrac{x^2-3}{2x+1}\) and simplify the numerator.</p>
+      <p><strong>(c)</strong> Use the table to find \(p'(1)\) and \(q'(1)\), where \(p(x) = f(x)g(x)\) and \(q(x) = \dfrac{f(x)}{g(x)}\).</p>
+      <table class="tex-table">
+        <tr><th>\(x\)</th><th>\(f(x)\)</th><th>\(f'(x)\)</th><th>\(g(x)\)</th><th>\(g'(x)\)</th></tr>
+        <tr><td>1</td><td>2</td><td>\(-1\)</td><td>3</td><td>4</td></tr>
+      </table>
+      <button onclick="toggleSolution('sc2-8', this)">Show Answer</button>
+      <div id="sc2-8" class="solution" style="display:none;">
+        <p><strong>(a)</strong> First: \(2x^3-x\), derivative \(6x^2-1\). Second: \(x^2+4\), derivative \(2x\).</p>
+        \[
+        f'(x) = (2x^3-x)(2x)+(6x^2-1)(x^2+4) = (4x^4-2x^2)+(6x^4+24x^2-x^2-4) = 10x^4+21x^2-4.
+        \]
+        <p>Check: \(f(x) = 2x^5+8x^3-x^3-4x = 2x^5+7x^3-4x\), so \(f'(x) = 10x^4+21x^2-4\). ✓</p>
+        <p><strong>(b)</strong> Hi: \(x^2-3\); D-Hi: \(2x\); Lo: \(2x+1\); D-Lo: \(2\).</p>
+        \[
+        g'(x) = \frac{(2x+1)(2x)-(x^2-3)(2)}{(2x+1)^2} = \frac{4x^2+2x-2x^2+6}{(2x+1)^2} = \frac{2x^2+2x+6}{(2x+1)^2}.
+        \]
+        <p><strong>(c)</strong> Product rule:</p>
+        \[
+        p'(1) = f(1)g'(1)+f'(1)g(1) = 2(4)+(-1)(3) = 8-3 = 5.
+        \]
+        <p>Quotient rule (Lo D-Hi minus Hi D-Lo, over Lo squared):</p>
+        \[
+        q'(1) = \frac{g(1)f'(1)-f(1)g'(1)}{\big(g(1)\big)^2} = \frac{3(-1)-2(4)}{3^2} = \frac{-3-8}{9} = -\frac{11}{9}.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.4 ================= -->
+    <div class="unit-divider" id="sec2-9">
+      <div class="part-label">Derivatives as Rates of Change</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Use derivatives to calculate marginal cost, profit and revenue; interpret derivatives in various settings; use derivatives to find the approximate function value for the "next" item.
+    </div>
+
+    <h2 class="tex-section">Marginal Cost, Revenue, and Profit</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(C(x) = 5x+3\) be the cost to produce \(x\) items. What is \(C'(x)\), and what does it represent?
+      <p>\(C'(x) = 5\). When \(x\) increases by 1, \(C(x)\) goes up by 5: it costs $5 to produce each extra item. This is the variable (marginal) cost from Unit 1; the 3 is the fixed cost.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Now let \(C(x) = x^2+3x+2\). What are \(C'(x)\) and \(C'(2)\), and what do they represent?
+      \[
+      C'(x) = 2x+3, \qquad C'(2) = 2(2)+3 = 7.
+      \]
+      <p>At \(x = 2\), the rate of change of cost is $7 per item. In words: after we've produced 2 items, the cost of the next item (the 3rd item) is approximately $7.</p>
+    </div>
+
+    <h3 class="tex-subsection">Why "the Next Item"?</h3>
+
+    <p>Return to the limit definition. If we let \(h = 1\) instead of letting it go to 0, we get an approximation:</p>
+    \[
+    f'(x) = \lim_{h\to0}\frac{f(x+h)-f(x)}{h} \approx \frac{f(x+1)-f(x)}{1} = f(x+1)-f(x).
+    \]
+    <p>When \(f\) is cost, \(C(x+1)\) is the cost to produce items \(1,2,\dots,x,x+1\), and \(C(x)\) is the cost to produce items \(1,2,\dots,x\). Subtracting leaves the cost of item number \(x+1\) alone.</p>
+
+    <div class="theorem">
+      <span class="label">Marginal Interpretation</span>
+      If \(C(x)\) is the cost to produce \(x\) items, then \(C'(x)\) is approximately the cost to produce the next, \((x+1)\)st, item. Similarly, \(R'(x)\) (<strong>marginal revenue</strong>) is approximately the revenue from the next item, and \(P'(x)\) (<strong>marginal profit</strong>) is approximately the profit from the next item.
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (Units)</span>
+      The units of \(f'(x)\) are always \(\dfrac{\text{output units}}{\text{input units}}\). If \(C\) is in dollars and \(x\) is in pounds, then \(C'(x)\) is in dollars per pound.
+    </div>
+
+    <h2 class="tex-section">Approximating the Next Value</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      If \(C(3) = 4\) and \(C'(3) = 2\), where \(x\) is in pounds and \(C\) is in dollars, what is an approximation for \(C(4)\)?
+      <p>\(C(3) = 4\): it costs $4 to produce 3 lbs. \(C'(3) = 2\): after producing 3 lbs, cost is increasing at a rate of $2 per pound, so the next pound costs about $2.</p>
+      \[
+      C(4)\approx C(3)+C'(3) = 4+2 = 6.
+      \]
+    </div>
+
+    <p>This idea extends to other settings as well.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(P(t)\) be the population of mosquitoes at time \(t\) in days, with \(P(0) = 1000\) and \(P'(0) = 75\).
+      <p><strong>(a) Approximate \(P(3)\).</strong> On day 0 there are 1000 mosquitoes, and the population is increasing by about 75 mosquitoes per day. So</p>
+      \[
+      P(1)\approx1075, \qquad P(2)\approx1150, \qquad P(3)\approx1225.
+      \]
+      <p><strong>(b) Find the equation of the tangent line to \(P(t)\) at \(t=0\).</strong> Point: \((0,1000)\). Slope: \(75\).</p>
+      \[
+      y-1000 = 75(t-0) \quad\Longrightarrow\quad y = 1000+75t.
+      \]
+      <p>Notice the estimates in (a) are just points on this tangent line: the tangent line is the "straight-line" approximation of the function near \(t=0\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(p(x) = x^2+3x\) be the profit (in dollars) a company makes after selling \(x\) items. Find and interpret \(p(2)\) and \(p'(2)\).
+      <p>\(p(2) = 2^2+3(2) = 10\): if we sell 2 items, the profit is $10.</p>
+      <p>\(p'(x) = 2x+3\), so \(p'(2) = 7\): after selling 2 items, profit is increasing at a rate of $7 per item, so the next (3rd) item will earn a profit of about $7.</p>
+    </div>
+
+    <!-- Self-check 3.4 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 14 and 15: Derivatives; Derivative Interpretation and Chain Rule</p>
+      <p><strong>(a)</strong> Given the demand function \(p_D(x) = 12-0.5x\), find the marginal revenue (the revenue from producing the next item) at \(x = 5\) items. (Hint: first find the revenue function \(R(x)\).)</p>
+      <p><strong>(b)</strong> Given a cost function \(C(x) = x^2+4x+5\), find \(C'(4)\) and interpret its meaning in the context of the problem.</p>
+      <button onclick="toggleSolution('sc2-9', this)">Show Answer</button>
+      <div id="sc2-9" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Revenue is (price per item)\(\times\)(number of items), and the demand function gives the price at which \(x\) items sell:</p>
+        \[
+        R(x) = x\cdot p_D(x) = x(12-0.5x) = 12x-0.5x^2.
+        \]
+        \[
+        R'(x) = 12-0.5(2x) = 12-x, \qquad R'(5) = 12-5 = 7.
+        \]
+        <p>The marginal revenue at \(x = 5\) is $7: after selling 5 items, the 6th item brings in about $7 of additional revenue.</p>
+        <p><strong>(b)</strong></p>
+        \[
+        C'(x) = 2x+4, \qquad C'(4) = 2(4)+4 = 12.
+        \]
+        <p>After producing 4 items, the cost is increasing at a rate of $12 per item, so the cost of producing the next (5th) item is approximately $12.</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.6 ================= -->
+    <div class="unit-divider" id="sec2-10">
+      <div class="part-label">The Chain Rule</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      State the chain rule; see how the chain rule works with the power rule; apply the chain rule together with the product and quotient rules.
+    </div>
+
+    <h2 class="tex-section">Review: Composition of Functions</h2>
+
+    <p>Recall from Unit 1 that \((f\circ g)(x) = f(g(x))\): plug the whole function \(g(x)\) in as the input of \(f\). For example, if \(f(x) = x^5\) and \(g(x) = x^2+2\), then \(f(g(x)) = (x^2+2)^5\).</p>
+
+    <p>For the chain rule we need to go the other way: given \(h(x)\), find an <strong>outside</strong> function \(f\) and an <strong>inside</strong> function \(g\) with \(h(x) = f(g(x))\).</p>
+
+    <table class="tex-table">
+      <tr><th>\(h(x)\)</th><th>Outside \(f(x)\)</th><th>Inside \(g(x)\)</th></tr>
+      <tr><td>\((x^2+5x)^3\)</td><td>\(x^3\)</td><td>\(x^2+5x\)</td></tr>
+      <tr><td>\(\sqrt{x^2+5}\)</td><td>\(\sqrt x\)</td><td>\(x^2+5\)</td></tr>
+      <tr><td>\(e^{x^3+2x}\)</td><td>\(e^x\)</td><td>\(x^3+2x\)</td></tr>
+      <tr><td>\(\ln\!\left(\dfrac{x^2+1}{5x}\right)\)</td><td>\(\ln(x)\)</td><td>\(\dfrac{x^2+1}{5x}\)</td></tr>
+    </table>
+
+    <h2 class="tex-section">The Chain Rule</h2>
+
+    <div class="theorem">
+      <span class="label">Chain Rule</span>
+      The chain rule tells us how to take the derivative of a composition of functions:
+      \[
+      \frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\cdot g'(x).
+      \]
+      How to think about it: <strong>take the derivative of the outside, leave the inside as it is, then multiply by the derivative of what's inside.</strong>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left[(x^2+5x)^3\right]\).
+      <p>Outside: \(f(x) = x^3\), so \(f'(x) = 3x^2\) and \(f'(g(x)) = 3(x^2+5x)^2\). Inside: \(g(x) = x^2+5x\), so \(g'(x) = 2x+5\).</p>
+      \[
+      \frac{d}{dx}\left[(x^2+5x)^3\right] = 3(x^2+5x)^2\cdot(2x+5).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left(\sqrt{x^2+5}\right)\).
+      <p>Rewrite as \((x^2+5)^{1/2}\). Outside: \(x^{1/2}\), with derivative \(\frac12x^{-1/2}\). Inside: \(x^2+5\), with derivative \(2x\).</p>
+      \[
+      \frac{d}{dx}\left(x^2+5\right)^{1/2} = \frac12(x^2+5)^{-1/2}(2x) = \frac{2x}{2\sqrt{x^2+5}} = \frac{x}{\sqrt{x^2+5}}.
+      \]
+    </div>
+
+    <h2 class="tex-section">The Chain Rule with the Power Rule</h2>
+
+    <p>The most common use of the chain rule is a power of some inside function.</p>
+
+    <div class="theorem">
+      <span class="label">Chain Rule with the Power Rule</span>
+      \[
+      \frac{d}{dx}\Big[\big(f(x)\big)^n\Big] = n\big(f(x)\big)^{n-1}\cdot f'(x).
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Take the derivative of each function.
+      \[
+      f(x) = (x^2+3)^5 \;\Longrightarrow\; f'(x) = 5(x^2+3)^4(2x), \qquad g(x) = (6x+1)^4 \;\Longrightarrow\; g'(x) = 4(6x+1)^3(6).
+      \]
+      <p>For \(h(x) = \dfrac{1}{(6x+3)^3}\), rewrite first so we can use the power rule: \(h(x) = (6x+3)^{-3}\), so</p>
+      \[
+      h'(x) = -3(6x+3)^{-4}(6) = \frac{-18}{(6x+3)^4}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      More practice:
+      \[
+      \frac{d}{dx}\left(\sqrt{x^2+3}\right) = \frac{d}{dx}(x^2+3)^{1/2} = \frac12(x^2+3)^{-1/2}(2x), \qquad \frac{d}{dx}\left[(x^2+5x)^{8/3}\right] = \frac83(x^2+5x)^{5/3}(2x+5),
+      \]
+      \[
+      \frac{d}{dx}\left[(x^2+3x+4)^6\right] = 6(x^2+3x+4)^5(2x+3), \qquad \frac{d}{dx}\left[\frac{(x^2+6x)^3}{5}\right] = \frac{d}{dx}\left[\frac15(x^2+6x)^3\right] = \frac35(x^2+6x)^2(2x+6).
+      \]
+      <p>In the last one, dividing by the constant 5 is the same as multiplying by \(\frac15\), so no quotient rule is needed.</p>
+    </div>
+
+    <h2 class="tex-section">Combining the Chain Rule with Other Rules</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the derivative of each function.
+      <p><strong>(a)</strong> \(f(x) = \dfrac{(x^2+2)^8}{x+2}\). Quotient rule, where D-Hi needs the chain rule: Hi \(= (x^2+2)^8\), D-Hi \(= 8(x^2+2)^7(2x)\), Lo \(= x+2\), D-Lo \(= 1\).</p>
+      \[
+      f'(x) = \frac{(x+2)\cdot8(x^2+2)^7(2x)-(x^2+2)^8(1)}{(x+2)^2}.
+      \]
+      <p><strong>(b)</strong> \(g(x) = 16x^2(x+7)^{16}\). Product rule, where the second factor needs the chain rule: \(\frac{d}{dx}(x+7)^{16} = 16(x+7)^{15}(1)\).</p>
+      \[
+      g'(x) = (16x^2)\cdot16(x+7)^{15}(1)+32x(x+7)^{16}.
+      \]
+      <p><strong>(c)</strong> \(h(x) = \dfrac{1}{(6x+3)^2}\) &mdash; two ways.</p>
+      <p><em>Chain rule:</em> \(h(x) = (6x+3)^{-2}\), so \(h'(x) = -2(6x+3)^{-3}(6) = \dfrac{-12}{(6x+3)^3}\).</p>
+      <p><em>Quotient rule:</em></p>
+      \[
+      h'(x) = \frac{(6x+3)^2(0)-1\cdot2(6x+3)(6)}{\big((6x+3)^2\big)^2} = \frac{-12(6x+3)}{(6x+3)^4} = \frac{-12}{(6x+3)^3}.
+      \]
+      <p>Same answer! Rewriting with a negative exponent is usually faster.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left(\dfrac{\sqrt{3x^2+6}}{2x}\right)\).
+      <p>Hi: \((3x^2+6)^{1/2}\); D-Hi: \(\frac12(3x^2+6)^{-1/2}(6x)\); Lo: \(2x\); D-Lo: \(2\).</p>
+      \[
+      \frac{d}{dx}\left(\frac{\sqrt{3x^2+6}}{2x}\right) = \frac{(2x)\cdot\frac12(3x^2+6)^{-1/2}(6x)-\sqrt{3x^2+6}\,(2)}{(2x)^2}.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\left(\dfrac{x^2(x+1)^6}{7x+4}\right)\).
+      <p>Hi: \(x^2(x+1)^6\). D-Hi needs the product rule and the chain rule: \(x^2\cdot6(x+1)^5(1)+2x(x+1)^6\). Lo: \(7x+4\); D-Lo: \(7\).</p>
+      \[
+      \frac{d}{dx}\left(\frac{x^2(x+1)^6}{7x+4}\right) = \frac{(7x+4)\big(x^2\cdot6(x+1)^5+2x(x+1)^6\big)-x^2(x+1)^6(7)}{(7x+4)^2}.
+      \]
+    </div>
+
+    <!-- Self-check 3.6 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activities 15 and 16: Derivative Interpretation and Chain Rule; Derivative of Exponential Functions</p>
+      <p>Find the derivative of each function.</p>
+      \[
+      \text{(a)}\ f(x) = \sqrt{3x^2-\frac7x} \qquad\qquad \text{(b)}\ h(x) = (4x^2-3x+2)^{-2}
+      \]
+      <button onclick="toggleSolution('sc2-10', this)">Show Answer</button>
+      <div id="sc2-10" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Rewrite as a power: \(f(x) = \left(3x^2-7x^{-1}\right)^{1/2}\). Outside: \((\ \cdot\ )^{1/2}\). Inside: \(3x^2-7x^{-1}\), whose derivative is \(6x-7(-1)x^{-2} = 6x+7x^{-2}\).</p>
+        \[
+        f'(x) = \frac12\left(3x^2-\frac7x\right)^{-1/2}\left(6x+\frac{7}{x^2}\right) = \frac{6x+\frac{7}{x^2}}{2\sqrt{3x^2-\frac7x}}.
+        \]
+        <p><strong>(b)</strong> Outside: \((\ \cdot\ )^{-2}\), with derivative \(-2(\ \cdot\ )^{-3}\). Inside: \(4x^2-3x+2\), with derivative \(8x-3\).</p>
+        \[
+        h'(x) = -2(4x^2-3x+2)^{-3}(8x-3) = \frac{-2(8x-3)}{(4x^2-3x+2)^3}.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3.9 ================= -->
+    <div class="unit-divider" id="sec2-11">
+      <div class="part-label">Derivatives of Exponential &amp; Logarithmic Functions</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Find the derivatives of \(e^x\) and \(\ln(x)\); use the chain rule (and other rules) with \(e^x\) and \(\ln(x)\).
+    </div>
+
+    <h2 class="tex-section">The Derivative of \(e^x\)</h2>
+
+    <div class="theorem">
+      <span class="label">Derivative of \(e^x\)</span>
+      \[
+      \frac{d}{dx}\left(e^x\right) = e^x.
+      \]
+      The function \(e^x\) is its own derivative!
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (Power Rule vs. Exponential)</span>
+      Don't mix these up. In \(x^n\) the variable is in the bottom (base) and a number is on top: use the power rule. In \(e^x\) the variable is on top and a number is on the bottom: use the exponential rule. So \(\frac{d}{dx}(e^x)\) is <strong>not</strong> \(xe^{x-1}\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the derivative of each function.
+      <ol type="a">
+        <li>\(f(x) = e^x+5\): \(\ f'(x) = e^x\).</li>
+        <li>\(f(x) = 3e^x\): \(\ f'(x) = 3e^x\).</li>
+        <li>\(f(x) = e^{4x}\) (outside \(e^x\), inside \(4x\)): \(\ f'(x) = e^{4x}\cdot\dfrac{d}{dx}(4x) = 4e^{4x}\).</li>
+        <li>\(f(x) = e^{6x^2+1}\): \(\ f'(x) = e^{6x^2+1}\cdot\dfrac{d}{dx}(6x^2+1) = 12x\,e^{6x^2+1}\).</li>
+      </ol>
+    </div>
+
+    <div class="theorem">
+      <span class="label">\(e^x\) with the Chain Rule</span>
+      \[
+      \frac{d}{dx}\left(e^{f(x)}\right) = e^{f(x)}\cdot f'(x).
+      \]
+      "The exponential stays exactly the same; then multiply by the derivative of the exponent."
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{d}{dx}\left(e^{x^2+4}\right) = e^{x^2+4}(2x), \qquad \frac{d}{dx}\left(5e^{3x+1}\right) = 5e^{3x+1}(3) = 15e^{3x+1},
+      \]
+      \[
+      \frac{d}{dx}\left(\frac{e^{3x}}{x^3+1}\right) = \frac{(x^3+1)(3e^{3x})-e^{3x}(3x^2)}{(x^3+1)^2}.
+      \]
+    </div>
+
+    <h3 class="tex-subsection">Other Bases</h3>
+
+    <p>What about an exponential like \(2^x\) with a base other than \(e\)? Since \(a = e^{\ln a}\), we can rewrite \(a^x = \left(e^{\ln a}\right)^x = e^{(\ln a)x}\). The chain rule then gives \(\frac{d}{dx}e^{(\ln a)x} = e^{(\ln a)x}\cdot\ln a\), that is:</p>
+
+    <div class="theorem">
+      <span class="label">Derivative of \(a^x\)</span>
+      \[
+      \frac{d}{dx}\left(a^x\right) = a^x\ln a, \qquad\text{and with the chain rule,}\qquad \frac{d}{dx}\left(a^{f(x)}\right) = a^{f(x)}\ln(a)\, f'(x).
+      \]
+      (When \(a = e\), \(\ln e = 1\) and we get back \(\frac{d}{dx}e^x = e^x\).)
+    </div>
+
+    <h3 class="tex-subsection">Continuous Compounding</h3>
+
+    <p>Recall from Unit 1 that with continuous compounding, \(F(t) = Pe^{rt}\). By the chain rule, \(F'(t) = Pe^{rt}\cdot r = rPe^{rt}\): the rate at which the account grows is \(r\) times the current balance.</p>
+
+    <h2 class="tex-section">The Derivative of \(\ln(x)\)</h2>
+
+    <div class="theorem">
+      <span class="label">Derivative of \(\ln x\)</span>
+      \[
+      \frac{d}{dx}\ln(x) = \frac1x.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{d}{dx}\left(\ln(x)+x^2\right) = \frac1x+2x, \qquad \frac{d}{dx}\ln(x^2+4) = \frac{1}{x^2+4}\cdot(2x) = \frac{2x}{x^2+4},
+      \]
+      \[
+      \frac{d}{dx}\big(\ln(3x+1)+2x\big) = \frac{1}{3x+1}\cdot3+2 = \frac{3}{3x+1}+2.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">\(\ln x\) with the Chain Rule</span>
+      \[
+      \frac{d}{dx}\ln\big(f(x)\big) = \frac{f'(x)}{f(x)}.
+      \]
+      "The derivative of the inside, over the inside."
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\dfrac{d}{dx}\ln\!\left(\dfrac{x+1}{x-1}\right)\) &mdash; two ways.
+      <p><em>Chain rule, then quotient rule for the inside:</em></p>
+      \[
+      \frac{1}{\frac{x+1}{x-1}}\cdot\frac{d}{dx}\left(\frac{x+1}{x-1}\right) = \frac{x-1}{x+1}\cdot\frac{(x-1)(1)-(x+1)(1)}{(x-1)^2} = \frac{x-1}{x+1}\cdot\frac{-2}{(x-1)^2} = \frac{-2}{(x+1)(x-1)}.
+      \]
+      <p><em>Log rules first:</em> \(\ln\!\left(\frac{x+1}{x-1}\right) = \ln(x+1)-\ln(x-1)\), so the derivative is</p>
+      \[
+      \frac{1}{x+1}-\frac{1}{x-1} = \frac{(x-1)-(x+1)}{(x+1)(x-1)} = \frac{-2}{(x+1)(x-1)}.
+      \]
+      <p>Using log rules first is often much easier.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \frac{d}{dx}\ln(3x^2+2) = \frac{6x}{3x^2+2}, \qquad \frac{d}{dx}\left(\ln(x^2+7x)+3x^2\right) = \frac{2x+7}{x^2+7x}+6x,
+      \]
+      \[
+      \frac{d}{dx}\left(\ln(5x^2+2)\cdot x^3\right) = \ln(5x^2+2)\cdot3x^2+\frac{10x}{5x^2+2}\cdot x^3 \quad\text{(product rule)}.
+      \]
+    </div>
+
+    <h2 class="tex-section">All the Rules in One</h2>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(f'(x)\) if \(f(x) = \dfrac{(3x+2)^2\ln(x^2+1)}{e^{4x}+1}\).
+      <p>This is a quotient whose top is a product.</p>
+      <ul>
+        <li>Hi: \((3x+2)^2\ln(x^2+1)\).</li>
+        <li>D-Hi (product rule, with the chain rule on each factor): \((3x+2)^2\cdot\dfrac{2x}{x^2+1}+2(3x+2)(3)\ln(x^2+1)\).</li>
+        <li>Lo: \(e^{4x}+1\); D-Lo: \(4e^{4x}\).</li>
+      </ul>
+      \[
+      f'(x) = \frac{(e^{4x}+1)\left[(3x+2)^2\dfrac{2x}{x^2+1}+2(3x+2)(3)\ln(x^2+1)\right]-(3x+2)^2\ln(x^2+1)\cdot4e^{4x}}{(e^{4x}+1)^2}.
+      \]
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Derivative Rules Summary</div>
+      <div class="methodbox-body">
+        \[
+        \begin{aligned}
+        &\frac{d}{dx}(c) = 0, \qquad \frac{d}{dx}(x^n) = nx^{n-1}, \qquad \frac{d}{dx}\big[cf(x)\big] = cf'(x), \qquad \frac{d}{dx}\big[f\pm g\big] = f'\pm g',\\
+        &\frac{d}{dx}\big[f(x)g(x)\big] = f(x)g'(x)+f'(x)g(x), \qquad \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)f'(x)-f(x)g'(x)}{\big(g(x)\big)^2},\\
+        &\frac{d}{dx}\big[f(g(x))\big] = f'(g(x))\,g'(x), \qquad \frac{d}{dx}\left(e^{f(x)}\right) = e^{f(x)}f'(x), \qquad \frac{d}{dx}\ln\big(f(x)\big) = \frac{f'(x)}{f(x)}.
+        \end{aligned}
+        \]
+      </div>
+    </div>
+
+    <!-- Self-check 3.9 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 16: Derivative of Exponential Functions</p>
+      <p><strong>(a)</strong> Suppose you open an account with a $1000 initial payment at a 4% interest rate compounded continuously.</p>
+      <ol type="i">
+        <li>Find the amount of money you will have in 10 years.</li>
+        <li>Find the derivative of \(F(t)\), the function giving the amount in the account after \(t\) years.</li>
+        <li>What is the interpretation of \(F'(10)\) in the context of the problem?</li>
+      </ol>
+      <p><strong>(b)</strong> Find the derivative of each function.</p>
+      \[
+      \text{(i)}\ f(x) = \ln\!\left(1-5x^2+\sqrt x\right) \qquad\qquad \text{(ii)}\ g(x) = \frac{2^{5x+7}}{x^3-\frac9x}
+      \]
+      <button onclick="toggleSolution('sc2-11', this)">Show Answer</button>
+      <div id="sc2-11" class="solution" style="display:none;">
+        <p><strong>(a)(i)</strong> Continuous compounding: \(F(t) = Pe^{rt}\) with \(P = 1000\) and \(r = 0.04\), so \(F(t) = 1000e^{0.04t}\).</p>
+        \[
+        F(10) = 1000e^{0.04(10)} = 1000e^{0.4}\approx\$1491.82.
+        \]
+        <p><strong>(a)(ii)</strong> Chain rule (the derivative of the exponent \(0.04t\) is \(0.04\)):</p>
+        \[
+        F'(t) = 1000e^{0.04t}(0.04) = 40e^{0.04t}.
+        \]
+        <p><strong>(a)(iii)</strong> \(F'(10) = 40e^{0.4}\approx59.67\). After 10 years, the money in the account is growing at a rate of about $59.67 per year. (So during the 11th year, the account will earn roughly $60.)</p>
+        <p><strong>(b)(i)</strong> Use \(\frac{d}{dx}\ln(f(x)) = \frac{f'(x)}{f(x)}\). The inside is \(1-5x^2+x^{1/2}\), with derivative \(-10x+\frac12x^{-1/2}\):</p>
+        \[
+        f'(x) = \frac{-10x+\dfrac{1}{2\sqrt x}}{1-5x^2+\sqrt x}.
+        \]
+        <p><strong>(b)(ii)</strong> Quotient rule. Hi: \(2^{5x+7}\); D-Hi (other base with the chain rule): \(2^{5x+7}\ln(2)\cdot5\). Lo: \(x^3-9x^{-1}\); D-Lo: \(3x^2+9x^{-2} = 3x^2+\frac{9}{x^2}\).</p>
+        \[
+        g'(x) = \frac{\left(x^3-\frac9x\right)\cdot5\ln(2)\,2^{5x+7}-2^{5x+7}\left(3x^2+\frac{9}{x^2}\right)}{\left(x^3-\frac9x\right)^2}.
+        \]
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

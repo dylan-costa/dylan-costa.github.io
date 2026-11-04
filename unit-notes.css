@@ -196,6 +196,47 @@ table.tex-table th {
 }
 .solution .step-line { margin-top: 0.9rem; margin-bottom: 0.3rem; }
 
+/* End-of-section "Self-Check" cards (MATH 1071 notes) — a .problem card
+   with a teal accent so it reads as a check-in rather than homework. */
+.problem.selfcheck {
+  border-color: var(--teal);
+  border-left-width: 4px;
+  background: rgba(0,100,85,0.04);
+}
+.problem.selfcheck h3 { color: var(--teal); }
+.problem.selfcheck .selfcheck-source {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--charcoal);
+  margin-top: -0.3rem;
+}
+.problem.selfcheck button { background: var(--teal); }
+.problem.selfcheck button:hover { background: #004a3f; }
+
+/* Vertical table of contents (MATH 1071 notes) */
+.toc.toc-vertical { min-width: 18rem; }
+.toc.toc-vertical ol {
+  margin: 0.5rem 0 0;
+  padding-left: 1.6rem;
+}
+/* overflow: visible beats the phone rule `.notes li { overflow-x: auto }`,
+   which would otherwise clip the list numbers off on narrow screens. */
+.notes .toc.toc-vertical li { margin: 0.3rem 0; overflow: visible; }
+.toc.toc-vertical li::marker { color: var(--charcoal); }
+.toc.toc-vertical a { margin: 0; }
+
+/* Small inline graphs */
+figure.tex-graph {
+  margin: 1rem auto;
+  text-align: center;
+}
+figure.tex-graph svg { max-width: 100%; height: auto; }
+figure.tex-graph figcaption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--charcoal);
+}
+
 /* Phones: long inline equations and wide tables scroll sideways inside their
    own block instead of pushing the whole page wider than the screen. */
 @media (max-width: 680px) {

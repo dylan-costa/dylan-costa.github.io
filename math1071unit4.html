@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATH 1071 — Unit 4 Lecture Notes</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="unit-notes.css" rel="stylesheet" type="text/css">
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        // No $ delimiters: this page uses $ for dollar amounts (money problems).
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Toggle self-check answers -->
+  <script>
+    function toggleSolution(id, btn) {
+      const solution = document.getElementById(id);
+      if (solution.style.display === "none") {
+        solution.style.display = "block";
+        btn.textContent = "Hide Answer";
+      } else {
+        solution.style.display = "none";
+        btn.textContent = "Show Answer";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div class="topnav">
+    <a href="index.html">Home</a>
+    <a href="notes.html">Notes</a>
+    <div class="dropdown">
+      <button class="dropbtn active">Teaching</button>
+      <div class="dropdown-content">
+        <a href="teaching.html">Courses Taught</a>
+        <a href="courseresources.html">Course Resources</a>
+      </div>
+    </div>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="projects.html">Projects</a>
+    <a href="outsidemath.html">Outside of Math</a>
+  </div>
+
+  <main class="notes">
+    <p>← <a href="courseresources.html">Back to Course Resources</a></p>
+
+    <h1>MATH 1071 — Calculus for Business &amp; Economics</h1>
+    <p class="subtitle">Lecture Notes. This is NOT meant to be a substitute for coming to lecture or consulting the textbook directly, but rather a helpful resource to review for exams/ review what was discussed in lecture. Each section ends with a <strong>Self-Check</strong> taken from the in-class activity &mdash; try the problem first, then click the button to see the answer.</p>
+
+    <!-- Table of Contents -->
+    <nav class="toc toc-vertical" id="top">
+      <strong>Unit 4</strong> (Sections 4.8, Chapters 5–6 of the textbook)
+      <ol>
+        <li><a href="#sec4-8">Antiderivatives</a></li>
+        <li><a href="#sec5-1">Approximating Areas</a></li>
+        <li><a href="#sec5-2">The Definite Integral</a></li>
+        <li><a href="#sec5-3">The Fundamental Theorem of Calculus</a></li>
+        <li><a href="#sec5-5">Substitution</a></li>
+        <li><a href="#sec6-1">Area Between Curves</a></li>
+      </ol>
+    </nav>
+
+    <!-- ================= SECTION 4.8 ================= -->
+    <div class="unit-divider" id="sec4-8">
+      <div class="part-label">Antiderivatives</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Define the antiderivative and its notation; find several basic rules for antiderivatives.
+    </div>
+
+    <h2 class="tex-section">Going Backwards</h2>
+
+    <p>We have learned how to take the derivative of many functions. Now let's go <strong>backwards</strong>: given a derivative, what function did it come from?</p>
+
+    <div class="remark">
+      <span class="label">Remark (Derivative Rules We Will Reverse)</span>
+      As a reminder, here are the derivatives we will be "undoing" in this unit:
+      \[
+      \frac{d}{dx}\left(x^n\right) = nx^{n-1}, \qquad \frac{d}{dx}\left(e^x\right) = e^x, \qquad \frac{d}{dx}\left(\ln x\right) = \frac1x, \qquad \frac{d}{dx}(k) = 0 \ \ (k \text{ a constant}).
+      \]
+      Also, the derivative of a sum is the sum of the derivatives, and constants multiplied in front just come along for the ride: \(\frac{d}{dx}\big(5x^2\big) = 5\cdot 2x = 10x\).
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find a function whose derivative is \(3x^2+2\).
+      <p>We know \(\frac{d}{dx}(x^3) = 3x^2\) and \(\frac{d}{dx}(2x) = 2\), so one answer is</p>
+      \[
+      x^3 + 2x.
+      \]
+      <p>Is there more than one possible answer? Yes! \(x^3+2x+1\) and \(x^3+2x-5\) also have derivative \(3x^2+2\), because the derivative of a constant is \(0\). In general, every function of the form</p>
+      \[
+      x^3 + 2x + C \qquad (C \text{ any constant})
+      \]
+      <p>works.</p>
+    </div>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      A function \(F\) is an <strong>antiderivative</strong> of the function \(f\) if
+      \[
+      F'(x) = f(x).
+      \]
+    </div>
+
+    <p>For example, the derivative of \(x^2\) is \(2x\), so <em>an</em> antiderivative of \(2x\) is \(x^2\). Remember that "constants added go away" when we take the derivative:</p>
+    \[
+    \frac{d}{dx}\left(x^2+1\right) = 2x, \qquad \frac{d}{dx}\left(x^2+3\right) = 2x, \qquad \frac{d}{dx}\left(x^2+56\right) = 2x.
+    \]
+    <p>So <em>the general</em> antiderivative of \(2x\) is \(x^2 + C\). Graphically, all of these antiderivatives are the same curve shifted up or down &mdash; shifting a graph vertically doesn't change its slope anywhere.</p>
+
+    <figure class="tex-graph">
+      <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Graphs of x squared minus 2, x squared, and x squared plus 2: identical parabolas shifted up and down">
+<line x1="20.0" y1="160.0" x2="312.0" y2="160.0" stroke="#888" stroke-width="1"/>
+<line x1="146.4" y1="232.0" x2="146.4" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="53.3" y1="156.0" x2="53.3" y2="164.0"/>
+<line x1="99.8" y1="156.0" x2="99.8" y2="164.0"/>
+<line x1="192.9" y1="156.0" x2="192.9" y2="164.0"/>
+<line x1="239.5" y1="156.0" x2="239.5" y2="164.0"/>
+<line x1="142.4" y1="198.7" x2="150.4" y2="198.7"/>
+<line x1="142.4" y1="121.3" x2="150.4" y2="121.3"/>
+<line x1="142.4" y1="82.7" x2="150.4" y2="82.7"/>
+<line x1="142.4" y1="44.0" x2="150.4" y2="44.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="53.3" y="176.0">−2</text>
+<text x="99.8" y="176.0">−1</text>
+<text x="192.9" y="176.0">1</text>
+<text x="239.5" y="176.0">2</text>
+<text x="138.4" y="202.7" text-anchor="end">−2</text>
+<text x="138.4" y="125.3" text-anchor="end">2</text>
+<text x="138.4" y="86.7" text-anchor="end">4</text>
+<text x="138.4" y="48.0" text-anchor="end">6</text>
+<text x="316.0" y="156.0">x</text><text x="154.4" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="44.0,105.1 46.5,109.7 49.1,114.2 51.6,118.6 54.2,122.9 56.8,127.0 59.3,131.1 61.9,135.0 64.4,138.8 67.0,142.5 69.6,146.0 72.1,149.5 74.7,152.8 77.2,156.0 79.8,159.1 82.4,162.1 84.9,165.0 87.5,167.7 90.1,170.4 92.6,172.9 95.2,175.3 97.7,177.6 100.3,179.7 102.9,181.8 105.4,183.7 108.0,185.5 110.5,187.2 113.1,188.8 115.7,190.2 118.2,191.6 120.8,192.8 123.3,193.9 125.9,194.9 128.5,195.8 131.0,196.6 133.6,197.2 136.1,197.7 138.7,198.1 141.3,198.4 143.8,198.6 146.4,198.7 148.9,198.6 151.5,198.4 154.1,198.1 156.6,197.7 159.2,197.2 161.7,196.6 164.3,195.8 166.9,194.9 169.4,193.9 172.0,192.8 174.5,191.6 177.1,190.2 179.7,188.8 182.2,187.2 184.8,185.5 187.3,183.7 189.9,181.8 192.5,179.7 195.0,177.6 197.6,175.3 200.1,172.9 202.7,170.4 205.3,167.7 207.8,165.0 210.4,162.1 212.9,159.1 215.5,156.0 218.1,152.8 220.6,149.5 223.2,146.0 225.8,142.5 228.3,138.8 230.9,135.0 233.4,131.1 236.0,127.0 238.6,122.9 241.1,118.6 243.7,114.2 246.2,109.7 248.8,105.1"/>
+<text x="253.4" y="107.0" font-size="10" fill="#464646" text-anchor="start" font-family="serif">x² − 2</text>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="44.0,66.4 46.5,71.0 49.1,75.6 51.6,79.9 54.2,84.2 56.8,88.4 59.3,92.4 61.9,96.3 64.4,100.1 67.0,103.8 69.6,107.4 72.1,110.8 74.7,114.1 77.2,117.4 79.8,120.5 82.4,123.4 84.9,126.3 87.5,129.1 90.1,131.7 92.6,134.2 95.2,136.6 97.7,138.9 100.3,141.1 102.9,143.1 105.4,145.0 108.0,146.8 110.5,148.5 113.1,150.1 115.7,151.6 118.2,152.9 120.8,154.2 123.3,155.3 125.9,156.3 128.5,157.1 131.0,157.9 133.6,158.5 136.1,159.1 138.7,159.5 141.3,159.8 143.8,159.9 146.4,160.0 148.9,159.9 151.5,159.8 154.1,159.5 156.6,159.1 159.2,158.5 161.7,157.9 164.3,157.1 166.9,156.3 169.4,155.3 172.0,154.2 174.5,152.9 177.1,151.6 179.7,150.1 182.2,148.5 184.8,146.8 187.3,145.0 189.9,143.1 192.5,141.1 195.0,138.9 197.6,136.6 200.1,134.2 202.7,131.7 205.3,129.1 207.8,126.3 210.4,123.4 212.9,120.5 215.5,117.4 218.1,114.1 220.6,110.8 223.2,107.4 225.8,103.8 228.3,100.1 230.9,96.3 233.4,92.4 236.0,88.4 238.6,84.2 241.1,79.9 243.7,75.6 246.2,71.0 248.8,66.4"/>
+<text x="253.4" y="68.4" font-size="10" fill="#464646" text-anchor="start" font-family="serif">x²</text>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="44.0,27.8 46.5,32.4 49.1,36.9 51.6,41.3 54.2,45.5 56.8,49.7 59.3,53.7 61.9,57.6 64.4,61.4 67.0,65.1 69.6,68.7 72.1,72.1 74.7,75.5 77.2,78.7 79.8,81.8 82.4,84.8 84.9,87.6 87.5,90.4 90.1,93.0 92.6,95.5 95.2,97.9 97.7,100.2 100.3,102.4 102.9,104.4 105.4,106.4 108.0,108.2 110.5,109.9 113.1,111.4 115.7,112.9 118.2,114.3 120.8,115.5 123.3,116.6 125.9,117.6 128.5,118.5 131.0,119.2 133.6,119.9 136.1,120.4 138.7,120.8 141.3,121.1 143.8,121.3 146.4,121.3 148.9,121.3 151.5,121.1 154.1,120.8 156.6,120.4 159.2,119.9 161.7,119.2 164.3,118.5 166.9,117.6 169.4,116.6 172.0,115.5 174.5,114.3 177.1,112.9 179.7,111.4 182.2,109.9 184.8,108.2 187.3,106.4 189.9,104.4 192.5,102.4 195.0,100.2 197.6,97.9 200.1,95.5 202.7,93.0 205.3,90.4 207.8,87.6 210.4,84.8 212.9,81.8 215.5,78.7 218.1,75.5 220.6,72.1 223.2,68.7 225.8,65.1 228.3,61.4 230.9,57.6 233.4,53.7 236.0,49.7 238.6,45.5 241.1,41.3 243.7,36.9 246.2,32.4 248.8,27.8"/>
+<text x="253.4" y="29.7" font-size="10" fill="#464646" text-anchor="start" font-family="serif">x² + 2</text>
+</svg>
+      <figcaption>Three antiderivatives of \(2x\): \(x^2-2\), \(x^2\), and \(x^2+2\). They all have the same slope at every \(x\).</figcaption>
+    </figure>
+
+    <h3 class="tex-subsection">Integral Notation</h3>
+
+    <div class="definition">
+      <span class="label">Definition (Indefinite Integral)</span>
+      We use <strong>integral notation</strong> to mean "find the (general) antiderivative":
+      \[
+      \int f(x)\,dx = F(x) + C, \qquad\text{where } F'(x) = f(x).
+      \]
+      The symbol \(\int\) is the <strong>integral sign</strong>, \(f(x)\) is the <strong>integrand</strong>, the \(dx\) tells us the variable is \(x\), and \(C\) is called the <strong>constant of integration</strong>. The result \(F(x)+C\) is called the <strong>general antiderivative</strong> or <strong>indefinite integral</strong>.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \int 2x\,dx = x^2 + C.
+      \]
+    </div>
+
+    <h2 class="tex-section">Basic Rules</h2>
+
+    <p>Each rule below comes from reading a derivative rule backwards. For the power rule: to <em>differentiate</em> \(x^n\) we multiply by the power and subtract 1; to <em>antidifferentiate</em> we do the opposite in reverse order: <strong>add 1 to the power, then divide by the new power</strong>.</p>
+
+    <div class="theorem">
+      <span class="label">General Rules for Antiderivatives</span>
+      \[
+      \begin{aligned}
+      \int x^n\,dx &= \frac{x^{n+1}}{n+1} + C \qquad (n\neq -1) &&\text{(power rule)}\\
+      \int \frac1x\,dx &= \ln|x| + C\\
+      \int e^x\,dx &= e^x + C\\
+      \int k\,dx &= kx + C \qquad (k \text{ a constant})\\
+      \int \big(f(x)\pm g(x)\big)\,dx &= \int f(x)\,dx \pm \int g(x)\,dx &&\text{(sums/differences split up)}\\
+      \int c\,f(x)\,dx &= c\int f(x)\,dx &&\text{(constants pull out front)}
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (Why \(n\neq-1\)? Why \(|x|\)?)</span>
+      If \(n=-1\), the power rule would give \(\frac{x^0}{0}\), dividing by zero. That's why \(\frac1x = x^{-1}\) gets its own rule: \(\ln|x|\). The absolute value is there because \(\frac1x\) makes sense for negative \(x\), but \(\ln x\) does not; \(\ln|x|\) works for all \(x\neq 0\) and still has derivative \(\frac1x\).
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (Check Your Work)</span>
+      You can <strong>always</strong> check an antiderivative by taking the derivative of your answer. If you get back the integrand, you're right.
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Before You Integrate: Rewrite as Powers</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Rewrite roots as fractional exponents: \(\sqrt x = x^{1/2}\), \(\sqrt[3]{x} = x^{1/3}\).</li>
+          <li>Rewrite \(x\)'s in the denominator as negative exponents: \(\frac{6}{x^2} = 6x^{-2}\). (But leave \(\frac1x\) alone &mdash; it becomes \(\ln|x|\).)</li>
+          <li>Multiply out products and split up fractions. There is <strong>no product rule</strong> for antiderivatives: \(\int (x+1)(x-1)\,dx\) is <em>not</em> \(\int(x+1)\,dx\cdot\int(x-1)\,dx\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the general antiderivatives below, then check your work.
+      <ol type="a">
+        <li>
+          \[
+          \int x^3\,dx = \frac{x^4}{4} + C. \qquad \text{Check: } \frac{d}{dx}\left(\tfrac14x^4 + C\right) = \tfrac44x^3 = x^3. \ ✓
+          \]
+        </li>
+        <li>
+          \[
+          \int \left(x^4 + 5x\right)dx = \frac{x^5}{5} + 5\cdot\frac{x^2}{2} + C = \frac15x^5 + \frac52x^2 + C.
+          \]
+          Check: \(\frac{d}{dx}\left(\frac15x^5+\frac52x^2+C\right) = x^4 + 5x\). ✓
+        </li>
+        <li>
+          \[
+          \int\left(\frac1x + e^x\right)dx = \ln|x| + e^x + C. \qquad \text{Check: } \frac{d}{dx}\left(\ln|x|+e^x+C\right) = \frac1x + e^x. \ ✓
+          \]
+        </li>
+        <li>Rewrite first: \(\dfrac4x = 4\cdot\dfrac1x\) and \(\dfrac{6}{x^2} = 6x^{-2}\). For the second term, add 1 to the power (\(-2+1 = -1\)) and divide by the new power:
+          \[
+          \int\left(\frac4x + \frac{6}{x^2}\right)dx = \int\left(4\cdot\frac1x + 6x^{-2}\right)dx = 4\ln|x| + \frac{6x^{-1}}{-1} + C = 4\ln|x| - 6x^{-1} + C.
+          \]
+          Check: \(\frac{d}{dx}\left(4\ln|x| - 6x^{-1}+C\right) = \frac4x + 6x^{-2}\). ✓
+        </li>
+        <li>Multiply out first:
+          \[
+          \int (x+1)(x-1)\,dx = \int\left(x^2-1\right)dx = \frac{x^3}{3} - x + C.
+          \]
+          Check: \(\frac{d}{dx}\left(\frac{x^3}3 - x + C\right) = x^2 - 1 = (x+1)(x-1)\). ✓
+        </li>
+      </ol>
+    </div>
+
+    <!-- Self-check 4.8 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From Activity 29: Antiderivatives/ Indefinite Integrals</p>
+      <p><strong>(a)</strong> Compute the following antiderivatives:</p>
+      \[
+      \text{(i)}\ \int \left(x^2+2x+1\right)dx \qquad\qquad \text{(ii)}\ \int\left(e^x - 7\sqrt x\right)dx \qquad\qquad \text{(iii)}\ \int\left(\sqrt[3]{x} - \frac2x\right)dx
+      \]
+      <p><strong>(b)</strong> Knowing that \(\frac{d}{dx}\left(e^{ax}\right) = ae^{ax}\) by the chain rule when \(a\) is a constant, what might you guess is \(\displaystyle\int e^{ax}\,dx\)?</p>
+      <button onclick="toggleSolution('sc4-8', this)">Show Answer</button>
+      <div id="sc4-8" class="solution" style="display:none;">
+        <p><strong>(a)(i)</strong> Use the power rule on each term (\(1 = x^0\), so its antiderivative is \(x\)):</p>
+        \[
+        \int\left(x^2+2x+1\right)dx = \frac{x^3}{3} + 2\cdot\frac{x^2}{2} + x + C = \boxed{\frac{x^3}{3} + x^2 + x + C}.
+        \]
+        <p>Check: \(\frac{d}{dx}\left(\frac{x^3}3+x^2+x+C\right) = x^2+2x+1\). ✓</p>
+        <p><strong>(a)(ii)</strong> Rewrite \(\sqrt x = x^{1/2}\). Adding 1 to the power gives \(\frac12+1 = \frac32\), and dividing by \(\frac32\) is the same as multiplying by \(\frac23\):</p>
+        \[
+        \int\left(e^x - 7x^{1/2}\right)dx = e^x - 7\cdot\frac{x^{3/2}}{3/2} + C = e^x - 7\cdot\frac23x^{3/2} + C = \boxed{e^x - \frac{14}{3}x^{3/2} + C}.
+        \]
+        <p>Check: \(\frac{d}{dx}\left(e^x - \frac{14}3x^{3/2}\right) = e^x - \frac{14}{3}\cdot\frac32x^{1/2} = e^x - 7\sqrt x\). ✓</p>
+        <p><strong>(a)(iii)</strong> Rewrite \(\sqrt[3]{x} = x^{1/3}\), so the new power is \(\frac13+1 = \frac43\). The \(\frac2x = 2\cdot\frac1x\) term gives a natural log:</p>
+        \[
+        \int\left(x^{1/3} - 2\cdot\frac1x\right)dx = \frac{x^{4/3}}{4/3} - 2\ln|x| + C = \boxed{\frac34x^{4/3} - 2\ln|x| + C}.
+        \]
+        <p>Check: \(\frac{d}{dx}\left(\frac34x^{4/3} - 2\ln|x|\right) = \frac34\cdot\frac43x^{1/3} - \frac2x = \sqrt[3]x - \frac2x\). ✓</p>
+        <p><strong>(b)</strong> Differentiating \(e^{ax}\) produces an extra factor of \(a\). To cancel it, divide by \(a\):</p>
+        \[
+        \int e^{ax}\,dx = \boxed{\frac1a e^{ax} + C} \qquad (a\neq 0).
+        \]
+        <p>Check: \(\frac{d}{dx}\left(\frac1ae^{ax}\right) = \frac1a\cdot ae^{ax} = e^{ax}\). ✓ For example, \(\int e^{5x}\,dx = \frac15e^{5x}+C\).</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 5.1 ================= -->
+    <div class="unit-divider" id="sec5-1">
+      <div class="part-label">Approximating Areas</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Use sums of rectangular areas to approximate the area under a curve.
+    </div>
+
+    <h2 class="tex-section">The Idea</h2>
+
+    <p>We want to find the area under the curve \(y = f(x)\) (and above the \(x\)-axis) from \(x = a\) to \(x = b\). Curved regions are hard to measure, but rectangles are easy: area \(=\) base \(\times\) height. So we chop the region into thin vertical strips and replace each strip with a rectangle. Two questions come up:</p>
+    <ul>
+      <li><strong>How many rectangles?</strong> We call this number \(n\).</li>
+      <li><strong>How tall should each rectangle be?</strong> We use the height of the curve at one point of each strip &mdash; usually the <strong>left endpoint</strong> or the <strong>right endpoint</strong> of the strip.</li>
+    </ul>
+
+    <div class="definition">
+      <span class="label">Definition (Riemann Sum)</span>
+      Divide \([a,b]\) into \(n\) equal pieces, each of width
+      \[
+      \Delta x = \frac{b-a}{n}.
+      \]
+      A <strong>Riemann sum</strong> (or <strong>rectangular approximation</strong>) adds up the areas of the \(n\) rectangles: \(\sum (\text{base})(\text{height}) = \Delta x\cdot f(x_1) + \Delta x\cdot f(x_2) + \cdots + \Delta x\cdot f(x_n)\), where \(x_1,\dots,x_n\) are the chosen points.
+      <ul>
+        <li>\(R_n\): \(n\) rectangles, heights from the <strong>right endpoints</strong>.</li>
+        <li>\(L_n\): \(n\) rectangles, heights from the <strong>left endpoints</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Computing \(L_n\) or \(R_n\)</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Find the width \(\Delta x = \frac{b-a}{n}\).</li>
+          <li>List the endpoints: start at \(a\) and keep adding \(\Delta x\) until you reach \(b\).</li>
+          <li>For \(L_n\), use every endpoint <em>except the last one</em> (\(b\)). For \(R_n\), use every endpoint <em>except the first one</em> (\(a\)).</li>
+          <li>Add up the function values at those points and multiply by \(\Delta x\): \(\ \Delta x\big(f(x_1)+\cdots+f(x_n)\big)\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Estimate the area under \(f(x) = x^2\) from \(x = 1\) to \(x=9\) using 4 rectangles and right endpoints (\(R_4\)).
+      <div class="step-line"><span class="step-label">1.</span> <span class="step-desc">Width: \(\Delta x = \frac{9-1}{4} = 2\).</span></div>
+      <div class="step-line"><span class="step-label">2.</span> <span class="step-desc">Endpoints: \(1, 3, 5, 7, 9\). Right endpoints: \(3, 5, 7, 9\).</span></div>
+      <div class="step-line"><span class="step-label">3.</span> <span class="step-desc">Heights: \(f(3) = 9,\ f(5) = 25,\ f(7) = 49,\ f(9) = 81\).</span></div>
+      <div class="step-line"><span class="step-label">4.</span> <span class="step-desc">Add the rectangle areas:</span></div>
+      \[
+      R_4 = 2(9) + 2(25) + 2(49) + 2(81) = 18 + 50 + 98 + 162 = 328.
+      \]
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Graph of x squared from 1 to 9 with four rectangles of width 2 whose heights are f(3), f(5), f(7), f(9)">
+<rect x="57.0" y="197.7" width="54.0" height="20.3" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="111.0" y="161.6" width="54.0" height="56.4" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="165.0" y="107.5" width="54.0" height="110.5" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="219.0" y="35.3" width="54.0" height="182.7" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<line x1="20.0" y1="218.0" x2="312.0" y2="218.0" stroke="#888" stroke-width="1"/>
+<line x1="30.0" y1="232.0" x2="30.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="57.0" y1="214.0" x2="57.0" y2="222.0"/>
+<line x1="111.0" y1="214.0" x2="111.0" y2="222.0"/>
+<line x1="165.0" y1="214.0" x2="165.0" y2="222.0"/>
+<line x1="219.0" y1="214.0" x2="219.0" y2="222.0"/>
+<line x1="273.0" y1="214.0" x2="273.0" y2="222.0"/>
+<line x1="26.0" y1="172.9" x2="34.0" y2="172.9"/>
+<line x1="26.0" y1="127.8" x2="34.0" y2="127.8"/>
+<line x1="26.0" y1="82.7" x2="34.0" y2="82.7"/>
+<line x1="26.0" y1="37.6" x2="34.0" y2="37.6"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="57.0" y="234.0">1</text>
+<text x="111.0" y="234.0">3</text>
+<text x="165.0" y="234.0">5</text>
+<text x="219.0" y="234.0">7</text>
+<text x="273.0" y="234.0">9</text>
+<text x="22.0" y="176.9" text-anchor="end">20</text>
+<text x="22.0" y="131.8" text-anchor="end">40</text>
+<text x="22.0" y="86.7" text-anchor="end">60</text>
+<text x="22.0" y="41.6" text-anchor="end">80</text>
+<text x="316.0" y="214.0">x</text><text x="38.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="30.0,218.0 33.2,218.0 36.3,217.9 39.5,217.7 42.7,217.5 45.9,217.2 49.0,216.9 52.2,216.5 55.4,216.0 58.6,215.5 61.7,214.9 64.9,214.2 68.1,213.5 71.2,212.7 74.4,211.9 77.6,211.0 80.8,210.0 83.9,209.0 87.1,207.9 90.3,206.8 93.5,205.5 96.6,204.3 99.8,202.9 103.0,201.5 106.1,200.1 109.3,198.5 112.5,196.9 115.7,195.3 118.8,193.6 122.0,191.8 125.2,190.0 128.3,188.1 131.5,186.1 134.7,184.1 137.9,182.0 141.0,179.9 144.2,177.6 147.4,175.4 150.6,173.0 153.7,170.6 156.9,168.2 160.1,165.7 163.2,163.1 166.4,160.4 169.6,157.7 172.8,154.9 175.9,152.1 179.1,149.2 182.3,146.3 185.5,143.2 188.6,140.1 191.8,137.0 195.0,133.8 198.1,130.5 201.3,127.2 204.5,123.8 207.7,120.3 210.8,116.8 214.0,113.2 217.2,109.6 220.3,105.9 223.5,102.1 226.7,98.3 229.9,94.4 233.0,90.4 236.2,86.4 239.4,82.4 242.6,78.2 245.7,74.0 248.9,69.7 252.1,65.4 255.2,61.0 258.4,56.6 261.6,52.1 264.8,47.5 267.9,42.8 271.1,38.1 274.3,33.4 277.5,28.5 280.6,23.7 283.8,18.7"/>
+<circle cx="111.0" cy="197.7" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="165.0" cy="161.6" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="219.0" cy="107.5" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="273.0" cy="35.3" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<text x="84.0" y="190.9" font-size="10" fill="#464646" text-anchor="middle" font-family="serif">18</text>
+<text x="138.0" y="154.8" font-size="10" fill="#464646" text-anchor="middle" font-family="serif">50</text>
+<text x="192.0" y="100.7" font-size="10" fill="#464646" text-anchor="middle" font-family="serif">98</text>
+<text x="246.0" y="26.3" font-size="10" fill="#464646" text-anchor="middle" font-family="serif">162</text>
+</svg>
+        <figcaption>\(R_4\) for \(f(x) = x^2\) on \([1,9]\). Each rectangle's top-right corner touches the curve. The numbers are the rectangle areas.</figcaption>
+      </figure>
+      <p>Notice the rectangles stick out above the curve, so 328 is an <em>overestimate</em>.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Estimate the area under \(f(x) = e^x + 3x\) from \(x=0\) to \(x = 1.5\) with 3 rectangles and right endpoints (\(R_3\)).
+      <p>Width: \(\Delta x = \frac{1.5-0}{3} = 0.5\). Endpoints: \(0,\ 0.5,\ 1,\ 1.5\), so the right endpoints are \(0.5,\ 1,\ 1.5\).</p>
+      \[
+      R_3 = \tfrac12 f\!\left(\tfrac12\right) + \tfrac12 f(1) + \tfrac12 f(1.5) = \tfrac12\Big(f(0.5) + f(1) + f(1.5)\Big).
+      \]
+      <table class="tex-table">
+        <tr><th>\(x\)</th><td>\(0.5\)</td><td>\(1\)</td><td>\(1.5\)</td></tr>
+        <tr><th>\(f(x) = e^x+3x\)</th><td>\(e^{0.5}+1.5\approx 3.1487\)</td><td>\(e+3\approx 5.7183\)</td><td>\(e^{1.5}+4.5\approx 8.9817\)</td></tr>
+      </table>
+      \[
+      R_3 \approx \tfrac12(3.1487 + 5.7183 + 8.9817) = \tfrac12(17.8487) \approx 8.9243.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Estimate the area under \(f(x) = x^3+2\) from \(x = 3\) to \(x = 11\) with 4 rectangles and left endpoints (\(L_4\)).
+      <p>Width: \(\Delta x = \frac{11-3}{4} = \frac84 = 2\). Endpoints: \(3, 5, 7, 9, 11\). Left endpoints: \(3, 5, 7, 9\) (we do <em>not</em> use 11).</p>
+      \[
+      L_4 = 2f(3) + 2f(5) + 2f(7) + 2f(9) = 2\big(29 + 127 + 345 + 731\big) = 2(1232) = 2464.
+      \]
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Graph of x cubed plus 2 from 3 to 11 with four rectangles whose heights are f(3), f(5), f(7), f(9)">
+<rect x="103.5" y="213.8" width="43.7" height="4.2" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="147.2" y="199.6" width="43.7" height="18.4" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="190.8" y="168.0" width="43.7" height="50.0" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<rect x="234.5" y="112.0" width="43.7" height="106.0" fill="rgba(0,100,85,0.2)" stroke="#006455" stroke-width="1"/>
+<line x1="28.0" y1="218.0" x2="312.0" y2="218.0" stroke="#888" stroke-width="1"/>
+<line x1="38.0" y1="232.0" x2="38.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="103.5" y1="214.0" x2="103.5" y2="222.0"/>
+<line x1="147.2" y1="214.0" x2="147.2" y2="222.0"/>
+<line x1="190.8" y1="214.0" x2="190.8" y2="222.0"/>
+<line x1="234.5" y1="214.0" x2="234.5" y2="222.0"/>
+<line x1="278.2" y1="214.0" x2="278.2" y2="222.0"/>
+<line x1="34.0" y1="145.5" x2="42.0" y2="145.5"/>
+<line x1="34.0" y1="73.0" x2="42.0" y2="73.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="103.5" y="234.0">3</text>
+<text x="147.2" y="234.0">5</text>
+<text x="190.8" y="234.0">7</text>
+<text x="234.5" y="234.0">9</text>
+<text x="278.2" y="234.0">11</text>
+<text x="30.0" y="149.5" text-anchor="end">500</text>
+<text x="30.0" y="77.0" text-anchor="end">1000</text>
+<text x="316.0" y="214.0">x</text><text x="46.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="38.0,217.7 41.0,217.7 44.1,217.7 47.1,217.7 50.2,217.7 53.2,217.7 56.3,217.6 59.3,217.6 62.3,217.5 65.4,217.4 68.4,217.3 71.5,217.2 74.5,217.0 77.6,216.8 80.6,216.6 83.6,216.4 86.7,216.1 89.7,215.8 92.8,215.4 95.8,215.0 98.9,214.6 101.9,214.1 104.9,213.5 108.0,212.9 111.0,212.3 114.1,211.6 117.1,210.8 120.2,210.0 123.2,209.1 126.2,208.1 129.3,207.1 132.3,206.0 135.4,204.8 138.4,203.6 141.5,202.3 144.5,200.9 147.5,199.4 150.6,197.8 153.6,196.2 156.7,194.4 159.7,192.6 162.8,190.7 165.8,188.6 168.8,186.5 171.9,184.3 174.9,181.9 178.0,179.5 181.0,177.0 184.1,174.3 187.1,171.5 190.2,168.6 193.2,165.6 196.2,162.5 199.3,159.3 202.3,155.9 205.4,152.4 208.4,148.8 211.5,145.0 214.5,141.1 217.5,137.1 220.6,132.9 223.6,128.6 226.7,124.1 229.7,119.5 232.8,114.8 235.8,109.9 238.8,104.8 241.9,99.6 244.9,94.3 248.0,88.7 251.0,83.1 254.1,77.2 257.1,71.2 260.1,65.0 263.2,58.6 266.2,52.1 269.3,45.4 272.3,38.5 275.4,31.4 278.4,24.2 281.4,16.7"/>
+<circle cx="103.5" cy="213.8" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="147.2" cy="199.6" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="190.8" cy="168.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="234.5" cy="112.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+</svg>
+        <figcaption>\(L_4\) for \(f(x) = x^3+2\) on \([3,11]\). Each rectangle's top-left corner touches the curve.</figcaption>
+      </figure>
+      <p>This time the rectangles sit below the curve, so 2464 is an <em>underestimate</em>.</p>
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      <ul>
+        <li>We focus on left and right endpoints, but you can also use <strong>midpoints</strong> or any other point in each strip.</li>
+        <li>If \(f\) is <strong>increasing</strong>, left endpoints give an underestimate and right endpoints give an overestimate. If \(f\) is decreasing, it's the other way around.</li>
+        <li>Using <strong>more rectangles</strong> (larger \(n\)) gives a better estimate. Using the Fundamental Theorem of Calculus later in this unit, we will see that the exact area under \(x^2\) on \([1,9]\) is \(\frac{728}{3}\approx 242.67\), so our \(R_4 = 328\) was quite rough; for comparison \(L_4 = 2(1+9+25+49) = 168\) is too small.</li>
+      </ul>
+    </div>
+
+    <!-- Self-check 5.1 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p><strong>(a)</strong> Estimate the area under \(f(x) = x^2+1\) from \(x = 0\) to \(x = 4\) using 4 rectangles, first with left endpoints (\(L_4\)) and then with right endpoints (\(R_4\)).</p>
+      <p><strong>(b)</strong> In part (a), which estimate is too big and which is too small? Why?</p>
+      <p><strong>(c)</strong> Estimate the area under \(f(x) = \sqrt{x}\) from \(x = 0\) to \(x = 6\) using 3 rectangles and right endpoints (\(R_3\)). Round to two decimal places.</p>
+      <button onclick="toggleSolution('sc5-1', this)">Show Answer</button>
+      <div id="sc5-1" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Width: \(\Delta x = \frac{4-0}{4} = 1\). Endpoints: \(0,1,2,3,4\).</p>
+        <table class="tex-table">
+          <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><th>\(f(x) = x^2+1\)</th><td>1</td><td>2</td><td>5</td><td>10</td><td>17</td></tr>
+        </table>
+        <p>Left endpoints \(0,1,2,3\):</p>
+        \[
+        L_4 = 1\big(f(0)+f(1)+f(2)+f(3)\big) = 1 + 2 + 5 + 10 = \boxed{18}.
+        \]
+        <p>Right endpoints \(1,2,3,4\):</p>
+        \[
+        R_4 = 1\big(f(1)+f(2)+f(3)+f(4)\big) = 2 + 5 + 10 + 17 = \boxed{34}.
+        \]
+        <p><strong>(b)</strong> On \([0,4]\), \(f(x) = x^2+1\) is <strong>increasing</strong>. So on each strip the left endpoint is the lowest point (the rectangle sits under the curve) and the right endpoint is the highest point (the rectangle pokes above the curve). Therefore \(L_4 = 18\) is too small and \(R_4 = 34\) is too big. The true area is somewhere in between. (In fact it is \(\frac{76}{3}\approx 25.33\).)</p>
+        <p><strong>(c)</strong> Width: \(\Delta x = \frac{6-0}{3} = 2\). Endpoints: \(0, 2, 4, 6\), so the right endpoints are \(2, 4, 6\).</p>
+        \[
+        R_3 = 2\left(\sqrt2 + \sqrt4 + \sqrt6\right) \approx 2(1.4142 + 2 + 2.4495) = 2(5.8637) \approx \boxed{11.73}.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 5.2 ================= -->
+    <div class="unit-divider" id="sec5-2">
+      <div class="part-label">The Definite Integral</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      State the definition of a definite integral in terms of net area; see the connection between Riemann sums and the definite integral; find the value of definite integrals using geometry.
+    </div>
+
+    <h2 class="tex-section">Notation</h2>
+
+    <p>When approximating areas, we estimated the area under a curve with rectangles. Now we want the <em>exact</em> (signed) area.</p>
+
+    <div class="definition">
+      <span class="label">Definition (Definite Integral)</span>
+      We write
+      \[
+      \int_a^b f(x)\,dx
+      \]
+      (read "the definite integral from \(x = a\) to \(x=b\) of \(f(x)\,dx\)") to mean the <strong>signed area</strong> between the curve \(y = f(x)\) and the \(x\)-axis from \(x=a\) to \(x=b\). The numbers \(a\) and \(b\) are the <strong>lower</strong> and <strong>upper limits</strong> (or bounds) of integration, and \(dx\) means "with respect to \(x\)."
+    </div>
+
+    <p>Notice this notation looks a lot like the indefinite integral \(\int 2x\,dx\) (take the antiderivative). That is not an accident &mdash; the reason is the Fundamental Theorem of Calculus, coming up next. Keep the difference in mind: an <strong>indefinite</strong> integral \(\int f(x)\,dx\) is a <em>function</em> (plus \(C\)), while a <strong>definite</strong> integral \(\int_a^b f(x)\,dx\) is a <em>number</em>.</p>
+
+    <h3 class="tex-subsection">From Estimate to Exact</h3>
+
+    <p>As we use more and more rectangles, the leftover slivers between the rectangles and the curve get thinner and thinner, and the Riemann sum gets closer to the true area. To get the exact area, we take the limit as the number of rectangles goes to infinity:</p>
+
+    <div class="definition">
+      <span class="label">Definition</span>
+      \[
+      \int_a^b f(x)\,dx = \lim_{n\to\infty} R_n = \lim_{n\to\infty} L_n.
+      \]
+    </div>
+
+    <h2 class="tex-section">Signed Area</h2>
+
+    <p>What happens if the function is negative? In a Riemann sum, each rectangle contributes \((\text{base})\cdot f(x_i)\). If \(f(x_i)\) is negative, that term is negative. So the definite integral counts area <strong>above</strong> the \(x\)-axis as <strong>positive</strong> and area <strong>below</strong> the \(x\)-axis as <strong>negative</strong>. This is called <strong>signed area</strong> or <strong>net area</strong>:</p>
+    \[
+    \int_a^b f(x)\,dx = (\text{area above the } x\text{-axis}) - (\text{area below the } x\text{-axis}).
+    \]
+
+    <h2 class="tex-section">Using Geometry</h2>
+
+    <p>Soon we will use antiderivatives to find these areas. For now, when the graph is made of straight lines, we can find exact values using area formulas from geometry:</p>
+    \[
+    \text{Rectangle: } A = bh, \qquad \text{Triangle: } A = \tfrac12 bh.
+    \]
+
+    <div class="example">
+      <span class="label">Example</span>
+      What is \(\displaystyle\int_0^3 x\,dx\)?
+      <p>This is the area under the line \(y=x\) from \(x=0\) to \(x=3\). That region is a triangle with base 3 and height 3 (since \(y = 3\) when \(x=3\)):</p>
+      \[
+      \int_0^3 x\,dx = \tfrac12\cdot 3\cdot 3 = \tfrac92 = 4.5.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Let \(f(x) = 10-2x\), graphed below. Find each of the following using geometry.
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Line f(x) = 10 minus 2x; triangle above the axis from 0 to 5 and triangle below the axis from 5 to 10">
+<g stroke="#e3e3e3" stroke-width="1">
+<line x1="52.5" y1="218.0" x2="52.5" y2="15.0"/>
+<line x1="75.0" y1="218.0" x2="75.0" y2="15.0"/>
+<line x1="97.5" y1="218.0" x2="97.5" y2="15.0"/>
+<line x1="120.0" y1="218.0" x2="120.0" y2="15.0"/>
+<line x1="142.5" y1="218.0" x2="142.5" y2="15.0"/>
+<line x1="165.0" y1="218.0" x2="165.0" y2="15.0"/>
+<line x1="187.5" y1="218.0" x2="187.5" y2="15.0"/>
+<line x1="210.0" y1="218.0" x2="210.0" y2="15.0"/>
+<line x1="232.5" y1="218.0" x2="232.5" y2="15.0"/>
+<line x1="255.0" y1="218.0" x2="255.0" y2="15.0"/>
+<line x1="277.5" y1="218.0" x2="277.5" y2="15.0"/>
+<line x1="30.0" y1="208.8" x2="300.0" y2="208.8"/>
+<line x1="30.0" y1="190.3" x2="300.0" y2="190.3"/>
+<line x1="30.0" y1="171.9" x2="300.0" y2="171.9"/>
+<line x1="30.0" y1="153.4" x2="300.0" y2="153.4"/>
+<line x1="30.0" y1="135.0" x2="300.0" y2="135.0"/>
+<line x1="30.0" y1="116.5" x2="300.0" y2="116.5"/>
+<line x1="30.0" y1="98.0" x2="300.0" y2="98.0"/>
+<line x1="30.0" y1="79.6" x2="300.0" y2="79.6"/>
+<line x1="30.0" y1="61.1" x2="300.0" y2="61.1"/>
+<line x1="30.0" y1="42.7" x2="300.0" y2="42.7"/>
+<line x1="30.0" y1="24.2" x2="300.0" y2="24.2"/>
+</g>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="52.5,24.2 108.8,70.4 165.0,116.5 165.0,116.5 108.8,116.5 52.5,116.5"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="165.0,116.5 221.2,116.5 277.5,116.5 277.5,208.8 221.2,162.6 165.0,116.5"/>
+<line x1="20.0" y1="116.5" x2="312.0" y2="116.5" stroke="#888" stroke-width="1"/>
+<line x1="52.5" y1="232.0" x2="52.5" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="97.5" y1="112.5" x2="97.5" y2="120.5"/>
+<line x1="165.0" y1="112.5" x2="165.0" y2="120.5"/>
+<line x1="232.5" y1="112.5" x2="232.5" y2="120.5"/>
+<line x1="277.5" y1="112.5" x2="277.5" y2="120.5"/>
+<line x1="48.5" y1="208.8" x2="56.5" y2="208.8"/>
+<line x1="48.5" y1="171.9" x2="56.5" y2="171.9"/>
+<line x1="48.5" y1="61.1" x2="56.5" y2="61.1"/>
+<line x1="48.5" y1="24.2" x2="56.5" y2="24.2"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="97.5" y="132.5">2</text>
+<text x="165.0" y="132.5">5</text>
+<text x="232.5" y="132.5">8</text>
+<text x="277.5" y="132.5">10</text>
+<text x="44.5" y="212.8" text-anchor="end">−10</text>
+<text x="44.5" y="175.9" text-anchor="end">−6</text>
+<text x="44.5" y="65.1" text-anchor="end">6</text>
+<text x="44.5" y="28.2" text-anchor="end">10</text>
+<text x="316.0" y="112.5">x</text><text x="60.5" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="41.2,15.0 165.0,116.5 288.8,218.0"/>
+<text x="86.2" y="93.4" font-size="16" fill="#006455" text-anchor="middle" font-family="serif">+</text>
+<text x="248.2" y="158.9" font-size="16" fill="#006455" text-anchor="middle" font-family="serif">−</text>
+</svg>
+        <figcaption>\(f(x) = 10-2x\). It crosses the \(x\)-axis at \(x = 5\): above the axis to the left, below to the right.</figcaption>
+      </figure>
+      <ol type="a">
+        <li>\(\displaystyle\int_0^5 f(x)\,dx\): a triangle with base 5 and height \(f(0) = 10\), above the axis:
+          \[
+          \int_0^5 f(x)\,dx = \tfrac12(5)(10) = 25.
+          \]</li>
+        <li>\(\displaystyle\int_2^5 f(x)\,dx\): a triangle with base \(5-2 = 3\) and height \(f(2) = 10 - 4 = 6\):
+          \[
+          \int_2^5 f(x)\,dx = \tfrac12(3)(6) = 9.
+          \]</li>
+        <li>\(\displaystyle\int_0^8 f(x)\,dx\): the big triangle above from 0 to 5, minus a triangle below from 5 to 8 with base 3 and height \(|f(8)| = |10-16| = 6\):
+          \[
+          \int_0^8 f(x)\,dx = 25 - \tfrac12(3)(6) = 25 - 9 = 16.
+          \]</li>
+        <li>\(\displaystyle\int_0^{10} f(x)\,dx\): the triangle above (area 25) and the triangle below from 5 to 10 (base 5, height \(|f(10)| = 10\), area 25) cancel:
+          \[
+          \int_0^{10} f(x)\,dx = \tfrac12(5)(10) - \tfrac12(5)(10) = 0.
+          \]
+          The area above equals the area below.</li>
+      </ol>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The graph of \(f\) below is made of line segments. Find \(\int_0^3 f(x)\,dx\), \(\int_1^6 f(x)\,dx\), and \(\int_0^8 f(x)\,dx\).
+      <figure class="tex-graph">
+        <svg viewBox="0 0 340 240" width="340" height="240" role="img" aria-label="Piecewise linear graph through (0,-6), (1,0), (2,6), (4,6), (6,0), (8,-6)">
+<g stroke="#e3e3e3" stroke-width="1">
+<line x1="48.5" y1="218.0" x2="48.5" y2="15.0"/>
+<line x1="79.4" y1="218.0" x2="79.4" y2="15.0"/>
+<line x1="110.2" y1="218.0" x2="110.2" y2="15.0"/>
+<line x1="141.1" y1="218.0" x2="141.1" y2="15.0"/>
+<line x1="171.9" y1="218.0" x2="171.9" y2="15.0"/>
+<line x1="202.8" y1="218.0" x2="202.8" y2="15.0"/>
+<line x1="233.6" y1="218.0" x2="233.6" y2="15.0"/>
+<line x1="264.5" y1="218.0" x2="264.5" y2="15.0"/>
+<line x1="295.3" y1="218.0" x2="295.3" y2="15.0"/>
+<line x1="30.0" y1="203.5" x2="320.0" y2="203.5"/>
+<line x1="30.0" y1="174.5" x2="320.0" y2="174.5"/>
+<line x1="30.0" y1="145.5" x2="320.0" y2="145.5"/>
+<line x1="30.0" y1="116.5" x2="320.0" y2="116.5"/>
+<line x1="30.0" y1="87.5" x2="320.0" y2="87.5"/>
+<line x1="30.0" y1="58.5" x2="320.0" y2="58.5"/>
+<line x1="30.0" y1="29.5" x2="320.0" y2="29.5"/>
+</g>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="48.5,116.5 63.9,116.5 79.4,116.5 79.4,116.5 63.9,160.0 48.5,203.5"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="79.4,116.5 94.8,73.0 110.2,29.5 110.2,116.5 94.8,116.5 79.4,116.5"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="110.2,29.5 141.1,29.5 171.9,29.5 171.9,116.5 141.1,116.5 110.2,116.5"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="171.9,29.5 202.8,73.0 233.6,116.5 233.6,116.5 202.8,116.5 171.9,116.5"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="233.6,116.5 264.5,116.5 295.3,116.5 295.3,203.5 264.5,160.0 233.6,116.5"/>
+<line x1="20.0" y1="116.5" x2="332.0" y2="116.5" stroke="#888" stroke-width="1"/>
+<line x1="48.5" y1="232.0" x2="48.5" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="79.4" y1="112.5" x2="79.4" y2="120.5"/>
+<line x1="110.2" y1="112.5" x2="110.2" y2="120.5"/>
+<line x1="141.1" y1="112.5" x2="141.1" y2="120.5"/>
+<line x1="171.9" y1="112.5" x2="171.9" y2="120.5"/>
+<line x1="202.8" y1="112.5" x2="202.8" y2="120.5"/>
+<line x1="233.6" y1="112.5" x2="233.6" y2="120.5"/>
+<line x1="264.5" y1="112.5" x2="264.5" y2="120.5"/>
+<line x1="295.3" y1="112.5" x2="295.3" y2="120.5"/>
+<line x1="44.5" y1="203.5" x2="52.5" y2="203.5"/>
+<line x1="44.5" y1="174.5" x2="52.5" y2="174.5"/>
+<line x1="44.5" y1="145.5" x2="52.5" y2="145.5"/>
+<line x1="44.5" y1="87.5" x2="52.5" y2="87.5"/>
+<line x1="44.5" y1="58.5" x2="52.5" y2="58.5"/>
+<line x1="44.5" y1="29.5" x2="52.5" y2="29.5"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="79.4" y="132.5">1</text>
+<text x="110.2" y="132.5">2</text>
+<text x="141.1" y="132.5">3</text>
+<text x="171.9" y="132.5">4</text>
+<text x="202.8" y="132.5">5</text>
+<text x="233.6" y="132.5">6</text>
+<text x="264.5" y="132.5">7</text>
+<text x="295.3" y="132.5">8</text>
+<text x="40.5" y="207.5" text-anchor="end">−6</text>
+<text x="40.5" y="178.5" text-anchor="end">−4</text>
+<text x="40.5" y="149.5" text-anchor="end">−2</text>
+<text x="40.5" y="91.5" text-anchor="end">2</text>
+<text x="40.5" y="62.5" text-anchor="end">4</text>
+<text x="40.5" y="33.5" text-anchor="end">6</text>
+<text x="336.0" y="112.5">x</text><text x="56.5" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="48.5,203.5 79.4,116.5 110.2,29.5 171.9,29.5 233.6,116.5 295.3,203.5"/>
+<text x="57.8" y="149.9" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">3</text>
+<text x="101.0" y="90.4" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">3</text>
+<text x="141.1" y="73.0" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">12</text>
+<text x="192.0" y="90.4" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">6</text>
+<text x="275.3" y="149.9" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">6</text>
+</svg>
+        <figcaption>The graph of \(f\). Shaded pieces are labeled with their (unsigned) areas; the pieces from 0 to 1 and from 6 to 8 are below the axis.</figcaption>
+      </figure>
+      <p>Break the region into simple shapes:</p>
+      <ul>
+        <li>\(0\) to \(1\): triangle <em>below</em> the axis, base 1, height 6: area \(\frac12(1)(6) = 3\), counts as \(-3\).</li>
+        <li>\(1\) to \(2\): triangle above, base 1, height 6: \(+3\).</li>
+        <li>\(2\) to \(4\): rectangle above, base 2, height 6: \(+12\). (From 2 to 3 alone it is \(1\cdot 6 = 6\).)</li>
+        <li>\(4\) to \(6\): triangle above, base 2, height 6: \(+6\).</li>
+        <li>\(6\) to \(8\): triangle <em>below</em>, base 2, height 6: \(-6\).</li>
+      </ul>
+      \[
+      \begin{aligned}
+      \int_0^3 f(x)\,dx &= -3 + 3 + 6 = 6,\\
+      \int_1^6 f(x)\,dx &= 3 + 12 + 6 = 21,\\
+      \int_0^8 f(x)\,dx &= -3 + 3 + 12 + 6 - 6 = 12.
+      \end{aligned}
+      \]
+    </div>
+
+    <h2 class="tex-section">Properties of the Definite Integral</h2>
+
+    <p>Since a definite integral is an area, areas of neighboring pieces add up:</p>
+
+    <div class="theorem">
+      <span class="label">Properties</span>
+      \[
+      \begin{aligned}
+      \int_a^b f(x)\,dx + \int_b^c f(x)\,dx &= \int_a^c f(x)\,dx &&\text{(adjacent intervals add)}\\
+      \int_a^a f(x)\,dx &= 0 &&\text{(no width, no area)}\\
+      \int_a^b \big(f(x)\pm g(x)\big)\,dx &= \int_a^b f(x)\,dx \pm \int_a^b g(x)\,dx\\
+      \int_a^b c\,f(x)\,dx &= c\int_a^b f(x)\,dx
+      \end{aligned}
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Suppose \(\int_1^3 f(x)\,dx = 4\) and \(\int_3^5 f(x)\,dx = 6\). Find \(\int_1^5 f(x)\,dx\).
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="A curve above the x-axis from 1 to 5; the region is split at x = 3 into a piece of area 4 and a piece of area 6">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="75.0,109.1 78.0,109.4 81.0,109.8 84.0,110.5 87.0,111.4 90.0,112.4 93.0,113.6 96.0,114.9 99.0,116.4 102.0,118.0 105.0,119.6 108.0,121.4 111.0,123.1 114.0,124.9 117.0,126.7 120.0,128.5 123.0,130.2 126.0,131.9 129.0,133.4 132.0,134.9 135.0,136.2 138.0,137.3 141.0,138.2 144.0,139.0 147.0,139.5 150.0,139.8 153.0,139.8 156.0,139.6 159.0,139.1 162.0,138.4 165.0,137.4 168.0,136.1 171.0,134.6 174.0,132.8 177.0,130.8 180.0,128.5 183.0,126.0 186.0,123.3 189.0,120.4 192.0,117.3 195.0,114.1 198.0,110.8 201.0,107.3 204.0,103.8 207.0,100.2 210.0,96.5 213.0,92.9 216.0,89.3 219.0,85.7 222.0,82.2 225.0,78.7 228.0,75.4 231.0,72.2 234.0,69.1 237.0,66.2 240.0,63.4 243.0,60.8 246.0,58.5 249.0,56.3 252.0,54.2 255.0,52.4 255.0,218.0 252.0,218.0 249.0,218.0 246.0,218.0 243.0,218.0 240.0,218.0 237.0,218.0 234.0,218.0 231.0,218.0 228.0,218.0 225.0,218.0 222.0,218.0 219.0,218.0 216.0,218.0 213.0,218.0 210.0,218.0 207.0,218.0 204.0,218.0 201.0,218.0 198.0,218.0 195.0,218.0 192.0,218.0 189.0,218.0 186.0,218.0 183.0,218.0 180.0,218.0 177.0,218.0 174.0,218.0 171.0,218.0 168.0,218.0 165.0,218.0 162.0,218.0 159.0,218.0 156.0,218.0 153.0,218.0 150.0,218.0 147.0,218.0 144.0,218.0 141.0,218.0 138.0,218.0 135.0,218.0 132.0,218.0 129.0,218.0 126.0,218.0 123.0,218.0 120.0,218.0 117.0,218.0 114.0,218.0 111.0,218.0 108.0,218.0 105.0,218.0 102.0,218.0 99.0,218.0 96.0,218.0 93.0,218.0 90.0,218.0 87.0,218.0 84.0,218.0 81.0,218.0 78.0,218.0 75.0,218.0"/>
+<line x1="20.0" y1="218.0" x2="312.0" y2="218.0" stroke="#888" stroke-width="1"/>
+<line x1="30.0" y1="232.0" x2="30.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="75.0" y1="214.0" x2="75.0" y2="222.0"/>
+<line x1="165.0" y1="214.0" x2="165.0" y2="222.0"/>
+<line x1="255.0" y1="214.0" x2="255.0" y2="222.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="75.0" y="234.0">1</text>
+<text x="165.0" y="234.0">3</text>
+<text x="255.0" y="234.0">5</text>
+<text x="316.0" y="214.0">x</text><text x="38.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="57.0,111.3 59.8,110.5 62.5,109.9 65.3,109.4 68.0,109.1 70.8,109.0 73.5,109.0 76.3,109.2 79.1,109.5 81.8,110.0 84.6,110.7 87.3,111.5 90.1,112.4 92.8,113.5 95.6,114.7 98.3,116.1 101.1,117.5 103.9,119.0 106.6,120.5 109.4,122.2 112.1,123.8 114.9,125.5 117.6,127.1 120.4,128.7 123.2,130.3 125.9,131.8 128.7,133.3 131.4,134.6 134.2,135.8 136.9,136.9 139.7,137.8 142.4,138.6 145.2,139.2 148.0,139.6 150.7,139.8 153.5,139.8 156.2,139.6 159.0,139.1 161.7,138.5 164.5,137.6 167.3,136.5 170.0,135.1 172.8,133.6 175.5,131.8 178.3,129.8 181.0,127.7 183.8,125.3 186.5,122.8 189.3,120.1 192.1,117.3 194.8,114.3 197.6,111.3 200.3,108.1 203.1,104.9 205.8,101.6 208.6,98.2 211.4,94.9 214.1,91.6 216.9,88.2 219.6,85.0 222.4,81.7 225.1,78.6 227.9,75.5 230.6,72.5 233.4,69.7 236.2,67.0 238.9,64.4 241.7,62.0 244.4,59.7 247.2,57.6 249.9,55.6 252.7,53.8 255.4,52.2 258.2,50.7 261.0,49.4 263.7,48.2 266.5,47.2 269.2,46.3 272.0,45.6 274.7,44.9 277.5,44.4"/>
+<line x1="165.0" y1="218.0" x2="165.0" y2="137.4" stroke="#888" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="120.0" y="174.0" font-size="14" fill="#006455" text-anchor="middle" font-family="serif">4</text>
+<text x="210.0" y="174.0" font-size="14" fill="#006455" text-anchor="middle" font-family="serif">6</text>
+</svg>
+        <figcaption>The area from 1 to 5 is the area from 1 to 3 plus the area from 3 to 5.</figcaption>
+      </figure>
+      \[
+      \int_1^5 f(x)\,dx = \int_1^3 f(x)\,dx + \int_3^5 f(x)\,dx = 4 + 6 = 10.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Suppose \(\int_2^8 f(x)\,dx = 3\) and \(\int_5^8 f(x)\,dx = 1\). Find \(\int_2^5 f(x)\,dx\).
+      <p>The interval \([2,8]\) is split at 5 into \([2,5]\) and \([5,8]\):</p>
+      \[
+      \int_2^5 f(x)\,dx + \int_5^8 f(x)\,dx = \int_2^8 f(x)\,dx \quad\Longrightarrow\quad \int_2^5 f(x)\,dx = 3 - 1 = 2.
+      \]
+    </div>
+
+    <!-- Self-check 5.2 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p>The graph of \(f\) below is made of line segments.</p>
+      <figure class="tex-graph">
+        <svg viewBox="0 0 340 240" width="340" height="240" role="img" aria-label="Piecewise linear graph: horizontal at height 4 from 0 to 2, down to 0 at x = 4, down to -2 at x = 6, then horizontal at -2 until x = 8">
+<g stroke="#e3e3e3" stroke-width="1">
+<line x1="48.5" y1="218.0" x2="48.5" y2="15.0"/>
+<line x1="79.4" y1="218.0" x2="79.4" y2="15.0"/>
+<line x1="110.2" y1="218.0" x2="110.2" y2="15.0"/>
+<line x1="141.1" y1="218.0" x2="141.1" y2="15.0"/>
+<line x1="171.9" y1="218.0" x2="171.9" y2="15.0"/>
+<line x1="202.8" y1="218.0" x2="202.8" y2="15.0"/>
+<line x1="233.6" y1="218.0" x2="233.6" y2="15.0"/>
+<line x1="264.5" y1="218.0" x2="264.5" y2="15.0"/>
+<line x1="295.3" y1="218.0" x2="295.3" y2="15.0"/>
+<line x1="30.0" y1="206.7" x2="320.0" y2="206.7"/>
+<line x1="30.0" y1="184.2" x2="320.0" y2="184.2"/>
+<line x1="30.0" y1="161.6" x2="320.0" y2="161.6"/>
+<line x1="30.0" y1="139.1" x2="320.0" y2="139.1"/>
+<line x1="30.0" y1="116.5" x2="320.0" y2="116.5"/>
+<line x1="30.0" y1="93.9" x2="320.0" y2="93.9"/>
+<line x1="30.0" y1="71.4" x2="320.0" y2="71.4"/>
+<line x1="30.0" y1="48.8" x2="320.0" y2="48.8"/>
+<line x1="30.0" y1="26.3" x2="320.0" y2="26.3"/>
+</g>
+<line x1="20.0" y1="139.1" x2="332.0" y2="139.1" stroke="#888" stroke-width="1"/>
+<line x1="48.5" y1="232.0" x2="48.5" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="79.4" y1="135.1" x2="79.4" y2="143.1"/>
+<line x1="110.2" y1="135.1" x2="110.2" y2="143.1"/>
+<line x1="141.1" y1="135.1" x2="141.1" y2="143.1"/>
+<line x1="171.9" y1="135.1" x2="171.9" y2="143.1"/>
+<line x1="202.8" y1="135.1" x2="202.8" y2="143.1"/>
+<line x1="233.6" y1="135.1" x2="233.6" y2="143.1"/>
+<line x1="264.5" y1="135.1" x2="264.5" y2="143.1"/>
+<line x1="295.3" y1="135.1" x2="295.3" y2="143.1"/>
+<line x1="44.5" y1="184.2" x2="52.5" y2="184.2"/>
+<line x1="44.5" y1="161.6" x2="52.5" y2="161.6"/>
+<line x1="44.5" y1="116.5" x2="52.5" y2="116.5"/>
+<line x1="44.5" y1="93.9" x2="52.5" y2="93.9"/>
+<line x1="44.5" y1="71.4" x2="52.5" y2="71.4"/>
+<line x1="44.5" y1="48.8" x2="52.5" y2="48.8"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="79.4" y="155.1">1</text>
+<text x="110.2" y="155.1">2</text>
+<text x="141.1" y="155.1">3</text>
+<text x="171.9" y="155.1">4</text>
+<text x="202.8" y="155.1">5</text>
+<text x="233.6" y="155.1">6</text>
+<text x="264.5" y="155.1">7</text>
+<text x="295.3" y="155.1">8</text>
+<text x="40.5" y="188.2" text-anchor="end">−2</text>
+<text x="40.5" y="165.6" text-anchor="end">−1</text>
+<text x="40.5" y="120.5" text-anchor="end">1</text>
+<text x="40.5" y="97.9" text-anchor="end">2</text>
+<text x="40.5" y="75.4" text-anchor="end">3</text>
+<text x="40.5" y="52.8" text-anchor="end">4</text>
+<text x="336.0" y="135.1">x</text><text x="56.5" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="48.5,48.8 110.2,48.8 171.9,139.1 233.6,184.2 295.3,184.2"/>
+</svg>
+        <figcaption>The graph of \(f\): through \((0,4)\), \((2,4)\), \((4,0)\), \((6,-2)\), \((8,-2)\).</figcaption>
+      </figure>
+      <p><strong>(a)</strong> Use geometry to find \(\displaystyle\int_0^2 f(x)\,dx\), \(\ \displaystyle\int_0^4 f(x)\,dx\), \(\ \displaystyle\int_4^8 f(x)\,dx\), and \(\ \displaystyle\int_0^8 f(x)\,dx\).</p>
+      <p><strong>(b)</strong> A different function \(g\) has \(\int_1^4 g(x)\,dx = 7\) and \(\int_1^9 g(x)\,dx = 2\). Find \(\int_4^9 g(x)\,dx\).</p>
+      <button onclick="toggleSolution('sc5-2', this)">Show Answer</button>
+      <div id="sc5-2" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Break the graph into shapes:</p>
+        <ul>
+          <li>\(0\) to \(2\): rectangle above the axis, base 2, height 4: area \(8\).</li>
+          <li>\(2\) to \(4\): triangle above, base 2, height 4: area \(\frac12(2)(4) = 4\).</li>
+          <li>\(4\) to \(6\): triangle <em>below</em>, base 2, height 2: area \(\frac12(2)(2) = 2\), counts as \(-2\).</li>
+          <li>\(6\) to \(8\): rectangle <em>below</em>, base 2, height 2: area \(4\), counts as \(-4\).</li>
+        </ul>
+        \[
+        \int_0^2 f(x)\,dx = \boxed{8}, \qquad \int_0^4 f(x)\,dx = 8 + 4 = \boxed{12},
+        \]
+        \[
+        \int_4^8 f(x)\,dx = -2 - 4 = \boxed{-6}, \qquad \int_0^8 f(x)\,dx = 12 + (-6) = \boxed{6}.
+        \]
+        <p><strong>(b)</strong> Split \([1,9]\) at 4:</p>
+        \[
+        \int_1^4 g(x)\,dx + \int_4^9 g(x)\,dx = \int_1^9 g(x)\,dx \quad\Longrightarrow\quad 7 + \int_4^9 g(x)\,dx = 2 \quad\Longrightarrow\quad \int_4^9 g(x)\,dx = \boxed{-5}.
+        \]
+        <p>A negative answer is fine: it just means that on \([4,9]\) there is more area below the axis than above.</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 5.3 ================= -->
+    <div class="unit-divider" id="sec5-3">
+      <div class="part-label">The Fundamental Theorem of Calculus</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Use the Fundamental Theorem of Calculus to evaluate definite integrals.
+    </div>
+
+    <h2 class="tex-section">Connecting Antiderivatives and Area</h2>
+
+    <p>We have seen how to find antiderivatives and how to find area under a curve. Now let's connect these ideas.</p>
+
+    <div class="example">
+      <span class="label">Example (Speed and Distance)</span>
+      A person's speed is graphed over time. Find the distance traveled.
+      <ol type="a">
+        <li>Constant speed \(v(t) = 5\) mph for \(t=0\) to \(t=3\) hours. Distance \(=\) rate \(\times\) time \(= 5\cdot 3 = 15\) miles. On the graph, this is the area of the \(5\times 3\) rectangle under \(v(t)\).</li>
+        <li>Speed \(6\) mph for the first hour, \(5\) mph for the second hour, and \(4\) mph for the third. Distance \(= 6\cdot1 + 5\cdot 1 + 4\cdot 1 = 15\) miles &mdash; again the area under the graph (three rectangles).</li>
+        <li>Speed \(v(t) = 5-t\) from \(t=0\) to \(t=5\). The speed changes constantly, but distance is still the area under the graph, here a triangle:
+          \[
+          \text{distance} = \tfrac12(5)(5) = 12.5 \text{ miles}.
+          \]</li>
+      </ol>
+      <p><strong>Alternate idea.</strong> Velocity is the derivative of position: \(v(t) = p'(t)\). So position is an <em>antiderivative</em> of velocity. In (a), \(p'(t) = 5\) gives \(p(t) = 5t + C\), and the distance traveled is</p>
+      \[
+      p(3) - p(0) = (15 + C) - (0 + C) = 15.
+      \]
+      <p>In (c), \(p'(t) = 5-t\) gives \(p(t) = 5t - \frac{t^2}{2} + C\), and</p>
+      \[
+      p(5) - p(0) = \left(25 - \tfrac{25}{2} + C\right) - (0 + C) = 12.5.
+      \]
+      <p>Same answers! The area under the velocity curve equals the change in an antiderivative. Notice also that the \(C\)'s cancel.</p>
+    </div>
+
+    <div class="theorem">
+      <span class="label">Fundamental Theorem of Calculus (Part 2)</span>
+      If \(F\) is any antiderivative of \(f\) (that is, \(F' = f\)), then
+      \[
+      \int_a^b f(x)\,dx = F(b) - F(a).
+      \]
+      In words: the signed area under \(f\) from \(x=a\) to \(x = b\) is the antiderivative evaluated at the top minus the antiderivative evaluated at the bottom.
+    </div>
+
+    <div class="definition">
+      <span class="label">Notation (Evaluation Bar)</span>
+      \[
+      F(x)\Big|_a^b = F(b) - F(a).
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark (No \(+C\) Needed)</span>
+      For a definite integral we can skip the \(+C\): whatever constant we pick, it shows up in both \(F(b)\) and \(F(a)\) and cancels when we subtract.
+    </div>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Evaluating \(\int_a^b f(x)\,dx\)</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Rewrite the integrand as powers if needed (roots \(\to\) fractional exponents, multiply out products, split fractions).</li>
+          <li>Find an antiderivative \(F(x)\) and write \(F(x)\Big|_a^b\).</li>
+          <li>Plug in the top bound, plug in the bottom bound, and subtract: \(F(b) - F(a)\). Use parentheses around each &mdash; the minus sign applies to <em>all</em> of \(F(a)\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \int_0^1 x\,dx = \frac{x^2}{2}\Big|_0^1 = \frac{1^2}{2} - \frac{0^2}{2} = \frac12.
+      \]
+      <p>This matches geometry: the region is a triangle with base 1 and height 1.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{aligned}
+      \int_2^3 \left(x^2+1\right)dx &= \left(\frac{x^3}{3} + x\right)\Big|_2^3 = \left(\frac{3^3}{3} + 3\right) - \left(\frac{2^3}{3} + 2\right)\\
+      &= (9 + 3) - \left(\frac83 + 2\right) = 12 - \frac{14}{3} = \frac{22}{3}.
+      \end{aligned}
+      \]
+      <p>(On an exam it is fine to stop after the line where the numbers are plugged in.)</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      \[
+      \begin{aligned}
+      \int_{-2}^2 \left(t^2-4\right)dt &= \left(\frac{t^3}{3} - 4t\right)\Big|_{-2}^2 = \left(\frac{2^3}{3} - 4\cdot 2\right) - \left(\frac{(-2)^3}{3} - 4(-2)\right)\\
+      &= \left(\frac83 - 8\right) - \left(-\frac83 + 8\right) = \frac83 - 8 + \frac83 - 8 = \frac{16}{3} - 16 = -\frac{32}{3}.
+      \end{aligned}
+      \]
+      <p>Be careful distributing the minus sign over the second parentheses. The answer is negative because \(t^2 - 4 \le 0\) on \([-2,2]\): the whole region is below the axis.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\int_1^9 \frac{x-1}{\sqrt x}\,dx\).
+      <p>First split the fraction and rewrite as powers: \(\dfrac{x-1}{\sqrt x} = \dfrac{x}{x^{1/2}} - \dfrac{1}{x^{1/2}} = x^{1/2} - x^{-1/2}\). The new powers are \(\frac12 + 1 = \frac32\) and \(-\frac12 + 1 = \frac12\).</p>
+      \[
+      \begin{aligned}
+      \int_1^9 \left(x^{1/2} - x^{-1/2}\right)dx &= \left(\frac{x^{3/2}}{3/2} - \frac{x^{1/2}}{1/2}\right)\Big|_1^9 = \left(\frac23x^{3/2} - 2x^{1/2}\right)\Big|_1^9\\
+      &= \left(\frac23\cdot 9^{3/2} - 2\cdot 9^{1/2}\right) - \left(\frac23\cdot 1^{3/2} - 2\cdot1^{1/2}\right)\\
+      &= \left(\frac23(27) - 2\cdot 3\right) - \left(\frac23 - 2\right) = 12 - \frac23 + 2 = \frac{40}{3}.
+      \end{aligned}
+      \]
+      <p>(Recall \(9^{3/2} = \left(\sqrt9\right)^3 = 27\).)</p>
+    </div>
+
+    <h3 class="tex-subsection">More Practice from Lecture</h3>
+
+    <div class="example">
+      <span class="label">Example</span>
+      <ol type="a">
+        <li>
+          \[
+          \int_0^3 \left(x^2 + \sqrt x\right)dx = \left(\frac13x^3 + \frac23x^{3/2}\right)\Big|_0^3 = \left(\frac13(3)^3 + \frac23(3)^{3/2}\right) - 0 = 9 + \frac23\cdot3^{3/2} = 9 + 2\sqrt3.
+          \]
+          (Since \(3^{3/2} = 3\sqrt3\), \(\frac23\cdot 3\sqrt3 = 2\sqrt3\). Numerically \(\approx 12.46\).)
+        </li>
+        <li>
+          \[
+          \int_1^5 \left(e^x + \frac1x\right)dx = \Big(e^x + \ln|x|\Big)\Big|_1^5 = \left(e^5 + \ln 5\right) - \left(e^1 + \ln 1\right) = e^5 + \ln 5 - e \approx 147.30,
+          \]
+          using \(\ln 1 = 0\).
+        </li>
+        <li>Multiply out first: \((x^2+1)(4x) = 4x^3 + 4x\).
+          \[
+          \int_3^8 (x^2+1)(4x)\,dx = \int_3^8 \left(4x^3+4x\right)dx = \left(x^4 + 2x^2\right)\Big|_3^8 = \left(8^4 + 2\cdot 8^2\right) - \left(3^4 + 2\cdot 3^2\right) = 4224 - 99 = 4125.
+          \]
+        </li>
+      </ol>
+    </div>
+
+    <h2 class="tex-section">Applications: Total Change from a Rate</h2>
+
+    <p>The theorem says: integrating a rate of change \(F'\) gives the <strong>total change</strong> in \(F\),</p>
+    \[
+    \int_a^b F'(t)\,dt = F(b) - F(a).
+    \]
+    <p>So if we know a <em>marginal</em> function (marginal revenue \(R'\), marginal cost \(C'\), ...), integrating it over an interval gives the total revenue, cost, etc. accumulated over that interval.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The marginal revenue for an item is \(R'(t) = -t^2 + 36t\), where \(t\) is in weeks. What is the revenue collected over the first four weeks?
+      <p><strong>Method 1 (find \(R\)).</strong> Antidifferentiate: \(R(t) = -\frac{t^3}{3} + 18t^2 + C\). At time 0 nothing has been collected yet, so \(R(0) = 0\), which forces \(C = 0\). Then</p>
+      \[
+      R(4) = -\frac{4^3}{3} + 18(4)^2 = -\frac{64}{3} + 288 = \frac{800}{3}\approx 266.67.
+      \]
+      <p><strong>Method 2 (definite integral).</strong></p>
+      \[
+      \int_0^4 R'(t)\,dt = R(t)\Big|_0^4 = R(4) - R(0) = \frac{800}{3}\approx 266.67.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      The marginal cost for making bagels is \(C'(t) = 10\sqrt t\) dollars per day. What are the costs for the second week?
+      <p>The first week is days 0 to 7, so the second week is from \(t = 7\) to \(t = 14\). Rewrite \(10\sqrt t = 10t^{1/2}\), whose antiderivative is \(10\cdot\frac{t^{3/2}}{3/2} = \frac{20}{3}t^{3/2}\):</p>
+      \[
+      \text{Cost} = \int_7^{14} 10\sqrt t\,dt = \frac{20}{3}t^{3/2}\Big|_7^{14} = \frac{20}{3}\left(14^{3/2} - 7^{3/2}\right)\approx \frac{20}{3}(52.383 - 18.520) \approx 225.75.
+      \]
+      <p>The costs for the second week are about $225.75.</p>
+    </div>
+
+    <!-- Self-check 5.3 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p>Evaluate:</p>
+      \[
+      \text{(a)}\ \int_1^4 \left(3x^2 - 2x\right)dx \qquad\qquad \text{(b)}\ \int_1^e \left(\frac2x + 1\right)dx \qquad\qquad \text{(c)}\ \int_0^4 \sqrt x\,(x+1)\,dx
+      \]
+      <p><strong>(d)</strong> The marginal cost of producing \(x\) items is \(C'(x) = 50 - 0.2x\) dollars per item. How much does the total cost increase when production goes from 100 items to 200 items?</p>
+      <button onclick="toggleSolution('sc5-3', this)">Show Answer</button>
+      <div id="sc5-3" class="solution" style="display:none;">
+        <p><strong>(a)</strong> The antiderivative of \(3x^2 - 2x\) is \(x^3 - x^2\):</p>
+        \[
+        \int_1^4\left(3x^2-2x\right)dx = \left(x^3 - x^2\right)\Big|_1^4 = \left(64 - 16\right) - \left(1 - 1\right) = \boxed{48}.
+        \]
+        <p><strong>(b)</strong> The antiderivative of \(\frac2x + 1\) is \(2\ln|x| + x\). Use \(\ln e = 1\) and \(\ln 1 = 0\):</p>
+        \[
+        \int_1^e\left(\frac2x + 1\right)dx = \Big(2\ln|x| + x\Big)\Big|_1^e = \left(2\ln e + e\right) - \left(2\ln 1 + 1\right) = (2 + e) - 1 = \boxed{e + 1}\approx 3.72.
+        \]
+        <p><strong>(c)</strong> Multiply out first: \(\sqrt x\,(x+1) = x^{1/2}\cdot x + x^{1/2} = x^{3/2} + x^{1/2}\). The new powers are \(\frac52\) and \(\frac32\):</p>
+        \[
+        \int_0^4\left(x^{3/2}+x^{1/2}\right)dx = \left(\frac25x^{5/2} + \frac23x^{3/2}\right)\Big|_0^4 = \frac25(4)^{5/2} + \frac23(4)^{3/2} - 0.
+        \]
+        <p>Since \(4^{5/2} = (\sqrt4)^5 = 32\) and \(4^{3/2} = (\sqrt4)^3 = 8\):</p>
+        \[
+        \frac25(32) + \frac23(8) = \frac{64}{5} + \frac{16}{3} = \frac{192}{15} + \frac{80}{15} = \boxed{\frac{272}{15}}\approx 18.13.
+        \]
+        <p><strong>(d)</strong> The increase in cost is the integral of the marginal cost. The antiderivative of \(50 - 0.2x\) is \(50x - 0.1x^2\):</p>
+        \[
+        \int_{100}^{200}\left(50 - 0.2x\right)dx = \left(50x - 0.1x^2\right)\Big|_{100}^{200} = \big(10000 - 4000\big) - \big(5000 - 1000\big) = 6000 - 4000 = 2000.
+        \]
+        <p>The total cost increases by <strong>$2000</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 5.5 ================= -->
+    <div class="unit-divider" id="sec5-5">
+      <div class="part-label">Substitution</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Use the method of substitution (\(u\)-substitution) to evaluate definite and indefinite integrals.
+    </div>
+
+    <h2 class="tex-section">Warm-Up: The Chain Rule</h2>
+
+    <p>Recall the <strong>chain rule</strong>: to differentiate a function of an "inside" function, take the derivative of the outside (leaving the inside alone), then multiply by the derivative of the inside.</p>
+
+    <table class="tex-table">
+      <tr><th>\(f(x)\)</th><th>\(f'(x)\)</th></tr>
+      <tr><td>\((3x+4)^6\)</td><td>\(6(3x+4)^5\cdot 3 = 18(3x+4)^5\)</td></tr>
+      <tr><td>\((8x^3+6x)^5\)</td><td>\(5(8x^3+6x)^4(24x^2+6) = 30(8x^3+6x)^4(4x^2+1)\)</td></tr>
+      <tr><td>\(\frac18 e^{4x^2+3}\)</td><td>\(\frac18 e^{4x^2+3}\cdot 8x = xe^{4x^2+3}\)</td></tr>
+      <tr><td>\(\ln(8x+3x^2+5)\)</td><td>\(\dfrac{8+6x}{8x+3x^2+5}\)</td></tr>
+    </table>
+
+    <p>What do we see in these derivatives? Each one looks like</p>
+    \[
+    f(\text{inside})\cdot(\text{derivative of inside}),
+    \]
+    <p>where the derivative of the inside may be off by a constant multiple (like the \(4x^2+1\) instead of \(24x^2+6\), or the \(x\) instead of \(8x\)).</p>
+
+    <h2 class="tex-section">The Method of Substitution</h2>
+
+    <p>The method of substitution is used to take the antiderivative of functions where the chain rule was used for the derivative. We look for integrals of the form</p>
+    \[
+    \int f(\text{inside})\cdot(\text{derivative of inside})\,dx,
+    \]
+    <p>where the derivative of the inside only needs to be there <em>up to multiplication by a constant</em>.</p>
+
+    <div class="methodbox">
+      <div class="methodbox-title">\(u\)-Substitution</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Let the inside be \(u\).</li>
+          <li>Find \(du\): take the derivative, \(\frac{du}{dx} = u'\), and write \(du = u'\,dx\).</li>
+          <li>Solve for \(dx\): \(\ dx = \frac{du}{u'}\).</li>
+          <li>Plug back in and cancel <strong>all</strong> the \(x\)'s. (If some \(x\)'s won't cancel, try a different \(u\).)</li>
+          <li>Take the antiderivative with respect to \(u\).</li>
+          <li>Plug back in what \(u\) was in terms of \(x\).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\displaystyle\int 18(3x+4)^5\,dx\).
+      <div class="step-line"><span class="step-label">1.</span> <span class="step-desc">Inside: \(u = 3x+4\).</span></div>
+      <div class="step-line"><span class="step-label">2.</span> <span class="step-desc">\(\frac{du}{dx} = 3\), so \(du = 3\,dx\).</span></div>
+      <div class="step-line"><span class="step-label">3.</span> <span class="step-desc">\(dx = \frac{du}{3}\).</span></div>
+      <div class="step-line"><span class="step-label">4–6.</span> <span class="step-desc">Plug in, integrate, and plug back:</span></div>
+      \[
+      \int 18u^5\cdot\frac{du}{3} = \int 6u^5\,du = u^6 + C = (3x+4)^6 + C.
+      \]
+      <p>This matches the warm-up: the derivative of \((3x+4)^6\) was \(18(3x+4)^5\).</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\displaystyle\int 5(8x^3+6x)^4(24x^2+6)\,dx\).
+      <p>Let \(u = 8x^3 + 6x\). Then \(du = (24x^2+6)\,dx\), so \(dx = \dfrac{du}{24x^2+6}\).</p>
+      \[
+      \int 5u^4\,(24x^2+6)\cdot\frac{du}{24x^2+6} = \int 5u^4\,du = u^5 + C = (8x^3+6x)^5 + C.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\displaystyle\int xe^{4x^2+3}\,dx\).
+      <p>Let \(u = 4x^2+3\). Then \(du = 8x\,dx\), so \(dx = \dfrac{du}{8x}\).</p>
+      \[
+      \int x\,e^u\cdot\frac{du}{8x} = \int \frac18 e^u\,du = \frac18e^u + C = \frac18e^{4x^2+3} + C.
+      \]
+      <p>Here the derivative of the inside (\(8x\)) was only present up to a constant (we had \(x\)); the leftover \(\frac18\) just comes out front.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find \(\displaystyle\int\frac{3x+4}{8x+3x^2+5}\,dx\).
+      <p>Let \(u = 8x + 3x^2+5\) (the denominator). Then \(du = (8+6x)\,dx = 2(3x+4)\,dx\), so \(dx = \dfrac{du}{2(3x+4)}\).</p>
+      \[
+      \int\frac{3x+4}{u}\cdot\frac{du}{2(3x+4)} = \frac12\int\frac1u\,du = \frac12\ln|u| + C = \frac12\ln\left|8x+3x^2+5\right| + C.
+      \]
+    </div>
+
+    <h2 class="tex-section">Substitution with Definite Integrals</h2>
+
+    <p>Same basic idea, but we have to be careful about the bounds: the original bounds are \(x\)-values, not \(u\)-values. We can either</p>
+    <ul>
+      <li><strong>change the bounds</strong> into \(u\)-values (and then never change back to \(x\)), or</li>
+      <li><strong>keep the bounds</strong> as \(x\)-values, writing "\(x = \)" on them all the way through, and change back to \(x\) before plugging in.</li>
+    </ul>
+
+    <div class="example">
+      <span class="label">Example (Change Bounds)</span>
+      Evaluate \(\displaystyle\int_1^3 xe^{x^2+1}\,dx\).
+      <p>Let \(u = x^2+1\), so \(du = 2x\,dx\) and \(dx = \dfrac{du}{2x}\). Convert the bounds:</p>
+      \[
+      x = 1 \ \Rightarrow\ u = 1^2+1 = 2, \qquad x = 3\ \Rightarrow\ u = 3^2 + 1 = 10.
+      \]
+      \[
+      \int_{u=2}^{u=10} x\,e^u\cdot\frac{du}{2x} = \int_2^{10}\frac12e^u\,du = \frac12e^u\Big|_2^{10} = \frac12e^{10} - \frac12e^2.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example (Keep Bounds)</span>
+      Same integral, same \(u = x^2+1\), \(dx = \frac{du}{2x}\):
+      \[
+      \int_{x=1}^{x=3}\frac12e^u\,du = \frac12e^u\Big|_{x=1}^{x=3} = \frac12e^{x^2+1}\Big|_{x=1}^{x=3} = \frac12e^{10} - \frac12e^2.
+      \]
+      <p>Which do you prefer? Both give the same answer.</p>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\int_0^1\frac{x+2}{x^2+4x+1}\,dx\).
+      <p>Let \(u = x^2+4x+1\). Then \(du = (2x+4)\,dx = 2(x+2)\,dx\), so \(dx = \dfrac{du}{2(x+2)}\).</p>
+      <p><strong>Changing bounds:</strong> \(x=0\Rightarrow u = 1\) and \(x = 1 \Rightarrow u = 1+4+1 = 6\).</p>
+      \[
+      \int_1^6\frac{x+2}{u}\cdot\frac{du}{2(x+2)} = \int_1^6\frac12\cdot\frac1u\,du = \frac12\ln|u|\Big|_1^6 = \frac12\ln 6 - \frac12\ln 1 = \frac12\ln 6.
+      \]
+      <p><strong>Keeping bounds:</strong></p>
+      \[
+      \int_{x=0}^{x=1}\frac12\cdot\frac1u\,du = \frac12\ln|u|\Big|_{x=0}^{x=1} = \frac12\ln\left|x^2+4x+1\right|\Big|_{x=0}^{x=1} = \frac12\ln 6 - \frac12\ln 1 = \frac12\ln 6.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Evaluate \(\displaystyle\int_5^8\left(e^{8x} - \frac1x\right)dx\).
+      <p>Split it into two integrals. Only the first needs substitution; the second we can do directly:</p>
+      \[
+      \int_5^8\left(e^{8x}-\frac1x\right)dx = \int_5^8 e^{8x}\,dx - \int_5^8\frac1x\,dx.
+      \]
+      <p>First integral: \(u = 8x\), \(du = 8\,dx\), \(dx = \frac{du}{8}\); bounds \(x = 5\Rightarrow u = 40\), \(x=8\Rightarrow u = 64\).</p>
+      \[
+      \int_{40}^{64}e^u\,\frac{du}{8} = \frac18e^u\Big|_{40}^{64} = \frac18e^{64} - \frac18e^{40}.
+      \]
+      <p>Second integral: \(\displaystyle\int_5^8\frac1x\,dx = \ln|x|\Big|_5^8 = \ln 8 - \ln 5\). Altogether,</p>
+      \[
+      \int_5^8\left(e^{8x}-\frac1x\right)dx = \left(\frac18e^{64} - \frac18e^{40}\right) - \left(\ln 8 - \ln 5\right).
+      \]
+    </div>
+
+    <!-- Self-check 5.5 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">From the Final Exam Review (part a), plus practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p><strong>(a)</strong> Evaluate \(\displaystyle\int_3^8\frac{5e^x + \frac5x}{\left(e^x + \ln x\right)^3}\,dx\).</p>
+      <p><strong>(b)</strong> Find \(\displaystyle\int x^2\left(x^3+1\right)^4dx\).</p>
+      <p><strong>(c)</strong> Evaluate \(\displaystyle\int_0^1\frac{2x}{x^2+1}\,dx\).</p>
+      <button onclick="toggleSolution('sc5-5', this)">Show Answer</button>
+      <div id="sc5-5" class="solution" style="display:none;">
+        <p><strong>(a)</strong> The inside is \(e^x+\ln x\), and its derivative \(e^x + \frac1x\) appears (up to the constant 5) on top. Let</p>
+        \[
+        u = e^x + \ln x, \qquad du = \left(e^x + \frac1x\right)dx, \qquad dx = \frac{du}{e^x+\frac1x}.
+        \]
+        <p>Factor the numerator as \(5\left(e^x + \frac1x\right)\) and plug in, keeping the bounds as \(x\)-values:</p>
+        \[
+        \int_{x=3}^{x=8}\frac{5\left(e^x+\frac1x\right)}{u^3}\cdot\frac{du}{e^x+\frac1x} = \int_{x=3}^{x=8}5u^{-3}\,du = 5\cdot\frac{u^{-2}}{-2}\Big|_{x=3}^{x=8} = -\frac52\left(e^x+\ln x\right)^{-2}\Big|_3^8.
+        \]
+        <p>Plug in the bounds (top minus bottom):</p>
+        \[
+        -\frac{5}{2\left(e^8+\ln 8\right)^2} + \frac{5}{2\left(e^3 + \ln 3\right)^2} \approx \boxed{0.00557}.
+        \]
+        <p><strong>(b)</strong> The inside is \(x^3+1\), and its derivative \(3x^2\) matches the \(x^2\) up to a constant. Let \(u = x^3+1\), so \(du = 3x^2\,dx\) and \(dx = \dfrac{du}{3x^2}\):</p>
+        \[
+        \int x^2u^4\cdot\frac{du}{3x^2} = \frac13\int u^4\,du = \frac13\cdot\frac{u^5}{5} + C = \boxed{\frac{1}{15}\left(x^3+1\right)^5 + C}.
+        \]
+        <p>Check: \(\frac{d}{dx}\left[\frac1{15}(x^3+1)^5\right] = \frac{5}{15}(x^3+1)^4\cdot 3x^2 = x^2(x^3+1)^4\). ✓</p>
+        <p><strong>(c)</strong> Let \(u = x^2+1\), so \(du = 2x\,dx\) and \(dx = \dfrac{du}{2x}\). Change the bounds: \(x = 0 \Rightarrow u = 1\), \(x = 1\Rightarrow u = 2\).</p>
+        \[
+        \int_1^2\frac{2x}{u}\cdot\frac{du}{2x} = \int_1^2\frac1u\,du = \ln|u|\Big|_1^2 = \ln 2 - \ln 1 = \boxed{\ln 2}\approx 0.693.
+        \]
+      </div>
+    </div>
+
+    <!-- ================= SECTION 6.1 ================= -->
+    <div class="unit-divider" id="sec6-1">
+      <div class="part-label">Area Between Curves</div>
+      <hr class="part-rule">
+      <span class="back-to-top"><a href="#top">↑ Back to top</a></span>
+    </div>
+
+    <div class="remark">
+      <span class="label">Goals</span>
+      Find the area between curves using integration; solve for bounds for more complicated regions.
+    </div>
+
+    <h2 class="tex-section">Top Minus Bottom</h2>
+
+    <p>We know how to find the area under a curve. Now we want to find the area <em>between</em> two curves.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the area between \(y = x^2\) and \(y = x\) (from \(x = 0\) to \(x = 1\), where they meet).
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Region between y = x on top and y = x squared on the bottom, from x = 0 to x = 1">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="73.5,194.1 76.5,192.1 79.4,190.1 82.3,188.1 85.2,186.2 88.1,184.2 91.0,182.2 93.9,180.2 96.8,178.2 99.7,176.2 102.6,174.2 105.5,172.2 108.4,170.2 111.3,168.2 114.2,166.3 117.1,164.3 120.0,162.3 122.9,160.3 125.8,158.3 128.7,156.3 131.6,154.3 134.5,152.3 137.4,150.3 140.3,148.3 143.2,146.4 146.1,144.4 149.0,142.4 151.9,140.4 154.8,138.4 157.7,136.4 160.6,134.4 163.5,132.4 166.5,130.4 169.4,128.4 172.3,126.5 175.2,124.5 178.1,122.5 181.0,120.5 183.9,118.5 186.8,116.5 189.7,114.5 192.6,112.5 195.5,110.5 198.4,108.5 201.3,106.5 204.2,104.6 207.1,102.6 210.0,100.6 212.9,98.6 215.8,96.6 218.7,94.6 221.6,92.6 224.5,90.6 227.4,88.6 230.3,86.6 233.2,84.7 236.1,82.7 239.0,80.7 241.9,78.7 244.8,76.7 247.7,74.7 247.7,74.7 244.8,78.7 241.9,82.5 239.0,86.3 236.1,90.1 233.2,93.8 230.3,97.4 227.4,100.9 224.5,104.4 221.6,107.8 218.7,111.2 215.8,114.5 212.9,117.7 210.0,120.8 207.1,123.9 204.2,126.9 201.3,129.9 198.4,132.8 195.5,135.6 192.6,138.4 189.7,141.0 186.8,143.7 183.9,146.2 181.0,148.7 178.1,151.1 175.2,153.5 172.3,155.8 169.4,158.0 166.5,160.2 163.5,162.2 160.6,164.3 157.7,166.2 154.8,168.1 151.9,169.9 149.0,171.7 146.1,173.4 143.2,175.0 140.3,176.6 137.4,178.1 134.5,179.5 131.6,180.8 128.7,182.1 125.8,183.4 122.9,184.5 120.0,185.6 117.1,186.7 114.2,187.6 111.3,188.5 108.4,189.3 105.5,190.1 102.6,190.8 99.7,191.4 96.8,192.0 93.9,192.5 91.0,192.9 88.1,193.3 85.2,193.6 82.3,193.8 79.4,194.0 76.5,194.1 73.5,194.1"/>
+<line x1="20.0" y1="194.1" x2="312.0" y2="194.1" stroke="#888" stroke-width="1"/>
+<line x1="73.5" y1="232.0" x2="73.5" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="247.7" y1="190.1" x2="247.7" y2="198.1"/>
+<line x1="69.5" y1="74.7" x2="77.5" y2="74.7"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="247.7" y="210.1">1</text>
+<text x="65.5" y="78.7" text-anchor="end">1</text>
+<text x="316.0" y="190.1">x</text><text x="81.5" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="56.1,206.1 173.7,125.5 291.3,44.9"/>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="38.7,189.3 41.8,190.1 44.8,190.9 47.9,191.5 50.9,192.1 54.0,192.6 57.0,193.0 60.0,193.4 63.1,193.7 66.1,193.9 69.2,194.0 72.2,194.1 75.3,194.1 78.3,194.0 81.4,193.9 84.4,193.7 87.5,193.4 90.5,193.0 93.6,192.5 96.6,192.0 99.7,191.4 102.7,190.8 105.8,190.0 108.8,189.2 111.9,188.3 114.9,187.4 118.0,186.4 121.0,185.3 124.1,184.1 127.1,182.8 130.2,181.5 133.2,180.1 136.3,178.6 139.3,177.1 142.4,175.5 145.4,173.8 148.5,172.0 151.5,170.2 154.5,168.3 157.6,166.3 160.6,164.3 163.7,162.1 166.7,159.9 169.8,157.7 172.8,155.3 175.9,152.9 178.9,150.4 182.0,147.8 185.0,145.2 188.1,142.5 191.1,139.7 194.2,136.9 197.2,133.9 200.3,130.9 203.3,127.8 206.4,124.7 209.4,121.5 212.5,118.2 215.5,114.8 218.6,111.4 221.6,107.8 224.7,104.3 227.7,100.6 230.8,96.9 233.8,93.0 236.9,89.2 239.9,85.2 243.0,81.2 246.0,77.1 249.0,72.9 252.1,68.7 255.1,64.3 258.2,59.9 261.2,55.5 264.3,50.9 267.3,46.3 270.4,41.6 273.4,36.9 276.5,32.0 279.5,27.1 282.6,22.2"/>
+<text x="286.1" y="68.7" font-size="11" fill="#464646" text-anchor="start" font-family="serif">y = x</text>
+<text x="256.5" y="24.6" font-size="11" fill="#464646" text-anchor="end" font-family="serif">y = x²</text>
+</svg>
+        <figcaption>On \([0,1]\) the line \(y=x\) is on top and the parabola \(y = x^2\) is on the bottom.</figcaption>
+      </figure>
+      <p>The area under the top curve \(y = x\) includes the shaded region <em>plus</em> the area under the bottom curve \(y = x^2\). So subtract:</p>
+      \[
+      \int_0^1 x\,dx - \int_0^1 x^2\,dx = \int_0^1\left(x - x^2\right)dx = \left(\frac{x^2}{2} - \frac{x^3}{3}\right)\Big|_0^1 = \frac12 - \frac13 = \frac16.
+      \]
+    </div>
+
+    <div class="theorem">
+      <span class="label">Area Between Curves</span>
+      If \(f(x)\ge g(x)\) for all \(x\) in \([a,b]\) (so \(f\) is on top and \(g\) is on the bottom), then the area between them from \(x = a\) to \(x = b\) is
+      \[
+      \int_a^b\big(f(x) - g(x)\big)\,dx = \int_a^b(\text{top} - \text{bottom})\,dx.
+      \]
+    </div>
+
+    <div class="remark">
+      <span class="label">Remark</span>
+      This formula still works when part of the region is below the \(x\)-axis: "top minus bottom" is always the (positive) height of the region. Unlike a plain definite integral, the area between curves is never negative.
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the area between \(y = x+1\) and \(y = x^2-1\) from \(x=0\) to \(x = 1\).
+      <p>On \([0,1]\), the line is on top (e.g. at \(x = 0\): \(1 &gt; -1\)).</p>
+      \[
+      \begin{aligned}
+      \int_0^1\Big((x+1) - (x^2-1)\Big)dx &= \int_0^1\left(x + 1 - x^2 + 1\right)dx = \int_0^1\left(x - x^2 + 2\right)dx\\
+      &= \left(\frac{x^2}{2} - \frac{x^3}{3} + 2x\right)\Big|_0^1 = \frac12 - \frac13 + 2 = \frac{13}{6}.
+      \end{aligned}
+      \]
+      <p>Careful: distribute the minus sign to <em>every</em> term of the bottom function.</p>
+    </div>
+
+    <h2 class="tex-section">Finding the Bounds</h2>
+
+    <p>When a problem asks for the area of the region <strong>bounded</strong> by two curves (with no interval given), the bounds are where the curves meet. To find them, set the two functions <strong>equal</strong> and solve.</p>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the area of the region bounded between \(y = x+1\) and \(y = x^2-1\).
+      <p>Points of intersection:</p>
+      \[
+      x + 1 = x^2 - 1 \;\Longrightarrow\; x^2 - x - 2 = 0 \;\Longrightarrow\; (x+1)(x-2) = 0 \;\Longrightarrow\; x = -1,\ x = 2.
+      \]
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Region bounded between the line y = x + 1 on top and the parabola y = x squared minus 1 on the bottom, from x = -1 to x = 2">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="84.0,160.0 86.7,158.6 89.4,157.1 92.1,155.7 94.8,154.2 97.5,152.8 100.2,151.3 102.9,149.9 105.6,148.4 108.3,147.0 111.0,145.5 113.7,144.1 116.4,142.6 119.1,141.1 121.8,139.7 124.5,138.2 127.2,136.8 129.9,135.3 132.6,133.9 135.3,132.4 138.0,131.0 140.7,129.6 143.4,128.1 146.1,126.7 148.8,125.2 151.5,123.8 154.2,122.3 156.9,120.9 159.6,119.4 162.3,117.9 165.0,116.5 167.7,115.1 170.4,113.6 173.1,112.2 175.8,110.7 178.5,109.2 181.2,107.8 183.9,106.4 186.6,104.9 189.3,103.4 192.0,102.0 194.7,100.5 197.4,99.1 200.1,97.7 202.8,96.2 205.5,94.8 208.2,93.3 210.9,91.8 213.6,90.4 216.3,89.0 219.0,87.5 221.7,86.1 224.4,84.6 227.1,83.2 229.8,81.7 232.5,80.2 235.2,78.8 237.9,77.3 240.6,75.9 243.3,74.4 246.0,73.0 246.0,73.0 243.3,78.7 240.6,84.3 237.9,89.7 235.2,95.0 232.5,100.2 229.8,105.2 227.1,110.0 224.4,114.8 221.7,119.3 219.0,123.8 216.3,128.0 213.6,132.2 210.9,136.1 208.2,140.0 205.5,143.7 202.8,147.2 200.1,150.6 197.4,153.9 194.7,157.0 192.0,160.0 189.3,162.8 186.6,165.5 183.9,168.0 181.2,170.4 178.5,172.7 175.8,174.8 173.1,176.7 170.4,178.6 167.7,180.2 165.0,181.8 162.3,183.1 159.6,184.4 156.9,185.4 154.2,186.4 151.5,187.2 148.8,187.8 146.1,188.3 143.4,188.7 140.7,188.9 138.0,189.0 135.3,188.9 132.6,188.7 129.9,188.3 127.2,187.8 124.5,187.2 121.8,186.4 119.1,185.4 116.4,184.4 113.7,183.1 111.0,181.8 108.3,180.2 105.6,178.6 102.9,176.7 100.2,174.8 97.5,172.7 94.8,170.4 92.1,168.0 89.4,165.5 86.7,162.8 84.0,160.0"/>
+<line x1="20.0" y1="160.0" x2="312.0" y2="160.0" stroke="#888" stroke-width="1"/>
+<line x1="138.0" y1="232.0" x2="138.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="84.0" y1="156.0" x2="84.0" y2="164.0"/>
+<line x1="192.0" y1="156.0" x2="192.0" y2="164.0"/>
+<line x1="246.0" y1="156.0" x2="246.0" y2="164.0"/>
+<line x1="134.0" y1="131.0" x2="142.0" y2="131.0"/>
+<line x1="134.0" y1="102.0" x2="142.0" y2="102.0"/>
+<line x1="134.0" y1="73.0" x2="142.0" y2="73.0"/>
+<line x1="134.0" y1="44.0" x2="142.0" y2="44.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="84.0" y="176.0">−1</text>
+<text x="192.0" y="176.0">1</text>
+<text x="246.0" y="176.0">2</text>
+<text x="130.0" y="135.0" text-anchor="end">1</text>
+<text x="130.0" y="106.0" text-anchor="end">2</text>
+<text x="130.0" y="77.0" text-anchor="end">3</text>
+<text x="130.0" y="48.0" text-anchor="end">4</text>
+<text x="316.0" y="156.0">x</text><text x="146.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="30.0,189.0 165.0,116.5 300.0,44.0"/>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="30.0,73.0 33.0,79.4 36.0,85.5 39.0,91.5 42.0,97.4 45.0,103.0 48.0,108.5 51.0,113.8 54.0,118.9 57.0,123.8 60.0,128.6 63.0,133.1 66.0,137.5 69.0,141.7 72.1,145.7 75.1,149.6 78.1,153.3 81.1,156.8 84.1,160.1 87.1,163.2 90.1,166.2 93.1,168.9 96.1,171.5 99.1,173.9 102.1,176.2 105.1,178.2 108.1,180.1 111.1,181.8 114.1,183.3 117.1,184.7 120.1,185.8 123.1,186.8 126.1,187.6 129.1,188.2 132.1,188.7 135.1,188.9 138.1,189.0 141.1,188.9 144.1,188.6 147.1,188.2 150.2,187.5 153.2,186.7 156.2,185.7 159.2,184.5 162.2,183.2 165.2,181.7 168.2,179.9 171.2,178.1 174.2,176.0 177.2,173.7 180.2,171.3 183.2,168.7 186.2,165.9 189.2,162.9 192.2,159.8 195.2,156.5 198.2,152.9 201.2,149.3 204.2,145.4 207.2,141.3 210.2,137.1 213.2,132.7 216.2,128.1 219.2,123.4 222.2,118.4 225.2,113.3 228.2,108.0 231.3,102.5 234.3,96.9 237.3,91.0 240.3,85.0 243.3,78.8 246.3,72.4 249.3,65.9 252.3,59.1 255.3,52.2 258.3,45.1 261.3,37.8 264.3,30.4 267.3,22.7 270.3,14.9"/>
+<circle cx="84.0" cy="160.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="246.0" cy="73.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<text x="297.3" y="87.5" font-size="10" fill="#464646" text-anchor="end" font-family="serif">y = x + 1</text>
+<text x="32.7" y="61.4" font-size="10" fill="#464646" text-anchor="start" font-family="serif">y = x² − 1</text>
+</svg>
+        <figcaption>The region bounded by \(y=x+1\) (top) and \(y = x^2-1\) (bottom), between the intersection points \(x=-1\) and \(x = 2\).</figcaption>
+      </figure>
+      \[
+      \begin{aligned}
+      \int_{-1}^2\Big((x+1) - (x^2-1)\Big)dx &= \left(\frac{x^2}{2} - \frac{x^3}{3} + 2x\right)\Big|_{-1}^2\\
+      &= \left(\frac{2^2}{2} - \frac{2^3}{3} + 2(2)\right) - \left(\frac{1}{2} - \frac{(-1)^3}{3} + 2(-1)\right)\\
+      &= \left(2 - \frac83 + 4\right) - \left(\frac12 + \frac13 - 2\right) = \frac{10}{3} - \left(-\frac76\right) = \frac{20}{6} + \frac76 = \frac{27}{6} = \frac92.
+      \end{aligned}
+      \]
+    </div>
+
+    <h3 class="tex-subsection">When the Curves Cross</h3>
+
+    <p>If the curves cross inside the interval, the top and bottom curves switch. Then we must split the integral at each crossing point and use "top minus bottom" on each piece.</p>
+
+    <div class="methodbox">
+      <div class="methodbox-title">Area Between Curves That Cross</div>
+      <div class="methodbox-body">
+        <ol>
+          <li>Set the functions equal to find where they cross.</li>
+          <li>Split \([a,b]\) at the crossing points that lie inside it.</li>
+          <li>On each piece, decide which function is on top (sketch, or plug in a test point).</li>
+          <li>Integrate top minus bottom on each piece, and add the results.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the area between \(y = x^2-1\) and \(y = x+5\) from \(x=-5\) to \(x=5\).
+      <p>Where do they cross?</p>
+      \[
+      x^2 - 1 = x + 5 \;\Longrightarrow\; x^2 - x - 6 = 0 \;\Longrightarrow\; (x+2)(x-3) = 0 \;\Longrightarrow\; x = -2,\ x = 3.
+      \]
+      <figure class="tex-graph">
+        <svg viewBox="0 0 340 260" width="340" height="260" role="img" aria-label="Parabola y = x squared minus 1 and line y = x + 5 from x = -5 to 5; they cross at x = -2 and x = 3">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="54.2,30.4 55.4,34.2 56.6,38.0 57.8,41.7 59.0,45.5 60.2,49.1 61.4,52.8 62.6,56.4 63.8,59.9 65.0,63.4 66.2,66.9 67.5,70.3 68.7,73.7 69.9,77.1 71.1,80.4 72.3,83.7 73.5,87.0 74.7,90.2 75.9,93.4 77.1,96.5 78.3,99.6 79.5,102.6 80.8,105.7 82.0,108.6 83.2,111.6 84.4,114.5 85.6,117.3 86.8,120.2 88.0,123.0 89.2,125.7 90.4,128.4 91.6,131.1 92.8,133.7 94.0,136.3 95.2,138.9 96.5,141.4 97.7,143.9 98.9,146.3 100.1,148.7 101.3,151.1 102.5,153.4 103.7,155.7 104.9,158.0 106.1,160.2 107.3,162.3 108.5,164.5 109.7,166.6 111.0,168.6 112.2,170.6 113.4,172.6 114.6,174.6 115.8,176.5 117.0,178.3 118.2,180.2 119.4,181.9 120.6,183.7 121.8,185.4 123.0,187.1 124.2,188.7 125.5,190.3 126.7,191.9 126.7,191.9 125.5,192.2 124.2,192.6 123.0,193.0 121.8,193.4 120.6,193.8 119.4,194.2 118.2,194.6 117.0,194.9 115.8,195.3 114.6,195.7 113.4,196.1 112.2,196.5 111.0,196.9 109.7,197.2 108.5,197.6 107.3,198.0 106.1,198.4 104.9,198.8 103.7,199.2 102.5,199.6 101.3,199.9 100.1,200.3 98.9,200.7 97.7,201.1 96.5,201.5 95.2,201.9 94.0,202.2 92.8,202.6 91.6,203.0 90.4,203.4 89.2,203.8 88.0,204.2 86.8,204.5 85.6,204.9 84.4,205.3 83.2,205.7 82.0,206.1 80.8,206.5 79.5,206.9 78.3,207.2 77.1,207.6 75.9,208.0 74.7,208.4 73.5,208.8 72.3,209.2 71.1,209.5 69.9,209.9 68.7,210.3 67.5,210.7 66.2,211.1 65.0,211.5 63.8,211.9 62.6,212.2 61.4,212.6 60.2,213.0 59.0,213.4 57.8,213.8 56.6,214.2 55.4,214.5 54.2,214.9"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="126.7,191.9 128.7,191.2 130.7,190.6 132.7,189.9 134.7,189.3 136.7,188.7 138.8,188.0 140.8,187.4 142.8,186.7 144.8,186.1 146.8,185.5 148.8,184.8 150.8,184.2 152.8,183.5 154.9,182.9 156.9,182.2 158.9,181.6 160.9,181.0 162.9,180.3 164.9,179.7 166.9,179.0 169.0,178.4 171.0,177.8 173.0,177.1 175.0,176.5 177.0,175.8 179.0,175.2 181.0,174.6 183.1,173.9 185.1,173.3 187.1,172.6 189.1,172.0 191.1,171.4 193.1,170.7 195.1,170.1 197.2,169.4 199.2,168.8 201.2,168.2 203.2,167.5 205.2,166.9 207.2,166.2 209.2,165.6 211.2,164.9 213.3,164.3 215.3,163.7 217.3,163.0 219.3,162.4 221.3,161.7 223.3,161.1 225.3,160.5 227.4,159.8 229.4,159.2 231.4,158.5 233.4,157.9 235.4,157.3 237.4,156.6 239.4,156.0 241.5,155.3 243.5,154.7 245.5,154.1 247.5,153.4 247.5,153.4 245.5,157.2 243.5,160.9 241.5,164.5 239.4,167.9 237.4,171.3 235.4,174.6 233.4,177.7 231.4,180.8 229.4,183.7 227.4,186.5 225.3,189.2 223.3,191.9 221.3,194.4 219.3,196.8 217.3,199.1 215.3,201.3 213.3,203.3 211.2,205.3 209.2,207.2 207.2,209.0 205.2,210.6 203.2,212.2 201.2,213.6 199.2,214.9 197.2,216.2 195.1,217.3 193.1,218.3 191.1,219.2 189.1,220.0 187.1,220.7 185.1,221.3 183.1,221.8 181.0,222.1 179.0,222.4 177.0,222.6 175.0,222.6 173.0,222.6 171.0,222.4 169.0,222.1 166.9,221.8 164.9,221.3 162.9,220.7 160.9,220.0 158.9,219.2 156.9,218.3 154.9,217.3 152.8,216.2 150.8,214.9 148.8,213.6 146.8,212.2 144.8,210.6 142.8,209.0 140.8,207.2 138.8,205.3 136.7,203.3 134.7,201.3 132.7,199.1 130.7,196.8 128.7,194.4 126.7,191.9"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="247.5,153.4 248.3,151.9 249.1,150.3 249.9,148.7 250.7,147.1 251.5,145.5 252.3,143.9 253.1,142.2 253.9,140.6 254.8,138.9 255.6,137.2 256.4,135.5 257.2,133.7 258.0,132.0 258.8,130.2 259.6,128.4 260.4,126.6 261.2,124.8 262.0,123.0 262.8,121.1 263.6,119.2 264.4,117.3 265.2,115.4 266.0,113.5 266.8,111.6 267.6,109.6 268.4,107.7 269.2,105.7 270.1,103.7 270.9,101.6 271.7,99.6 272.5,97.5 273.3,95.5 274.1,93.4 274.9,91.2 275.7,89.1 276.5,87.0 277.3,84.8 278.1,82.6 278.9,80.4 279.7,78.2 280.5,76.0 281.3,73.7 282.1,71.5 282.9,69.2 283.8,66.9 284.6,64.6 285.4,62.3 286.2,59.9 287.0,57.5 287.8,55.2 288.6,52.8 289.4,50.3 290.2,47.9 291.0,45.5 291.8,43.0 292.6,40.5 293.4,38.0 294.2,35.5 295.0,32.9 295.8,30.4 295.8,138.0 295.0,138.3 294.2,138.5 293.4,138.8 292.6,139.1 291.8,139.3 291.0,139.6 290.2,139.8 289.4,140.1 288.6,140.3 287.8,140.6 287.0,140.9 286.2,141.1 285.4,141.4 284.6,141.6 283.8,141.9 282.9,142.1 282.1,142.4 281.3,142.6 280.5,142.9 279.7,143.2 278.9,143.4 278.1,143.7 277.3,143.9 276.5,144.2 275.7,144.4 274.9,144.7 274.1,145.0 273.3,145.2 272.5,145.5 271.7,145.7 270.9,146.0 270.1,146.2 269.2,146.5 268.4,146.7 267.6,147.0 266.8,147.3 266.0,147.5 265.2,147.8 264.4,148.0 263.6,148.3 262.8,148.5 262.0,148.8 261.2,149.1 260.4,149.3 259.6,149.6 258.8,149.8 258.0,150.1 257.2,150.3 256.4,150.6 255.6,150.9 254.8,151.1 253.9,151.4 253.1,151.6 252.3,151.9 251.5,152.1 250.7,152.4 249.9,152.6 249.1,152.9 248.3,153.2 247.5,153.4"/>
+<line x1="20.0" y1="214.9" x2="332.0" y2="214.9" stroke="#888" stroke-width="1"/>
+<line x1="175.0" y1="252.0" x2="175.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="54.2" y1="210.9" x2="54.2" y2="218.9"/>
+<line x1="126.7" y1="210.9" x2="126.7" y2="218.9"/>
+<line x1="247.5" y1="210.9" x2="247.5" y2="218.9"/>
+<line x1="295.8" y1="210.9" x2="295.8" y2="218.9"/>
+<line x1="171.0" y1="176.5" x2="179.0" y2="176.5"/>
+<line x1="171.0" y1="138.0" x2="179.0" y2="138.0"/>
+<line x1="171.0" y1="99.6" x2="179.0" y2="99.6"/>
+<line x1="171.0" y1="61.1" x2="179.0" y2="61.1"/>
+<line x1="171.0" y1="22.7" x2="179.0" y2="22.7"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="54.2" y="230.9">−5</text>
+<text x="126.7" y="230.9">−2</text>
+<text x="247.5" y="230.9">3</text>
+<text x="295.8" y="230.9">5</text>
+<text x="167.0" y="180.5" text-anchor="end">5</text>
+<text x="167.0" y="142.0" text-anchor="end">10</text>
+<text x="167.0" y="103.6" text-anchor="end">15</text>
+<text x="167.0" y="65.1" text-anchor="end">20</text>
+<text x="167.0" y="26.7" text-anchor="end">25</text>
+<text x="336.0" y="210.9">x</text><text x="183.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="30.0,222.6 175.0,176.5 320.0,130.3"/>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="49.3,14.7 52.5,25.0 55.6,35.0 58.8,44.7 61.9,54.2 65.0,63.4 68.2,72.4 71.3,81.1 74.5,89.5 77.6,97.7 80.7,105.7 83.9,113.3 87.0,120.7 90.2,127.9 93.3,134.8 96.5,141.4 99.6,147.8 102.7,153.9 105.9,159.7 109.0,165.3 112.2,170.6 115.3,175.7 118.5,180.5 121.6,185.1 124.7,189.4 127.9,193.4 131.0,197.1 134.2,200.7 137.3,203.9 140.4,206.9 143.6,209.6 146.7,212.1 149.9,214.3 153.0,216.3 156.2,217.9 159.3,219.4 162.4,220.5 165.6,221.5 168.7,222.1 171.9,222.5 175.0,222.6 178.1,222.5 181.3,222.1 184.4,221.5 187.6,220.5 190.7,219.4 193.9,217.9 197.0,216.3 200.1,214.3 203.3,212.1 206.4,209.6 209.6,206.9 212.7,203.9 215.8,200.7 219.0,197.1 222.1,193.4 225.3,189.4 228.4,185.1 231.5,180.5 234.7,175.7 237.8,170.6 241.0,165.3 244.1,159.7 247.3,153.9 250.4,147.8 253.5,141.4 256.7,134.8 259.8,127.9 263.0,120.7 266.1,113.3 269.2,105.7 272.4,97.7 275.5,89.5 278.7,81.1 281.8,72.4 285.0,63.4 288.1,54.2 291.2,44.7 294.4,35.0 297.5,25.0 300.7,14.7"/>
+<line x1="54.2" y1="214.9" x2="54.2" y2="30.4" stroke="#888" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="295.8" y1="214.9" x2="295.8" y2="30.4" stroke="#888" stroke-width="1" stroke-dasharray="4 3"/>
+<circle cx="126.7" cy="191.9" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="247.5" cy="153.4" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<text x="80.8" y="115.0" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">A₁</text>
+<text x="189.5" y="180.3" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">A₂</text>
+<text x="275.3" y="111.1" font-size="11" fill="#006455" text-anchor="middle" font-family="serif">A₃</text>
+</svg>
+        <figcaption>From \(-5\) to \(-2\) and from \(3\) to \(5\) the parabola is on top; from \(-2\) to \(3\) the line is on top.</figcaption>
+      </figure>
+      <p>Test points: at \(x = -3\), \(x^2-1 = 8 &gt; 2 = x+5\); at \(x = 0\), \(x + 5 = 5 &gt; -1\); at \(x = 4\), \(x^2 - 1 = 15 &gt; 9\). So</p>
+      \[
+      \text{Area} = \int_{-5}^{-2}\Big((x^2-1) - (x+5)\Big)dx + \int_{-2}^{3}\Big((x+5) - (x^2-1)\Big)dx + \int_3^5\Big((x^2-1)-(x+5)\Big)dx.
+      \]
+      <p>Each integrand is \(\pm\left(x^2 - x - 6\right)\), and an antiderivative of \(x^2 - x - 6\) is \(F(x) = \frac{x^3}{3} - \frac{x^2}{2} - 6x\). We need</p>
+      \[
+      F(-5) = -\frac{145}{6}, \qquad F(-2) = \frac{22}{3}, \qquad F(3) = -\frac{27}{2}, \qquad F(5) = -\frac56.
+      \]
+      \[
+      \begin{aligned}
+      A_1 &= F(-2) - F(-5) = \frac{44}{6} + \frac{145}{6} = \frac{189}{6} = \frac{63}{2},\\
+      A_2 &= -\big(F(3) - F(-2)\big) = \frac{27}{2} + \frac{22}{3} = \frac{81}{6} + \frac{44}{6} = \frac{125}{6},\\
+      A_3 &= F(5) - F(3) = -\frac56 + \frac{27}{2} = -\frac56 + \frac{81}{6} = \frac{76}{6} = \frac{38}{3}.
+      \end{aligned}
+      \]
+      \[
+      \text{Area} = \frac{189}{6} + \frac{125}{6} + \frac{76}{6} = \frac{390}{6} = 65.
+      \]
+    </div>
+
+    <div class="example">
+      <span class="label">Example</span>
+      Find the area between \(y = -x\) and \(y = 2-x^2\) on \([-2,2]\).
+      <p>Crossings: \(-x = 2 - x^2 \Rightarrow x^2 - x - 2 = 0 \Rightarrow (x+1)(x-2) = 0\), so \(x = -1\) and \(x = 2\). Only \(x=-1\) is strictly inside \([-2,2]\), so we split there.</p>
+      <figure class="tex-graph">
+        <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Line y = -x and parabola y = 2 minus x squared on the interval from -2 to 2; they cross at x = -1 and x = 2">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="61.2,44.0 62.0,44.6 62.9,45.2 63.8,45.8 64.6,46.4 65.5,47.0 66.3,47.6 67.2,48.2 68.1,48.8 68.9,49.4 69.8,50.0 70.7,50.6 71.5,51.2 72.4,51.9 73.3,52.5 74.1,53.1 75.0,53.7 75.9,54.3 76.7,54.9 77.6,55.5 78.5,56.1 79.3,56.7 80.2,57.3 81.1,57.9 81.9,58.5 82.8,59.1 83.7,59.7 84.5,60.3 85.4,60.9 86.2,61.5 87.1,62.1 88.0,62.7 88.8,63.3 89.7,63.9 90.6,64.5 91.4,65.1 92.3,65.8 93.2,66.4 94.0,67.0 94.9,67.6 95.8,68.2 96.6,68.8 97.5,69.4 98.4,70.0 99.2,70.6 100.1,71.2 101.0,71.8 101.8,72.4 102.7,73.0 103.6,73.6 104.4,74.2 105.3,74.8 106.2,75.4 107.0,76.0 107.9,76.6 108.7,77.2 109.6,77.8 110.5,78.4 111.3,79.0 112.2,79.6 113.1,80.2 113.1,80.2 112.2,81.5 111.3,82.7 110.5,84.0 109.6,85.2 108.7,86.5 107.9,87.9 107.0,89.2 106.2,90.6 105.3,91.9 104.4,93.3 103.6,94.8 102.7,96.2 101.8,97.7 101.0,99.1 100.1,100.6 99.2,102.2 98.4,103.7 97.5,105.3 96.6,106.8 95.8,108.4 94.9,110.1 94.0,111.7 93.2,113.4 92.3,115.0 91.4,116.8 90.6,118.5 89.7,120.2 88.8,122.0 88.0,123.8 87.1,125.6 86.2,127.4 85.4,129.2 84.5,131.1 83.7,133.0 82.8,134.9 81.9,136.8 81.1,138.7 80.2,140.7 79.3,142.7 78.5,144.7 77.6,146.7 76.7,148.8 75.9,150.8 75.0,152.9 74.1,155.0 73.3,157.1 72.4,159.3 71.5,161.5 70.7,163.6 69.8,165.8 68.9,168.1 68.1,170.3 67.2,172.6 66.3,174.9 65.5,177.2 64.6,179.5 63.8,181.8 62.9,184.2 62.0,186.6 61.2,189.0"/>
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="113.1,80.2 115.7,76.7 118.3,73.4 120.9,70.2 123.5,67.2 126.1,64.4 128.7,61.8 131.2,59.3 133.8,57.0 136.4,55.0 139.0,53.1 141.6,51.3 144.2,49.8 146.8,48.4 149.4,47.3 152.0,46.3 154.6,45.5 157.2,44.8 159.8,44.4 162.4,44.1 165.0,44.0 167.6,44.1 170.2,44.4 172.8,44.8 175.4,45.5 178.0,46.3 180.6,47.3 183.2,48.4 185.8,49.8 188.4,51.3 191.0,53.1 193.6,55.0 196.2,57.0 198.8,59.3 201.3,61.8 203.9,64.4 206.5,67.2 209.1,70.2 211.7,73.4 214.3,76.7 216.9,80.2 219.5,84.0 222.1,87.9 224.7,91.9 227.3,96.2 229.9,100.6 232.5,105.3 235.1,110.1 237.7,115.0 240.3,120.2 242.9,125.6 245.5,131.1 248.1,136.8 250.7,142.7 253.3,148.8 255.9,155.0 258.5,161.4 261.1,168.1 263.7,174.9 266.2,181.8 268.8,189.0 268.8,189.0 266.2,187.2 263.7,185.4 261.1,183.6 258.5,181.8 255.9,179.9 253.3,178.1 250.7,176.3 248.1,174.5 245.5,172.7 242.9,170.9 240.3,169.1 237.7,167.2 235.1,165.4 232.5,163.6 229.9,161.8 227.3,160.0 224.7,158.2 222.1,156.4 219.5,154.6 216.9,152.8 214.3,150.9 211.7,149.1 209.1,147.3 206.5,145.5 203.9,143.7 201.3,141.9 198.8,140.1 196.2,138.2 193.6,136.4 191.0,134.6 188.4,132.8 185.8,131.0 183.2,129.2 180.6,127.4 178.0,125.6 175.4,123.8 172.8,121.9 170.2,120.1 167.6,118.3 165.0,116.5 162.4,114.7 159.8,112.9 157.2,111.1 154.6,109.2 152.0,107.4 149.4,105.6 146.8,103.8 144.2,102.0 141.6,100.2 139.0,98.4 136.4,96.6 133.8,94.8 131.2,92.9 128.7,91.1 126.1,89.3 123.5,87.5 120.9,85.7 118.3,83.9 115.7,82.1 113.1,80.2"/>
+<line x1="20.0" y1="116.5" x2="312.0" y2="116.5" stroke="#888" stroke-width="1"/>
+<line x1="165.0" y1="232.0" x2="165.0" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="61.2" y1="112.5" x2="61.2" y2="120.5"/>
+<line x1="113.1" y1="112.5" x2="113.1" y2="120.5"/>
+<line x1="216.9" y1="112.5" x2="216.9" y2="120.5"/>
+<line x1="268.8" y1="112.5" x2="268.8" y2="120.5"/>
+<line x1="161.0" y1="189.0" x2="169.0" y2="189.0"/>
+<line x1="161.0" y1="152.8" x2="169.0" y2="152.8"/>
+<line x1="161.0" y1="80.2" x2="169.0" y2="80.2"/>
+<line x1="161.0" y1="44.0" x2="169.0" y2="44.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="61.2" y="132.5">−2</text>
+<text x="113.1" y="132.5">−1</text>
+<text x="216.9" y="132.5">1</text>
+<text x="268.8" y="132.5">2</text>
+<text x="157.0" y="193.0" text-anchor="end">−2</text>
+<text x="157.0" y="156.8" text-anchor="end">−1</text>
+<text x="157.0" y="84.2" text-anchor="end">1</text>
+<text x="157.0" y="48.0" text-anchor="end">2</text>
+<text x="316.0" y="112.5">x</text><text x="173.0" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="35.2,25.9 165.0,116.5 294.8,207.1"/>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="50.8,219.5 53.6,210.8 56.5,202.3 59.3,194.1 62.2,186.1 65.0,178.3 67.9,170.8 70.8,163.4 73.6,156.3 76.5,149.4 79.3,142.7 82.2,136.2 85.0,130.0 87.9,123.9 90.8,118.1 93.6,112.5 96.5,107.2 99.3,102.0 102.2,97.1 105.0,92.4 107.9,87.9 110.7,83.6 113.6,79.5 116.5,75.7 119.3,72.1 122.2,68.7 125.0,65.5 127.9,62.5 130.7,59.8 133.6,57.3 136.4,55.0 139.3,52.9 142.2,51.0 145.0,49.4 147.9,47.9 150.7,46.7 153.6,45.8 156.4,45.0 159.3,44.4 162.1,44.1 165.0,44.0 167.9,44.1 170.7,44.4 173.6,45.0 176.4,45.8 179.3,46.7 182.1,47.9 185.0,49.4 187.8,51.0 190.7,52.9 193.6,55.0 196.4,57.3 199.3,59.8 202.1,62.5 205.0,65.5 207.8,68.7 210.7,72.1 213.5,75.7 216.4,79.5 219.3,83.6 222.1,87.9 225.0,92.4 227.8,97.1 230.7,102.0 233.5,107.2 236.4,112.5 239.2,118.1 242.1,123.9 245.0,130.0 247.8,136.2 250.7,142.7 253.5,149.4 256.4,156.3 259.2,163.4 262.1,170.8 265.0,178.3 267.8,186.1 270.7,194.1 273.5,202.3 276.4,210.8 279.2,219.5"/>
+<circle cx="113.1" cy="80.2" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="268.8" cy="189.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<text x="37.8" y="24.1" font-size="10" fill="#464646" text-anchor="start" font-family="serif">y = −x</text>
+<text x="178.0" y="36.7" font-size="10" fill="#464646" text-anchor="start" font-family="serif">y = 2−x²</text>
+</svg>
+        <figcaption>On \([-2,-1]\) the line \(y=-x\) is on top; on \([-1,2]\) the parabola \(y = 2-x^2\) is on top.</figcaption>
+      </figure>
+      <p>On \([-2,-1]\) (test \(x = -1.5\): \(-x = 1.5\), \(2-x^2 = -0.25\)) the line is on top. On \([-1,2]\) (test \(x=0\): \(2 &gt; 0\)) the parabola is on top.</p>
+      \[
+      \begin{aligned}
+      \int_{-2}^{-1}\Big((-x) - (2-x^2)\Big)dx &= \left(-\frac{x^2}{2} - 2x + \frac{x^3}{3}\right)\Big|_{-2}^{-1} = \left(-\frac12 + 2 - \frac13\right) - \left(-2 + 4 - \frac83\right) = \frac76 + \frac23 = \frac{11}{6},\\
+      \int_{-1}^{2}\Big((2-x^2) - (-x)\Big)dx &= \left(2x - \frac{x^3}{3} + \frac{x^2}{2}\right)\Big|_{-1}^{2} = \left(4 - \frac83 + 2\right) - \left(-2 + \frac13 + \frac12\right) = \frac{10}{3} + \frac76 = \frac92.
+      \end{aligned}
+      \]
+      \[
+      \text{Area} = \frac{11}{6} + \frac92 = \frac{11}{6} + \frac{27}{6} = \frac{38}{6} = \frac{19}{3}.
+      \]
+    </div>
+
+    <!-- Self-check 6.1 -->
+    <div class="problem selfcheck">
+      <h3>Self-Check</h3>
+      <p class="selfcheck-source">Practice in the style of the lecture examples (there is no in-class activity for this section)</p>
+      <p><strong>(a)</strong> Find the area of the region bounded between \(y = 2x\) and \(y = x^2\).</p>
+      <p><strong>(b)</strong> Find the area between \(y = x\) and \(y = x^3\) on \([-1,1]\). (Hint: where do they cross, and which is on top on each piece?)</p>
+      <button onclick="toggleSolution('sc6-1', this)">Show Answer</button>
+      <div id="sc6-1" class="solution" style="display:none;">
+        <p><strong>(a)</strong> Find the bounds by setting the curves equal:</p>
+        \[
+        2x = x^2 \;\Longrightarrow\; x^2 - 2x = 0 \;\Longrightarrow\; x(x-2) = 0 \;\Longrightarrow\; x = 0,\ x = 2.
+        \]
+        <figure class="tex-graph">
+          <svg viewBox="0 0 320 240" width="320" height="240" role="img" aria-label="Region between y = 2x on top and y = x squared on the bottom, from x = 0 to x = 2">
+<polygon fill="rgba(0,100,85,0.2)" stroke="none" points="67.5,197.0 70.0,194.7 72.5,192.3 75.0,190.0 77.5,187.7 80.0,185.3 82.5,183.0 85.0,180.7 87.5,178.3 90.0,176.0 92.5,173.7 95.0,171.3 97.5,169.0 100.0,166.7 102.5,164.3 105.0,162.0 107.5,159.7 110.0,157.3 112.5,155.0 115.0,152.7 117.5,150.3 120.0,148.0 122.5,145.7 125.0,143.3 127.5,141.0 130.0,138.7 132.5,136.3 135.0,134.0 137.5,131.7 140.0,129.3 142.5,127.0 145.0,124.7 147.5,122.3 150.0,120.0 152.5,117.7 155.0,115.3 157.5,113.0 160.0,110.7 162.5,108.3 165.0,106.0 167.5,103.7 170.0,101.3 172.5,99.0 175.0,96.7 177.5,94.3 180.0,92.0 182.5,89.7 185.0,87.3 187.5,85.0 190.0,82.7 192.5,80.3 195.0,78.0 197.5,75.7 200.0,73.3 202.5,71.0 205.0,68.7 207.5,66.3 210.0,64.0 212.5,61.7 215.0,59.3 217.5,57.0 217.5,57.0 215.0,61.6 212.5,66.2 210.0,70.7 207.5,75.0 205.0,79.4 202.5,83.6 200.0,87.8 197.5,91.8 195.0,95.9 192.5,99.8 190.0,103.6 187.5,107.4 185.0,111.1 182.5,114.7 180.0,118.3 177.5,121.7 175.0,125.1 172.5,128.4 170.0,131.6 167.5,134.8 165.0,137.8 162.5,140.8 160.0,143.8 157.5,146.6 155.0,149.4 152.5,152.0 150.0,154.7 147.5,157.2 145.0,159.6 142.5,162.0 140.0,164.3 137.5,166.5 135.0,168.7 132.5,170.7 130.0,172.7 127.5,174.6 125.0,176.4 122.5,178.2 120.0,179.8 117.5,181.4 115.0,183.0 112.5,184.4 110.0,185.8 107.5,187.0 105.0,188.3 102.5,189.4 100.0,190.4 97.5,191.4 95.0,192.3 92.5,193.1 90.0,193.8 87.5,194.5 85.0,195.1 82.5,195.6 80.0,196.0 77.5,196.4 75.0,196.7 72.5,196.8 70.0,197.0 67.5,197.0"/>
+<line x1="20.0" y1="197.0" x2="312.0" y2="197.0" stroke="#888" stroke-width="1"/>
+<line x1="67.5" y1="232.0" x2="67.5" y2="6" stroke="#888" stroke-width="1"/>
+<g stroke="#888" stroke-width="1">
+<line x1="142.5" y1="193.0" x2="142.5" y2="201.0"/>
+<line x1="217.5" y1="193.0" x2="217.5" y2="201.0"/>
+<line x1="63.5" y1="162.0" x2="71.5" y2="162.0"/>
+<line x1="63.5" y1="127.0" x2="71.5" y2="127.0"/>
+<line x1="63.5" y1="92.0" x2="71.5" y2="92.0"/>
+<line x1="63.5" y1="57.0" x2="71.5" y2="57.0"/>
+</g>
+<g font-size="11" fill="#464646" text-anchor="middle" font-family="serif">
+<text x="142.5" y="213.0">1</text>
+<text x="217.5" y="213.0">2</text>
+<text x="59.5" y="166.0" text-anchor="end">1</text>
+<text x="59.5" y="131.0" text-anchor="end">2</text>
+<text x="59.5" y="96.0" text-anchor="end">3</text>
+<text x="59.5" y="61.0" text-anchor="end">4</text>
+<text x="316.0" y="193.0">x</text><text x="75.5" y="12">y</text>
+</g>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="48.8,214.5 150.0,120.0 251.2,25.5"/>
+<polyline fill="none" stroke="#002d62" stroke-width="2" points="30.0,188.3 32.5,189.4 35.0,190.4 37.5,191.4 39.9,192.3 42.4,193.1 44.9,193.8 47.4,194.5 49.9,195.1 52.4,195.6 54.8,196.0 57.3,196.4 59.8,196.6 62.3,196.8 64.8,197.0 67.3,197.0 69.8,197.0 72.2,196.9 74.7,196.7 77.2,196.4 79.7,196.1 82.2,195.7 84.7,195.2 87.1,194.6 89.6,194.0 92.1,193.2 94.6,192.4 97.1,191.6 99.6,190.6 102.0,189.6 104.5,188.5 107.0,187.3 109.5,186.0 112.0,184.7 114.5,183.3 117.0,181.8 119.4,180.2 121.9,178.6 124.4,176.9 126.9,175.1 129.4,173.2 131.9,171.2 134.3,169.2 136.8,167.1 139.3,164.9 141.8,162.7 144.3,160.3 146.8,157.9 149.2,155.4 151.7,152.9 154.2,150.2 156.7,147.5 159.2,144.7 161.7,141.8 164.2,138.9 166.6,135.8 169.1,132.7 171.6,129.6 174.1,126.3 176.6,123.0 179.1,119.6 181.5,116.1 184.0,112.5 186.5,108.9 189.0,105.1 191.5,101.4 194.0,97.5 196.5,93.5 198.9,89.5 201.4,85.4 203.9,81.2 206.4,77.0 208.9,72.6 211.4,68.2 213.8,63.7 216.3,59.2 218.8,54.5 221.3,49.8 223.8,45.0 226.3,40.2 228.7,35.2"/>
+<circle cx="67.5" cy="197.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<circle cx="217.5" cy="57.0" r="3" fill="#002d62" stroke="#002d62" stroke-width="1.5"/>
+<text x="256.5" y="36.0" font-size="10" fill="#464646" text-anchor="start" font-family="serif">y = 2x</text>
+<text x="219.0" y="32.5" font-size="10" fill="#464646" text-anchor="end" font-family="serif">y = x²</text>
+</svg>
+          <figcaption>On \([0,2]\), \(y = 2x\) is on top (test \(x=1\): \(2 &gt; 1\)).</figcaption>
+        </figure>
+        \[
+        \int_0^2\left(2x - x^2\right)dx = \left(x^2 - \frac{x^3}{3}\right)\Big|_0^2 = \left(4 - \frac83\right) - 0 = \boxed{\frac43}.
+        \]
+        <p><strong>(b)</strong> Crossings: \(x = x^3 \Rightarrow x^3 - x = 0 \Rightarrow x(x-1)(x+1) = 0\), so \(x = -1, 0, 1\). Split at \(x = 0\).</p>
+        <ul>
+          <li>On \([-1,0]\), test \(x = -\frac12\): \(x^3 = -\frac18\) is bigger than \(x = -\frac12\), so \(y = x^3\) is on top.</li>
+          <li>On \([0,1]\), test \(x = \frac12\): \(x = \frac12\) is bigger than \(x^3 = \frac18\), so \(y = x\) is on top.</li>
+        </ul>
+        \[
+        \int_{-1}^0\left(x^3 - x\right)dx = \left(\frac{x^4}{4} - \frac{x^2}{2}\right)\Big|_{-1}^0 = 0 - \left(\frac14 - \frac12\right) = \frac14,
+        \]
+        \[
+        \int_0^1\left(x - x^3\right)dx = \left(\frac{x^2}{2} - \frac{x^4}{4}\right)\Big|_0^1 = \frac12 - \frac14 = \frac14.
+        \]
+        \[
+        \text{Area} = \frac14 + \frac14 = \boxed{\frac12}.
+        \]
+        <p>Note: if you had just computed \(\int_{-1}^1(x - x^3)\,dx\) without splitting, you would get \(0\), because the two pieces would cancel. That's why we must split where the curves cross.</p>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>
